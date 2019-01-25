@@ -351,9 +351,6 @@ defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 # Show path bar
 defaults write com.apple.finder ShowPathbar -bool true
 
-# Show all hidden files
-defaults write com.apple.finder AppleShowAllFiles YES
-
 ###############################################################################
 # Safari                                                                      #
 ###############################################################################
