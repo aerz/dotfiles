@@ -13,16 +13,9 @@ brew tap "caskroom/fonts"
 brew tap "homebrew/core"
 
 declare -a brew_apps=(
-    'autoconf'
-    'composer'
     'docker-compose'
     'git'
     'mas'
-    'php'
-    'php-cs-fixer'
-    'phpunit'
-    'ruby'
-    'screenresolution'
     'shellcheck'
     'tree'
     'tldr'
