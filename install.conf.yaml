@@ -8,6 +8,10 @@
     ~/.dotfiles: ''
     ~/.gitconfig: 'gitconfig'
     ~/.gitignore_global: 'gitignore_global'
+    ~/.zshrc:
+        path: zshrc
+        relink: true
+        force: true
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
