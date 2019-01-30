@@ -9,6 +9,7 @@ if ! [ -x "$(which brew)" ]; then
 fi
 
 brew tap "caskroom/cask"
+brew tap "homebrew/cask-versions"
 brew tap "caskroom/fonts"
 brew tap "homebrew/core"
 
@@ -33,6 +34,7 @@ declare -a brew_cask_apps=(
     'discord'
     'docker'
     'google-chrome'
+    'google-chrome-canary'
     'grammarly'
     'firefox'
     'homebrew/cask-fonts/font-roboto-mono'
