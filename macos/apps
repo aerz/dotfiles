@@ -31,6 +31,7 @@ declare -a brew_cask_apps=(
     'calibre'
     'contexts'
     'clover-configurator'
+    'cyberduck'
     'discord'
     'docker'
     'google-chrome'
