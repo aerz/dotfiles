@@ -48,6 +48,7 @@ declare -a brew_cask_apps=(
     'notion'
     'pocket-casts'
     'safeincloud-password-manager'
+    'sensiblesidebuttons'
     'sequel-pro'
     'sourcetree'
     'spectacle'
