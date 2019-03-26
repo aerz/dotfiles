@@ -32,7 +32,7 @@ defaults write -g com.apple.swipescrolldirection -bool false
 # System Preferences > Keyboard                                               #
 ###############################################################################
 
-# Keyboard repeat fast 
+# Keyboard repeat fast
 defaults write -g KeyRepeat -int 2
 
 # Delay until repeat short

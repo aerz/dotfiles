@@ -11,7 +11,7 @@ fi
 brew install zsh
 
 # Install ZSH Plugins
-brew install zsh-syntax-highlighting 
+brew install zsh-syntax-highlighting
 
 # Install Oh My ZSH
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
