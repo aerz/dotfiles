@@ -1,0 +1,19 @@
+{
+    "[html]": {
+        "editor.tabSize": 2
+    },
+    "[jade]": {
+        "editor.tabSize": 2
+    },
+    "[javascript]": {
+        "editor.tabSize": 2
+    },
+    "[scss]": {
+        "editor.tabSize": 2
+    },
+    "editor.detectIndentation": false,
+    "window.nativeTabs": true,
+    "discord.lowerDetailsEditing": "Current line: {currentline}",
+    "terminal.integrated.shell.osx": "/bin/zsh",
+    "git.autofetch": true
+}
