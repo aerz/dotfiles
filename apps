@@ -21,6 +21,7 @@ echo 'Installing Homebrew apps...'
 brew install \
   'docker-compose' \
   'mas' \
+  'node' \
   'shellcheck' \
   'tree' \
   'tldr'
