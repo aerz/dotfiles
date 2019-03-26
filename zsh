@@ -2,7 +2,7 @@
 
 set -e
 
-if ! [ -x "$(which brew)" ]; then
+if ! [ -x "$(command -v brew)" ]; then
     echo "You must install first Homebrew to run this script."
     exit 0
 fi

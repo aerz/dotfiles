@@ -1,7 +1,5 @@
 #!/bin/bash
 
-BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
 APPS=$(defaults read com.apple.dock persistent-apps)
 
 # Create the script base
