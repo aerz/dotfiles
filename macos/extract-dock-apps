@@ -1,0 +1,22 @@
+#!/bin/bash
+
+BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+APPS=$(defaults read com.apple.dock persistent-apps)
+
+# Create the script base
+echo "#!/bin/bash
+
+# Clean dock icons
+defaults write com.apple.dock persistent-apps -array
+
+# Dock apps backup
+defaults write com.apple.dock persistent-apps -array-add '$APPS'
+
+# Restart Dock
+killall Dock
+
+" | sed 's/[()]//g' | sed $'s/,/ \'; defaults write com.apple.dock persistent-apps -array-add \' /g' > "backup-dock-apps"
+
+# Set execution permissions
+chmod +x "backup-dock-apps"
