@@ -5,76 +5,70 @@ set -e
 # Homebrew
 if ! [ -x "$(which brew)" ]; then
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    brew update
 fi
 
-brew tap "caskroom/cask"
-brew tap "homebrew/cask-versions"
-brew tap "caskroom/fonts"
-brew tap "homebrew/core"
+brew update
 
-declare -a brew_apps=(
-    'docker-compose'
-    'git'
-    'mas'
-    'shellcheck'
-    'tree'
-    'tldr'
-)
+brew tap 'caskroom/cask' \
+  'homebrew/cask-versions' \
+  'caskroom/fonts' \
+  'homebrew/core'
 
-for app in "${brew_apps[@]}"; do
-  brew install "$app"
-done
+brew install \
+  'docker-compose' \
+  'mas' \
+  'shellcheck' \
+  'tree' \
+  'tldr'
 
-declare -a brew_cask_apps=(
-    'appcleaner'
-    'calibre'
-    'contexts'
-    'clover-configurator'
-    'cyberduck'
-    'discord'
-    'docker'
-    'google-chrome'
-    'google-chrome-canary'
-    'grammarly'
-    'firefox'
-    'homebrew/cask-fonts/font-roboto-mono'
-    'iina'
-    'iterm2'
-    'jetbrains-toolbox'
-    'keka'
-    'nativedisplaybrightness'
-    'nightowl'
-    'notion'
-    'pocket-casts'
-    'safeincloud-password-manager'
-    'sensiblesidebuttons'
-    'sequel-pro'
-    'sourcetree'
-    'spectacle'
-    'spotify'
-    'slack'
-    'telegram-desktop'
+brew cask install \
+    'appcleaner' \
+    'calibre' \
+    'contexts' \
+    'clover-configurator' \
+    'cyberduck' \
+    'discord' \
+    'docker' \
+    'google-backup-and-sync' \
+    'google-chrome' \
+    'google-chrome-canary' \
+    'firefox' \
+    'homebrew/cask-fonts/font-roboto-mono' \
+    'iina' \
+    'iterm2' \
+    'jetbrains-toolbox' \
+    'keka' \
+    'megasync' \
+    'nativedisplaybrightness' \
+    'nightowl' \
+    'pocket-casts' \
+    'safeincloud-password-manager' \
+    'sensiblesidebuttons' \
+    'sequel-pro' \
+    'sourcetree' \
+    'spectacle' \
+    'spotify' \
+    'slack' \
+    'telegram-desktop' \
+    'typora' \
     'visual-studio-code'
-    'vivaldi'
-)
 
-for app in "${brew_cask_apps[@]}"; do
-  brew cask install "$app"
-done
-
-declare -a mas_apps=(
-    '409203825' # Numbers
-    '409201541' # Pages
-    '407963104' # Pixelmator
-    '880001334' # Reeder 3
-    '1327661892' # XMind ZEN
-    '497799835' # XCode
-    '1176895641' # Spark Email
-    '568494494' # Pocket
-    '1384080005' # Tweetbot 3
-)
-
-for app in "${mas_apps[@]}"; do
-  mas install "$app"
-done
+mas install \
+    # Numbers
+    '409203825' \
+    # Pages
+    '409201541' \
+    # Pixelmator
+    '407963104' \
+    # Reeder 3
+    '880001334' \
+    # XMind ZEN
+    '1327661892' \
+    # XCode
+    '497799835' \
+    # Spark Email
+    '1176895641' \
+    # Pocket
+    '568494494' \
+    # Tweetbot 3
+    '1384080005'
