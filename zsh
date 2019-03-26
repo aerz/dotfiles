@@ -3,15 +3,15 @@
 set -e
 
 if ! [ -x "$(command -v brew)" ]; then
-    echo "You must install first Homebrew to run this script."
+    echo "You must install Homebrew to run this script."
     exit 0
 fi
 
-# Install ZSH
+echo 'Installing ZSH...'
 brew install zsh
 
-# Install ZSH Plugins
+echo 'Installing ZSH plugins...'
 brew install zsh-syntax-highlighting
 
-# Install Oh My ZSH
+echo 'Installing Oh My ZSH...'
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"

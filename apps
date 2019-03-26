@@ -4,16 +4,20 @@ set -e
 
 # Homebrew
 if ! [ -x "$(command -v brew)" ]; then
+    echo 'Installing Homebrew...'
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
+echo 'Updating Hombrew...'
 brew update
 
+echo 'Updating Hombrew sources...'
 brew tap 'caskroom/cask' \
   'homebrew/cask-versions' \
   'caskroom/fonts' \
   'homebrew/core'
 
+echo 'Installing Homebrew apps...'
 brew install \
   'docker-compose' \
   'mas' \
@@ -21,6 +25,7 @@ brew install \
   'tree' \
   'tldr'
 
+echo 'Installing Homebrew cask apps...'
 brew cask install \
     'appcleaner' \
     'calibre' \
@@ -53,6 +58,7 @@ brew cask install \
     'typora' \
     'visual-studio-code'
 
+echo 'Installing Mac AppStore apps...'
 mas install \
     # Numbers
     '409203825' \
