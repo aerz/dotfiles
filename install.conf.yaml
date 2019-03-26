@@ -12,7 +12,7 @@
         relink: true
         force: true
     ~/Library/Application Support/Code/User/settings.json:
-        path: 'settings.json'
+        path: 'vscode/settings.json'
         relink: true
         force: true
 

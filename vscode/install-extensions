@@ -1,0 +1,6 @@
+#!/bin/bash
+
+echo "Installing VSCode extensions..."
+cat extensions.vsc | xargs -L 1 code --install-extension
+
+exit 0
