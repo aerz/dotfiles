@@ -72,10 +72,12 @@ mas install \
     # XMind ZEN
     '1327661892' \
     # XCode
-    '497799835' \
+    #'497799835' \
     # Spark Email
     '1176895641' \
     # Pocket
     '568494494' \
     # Tweetbot 3
-    '1384080005'
+    '1384080005' \
+    # Wunderlist
+    '410628904'
