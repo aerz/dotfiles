@@ -1,20 +1,19 @@
 #!/bin/bash
 
-APPS=$(defaults read com.apple.dock persistent-apps)
-
-# Create the script base
 echo "#!/bin/bash
 
 # Clean dock icons
 defaults write com.apple.dock persistent-apps -array
 
 # Dock apps backup
-defaults write com.apple.dock persistent-apps -array-add '$APPS'
+defaults write com.apple.dock persistent-apps -array-add '$(defaults read com.apple.dock persistent-apps)';
 
 # Restart Dock
-killall Dock
+killall Dock" | \
+# Remove parenthesis from defaults array command
+sed 's/[()]//g' | \
+# Format arrays into array add key
+sed $'s/,/ \';\r\rdefaults write com.apple.dock persistent-apps -array-add \'/g' > "backup-dock-apps"
 
-" | sed 's/[()]//g' | sed $'s/,/ \'; defaults write com.apple.dock persistent-apps -array-add \' /g' > "backup-dock-apps"
-
-# Set execution permissions
+# Execution permissions
 chmod +x "backup-dock-apps"
