@@ -1,19 +1,18 @@
 {
-    "[html]": {
-        "editor.tabSize": 2
-    },
-    "[jade]": {
-        "editor.tabSize": 2
-    },
-    "[javascript]": {
-        "editor.tabSize": 2
-    },
-    "[scss]": {
-        "editor.tabSize": 2
-    },
-    "editor.detectIndentation": false,
-    "window.nativeTabs": true,
-    "discord.lowerDetailsEditing": "Current line: {currentline}",
+    "editor.fontFamily": "Fira Code",
+    "editor.fontWeight": "500",
+    "editor.rulers": [100],
+    "editor.tabSize": 2,
+    "prettier.eslintIntegration": true,
+    "prettier.printWidth": 100,
+    "prettier.singleQuote": true,
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/.meteor": true,
+        "**/.next": true,
+        "**/bower_components": true
+      },
     "terminal.integrated.shell.osx": "/bin/zsh",
-    "git.autofetch": true
+    "window.nativeTabs": true,
+    "workbench.colorTheme": "One Dark Pro"
 }
