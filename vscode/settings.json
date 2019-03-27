@@ -14,5 +14,6 @@
       },
     "terminal.integrated.shell.osx": "/bin/zsh",
     "window.nativeTabs": true,
-    "workbench.colorTheme": "One Dark Pro"
+    "workbench.colorTheme": "One Dark Pro",
+    "workbench.iconTheme": "file-icons"
 }
