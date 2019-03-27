@@ -13,7 +13,7 @@ killall Dock" | \
 # Remove parenthesis from defaults array command
 sed 's/[()]//g' | \
 # Format arrays into array add key
-sed $'s/,/ \';\r\rdefaults write com.apple.dock persistent-apps -array-add \'/g' > "backup-dock-apps"
+sed $'s/,/ \';\r\rdefaults write com.apple.dock persistent-apps -array-add \'/g' > "backup_dock_apps"
 
 # Execution permissions
-chmod +x "backup-dock-apps"
+chmod +x "backup_dock_apps"
