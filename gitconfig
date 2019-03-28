@@ -14,3 +14,8 @@
 	# local changes
 	amend = commit -a --amend
 	st = status
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
