@@ -29,6 +29,7 @@ brew install \
 echo 'Installing Homebrew cask apps...'
 brew cask install \
     'appcleaner' \
+    'balenaetcher' \
     'calibre' \
     'contexts' \
     'clover-configurator' \
@@ -47,6 +48,7 @@ brew cask install \
     'megasync' \
     'nativedisplaybrightness' \
     'nightowl' \
+    'plug' \
     'pocket-casts' \
     'safeincloud-password-manager' \
     'sensiblesidebuttons' \
@@ -80,4 +82,6 @@ mas install \
     # Tweetbot 3
     '1384080005' \
     # Wunderlist
-    '410628904'
+    '410628904' \
+    # Encrypto
+    '935235287'

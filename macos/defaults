@@ -38,6 +38,9 @@ defaults write -g KeyRepeat -int 2
 # Delay until repeat short
 defaults write -g InitialKeyRepeat -int 15
 
+# Disable spell correction
+defaults write -g NSAutomaticSpellingCorrectionEnabled -bool false
+
 ###############################################################################
 # System Preferences > Energy saver                                           #
 ###############################################################################
