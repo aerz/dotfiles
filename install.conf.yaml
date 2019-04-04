@@ -15,6 +15,9 @@
         path: 'vscode/settings.json'
         relink: true
         force: true
-
+    ~/Library/Application Support/Code/User/keybindings.json:
+        path: 'vscode/keybindings.json'
+        relink: true
+        force: true
 - shell:
   - [git submodule update --init --recursive, Installing submodules]

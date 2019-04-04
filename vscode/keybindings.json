@@ -1,0 +1,22 @@
+[
+  {
+    "key": "alt+w",
+    "command": "macros.collapseAndClose"
+  },
+  {
+    "key": "shift+alt+cmd+down",
+    "command": "editor.action.revealDefinition",
+    "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
+  },
+  {
+    "key": "f12",
+    "command": "-editor.action.revealDefinition",
+    "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
+  },
+  {
+    // Extension: letrieu.expand-region
+    "key": "cmd+alt+e",
+    "command": "expand_region",
+    "when": "editorTextFocus"
+  }
+]

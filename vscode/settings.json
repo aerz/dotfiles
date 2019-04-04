@@ -1,20 +1,71 @@
 {
-    "editor.fontFamily": "Fira Code",
-    "editor.fontWeight": "500",
-    "editor.rulers": [100],
-    "editor.tabSize": 2,
-    "prettier.eslintIntegration": true,
-    "prettier.printWidth": 100,
-    "prettier.singleQuote": true,
-    "search.exclude": {
-        "**/node_modules": true,
-        "**/.meteor": true,
-        "**/.next": true,
-        "**/bower_components": true
-      },
-    "terminal.integrated.shell.osx": "/bin/zsh",
-    "window.nativeTabs": true,
-    "workbench.colorTheme": "One Dark Pro",
-    "workbench.iconTheme": "file-icons",
-    "editor.fontLigatures": true
+  // Fonts
+  "editor.fontFamily": "Fira Code",
+  "editor.fontWeight": "500",
+  "editor.fontLigatures": true,
+  "editor.rulers": [
+    100,
+    120
+  ],
+  "editor.tabSize": 2,
+  "editor.lineHeight": 17.4, // font-size * 1.45
+  "workbench.fontAliasing": "auto",
+  // macOS
+  "terminal.integrated.shell.osx": "/bin/zsh",
+  "window.titleBarStyle": "custom",
+  //"window.nativeTabs": true,
+  // UI
+  "workbench.colorTheme": "Min Dark",
+  "workbench.iconTheme": "file-icons",
+  "debug.toolBarLocation": "docked",
+  "workbench.statusBar.feedback.visible": false,
+  "editor.minimap.enabled": false,
+  "explorer.openEditors.visible": 0,
+  "editor.quickSuggestionsDelay": 0,
+  // Whitespaces
+  "files.trimTrailingWhitespace": true,
+  "files.trimFinalNewlines": true,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "files.insertFinalNewline": true,
+  // Formatting
+  "editor.formatOnPaste": true,
+  // Emmet
+  "emmet.triggerExpansionOnTab": true,
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  },
+  // ESLint
+  "eslint.autoFixOnSave": true,
+  "eslint.alwaysShowStatus": true,
+  // Prettier
+  "prettier.eslintIntegration": true,
+  "prettier.printWidth": 120,
+  "prettier.singleQuote": true,
+  // Macros
+  "macros": {
+    "collapseAndClose": [
+      "workbench.files.action.collapseExplorerFolders",
+      "workbench.action.closeAllEditors"
+    ]
+  },
+  // Git
+  "git.autofetch": true,
+  // Gitlens
+  "gitlens.views.compare.files.layout": "auto",
+  "gitlens.currentLine.enabled": false,
+  "gitlens.hovers.enabled": false,
+  "gitlens.keymap": "alternate",
+  "gitlens.advanced.messages": {
+    "suppressShowKeyBindingsNotice": true
+  },
+  // Pug
+  "puglint.enable": true,
+  "puglint.run": "onSave",
+  // Specific language settings
+  "[javascript]": {
+    "editor.formatOnSave": true
+  },
+  "files.associations": {
+    "zshrc": "shellscript"
+  }
 }
