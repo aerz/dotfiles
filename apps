@@ -2,31 +2,26 @@
 
 set -e
 
-# Homebrew
+# Install homebrew
 if ! [ -x "$(command -v brew)" ]; then
-    echo 'Installing Homebrew...'
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
-echo 'Updating Hombrew...'
 brew update
 
-echo 'Updating Hombrew sources...'
 brew tap 'caskroom/cask' \
   'homebrew/cask-versions' \
   'caskroom/fonts' \
   'homebrew/core'
 
-echo 'Installing Homebrew apps...'
 brew install \
   'docker-compose' \
   'mas' \
-  'node' \
   'shellcheck' \
   'tree' \
-  'tldr'
+  'tldr' \
+  'youtube-dl'
 
-echo 'Installing Homebrew cask apps...'
 brew cask install \
     'appcleaner' \
     'balenaetcher' \
@@ -40,11 +35,13 @@ brew cask install \
     'google-chrome' \
     'google-chrome-canary' \
     'firefox' \
+    'handbrake' \
     'homebrew/cask-fonts/font-roboto-mono' \
     'iina' \
     'iterm2' \
     'jetbrains-toolbox' \
     'keka' \
+    'kext-utility' \
     'megasync' \
     'nativedisplaybrightness' \
     'nightowl' \
@@ -58,10 +55,10 @@ brew cask install \
     'spotify' \
     'slack' \
     'telegram-desktop' \
+    'transmission' \
     'typora' \
     'visual-studio-code'
 
-echo 'Installing Mac AppStore apps...'
 mas install \
     # Numbers
     '409203825' \
