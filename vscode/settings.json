@@ -67,5 +67,29 @@
   },
   "files.associations": {
     "zshrc": "shellscript"
-  }
+  },
+  // Terminal theme: Eighties (https://glitchbone.github.io/vscode-base16-term/#/)
+  "workbench.colorCustomizations": {
+    "terminal.background": "#202020",
+    "terminal.foreground": "#D3D0C8",
+    "terminalCursor.background": "#D3D0C8",
+    "terminalCursor.foreground": "#D3D0C8",
+    "terminal.ansiBlack": "#2D2D2D",
+    "terminal.ansiBlue": "#6699CC",
+    "terminal.ansiBrightBlack": "#747369",
+    "terminal.ansiBrightBlue": "#6699CC",
+    "terminal.ansiBrightCyan": "#66CCCC",
+    "terminal.ansiBrightGreen": "#99CC99",
+    "terminal.ansiBrightMagenta": "#CC99CC",
+    "terminal.ansiBrightRed": "#F2777A",
+    "terminal.ansiBrightWhite": "#F2F0EC",
+    "terminal.ansiBrightYellow": "#FFCC66",
+    "terminal.ansiCyan": "#66CCCC",
+    "terminal.ansiGreen": "#99CC99",
+    "terminal.ansiMagenta": "#CC99CC",
+    "terminal.ansiRed": "#F2777A",
+    "terminal.ansiWhite": "#D3D0C8",
+    "terminal.ansiYellow": "#FFCC66"
+  },
+  "terminal.integrated.fontSize": 13
 }
