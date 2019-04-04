@@ -50,6 +50,7 @@
   },
   // Git
   "git.autofetch": true,
+  "git.detectSubmodules": false,
   // Gitlens
   "gitlens.views.compare.files.layout": "auto",
   "gitlens.currentLine.enabled": false,
