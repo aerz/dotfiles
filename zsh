@@ -7,11 +7,9 @@ if ! [ -x "$(command -v brew)" ]; then
     exit 0
 fi
 
-echo 'Installing ZSH...'
-brew install zsh
+brew install \
+    'zsh' \
+    'zsh-syntax-highlighting'
 
-echo 'Installing ZSH plugins...'
-brew install zsh-syntax-highlighting
-
-echo 'Installing Oh My ZSH...'
+# Oh My ZSH
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
