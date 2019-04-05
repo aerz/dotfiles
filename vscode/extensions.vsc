@@ -1,5 +1,4 @@
 alefragnani.Bookmarks
-alefragnani.project-manager
 bierner.lit-html
 christian-kohler.path-intellisense
 dbaeumer.vscode-eslint
@@ -11,8 +10,6 @@ esbenp.prettier-vscode
 file-icons.file-icons
 geddski.macros
 GitHub.vscode-pull-request-github
-lehni.vscode-fix-checksums
-lehni.vscode-titlebar-less-macos
 letrieu.expand-region
 miguelsolorio.min-theme
 mrmlnc.vscode-puglint
