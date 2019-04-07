@@ -1,6 +1,6 @@
 {
   // Fonts
-  "editor.fontFamily": "Fira Code",
+  "editor.fontFamily": "Fira Code, Menlo, Monaco, 'Courier New', monospace",
   "editor.fontWeight": "500",
   "editor.fontLigatures": true,
   "editor.rulers": [
