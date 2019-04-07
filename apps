@@ -9,7 +9,7 @@ fi
 
 brew update
 
-brew tap 'caskroom/cask' \
+brew tap \
   'homebrew/cask-versions' \
   'caskroom/fonts' \
   'homebrew/core'
