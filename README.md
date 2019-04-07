@@ -16,6 +16,9 @@ I didn't find the way to modify it :(
   - Start up automatically after a power failure
   - Enable Power Nap
 
+- Disable: System Preferences > Bluetooth > Advanced
+  - Allow Bluetooth devices to wake this computer
+
 - Enable: System Preferences > Energy Saver
   - Prevent computer from sleeping automatically when the display is off
 
