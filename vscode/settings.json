@@ -70,8 +70,8 @@
   },
   // Terminal theme: Eighties (https://glitchbone.github.io/vscode-base16-term/#/)
   "workbench.colorCustomizations": {
-    "terminal.background": "#202020",
-    "terminal.foreground": "#D3D0C8",
+    "terminal.background": "#1f1f1f",
+    "terminal.foreground": "#888888",
     "terminalCursor.background": "#D3D0C8",
     "terminalCursor.foreground": "#D3D0C8",
     "terminal.ansiBlack": "#2D2D2D",
