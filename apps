@@ -24,6 +24,7 @@ brew install \
   'youtube-dl'
 
 brew cask install \
+    'android-file-transfer' \
     'appcleaner' \
     'balenaetcher' \
     'brooklyn' \
