@@ -59,6 +59,7 @@ brew cask install \
     'spotify' \
     'slack' \
     'telegram-desktop' \
+    'timemachineeditor' \
     'transmission' \
     'typora' \
     'visual-studio-code'
