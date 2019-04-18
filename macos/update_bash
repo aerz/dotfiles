@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+brew install bash
+
+sudo bash -c 'echo /usr/local/bin/bash >> /etc/shells'
+bash --version
+
+# Make it default shell
+# chsh -s /usr/local/bin/bash
