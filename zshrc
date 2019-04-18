@@ -4,6 +4,9 @@
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
+# Homebrew
+export PATH="/usr/local/sbin:$PATH"
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -66,6 +69,13 @@ plugins=(git colored-man-pages colorize osx)
 
 source $ZSH/oh-my-zsh.sh
 
+# Plugin Syntax Highlighting
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Allow to use z command
+# (https://github.com/rupa/z)
+. /usr/local/etc/profile.d/z/z.sh
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -94,12 +104,3 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
-# Plugin Syntax Highlighting
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# Homebrew
-export PATH="/usr/local/sbin:$PATH"
-
-# Allow the use of the z plugin to easily navigate directories
-. /usr/local/etc/profile.d/z/z.sh
