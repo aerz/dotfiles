@@ -100,3 +100,6 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Homebrew
 export PATH="/usr/local/sbin:$PATH"
+
+# Allow the use of the z plugin to easily navigate directories
+. /usr/local/etc/profile.d/z/z.sh
