@@ -63,7 +63,8 @@ brew cask install \
     'timemachineeditor' \
     'transmission' \
     'typora' \
-    'visual-studio-code'
+    'visual-studio-code' \
+    'xmind-zen'
 
 mas install \
     # Numbers
@@ -75,7 +76,7 @@ mas install \
     # Reeder 3
     '880001334' \
     # Lighten
-    '1447226117' \
+    #'1447226117' \
     # XCode
     #'497799835' \
     # Spark Email
