@@ -53,6 +53,8 @@
   // Gitlens
   "gitlens.views.compare.files.layout": "auto",
   "gitlens.currentLine.enabled": false,
+  "gitlens.codeLens.authors.enabled": false,
+  "gitlens.codeLens.recentChange.enabled": false,
   "gitlens.hovers.enabled": false,
   "gitlens.keymap": "alternate",
   "gitlens.advanced.messages": {
