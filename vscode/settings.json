@@ -34,7 +34,7 @@
     "javascript": "javascript"
   },
   // ESLint
-  "eslint.autoFixOnSave": true,
+  "eslint.autoFixOnSave": false,
   "eslint.alwaysShowStatus": true,
   // Prettier
   "prettier.eslintIntegration": true,
@@ -63,7 +63,7 @@
   "puglint.run": "onSave",
   // Specific language settings
   "[javascript]": {
-    "editor.formatOnSave": true
+    "editor.formatOnSave": false
   },
   "files.associations": {
     "zshrc": "shellscript"
@@ -74,22 +74,22 @@
     "terminal.foreground": "#888888",
     "terminalCursor.background": "#D3D0C8",
     "terminalCursor.foreground": "#D3D0C8",
-    "terminal.ansiBlack": "#2D2D2D",
-    "terminal.ansiBlue": "#6699CC",
-    "terminal.ansiBrightBlack": "#747369",
-    "terminal.ansiBrightBlue": "#6699CC",
-    "terminal.ansiBrightCyan": "#66CCCC",
-    "terminal.ansiBrightGreen": "#99CC99",
-    "terminal.ansiBrightMagenta": "#CC99CC",
-    "terminal.ansiBrightRed": "#F2777A",
-    "terminal.ansiBrightWhite": "#F2F0EC",
-    "terminal.ansiBrightYellow": "#FFCC66",
-    "terminal.ansiCyan": "#66CCCC",
-    "terminal.ansiGreen": "#99CC99",
-    "terminal.ansiMagenta": "#CC99CC",
-    "terminal.ansiRed": "#F2777A",
-    "terminal.ansiWhite": "#D3D0C8",
-    "terminal.ansiYellow": "#FFCC66"
+    "terminal.ansiBlack": "#1a1a1a",
+    "terminal.ansiBlue": "#3e5e83",
+    "terminal.ansiBrightBlack": "#1f1f1f",
+    "terminal.ansiBrightBlue": "#6ea7e7",
+    "terminal.ansiBrightCyan": "#77b7ff",
+    "terminal.ansiBrightGreen": "#68b482",
+    "terminal.ansiBrightMagenta": "#b190ef",
+    "terminal.ansiBrightRed": "#f57381",
+    "terminal.ansiBrightWhite": "#bbbbbb",
+    "terminal.ansiBrightYellow": "#e69e69",
+    "terminal.ansiCyan": "#4f7bac",
+    "terminal.ansiGreen": "#6ab583",
+    "terminal.ansiMagenta": "#6d5895",
+    "terminal.ansiRed": "#933741",
+    "terminal.ansiWhite": "#828282",
+    "terminal.ansiYellow": "#9b6b46"
   },
   "terminal.integrated.fontSize": 13
 }
