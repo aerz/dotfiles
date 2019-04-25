@@ -9,7 +9,7 @@ fi
 
 brew install 'node'
 
-npm intall -g \
+npm install -g \
     'eslint' \
     'tslint' \
     'typescript' \

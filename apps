@@ -9,10 +9,7 @@ fi
 
 brew update
 
-brew tap \
-  'homebrew/cask-versions' \
-  'caskroom/fonts' \
-  'homebrew/core'
+brew tap 'homebrew/cask-versions'
 
 brew install \
   'docker-compose' \
