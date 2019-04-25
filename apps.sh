@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 set -e
 
@@ -11,59 +11,70 @@ brew update
 
 brew tap 'homebrew/cask-versions'
 
-brew install \
-  'docker-compose' \
-  'mas' \
-  'mongodb' \
-  'ruby' \
-  'shellcheck' \
-  'tree' \
-  'tldr' \
-  'youtube-dl'
+install_basic_apps () {
+  echo "Installing basic apps"
 
-brew cask install \
-    'android-file-transfer' \
+  brew install \
+    'docker-compose' \
+    'mas' \
+    'mongodb' \
+    'ruby' \
+    'shellcheck' \
+    'tree' \
+    'tldr'
+
+  brew cask install \
     'appcleaner' \
+    'contexts' \
+    'clover-configurator' \
+    'font-fira-code' \
+    'font-roboto-mono'
+    'google-chrome' \
+    'enpass' \
+    'nightowl' \
+    'spectacle' \
+    'spotify' \
+    'telegram-desktop' \
+    'visual-studio-code'
+
+  mas install \
+    # Tweetbot 3
+    '1384080005' \
+    # Spark Email
+    '1176895641' \
+    # iA Writer
+    '775737590'
+
+}
+
+install_complete_apps () {
+  install_basic_apps
+
+  brew install 'youtube-dl'
+
+  brew cask install \
+    'android-file-transfer' \
     'balenaetcher' \
     'brooklyn' \
     'calibre' \
-    'contexts' \
-    'clover-configurator' \
     'cyberduck' \
     'discord' \
     'docker' \
-    'enpass' \
     'google-backup-and-sync' \
-    'google-chrome' \
-    'google-chrome-canary' \
-    'firefox' \
     'handbrake' \
-    'homebrew/cask-fonts/font-roboto-mono' \
-    'iina' \
-    'iterm2' \
-    'jetbrains-toolbox' \
-    'keka' \
-    'kext-utility' \
     'megasync' \
     'nativedisplaybrightness' \
-    'nightowl' \
-    'plug' \
     'pocket-casts' \
     'postman' \
     'sensiblesidebuttons' \
     'sequel-pro' \
-    'sourcetree' \
-    'spectacle' \
-    'spotify' \
     'slack' \
-    'telegram-desktop' \
     'timemachineeditor' \
     'transmission' \
     'typora' \
-    'visual-studio-code' \
     'xmind-zen'
 
-mas install \
+  mas install \
     # Numbers
     '409203825' \
     # Pages
@@ -76,13 +87,11 @@ mas install \
     #'1447226117' \
     # XCode
     #'497799835' \
-    # Spark Email
-    '1176895641' \
     # Pocket
     '568494494' \
-    # Tweetbot 3
-    '1384080005' \
-    # Wunderlist
-    '410628904' \
     # Encrypto
     '935235287'
+}
+
+install_basic_apps
+# install_complete_apps
