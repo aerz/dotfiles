@@ -104,3 +104,5 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+# Fixs gitignore file (http://www.randallkent.com/2010/04/30/gitignore-not-working/)
+alias fix-gitignore='for file in `cat .gitignore`  ; do git rm -r --cached $file; done'
