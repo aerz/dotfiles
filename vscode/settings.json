@@ -26,8 +26,6 @@
   "files.trimFinalNewlines": true,
   "diffEditor.ignoreTrimWhitespace": false,
   "files.insertFinalNewline": true,
-  // Formatting
-  "editor.formatOnPaste": true,
   // Emmet
   "emmet.triggerExpansionOnTab": true,
   "emmet.includeLanguages": {
