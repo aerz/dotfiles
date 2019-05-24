@@ -65,8 +65,15 @@
   "[javascript]": {
     "editor.formatOnSave": false
   },
+  "[yaml]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+    "editor.autoIndent": false
+  },
   "files.associations": {
-    "zshrc": "shellscript"
+    "zshrc": "shellscript",
+    "Vagrantfile": "ruby",
+    "*.service": "properties"
   },
   // Terminal theme: Eighties (https://glitchbone.github.io/vscode-base16-term/#/)
   "workbench.colorCustomizations": {
@@ -91,5 +98,6 @@
     "terminal.ansiWhite": "#828282",
     "terminal.ansiYellow": "#9b6b46"
   },
-  "terminal.integrated.fontSize": 13
+  "terminal.integrated.fontSize": 13,
+  "sync.gist": "f29ba18686f6c6283e296c1169666879"
 }
