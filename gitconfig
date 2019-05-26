@@ -4,7 +4,7 @@
 [github]
 	user = aerz
 [core]
-	excludesfile = /Users/aerz/.gitignore_global
+	excludesfile = ~/.gitignore_global
 	autocrlf = input
 [alias]
 	assume = update-index --assume-unchanged

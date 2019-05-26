@@ -1,6 +1,8 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 sudo -v
+
+BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Close System Preferences pane to prevent overriding
 osascript -e 'tell application "System Preferences" to quit'
@@ -75,9 +77,6 @@ defaults write com.apple.Dock autohide -int 1
 
 # Disable show recent applications in Dock
 defaults write com.apple.Dock show-recents -int 0
-
-# Add apps on the Dock
-source backup-dock-apps
 
 ###############################################################################
 # Menu bar                                                                    #
@@ -177,6 +176,16 @@ sudo pmset -a standby 0
 # Set Cloudflare DNS
 networksetup -setdnsservers "Ethernet" 1.1.1.1 1.0.0.1
 # networksetup -setdnsservers "802.11n NIC" 1.1.1.1 1.0.0.1
+
+###############################################################################
+# Network                                                                     #
+###############################################################################
+
+# Change preferences directory iTerm2
+defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "$BASE_DIR"
+
+# Load custom preferences iTerm2
+defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
 
 ###############################################################################
 # SSD                                                                         #

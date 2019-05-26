@@ -1,0 +1,86 @@
+#!/usr/bin/env bash
+
+set -e
+
+# Install homebrew
+if ! [ -x "$(command -v brew)" ]; then
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
+
+brew update
+
+brew tap homebrew/cask-versions
+brew tap homebrew/cask-fonts
+
+echo "########################################"
+echo "Installing brew apps"
+echo "########################################"
+
+brew install \
+  'docker-compose' \
+  'mas' \
+  'ruby' \
+  'shellcheck' \
+  'tldr' \
+  'tree' \
+  'youtube-dl'
+
+echo "########################################"
+echo "Installing brew cask apps"
+echo "########################################"
+
+brew cask install \
+  'android-file-transfer' \
+  'appcleaner' \
+  'balenaetcher' \
+  'brooklyn' \
+  'calibre' \
+  'clover-configurator' \
+  'contexts' \
+  'cyberduck' \
+  'dash' \
+  'discord' \
+  'docker' \
+  'downie' \
+  'firefox' \
+  'font-fira-code' \
+  'font-roboto-mono' \
+  'google-backup-and-sync' \
+  'google-chrome' \
+  'handbrake' \
+  'nativedisplaybrightness' \
+  'nightowl' \
+  'pocket-casts' \
+  'postman' \
+  'sensiblesidebuttons' \
+  'slack' \
+  'spectacle' \
+  'spotify' \
+  'telegram-desktop' \
+  'transmission' \
+  'typora' \
+  'vagrant' \
+  'virtualbox' \
+  'visual-studio-code' \
+  'xmind-zen'
+
+echo "########################################"
+echo "Installing Mac App Store apps"
+echo "########################################"
+
+mas_apps=(
+  935235287   # Encrypto
+  497799835   # XCode
+  775737590   # iA Writer
+  407963104   # Pixelmator
+  568494494   # Pocket
+  880001334   # Reeder 3
+  1176895641  # Spark Email
+  1384080005  # Tweetbot 3
+  410628904   # Wunderlist
+)
+
+for app in ${mas_apps[@]};
+do
+  mas install "$app"
+done

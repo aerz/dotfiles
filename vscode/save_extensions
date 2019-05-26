@@ -1,6 +1,0 @@
-#!/bin/bash
-
-code --list-extensions > extensions.vsc
-echo "Extensions saved on extensions.vsc file!"
-
-exit 0
