@@ -50,6 +50,7 @@ brew cask install \
   'google-chrome' \
   'handbrake' \
   'iina' \
+  'iterm2' \
   'nativedisplaybrightness' \
   'nightowl' \
   'pocket-casts' \

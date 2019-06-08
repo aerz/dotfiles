@@ -11,10 +11,6 @@ brew install \
     'zsh' \
     'zsh-syntax-highlighting'
 
-# Spaceship ZSH (https://denysdovhan.com/spaceship-prompt)
-git clone https://github.com/denysdovhan/spaceship-prompt.git "$HOME/.oh-my-zsh/custom/themes/spaceship-prompt"
-ln -sv "$HOME/.oh-my-zsh/custom/themes/spaceship-prompt/spaceship.zsh-theme" "$HOME/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
-
 # Get z command
 git clone https://github.com/rupa/z.git /usr/local/etc/profile.d/z
 
