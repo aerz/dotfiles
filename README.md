@@ -4,7 +4,8 @@ Personal configuration for macOS software development setup.
 
 ## Install
 ```sh
-xcode-select --install && git clone https://github.com/Aerz/dotfiles.git ~/dotfiles
+xcode-select --install
+git clone https://github.com/Aerz/dotfiles.git ~/dotfiles
 source ~/dotfiles/install_dotfiles
 ```
 
