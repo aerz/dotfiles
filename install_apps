@@ -19,6 +19,7 @@ echo "########################################"
 brew install \
   'docker-compose' \
   'mas' \
+  'grep' \
   'ruby' \
   'shellcheck' \
   'tldr' \
@@ -48,6 +49,7 @@ brew cask install \
   'google-backup-and-sync' \
   'google-chrome' \
   'handbrake' \
+  'iina' \
   'nativedisplaybrightness' \
   'nightowl' \
   'pocket-casts' \

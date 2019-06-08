@@ -6,6 +6,7 @@
 [core]
 	excludesfile = ~/.gitignore_global
 	autocrlf = input
+	ignorecase = false
 [alias]
 	assume = update-index --assume-unchanged
 	unassume = update-index --no-assume-unchanged
