@@ -1,8 +1,8 @@
 [user]
-	name = Aerz
-	email = aerz94@gmail.com
+	name = Agustín Cisneros
+	email = agustincc2@gmail.com
 [github]
-	user = aerz
+	user = arzaner
 [core]
 	excludesfile = ~/.gitignore_global
 	autocrlf = input
