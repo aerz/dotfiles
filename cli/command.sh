@@ -4,6 +4,7 @@
 declare -ar COMMAND_LIST=(
   "install"
   "install_apps"
+  "install_app_store_apps"
   "help"
   "defaults"
 )
