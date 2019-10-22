@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ -d "${HOME}/dotfiles" ]; then
+  echo "dotfiles already installed!"
+  exit 0
+fi
+
+git clone https://github.com/aerz/dotfiles.git "${HOME}/dotfiles"
+
+ln -sv "${HOME}/dotfiles/dotfiles" "/usr/local/bin/dot"
+
+echo "Type 'dot' on your terminal to start using the dotfiles!"

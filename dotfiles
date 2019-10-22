@@ -6,9 +6,8 @@ set -e
 USER_COMMAND=$1
 
 # global variables
-DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+DOTFILES_DIR="${HOME}/dotfiles"
 CLI_DIR="${DOTFILES_DIR}/cli"
-USER_DIR="$HOME"
 
 # init cli
 source "${CLI_DIR}/command.sh"

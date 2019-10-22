@@ -2,9 +2,7 @@
 
 ## Install
 ```sh
-xcode-select --install
-git clone https://github.com/Aerz/dotfiles.git
-cd ~/dotfiles && ./dotfiles
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/aerz/dotfiles/master/install)"
 ```
 
 ## Manual settings
