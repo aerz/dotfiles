@@ -1,12 +1,10 @@
-# Dotfiles
-
-Personal configuration for macOS software development setup.
+# 🚀 dotfiles
 
 ## Install
 ```sh
 xcode-select --install
-git clone https://github.com/Aerz/dotfiles.git ~/dotfiles
-source ~/dotfiles/install_dotfiles
+git clone https://github.com/Aerz/dotfiles.git
+cd ~/dotfiles && ./dotfiles
 ```
 
 ## Manual settings

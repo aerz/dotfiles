@@ -1,17 +1,5 @@
 #!/usr/bin/env bash
 
-set -e
-
-BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-USER_DIR="/Users/${USER}"
-
-# Git
-ln -sfv "${BASE_DIR}/gitconfig" "${USER_DIR}/.gitconfig"
-ln -sfv "${BASE_DIR}/gitignore_global" "${USER_DIR}/.gitignore_global"
-
-# ZSH
-ln -sfv "${BASE_DIR}/zshrc" "${USER_DIR}/.zshrc"
-
 # iTerm2
 # Change preferences directory iTerm2
 defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "${BASE_DIR}/dotfiles"

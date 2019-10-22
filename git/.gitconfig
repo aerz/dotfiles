@@ -2,7 +2,7 @@
 	name = Agustín Cisneros
 	email = agustincc2@gmail.com
 [github]
-	user = arzaner
+	user = aerz
 [core]
 	excludesfile = ~/.gitignore_global
 	autocrlf = input

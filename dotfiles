@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -e
+
+# arguments
+USER_COMMAND=$1
+
+# global variables
+DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+CLI_DIR="${DOTFILES_DIR}/cli"
+USER_DIR="$HOME"
+
+# init cli
+source "${CLI_DIR}/command.sh"
+
+execute_command "$USER_COMMAND"
+
+exit 0
+

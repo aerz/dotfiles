@@ -1,15 +1,8 @@
-export NVM_DIR="$HOME/.nvm"
-  [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
-
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
-
-# Homebrew
-export PATH="/usr/local/sbin:$PATH"
+export ZSH="/Users/${USER}/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -33,8 +26,14 @@ ZSH_THEME="spaceship"
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
 
+# Uncomment the following line to automatically update without prompting.
+# DISABLE_UPDATE_PROMPT="true"
+
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
+
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS=true
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -69,16 +68,9 @@ ZSH_THEME="spaceship"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git colored-man-pages colorize osx)
+plugins=(git zsh-syntax-highlighting colored-man-pages)
 
 source $ZSH/oh-my-zsh.sh
-
-# Plugin Syntax Highlighting
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# Allow to use z command
-# (https://github.com/rupa/z)
-. /usr/local/etc/profile.d/z/z.sh
 
 # User configuration
 
@@ -97,9 +89,6 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
-
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -108,5 +97,14 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-# Fixs gitignore file (http://www.randallkent.com/2010/04/30/gitignore-not-working/)
-alias fix-gitignore='for file in `cat .gitignore`  ; do git rm -r --cached $file; done'
+
+# nvm - https://github.com/nvm-sh/nvm
+export NVM_DIR="$HOME/.nvm"
+  [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
+
+# zsh autosuggestions - https://github.com/zsh-users/zsh-autosuggestions
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# z command - https://github.com/rupa/z
+. /usr/local/etc/profile.d/z/z.sh
