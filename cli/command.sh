@@ -3,6 +3,7 @@
 # list of available commands
 declare -ar COMMAND_LIST=(
   "install"
+  "install_apps"
   "help"
   "defaults"
 )
