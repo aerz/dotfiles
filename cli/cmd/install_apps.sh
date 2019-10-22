@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#######################################
+# Install listed apps using brew 
+# command
+#######################################
 install_apps() {
   if ! [ -x "$(command -v brew)" ]; then
       /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -14,6 +18,7 @@ install_apps() {
   brew tap homebrew/core
 
   brew install \
+    'bash' \
     'docker-compose' \
     'mas' \
     'grep' \
@@ -21,7 +26,8 @@ install_apps() {
     'shellcheck' \
     'tldr' \
     'tree' \
-    'youtube-dl'
+    'youtube-dl' \
+    'wget'
   
   brew cask install \
     'appcleaner' \

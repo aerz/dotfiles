@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#######################################
+# Install apps from the App Store
+#######################################
 install_app_store_apps() {
   echo "Maybe you need to open the App Store once before this command..."
   echo ""
