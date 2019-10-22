@@ -196,6 +196,8 @@ install() {
 
   # Enable TRIM
   sudo trimforce enable
+
+  exit 0
 }
 
 #######################################

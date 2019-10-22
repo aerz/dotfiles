@@ -1,8 +1,7 @@
 #!/bin/bash
 
 #######################################
-# Install listed apps using brew 
-# command
+# Install listed apps using brew
 #######################################
 install_apps() {
   if ! [ -x "$(command -v brew)" ]; then
@@ -17,43 +16,62 @@ install_apps() {
   brew tap homebrew/cask-versions
   brew tap homebrew/core
 
-  brew install \
-    'bash' \
-    'docker-compose' \
-    'mas' \
-    'grep' \
-    'ruby' \
-    'shellcheck' \
-    'tldr' \
-    'tree' \
-    'youtube-dl' \
+  local brew_apps=(
+    'bash'
+    'docker-compose'
+    'mas'
+    'grep'
+    'ruby'
+    'shellcheck'
+    'tldr'
+    'tree'
+    'youtube-dl'
     'wget'
+  )
+
+  for app in "${brew_apps[@]}"; do
+    brew install "$app"
+  done
+
+  local brew_cask_apps=(
+    appcleaner
+    balenaetcher
+    calibre
+    clover-configurator
+    contexts
+    cyberduck
+    discord
+    docker
+    downie
+    firefox
+    firefox-developer-edition
+    font-fira-code
+    google-chrome
+    google-chrome-canary
+    hyper
+    iina
+    iterm2
+    nativedisplaybrightness
+    notion
+    pocket-casts
+    postman
+    safeincloud-password-manager
+    sensiblesidebuttons
+    skype
+    slack
+    spark
+    spotify
+    telegram-desktop
+    ticktick
+    transmission
+    typora
+    visual-studio-code
+    xmind-zen
+  )
   
-  brew cask install \
-    'appcleaner' \
-    'balenaetcher' \
-    'calibre' \
-    'clover-configurator' \
-    'contexts' \
-    'cyberduck' \
-    'discord' \
-    'docker' \
-    'downie' \
-    'firefox' \
-    'font-fira-code' \
-    'google-chrome' \
-    'google-chrome-canary' \
-    'iina' \
-    'iterm2' \
-    'nativedisplaybrightness' \
-    'pocket-casts' \
-    'postman' \
-    'sensiblesidebuttons' \
-    'slack' \
-    'spotify' \
-    'telegram-desktop' \
-    'transmission' \
-    'typora' \
-    'visual-studio-code' \
-    'xmind-zen'
+  for app in "${brew_cask_apps[@]}"; do
+    brew cask install "$app"
+  done
+  
+  exit 0
 }

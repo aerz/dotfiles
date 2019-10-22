@@ -13,10 +13,13 @@ install_app_store_apps() {
     407963104   # Pixelmator
     1176895641  # Spark Email
     1384080005  # Tweetbot 3
+    441258766   # Magnet
   )
 
   for app in ${mas_apps[@]};
   do
     mas install "$app"
   done
+
+  exit 0
 }
