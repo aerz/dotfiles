@@ -4,6 +4,7 @@
 declare -ar COMMAND_LIST=(
   "install"
   "help"
+  "defaults"
 )
 
 #######################################

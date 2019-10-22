@@ -11,7 +11,8 @@ help() {
   echo ""
   echo "Commands:"
   echo "  help      Shows information about the cli usage"
-  echo "  install   Link saved dotfiles to their original location"
+  echo "  install   Links saved dotfiles to their original location"
+  echo "  defaults  Sets the macOS defaults"
   echo ""
   
   exit 0
