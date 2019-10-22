@@ -20,12 +20,8 @@ update_apps() {
 
     echo ""
     echo "Done!"
-
-    exit 0
   fi
 
   echo ""
   echo "Operation cancelled!"
-
-  exit 0
 }

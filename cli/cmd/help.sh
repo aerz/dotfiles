@@ -16,6 +16,4 @@ help() {
   echo "  install_apps            Install macOS apps using brew"
   echo "  install_app_store_apps  Install App Store apps using mas"
   echo ""
-  
-  exit 0
 }

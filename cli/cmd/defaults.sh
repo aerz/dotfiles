@@ -196,8 +196,6 @@ install() {
 
   # Enable TRIM
   sudo trimforce enable
-
-  exit 0
 }
 
 #######################################
@@ -207,7 +205,6 @@ install() {
 no_install() {
   echo "No configurations applied"
   echo ""
-  exit 0
 }
 
 #######################################

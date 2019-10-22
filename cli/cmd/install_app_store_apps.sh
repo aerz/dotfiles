@@ -20,6 +20,4 @@ install_app_store_apps() {
   do
     mas install "$app"
   done
-
-  exit 0
 }

@@ -22,15 +22,21 @@ execute_command() {
   if [ -z "$input_command" ]; then
     source "${CLI_DIR}/cmd/help.sh"
     help
+
+    exit 0
   fi
 
   for command in "${COMMAND_LIST[@]}"; do
     if [ "$input_command" = "$command" ]; then
       source "${CLI_DIR}/cmd/${command}.sh"
       $command
+
+      exit 0
     fi
   done
 
   source "${CLI_DIR}/messages.sh"
   msg_command_not_found "$input_command"
+
+  exit 1
 }

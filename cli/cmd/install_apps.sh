@@ -72,6 +72,4 @@ install_apps() {
   for app in "${brew_cask_apps[@]}"; do
     brew cask install "$app"
   done
-  
-  exit 0
 }
