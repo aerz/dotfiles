@@ -19,6 +19,7 @@ install_apps() {
   local brew_apps=(
     bash
     docker-compose
+    nvm
     mas
     grep
     ruby

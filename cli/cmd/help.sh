@@ -10,6 +10,7 @@ help() {
   echo "Personal dotfiles installer for macOS 10.15+"
   echo ""
   echo "Commands:"
+  echo "  configure_zsh           Install zsh customizations"
   echo "  defaults                Set the macOS defaults"
   echo "  help                    Show information about the cli usage"
   echo "  install                 Link saved dotfiles to their original location"
