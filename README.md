@@ -8,18 +8,16 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/aerz/dotfiles/master/insta
 
 ## Manual settings
 
-I didn't find the way to modify it :(
+- System Preferences > Energy Saver
+  - [ ] Wake for Ethernet network access
+  - [ ] Start up automatically after a power failure
+  - [ ] Enable Power Nap
 
-- Disable: System Preferences > Energy Saver
-  - Wake for Ethernet network access
-  - Start up automatically after a power failure
-  - Enable Power Nap
+- System Preferences > Bluetooth > Advanced
+  - [ ] Allow Bluetooth devices to wake this computer
 
-- Disable: System Preferences > Bluetooth > Advanced
-  - Allow Bluetooth devices to wake this computer
-
-- Enable: System Preferences > Energy Saver
-  - Prevent computer from sleeping automatically when the display is off
+- System Preferences > Energy Saver
+  - [x] Prevent computer from sleeping automatically when the display is off
 
 ## License
 
