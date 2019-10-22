@@ -10,11 +10,11 @@ help() {
   echo "Personal dotfiles installer for macOS 10.15+"
   echo ""
   echo "Commands:"
-  echo "  help                    Shows information about the cli usage"
-  echo "  install                 Links saved dotfiles to their original location"
-  echo "  install_apps            Installs macOS apps using brew"
-  echo "  install_app_store_apps  Installs App Store apps using mas"
-  echo "  defaults                Sets the macOS defaults"
+  echo "  defaults                Set the macOS defaults"
+  echo "  help                    Show information about the cli usage"
+  echo "  install                 Link saved dotfiles to their original location"
+  echo "  install_apps            Install macOS apps using brew"
+  echo "  install_app_store_apps  Install App Store apps using mas"
   echo ""
   
   exit 0

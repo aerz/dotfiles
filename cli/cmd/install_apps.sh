@@ -17,16 +17,16 @@ install_apps() {
   brew tap homebrew/core
 
   local brew_apps=(
-    'bash'
-    'docker-compose'
-    'mas'
-    'grep'
-    'ruby'
-    'shellcheck'
-    'tldr'
-    'tree'
-    'youtube-dl'
-    'wget'
+    bash
+    docker-compose
+    mas
+    grep
+    ruby
+    shellcheck
+    tldr
+    tree
+    youtube-dl
+    wget
   )
 
   for app in "${brew_apps[@]}"; do
