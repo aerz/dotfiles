@@ -2,6 +2,7 @@
 
 # list of available commands
 declare -ar COMMAND_LIST=(
+  "configure_iterm"
   "configure_zsh"
   "defaults"
   "help"

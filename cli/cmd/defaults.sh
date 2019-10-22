@@ -181,16 +181,6 @@ install() {
   # networksetup -setdnsservers "802.11n NIC" 1.1.1.1 1.0.0.1
 
   #######################################
-  # iTerm2
-  #######################################
-
-  # Change preferences directory iTerm2
-  defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "${DOTFILES_DIR}/terminal/iterm"
-
-  # Load custom preferences iTerm2
-  defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
-
-  #######################################
   # SSD/M2
   #######################################
 
