@@ -136,19 +136,6 @@ install() {
   defaults write com.apple.TextEdit RichText -int 0
 
   #######################################
-  # Contexts
-  #######################################
-
-  # Use Vibrant Dark theme
-  defaults write ~/Users/aerz/Library/Preferences/com.contextsformac.Contexts.plist CTAppearanceTheme -string "CTAppearanceNamedVibrantDark"
-
-  # Adjust width
-  defaults write ~/Users/aerz/Library/Preferences/com.contextsformac.Contexts.plist CTPreferencePanelWidth -int 3
-
-  # Hide lateral sidebar
-  defaults write ~/Library/Preferences/com.contextsformac.Contexts.plist CTPreferenceSidebarDisplayMode -string "CTDisplayModeNone"
-
-  #######################################
   # macOS UI
   #######################################
 
@@ -202,7 +189,7 @@ no_install() {
 #######################################
 defaults() {
   read -r -p "By setting up macOS defaults you'll need restart your computer. Are you sure to continue? (Y/n) " answer
-  
+
   if [[ $answer =~ (y|yes|Y) ]]; then
     sudo bash -c "$(declare -f install); install"
   else
