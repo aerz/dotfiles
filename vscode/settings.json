@@ -1,34 +1,26 @@
 {
-  // Fonts
   "editor.fontFamily": "FiraCode-Retina",
   "editor.lineHeight": 17,
   "editor.fontLigatures": true,
   "editor.rulers": [80],
   "editor.tabSize": 2,
   "workbench.fontAliasing": "auto",
-  // macOS
   "debug.toolBarLocation": "docked",
   "editor.minimap.enabled": false,
   "explorer.openEditors.visible": 0,
   "editor.quickSuggestionsDelay": 0,
-  // Whitespaces
   "files.trimTrailingWhitespace": true,
   "files.trimFinalNewlines": true,
   "diffEditor.ignoreTrimWhitespace": false,
   "files.insertFinalNewline": true,
-  // Emmet
   "emmet.triggerExpansionOnTab": true,
   "emmet.includeLanguages": {
     "javascript": "javascriptreact"
   },
-  // ESLint
   "eslint.alwaysShowStatus": true,
-  // Prettier
   "prettier.requireConfig": true,
-  // Git
   "git.autofetch": true,
   "git.detectSubmodules": false,
-  // Gitlens
   "gitlens.views.compare.files.layout": "auto",
   "gitlens.currentLine.enabled": false,
   "gitlens.codeLens.authors.enabled": false,
@@ -38,7 +30,6 @@
   "gitlens.advanced.messages": {
     "suppressShowKeyBindingsNotice": true
   },
-  // Specific language settings
   "[javascript]": {
     "editor.formatOnSave": true,
     "editor.formatOnPaste": true,
