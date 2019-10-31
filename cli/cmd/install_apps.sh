@@ -74,7 +74,6 @@ install_apps() {
     sensiblesidebuttons
     skype
     slack
-    spark
     spotify
     telegram-desktop
     ticktick
