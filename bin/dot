@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -e
+
+# arguments
+user_command=$1
+
+# global variables
+dotfiles_dir="${HOME}/dotfiles"
+cli_dir="${dotfiles_dir}/cli"
+
+# init cli
+source "${cli_dir}/command.sh"
+
+execute_command "$user_command"
+
+exit 0
