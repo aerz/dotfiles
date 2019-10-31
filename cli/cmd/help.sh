@@ -1,13 +1,8 @@
 #!/bin/bash
 
-#######################################
-# Shows the cli usage information
-#######################################
 help() {
   echo ""
-  echo "Usage:  ./dotfiles COMMAND"
-  echo ""
-  echo "Personal dotfiles installer for macOS 10.15+"
+  echo "Usage:  dot <command>"
   echo ""
   echo "Commands:"
   echo "  configure_iterm         Install all the iTerm configurations"
