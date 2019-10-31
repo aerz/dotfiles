@@ -63,7 +63,6 @@ install_apps() {
     font-fira-code
     google-chrome
     google-chrome-canary
-    hyper
     iina
     iterm2
     nativedisplaybrightness
