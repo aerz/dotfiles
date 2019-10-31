@@ -1,5 +1,19 @@
 #!/bin/bash
 
+check_app_exist() {
+  local app_name="$1"
+
+  # remove hypens on the app name
+  app_name="$(echo $app_name | tr '-' ' ')"
+
+  # check if app name is found on the Applications name
+  if [ -n $(ls -la "/Applications" | grep -i "$app_name") ]; then
+    return true
+  fi
+
+  return false
+}
+
 #######################################
 # Install listed apps using brew
 #######################################
@@ -9,7 +23,7 @@ install_apps() {
   fi
 
   brew update
-  
+
   brew tap homebrew/cask
   brew tap homebrew/cask-drivers
   brew tap homebrew/cask-fonts
@@ -69,8 +83,12 @@ install_apps() {
     visual-studio-code
     xmind-zen
   )
-  
+
   for app in "${brew_cask_apps[@]}"; do
-    brew cask install "$app"
+    if [ check_app_exist "$app" ]; then
+      brew cask install "$app" --force
+    else
+      brew cask install "$app"
+    fi
   done
 }
