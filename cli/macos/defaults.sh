@@ -1,5 +1,13 @@
 #!/bin/bash
 
+read -rp "This command will do an instant reboot when finished. Are you sure to continue? (y/n)" answer
+echo ""
+
+if [ "$answer" == "n" ]; then
+  echo "No changes applied, operation cancelled"
+  exit 0
+fi
+
 sudo -v
 
 echo "Closing System Preferences window opened to prevent changes..."
@@ -172,3 +180,7 @@ if [ ! -e "${COMMAND_PATH}/trim.lock" ]; then
   touch "${COMMAND_PATH}/trim.lock"
   sudo trimforce enable
 fi
+
+
+# reboot
+sudo reboot now
