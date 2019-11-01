@@ -12,7 +12,25 @@ readonly DOT_PATH="${DOTFILES_PATH}/cli"
 readonly COMMAND_PATH="${DOT_PATH}/${COMMAND}"
 readonly SUB_COMMAND_FILE="${COMMAND_PATH}/${SUB_COMMAND}.sh"
 
-source "${DOT_PATH}/messages.sh"
-source "${DOT_PATH}/core.sh"
+# show help message if no command inserted
+if [ -z "$COMMAND" ]; then
+  dot help
+  exit 0
+fi
+
+# throws an error if command doesn't exist
+if [ ! -d "$COMMAND_PATH" ]; then
+  echo "'${COMMAND}' - command doesn't exist"
+  exit 1
+fi
+
+# show sub command help doesn't exist
+if [ ! -e "$SUB_COMMAND_FILE" ]; then
+  echo "'${SUB_COMMAND}' - subcommand doesn't exist"
+  exit 1
+fi
+
+# load the script
+source "$SUB_COMMAND_FILE"
 
 exit 0
