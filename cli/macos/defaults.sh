@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 read -rp "This command will do an instant reboot when finished. Are you sure to continue? (y/n)" answer
 echo ""

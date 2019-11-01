@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 if [ ! -x "$(command -v brew)" ]; then
   echo "You must install Homebrew to run this command"

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 check_app_exist() {
   local app_name="$1"

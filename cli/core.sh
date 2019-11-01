@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # show help message if no command inserted
 if [ -z "$COMMAND" ]; then

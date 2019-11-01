@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 echo "Maybe you need to open the App Store once before this command..."
 echo ""
