@@ -1,17 +1,18 @@
 #!/bin/bash
 
-set -e
+set -euo pipefail
 
-# arguments
-user_command=$1
+readonly COMMAND="${1-}"
+readonly SUB_COMMAND="${2-}"
+# readonly OPTION="$3"
 
-# global variables
-dotfiles_dir="${HOME}/dotfiles"
-cli_dir="${dotfiles_dir}/cli"
+readonly DOTFILES_PATH="${HOME}/dotfiles"
+readonly DOT_PATH="${DOTFILES_PATH}/cli"
 
-# init cli
-source "${cli_dir}/command.sh"
+readonly COMMAND_PATH="${DOT_PATH}/${COMMAND}"
+readonly SUB_COMMAND_FILE="${COMMAND_PATH}/${SUB_COMMAND}.sh"
 
-execute_command "$user_command"
+source "${DOT_PATH}/messages.sh"
+source "${DOT_PATH}/core.sh"
 
 exit 0

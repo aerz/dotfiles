@@ -3,30 +3,33 @@
 set -euo pipefail
 
 echo ""
-echo "Installing Aerz's dotfiles"
-echo "##########################################################################"
+echo "Installing dotfiles..."
 echo ""
 
-dotfiles_path="${HOME}/dotfiles"
+readonly DOTFILES_PATH="${HOME}/dotfiles"
 
-if [ -d "$dotfiles_path" ]; then
+# error if dotfiles already exist
+if [ -d "$DOTFILES_PATH" ]; then
   echo "dotfiles folder already exist!"
   echo "delete the folder and run the command again"
   echo ""
   exit 1
 fi
 
-git clone https://github.com/aerz/dotfiles.git "$dotfiles_path"
+# clone the dotfiles
+git clone https://github.com/aerz/dotfiles.git "$DOTFILES_PATH"
 
-sudo ln -sfv "${dotfiles_path}/bin/dot" "/usr/local/bin/dot"
+# dot command alias
+sudo ln -sfv "${DOTFILES_PATH}/bin/dot" "/usr/local/bin/dot"
 
+# search the dot alias and show error if it's not exist
 if [ -z "$(ls -la /usr/local/bin | grep -w 'dot')" ]; then
   echo ""
   echo "Error: dot command was not installed, try to install it manually..."
   exit 1
 fi
 
-echo "##########################################################################"
+echo ""
 echo "dotfiles installed successfully"
 echo ""
 echo "Type 'dot' on your terminal to start using the dotfiles!"
