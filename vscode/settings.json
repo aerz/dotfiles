@@ -85,5 +85,6 @@
     "terminal.ansiYellow":"#FFCC66"
   },
   "terminal.external.osxExec": "iTerm.app",
-  "window.nativeTabs": true
+  "window.nativeTabs": true,
+  "editor.renderWhitespace": "all"
 }
