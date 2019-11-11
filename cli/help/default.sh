@@ -8,13 +8,16 @@ echo "  configure"
 echo "    iterm                 Install all the iTerm configurations"
 echo "    vscode                Install VSCode configurations"
 echo "    zsh                   Install zsh customizations"
-echo ""
+echo
 echo "  macos"
 echo "    defaults              Set the macOS defaults"
-echo ""
+echo
 echo "  install"
 echo "    brew_apps             Install macOS apps using brew"
 echo "    app_store_apps        Install App Store apps using mas"
-echo ""
+echo
+echo "  utils"
+echo "    compress-folders      Compress all the folders on the current path"
+echo
 echo "  help                    Show information about the cli usage"
 echo
