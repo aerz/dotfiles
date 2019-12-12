@@ -61,7 +61,6 @@
     "editor.defaultFormatter": "yzhang.markdown-all-in-one"
   },
   "workbench.iconTheme": "file-icons",
-  "workbench.colorTheme": "Min Dark",
   "workbench.colorCustomizations": {
     "terminal.background":"#1f1f1f",
     "terminal.foreground":"#D3D0C8",
@@ -86,5 +85,7 @@
   },
   "terminal.external.osxExec": "iTerm.app",
   "window.nativeTabs": true,
-  "editor.renderWhitespace": "all"
+  "editor.renderWhitespace": "all",
+  "workbench.colorTheme": "Min Dark",
+  "webhint.enableTelemetry": "disabled"
 }
