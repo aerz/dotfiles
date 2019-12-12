@@ -18,6 +18,7 @@ echo "    app_store_apps        Install App Store apps using mas"
 echo
 echo "  utils"
 echo "    compress-folders      Compress all the folders on the current path"
+echo "    files-to-folder       Create a new folder for each file with the same name"
 echo
 echo "  help                    Show information about the cli usage"
 echo
