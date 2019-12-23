@@ -11,6 +11,7 @@ echo "    zsh                   Install zsh customizations"
 echo
 echo "  macos"
 echo "    defaults              Set the macOS defaults"
+echo "    preferences           Modify macOS System Preferences"
 echo
 echo "  install"
 echo "    brew_apps             Install macOS apps using brew"
