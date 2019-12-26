@@ -10,13 +10,13 @@ DOTFILES_SCRIPTS_PATH="${DOTFILES_PATH}/scripts"
 COMMAND_EXEC="$DOTFILES_SCRIPTS_PATH/$COMMAND"
 
 # stop if no command inserted
-if [ -z "$COMMAND" ]; then; exit 0; fi
+if [ -z "$COMMAND" ]; then exit 0; fi
 
 # throws an error if context does not exist
-if [ ! -d "$CONTEXT" ]; then; exit 1; fi
+if [ ! -d "$CONTEXT" ]; then exit 1; fi
 
 # show sub command help does not exist
-if [ ! -e "$COMMAND_EXEC" ]; then; exit 1; fi
+if [ ! -e "$COMMAND_EXEC" ]; then exit 1; fi
 
 # load the script
 shift 2
