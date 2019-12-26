@@ -2,13 +2,11 @@
 
 set -euo pipefail
 
-export DOTFILES_PATH="$HOME/dotfiles"
-
 echo
-echo "Installing dotfiles to default path: ${DOTFILES_PATH}"
+echo "Installing dotfiles to default path: ${HOME}/dotfiles"
 echo
 
 git --version
-git clone git@github.com:aerz/dotfiles.git "$DOTFILES_PATH"
+#git clone git@github.com:aerz/dotfiles.git "${HOME}/dotfiles"
 
-"${DOTFILES_PATH}/bin/dot" self install
+"${HOME}/dotfiles/bin/dot" self install

@@ -1,7 +1,9 @@
 #!/usr/bin/env zsh
 
+export ZPLUG_HOME=/usr/local/opt/zplug
+
 # init
-source ~/.zplug/init.zsh
+source $ZPLUG_HOME/init.zsh
 
 # theme
 zplug "geometry-zsh/geometry"

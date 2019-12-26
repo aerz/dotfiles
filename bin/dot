@@ -5,6 +5,7 @@ set -euo pipefail
 context="$1"
 command="$2"
 
+DOTFILES_PATH="$HOME/dotfiles"
 SCRIPTS_PATH="$DOTFILES_PATH/scripts"
 CONTEXT_PATH="$SCRIPTS_PATH/$context"
 COMMAND_EXEC="$CONTEXT_PATH/$command"

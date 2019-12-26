@@ -2,31 +2,12 @@
 
 set -eou pipefail
 
-check_app_exist() {
-  local app_name="$1"
-
-  # remove hypens on the app name
-  app_name="$(echo $app_name | tr '-' ' ')"
-
-  # check if app name is found on the Applications name
-  if [ -n $(ls -la "/Applications" | grep -i "$app_name") ]; then
-    return true
-  fi
-
-  return false
-}
-
-if ! [ -x "$(command -v brew)" ]; then
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-fi
-
 brew update
 
+brew tap homebrew/core
 brew tap homebrew/cask
-brew tap homebrew/cask-drivers
 brew tap homebrew/cask-fonts
 brew tap homebrew/cask-versions
-brew tap homebrew/core
 
 brew install \
   bash \
@@ -40,6 +21,7 @@ brew install \
   tree \
   youtube-dl \
   wget \
+  zplug
 
 brew cask install \
   appcleaner \
