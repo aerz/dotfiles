@@ -7,6 +7,6 @@ echo "Installing dotfiles to default path: ${HOME}/dotfiles"
 echo
 
 git --version
-#git clone git@github.com:aerz/dotfiles.git "${HOME}/dotfiles"
+git clone git@github.com:aerz/dotfiles.git "${HOME}/dotfiles"
 
 "${HOME}/dotfiles/bin/dot" self install
