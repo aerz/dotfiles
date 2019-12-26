@@ -2,22 +2,13 @@
 
 set -euo pipefail
 
-readonly DOTFILES_PATH="$HOME/dotfiles"
-readonly DOTFILES_COMMAND="dot"
-readonly DOTFILES_REPO="git@github.com:aerz/dotfiles.git"
-
-source "$DOTFILES_PATH/scripts/core/dot.sh"
+DOTFILES_PATH="$HOME/dotfiles"
 
 echo
 echo "Installing dotfiles to default path: $DOTFILES_PATH"
 echo
 
-clone_dotfiles
-install_dot
-check_dot_is_installed && if  [ $? -eq 1 ]; then exit 1; fi
+git --version
+git clone git@github.com:aerz/dotfiles.git "$DOTFILES_PATH"
 
-echo
-echo "dotfiles installed successfully"
-echo
-echo "Type 'dot' on your terminal to start using the dotfiles!"
-echo
+"$DOTFILES_PATH/bin/dot" install
