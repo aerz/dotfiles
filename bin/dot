@@ -2,35 +2,24 @@
 
 set -euo pipefail
 
-readonly COMMAND="${1-}"
-readonly SUB_COMMAND="${2-default}"
-# readonly OPTION="$3"
+CONTEXT="$1"
+COMMAND="$2"
 
-readonly DOTFILES_PATH="${HOME}/dotfiles"
-readonly DOT_PATH="${DOTFILES_PATH}/cli"
+DOTFILES_PATH="${HOME}/dotfiles"
+DOTFILES_SCRIPTS_PATH="${DOTFILES_PATH}/scripts"
+COMMAND_EXEC="$DOTFILES_SCRIPTS_PATH/$COMMAND"
 
-readonly COMMAND_PATH="${DOT_PATH}/${COMMAND}"
-readonly SUB_COMMAND_FILE="${COMMAND_PATH}/${SUB_COMMAND}.sh"
+# stop if no command inserted
+if [ -z "$COMMAND" ]; then; exit 0; fi
 
-# show help message if no command inserted
-if [ -z "$COMMAND" ]; then
-  dot help
-  exit 0
-fi
+# throws an error if context does not exist
+if [ ! -d "$CONTEXT" ]; then; exit 1; fi
 
-# throws an error if command doesn't exist
-if [ ! -d "$COMMAND_PATH" ]; then
-  echo "'${COMMAND}' - command doesn't exist"
-  exit 1
-fi
-
-# show sub command help doesn't exist
-if [ ! -e "$SUB_COMMAND_FILE" ]; then
-  echo "'${SUB_COMMAND}' - subcommand doesn't exist"
-  exit 1
-fi
+# show sub command help does not exist
+if [ ! -e "$COMMAND_EXEC" ]; then; exit 1; fi
 
 # load the script
-source "$SUB_COMMAND_FILE"
+shift 2
+source "$COMMAND_EXEC" $@
 
 exit 0

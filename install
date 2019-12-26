@@ -11,4 +11,4 @@ echo
 git --version
 git clone git@github.com:aerz/dotfiles.git "$DOTFILES_PATH"
 
-"$DOTFILES_PATH/bin/dot" install
+"$DOTFILES_PATH/bin/dot" self install
