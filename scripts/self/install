@@ -4,10 +4,15 @@ set -eou pipefail
 
 DOT_LOCAL_PATH="/usr/local/bin"
 
-source "$DOTFILES_PATH/scripts/dot/utils/install.sh"
+sudo ln -s "$DOTFILES_PATH/bin/dot" "$DOT_LOCAL_PATH/dot"
 
-install_dot
-check_dot_is_installed && if  [ $? -eq 1 ]; then exit 1; fi
+if [ -z "$(ls $DOT_LOCAL_PATH | grep -w 'dot')" ]; then
+    echo
+    echo "Error: dot command was not installed, try to install it manually..."
+    echo
+
+    exit 1
+fi
 
 echo
 echo "dot command installed successfully"
