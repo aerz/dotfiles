@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+set -eou pipefail
+
+mas_apps=(
+  1384080005  # Tweetbot 3
+  441258766   # Magnet
+  497799835   # XCode
+)
+
+for app in ${mas_apps[@]};
+do
+  mas install "$app"
+done

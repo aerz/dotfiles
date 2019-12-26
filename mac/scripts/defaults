@@ -1,18 +1,8 @@
 #!/usr/bin/env bash
 
-read -rp "This command will do an instant reboot when finished. Are you sure to continue? (y/n)" answer
-echo ""
-
-if [ "$answer" == "n" ]; then
-  echo "No changes applied, operation cancelled"
-  exit 0
-fi
-
 sudo -v
 
-echo "Closing System Preferences window opened to prevent changes..."
 osascript -e 'tell application "System Preferences" to quit'
-echo ""
 
 #######################################
 # System preferences > General
@@ -21,11 +11,12 @@ echo ""
 # Show scroll bars when scrolling
 defaults write -g AppleShowScrollBars -string WhenScrolling
 
-# Disable font smooth
-defaults -currentHost write -globalDomain AppleFontSmoothing -int 0
+# Enable subpixel font rendering on non-Apple LCDs
+defaults write NSGlobalDomain AppleFontSmoothing -int 1
+defaults -currentHost write -globalDomain AppleFontSmoothing -int 1
 
-# Disable font smooth (Mojave)
-defaults write -g CGFontRenderingFontSmoothingDisabled -bool false
+# Disable font smooth (since Mojave)
+defaults write -g CGFontRenderingFontSmoothingDisabled -bool YES
 
 #######################################
 # System preferences > Mouse
@@ -176,11 +167,7 @@ networksetup -setdnsservers "Ethernet" 1.1.1.1 1.0.0.1
 #######################################
 
 # Enable TRIM
-if [ ! -e "${COMMAND_PATH}/trim.lock" ]; then
-  touch "${COMMAND_PATH}/trim.lock"
-  sudo trimforce enable
-fi
-
+sudo trimforce enable
 
 # reboot
 sudo reboot now
