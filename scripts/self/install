@@ -2,7 +2,7 @@
 
 set -eou pipefail
 
-sudo ln -s "$dotfiles_path/bin/dot" "/usr/local/bin/dot"
+sudo ln -s "$DOTFILES_PATH/bin/dot" "/usr/local/bin/dot"
 
 if [ -z "$(ls /usr/local/bin | grep -w 'dot')" ]; then
     echo
