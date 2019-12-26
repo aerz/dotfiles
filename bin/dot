@@ -2,23 +2,28 @@
 
 set -euo pipefail
 
-CONTEXT="$1"
-COMMAND="$2"
+context="$1"
+command="$2"
 
-DOTFILES_PATH="${HOME}/dotfiles"
-DOTFILES_SCRIPTS_PATH="${DOTFILES_PATH}/scripts"
-COMMAND_EXEC="$DOTFILES_SCRIPTS_PATH/$COMMAND"
+SCRIPTS_PATH="$DOTFILES_PATH/scripts"
+CONTEXT_PATH="$SCRIPTS_PATH/$context"
+COMMAND_EXEC="$CONTEXT_PATH/$command"
 
-# stop if no command inserted
-if [ -z "$COMMAND" ]; then exit 0; fi
+if [ -z "$context" ]; then
+    echo "You have to specify a context"
+    exit 0
+fi
 
-# throws an error if context does not exist
-if [ ! -d "$CONTEXT" ]; then exit 1; fi
+if [ ! -d "$CONTEXT_PATH" ]; then 
+    echo "The script context '$context' does not exist"
+    exit 1
+fi
 
-# show sub command help does not exist
-if [ ! -e "$COMMAND_EXEC" ]; then exit 1; fi
+if [ ! -e "$COMMAND_EXEC" ]; then 
+    echo "The command '$command' does not exist"
+    exit 1
+fi
 
-# load the script
 shift 2
 source "$COMMAND_EXEC" $@
 
