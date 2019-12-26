@@ -12,12 +12,12 @@ tell application "System Events" to tell process "System Preferences"
 		tell wakeDevices to if (1 is equal to its value) then click wakeDevices
 		click button "OK" of sheet 1
 	end tell
-	delay 1
 end tell
+
+set bluetoothChanges to "❌ Allow Bluetooth devices to wake this computer"
 
 tell application "System Preferences"
-	display dialog "🔔 Bluetooth
-
-❌ Allow Bluetooth devices to wake this computer
-" buttons "Ok"
+	display dialog bluetoothChanges buttons "Done" with title "🔔 Bluetooth"
 end tell
+
+quit application "System Preferences"

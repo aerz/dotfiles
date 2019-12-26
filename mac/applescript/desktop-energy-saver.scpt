@@ -1,8 +1,10 @@
 quit application "System Preferences"
 
-tell application "System Preferences"
-	set current pane to pane "Energy
+set energySaver to "Energy
 Saver"
+
+tell application "System Preferences"
+	set current pane to pane energySaver
 	activate
 end tell
 
@@ -12,7 +14,7 @@ tell application "System Events" to tell process "System Preferences"
 			set preventSleep to checkbox "Prevent computer from sleeping automatically when the display is off"
 			set wakeNetwork to checkbox "Wake for network access" of list 1
 			set powerNap to checkbox "Enable Power Nap" of list 2
-			
+
 			tell preventSleep to if (0 is equal to its value) then click preventSleep
 			tell wakeNetwork to if (1 is equal to its value) then click wakeNetwork
 			tell powerNap to if (1 is equal to its value) then click powerNap
@@ -20,13 +22,16 @@ tell application "System Events" to tell process "System Preferences"
 	end tell
 end tell
 
-tell application "System Preferences"
-	display dialog "🔔 Energy Saver
+set titleChanges to "🔔 Energy Saver"
 
+set changesText to "
 ✅ Prevent computer from sleeping automatically when the display is off
 ❌ Wake for network access
 ❌ Enable Power Nap
-" buttons "Ok"
-end tell
+"
+
+set buttonChanges to "Done"
+
+tell application "System Preferences" to display dialog changesText buttons buttonChanges with title titleChanges
 
 quit application "System Preferences"
