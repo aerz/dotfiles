@@ -16,6 +16,8 @@ zplug "junegunn/fzf-bin", \
     frozen:1
 zplug "junegunn/fzf", use:"shell/*.zsh"
 
+zplug "Aloxaf/fzf-tab", use:"fzf-tab.zsh"
+
 zplug "zsh-users/zsh-syntax-highlighting", \
     defer:2
 
