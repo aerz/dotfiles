@@ -12,7 +12,6 @@ brew tap homebrew/cask-versions
 brew install \
   bash \
   docker-compose \
-  fzf \
   nvm \
   mas \
   grep \

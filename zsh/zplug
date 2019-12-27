@@ -9,7 +9,15 @@ source $ZPLUG_HOME/init.zsh
 zplug "geometry-zsh/geometry"
 
 # zsh enhacements
-zplug "zsh-users/zsh-syntax-highlighting", defer:2
+zplug "junegunn/fzf-bin", \
+    as:command, \
+    from:gh-r, \
+    rename-to:"fzf", \
+    frozen:1
+
+zplug "zsh-users/zsh-syntax-highlighting", \
+    defer:2
+
 zplug "zsh-users/zsh-autosuggestions"
 
 # commands

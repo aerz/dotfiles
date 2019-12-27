@@ -8,12 +8,14 @@ if [ ! -d "$FZF_TAB_HOME" ]; then
   echo "🔔 Aloxaf/fzf-tab is not installed"
   echo
   echo "Installing into ${FZF_TAB_HOME}..."
+
   git clone https://github.com/Aloxaf/fzf-tab "$FZF_TAB_HOME" &> /dev/null
+
   echo
   echo "✅ Done!"
 fi
 
 source "${FZF_TAB_HOME}/fzf-tab.plugin.zsh"
 
-# run fzf
+# fzf completions
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
