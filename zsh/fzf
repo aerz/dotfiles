@@ -16,6 +16,3 @@ if [ ! -d "$FZF_TAB_HOME" ]; then
 fi
 
 source "${FZF_TAB_HOME}/fzf-tab.plugin.zsh"
-
-# fzf completions
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
