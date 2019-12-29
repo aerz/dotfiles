@@ -1,6 +1,6 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
-set -eou pipefail
+set -e
 
 brew update
 
