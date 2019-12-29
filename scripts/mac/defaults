@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 sudo -v
 
@@ -11,12 +11,15 @@ osascript -e 'tell application "System Preferences" to quit'
 # Show scroll bars when scrolling
 defaults write -g AppleShowScrollBars -string WhenScrolling
 
-# Enable subpixel font rendering on non-Apple LCDs
-defaults write NSGlobalDomain AppleFontSmoothing -int 1
-defaults -currentHost write -globalDomain AppleFontSmoothing -int 1
+# Disable blurry font rendering
+defaults write NSGlobalDomain AppleFontSmoothing -int 0
+defaults -currentHost write -globalDomain AppleFontSmoothing -int 0
 
 # Disable font smooth (since Mojave)
 defaults write -g CGFontRenderingFontSmoothingDisabled -bool YES
+
+# Hide menu bar
+defaults write NSGlobalDomain _HIHideMenuBar -bool true
 
 #######################################
 # System preferences > Mouse
@@ -142,6 +145,9 @@ defaults write com.apple.dock expose-animation-duration -float 0.1
 
 # Disable popup showing accented characters when hold down a key
 defaults write -g ApplePressAndHoldEnabled -bool false
+
+# Disable transparency
+defaults write com.apple.universalaccess reduceTransparency 1
 
 #######################################
 # Dashboard
