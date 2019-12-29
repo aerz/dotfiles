@@ -21,8 +21,7 @@ brew install \
   tldr \
   tree \
   youtube-dl \
-  wget \
-  zplug
+  wget
 
 brew cask install \
   appcleaner \

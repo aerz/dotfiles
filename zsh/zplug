@@ -1,8 +1,7 @@
 #!/usr/bin/env zsh
 
-export ZPLUG_HOME=/usr/local/opt/zplug
-
-# init
+# run zplug
+export ZPLUG_HOME="$HOME/.zplug"
 source $ZPLUG_HOME/init.zsh
 
 # theme

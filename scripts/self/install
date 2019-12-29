@@ -2,6 +2,7 @@
 
 set -eou pipefail
 
+# link dot command
 sudo ln -sf "${DOTFILES_PATH}/bin/dot" "/usr/local/bin/dot"
 
 if [ -z "$(ls /usr/local/bin | grep -w 'dot')" ]; then
@@ -16,16 +17,19 @@ else
     echo
 fi
 
+# install zplug if not exist
+if [[ -z $ZPLUG_HOME ]]; then
+    curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+fi
+
 if [[ "$OSTYPE" == *"darwin"* ]]; then
+    # check homebrew and install it is not installed
     if ! [ -x "$(command -v brew)" ]; then
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     fi
 
-    source "${DOTFILES_PATH}/mac/scripts/brew"
+    # install basic apps for macOS
+    dot mac brew
 fi
 
 dot configure zsh
-
-
-
-
