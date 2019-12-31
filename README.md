@@ -3,7 +3,7 @@
 ## Install
 
 ```sh
-bash <(curl -s https://raw.githubusercontent.com/aerz/dotfiles/master/install) -r
+curl -s https://raw.githubusercontent.com/aerz/dotfiles/master/install | bash -s -- --r
 ```
 
 ## Inspiration
