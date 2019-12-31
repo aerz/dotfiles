@@ -12,6 +12,7 @@ if [ "$remote" == "-r" ] || [ "$remote" == "--remote" ]; then
     git clone https://github.com/aerz/dotfiles.git "${DOTFILES_PATH}"
   fi
 
+  shift $# # remove all arguments before run the installer
   source "${DOTFILES_PATH}/install"
 else
   source "${HOME}/dotfiles/config.sh"
