@@ -1,6 +1,9 @@
-# ignore lock files
+# macOS
+.DS_Store
+
+# lock files
 *.lock
 
-# ignore dependencies
+# dependencies
 zplug-*
 dotman-*
