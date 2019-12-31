@@ -1,10 +1,12 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
-set -eou
+set -e
 
-ln -sfv "${DOTFILES_PATH}/vscode/settings.json" "${HOME}/Library/Application Support/Code/User/settings.json"
-ln -sfv "${DOTFILES_PATH}/vscode/keybindings.json" "${HOME}/Library/Application Support/Code/User/keybindings.json"
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  log::header "Creating symlinks..."
+  $DOTMAN_BIN --config "${CODE_MAC_SYMLINKS}" --force
+fi
 
-while IFS= read -r extension; do
-  code --install-extension "$extension"
+while IFS= read -r ext; do
+  code --install-extension "$ext"
 done < "${DOTFILES_PATH}/vscode/extensions"

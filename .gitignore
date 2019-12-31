@@ -1,2 +1,6 @@
 # ignore lock files
 *.lock
+
+# ignore dependencies
+zplug-*
+dotman-*

@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-
-set -eou
-
-ln -sfv "${DOTFILES_PATH}/zsh/.zshrc" "${HOME}/.zshrc"

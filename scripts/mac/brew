@@ -2,6 +2,12 @@
 
 set -e
 
+if ! [ -x "$(command -v brew)" ]; then
+  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
+
+log::info "Updating brew"
+
 brew update
 
 brew tap homebrew/core
@@ -9,12 +15,15 @@ brew tap homebrew/cask
 brew tap homebrew/cask-fonts
 brew tap homebrew/cask-versions
 
+log::info "Installing brew apps"
+
 brew install \
   bash \
   docker-compose \
   exa \
   nvm \
   mas \
+  moreutils \
   grep \
   ruby \
   shellcheck \
@@ -22,6 +31,8 @@ brew install \
   tree \
   youtube-dl \
   wget
+
+log::info "Installing brew cask apps"
 
 brew cask install \
   appcleaner \

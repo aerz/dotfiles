@@ -1,10 +1,7 @@
-DOTFILES_PATH="$HOME/dotfiles"
+DOTFILES_PATH="${HOME}/dotfiles"
 
 # init shell
-source $DOTFILES_PATH/zsh/init.zsh
-
-# run zplug
-source $ZPLUG_HOME/init.zsh
+source "${DOTFILES_PATH}/zsh/init.zsh"
 
 # theme
 zplug "geometry-zsh/geometry"
@@ -31,7 +28,12 @@ zplug "agkozak/zsh-z"
 zplug "b4b4r07/enhancd", use:init.sh
 
 # install plugins wether needed
-zplug_check_plugins
+if ! zplug check --verbose; then
+  printf "Install plugins? [y/N]: "
+  if read -q; then
+      echo; zplug install
+  fi
+fi
 
 # source plugins and add commands to $PATH
 zplug load

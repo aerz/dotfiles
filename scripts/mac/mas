@@ -1,6 +1,10 @@
 #!/usr/bin/env zsh
 
-set -eou pipefail
+set -e
+
+log::header "Installing apps from Mac App Store"
+
+check::command_installed "mas" -v
 
 mas_apps=(
   1384080005  # Tweetbot 3

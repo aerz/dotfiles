@@ -1,26 +1,27 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
-set -euo pipefail
+set -e
 
 context="$1"
 command="$2"
 
-DOTFILES_PATH="$HOME/dotfiles"
-SCRIPTS_PATH="$DOTFILES_PATH/scripts"
-CONTEXT_PATH="$SCRIPTS_PATH/$context"
-COMMAND_EXEC="$CONTEXT_PATH/$command"
+source "${HOME}/dotfiles/config.sh"
+source "${DOT_SCRIPTS_PATH}/_core/init.sh"
+
+CONTEXT_PATH="${DOT_SCRIPTS_PATH}/${context}"
+COMMAND_EXEC="${CONTEXT_PATH}/${command}"
 
 if [ -z "$context" ]; then
     echo "You have to specify a context"
     exit 0
 fi
 
-if [ ! -d "$CONTEXT_PATH" ]; then 
+if [ ! -d "$CONTEXT_PATH" ]; then
     echo "The script context '$context' does not exist"
     exit 1
 fi
 
-if [ ! -e "$COMMAND_EXEC" ]; then 
+if [ ! -e "$COMMAND_EXEC" ]; then
     echo "The command '$command' does not exist"
     exit 1
 fi

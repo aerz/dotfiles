@@ -1,12 +1,27 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
+set -e
 
-echo
-echo "Installing dotfiles to default path: ${HOME}/dotfiles"
-echo
+remote="$1"
 
-git --version
-git clone git@github.com:aerz/dotfiles.git "${HOME}/dotfiles"
+if [ "$remote" == "-r" ] || [ "$remote" == "--remote" ]; then
+  DOTFILES_PATH="${HOME}/dotfiles"
 
-"${HOME}/dotfiles/bin/dot" self install
+  if ! [ -d "$DOTFILES_PATH" ]; then
+    echo "Cloning dotfiles in ${DOTFILES_PATH}"
+    git clone https://github.com/aerz/dotfiles.git "${DOTFILES_PATH}"
+  fi
+
+  source "${DOTFILES_PATH}/install"
+else
+  source "${HOME}/dotfiles/config.sh"
+  source "${DOT_SCRIPTS_PATH}/_core/init.sh"
+  source "${DOT_SCRIPTS_PATH}/_core/install/welcome.sh"
+  source "${DOT_SCRIPTS_PATH}/_core/install/analyse.sh"
+  source "${DOT_SCRIPTS_PATH}/_core/install/os_default.sh"
+  source "${DOT_SCRIPTS_PATH}/_core/install/requirements.sh"
+  source "${DOT_SCRIPTS_PATH}/_core/install/dependencies.sh"
+  source "${DOT_SCRIPTS_PATH}/_core/install/symlinks.sh"
+  source "${DOT_SCRIPTS_PATH}/_core/install/dot.sh"
+  source "${DOT_SCRIPTS_PATH}/_core/install/finish.sh"
+fi
