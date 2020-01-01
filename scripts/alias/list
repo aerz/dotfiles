@@ -1,0 +1,16 @@
+#!/usr/bin/env zsh
+
+set -e
+
+for file in "$DOTFILES_PATH/zsh/_alias/"*; do
+  log::header "$(basename $file)"
+
+  # format alias file content
+  cat "$file" | # print file contents
+  sed '1d' | # remove shebang
+  sed 's/alias //' | # remove alias word
+  sed 's/="/ -> /' | # replace equivalent to something readable
+  sed 's/"//g' | # remove the last double quote
+  sed -E "s/##! *.+/$(log::info "&")/" | # print header comment as log info message
+  sed "s/##! //" # remove header comment symbol
+done

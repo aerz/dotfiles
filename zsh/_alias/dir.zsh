@@ -1,8 +1,11 @@
 #!/usr/bin/env zsh
 
-# cd
+##! cd
 alias ..="cd .."
 alias ...="cd ../.."
 
-# exa
+##! exa
+alias ll="exa -l"
+alias la="exa -la"
 alias lss="exa"
+alias lt="exa --tree --level=2"
