@@ -6,14 +6,7 @@ source "${DOTFILES_PATH}/config.sh"
 # run zplug
 source "${ZPLUG_HOME}/init.zsh"
 
-for a in "${DOTFILES_PATH}/zsh/_alias/"*; do
-  source $a
-done
-
-for e in "${DOTFILES_PATH}/zsh/_exports/"*; do
-  source $e
-done
-
-for f in "${DOTFILES_PATH}/zsh/_functions/"*; do
-  source $f
-done
+# load zsh files
+for a in "${DOTFILES_PATH}/zsh/_alias/"*; do source $a; done
+for e in "${DOTFILES_PATH}/zsh/_exports/"*; do source $e; done
+for f in "${DOTFILES_PATH}/zsh/_functions/"*; do source $f; done

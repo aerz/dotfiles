@@ -26,7 +26,6 @@ if [ ! -e "$COMMAND_EXEC" ]; then
     exit 1
 fi
 
-shift 2
 source "$COMMAND_EXEC" $@
 
 exit 0
