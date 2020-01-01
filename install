@@ -10,6 +10,10 @@ if [ "$remote" == "-r" ] || [ "$remote" == "--remote" ]; then
   if ! [ -d "$DOTFILES_PATH" ]; then
     echo "Cloning dotfiles in ${DOTFILES_PATH}"
     git clone https://github.com/aerz/dotfiles.git "${DOTFILES_PATH}"
+  else
+    echo "Error: Use remote option only on a fresh installation"
+    echo "Remove your dotfiles folder and try again"
+    exit 1
   fi
 
   shift $# # remove all arguments before run the installer
