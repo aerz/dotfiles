@@ -3,8 +3,11 @@ DOTFILES_PATH="${HOME}/dotfiles"
 # init shell
 source "${DOTFILES_PATH}/zsh/init.zsh"
 
+# zsh
+zplug "mafredri/zsh-async", use:"async.zsh"
+
 # theme
-zplug "geometry-zsh/geometry"
+zplug "geometry-zsh/geometry", as:"theme"
 
 # zsh enhacements
 zplug "zsh-users/zsh-syntax-highlighting", \

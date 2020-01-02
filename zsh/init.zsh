@@ -3,7 +3,11 @@
 # load dotfiles config
 source "${DOTFILES_PATH}/config.sh"
 
-# run zplug
+# zplug
+if [ ! -e "${ZPLUG_HOME}/init.zsh" ] || [ ! -x "$DOTMAN_BIN" ]; then
+  $DOTFILES_PATH/install
+fi
+
 source "${ZPLUG_HOME}/init.zsh"
 
 # load zsh files

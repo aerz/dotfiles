@@ -15,14 +15,6 @@ install_zplug() {
   log::done "✔ Installed!"
 }
 
-update_zplug() {
-  local _zsh=$(which zsh)
-
-  log::info "Updating zplug plugins"
-
-  $_zsh -i -c "zplug update"
-}
-
 install_dotman() {
   local url="https://github.com/erizocosmico/dotman/releases/download"
   local dotman_url
@@ -49,7 +41,6 @@ log::header "Checking dependencies..."
 if ! [ -d "$ZPLUG_HOME" ] && ! [ -e "$ZPLUG_HOME/init.zsh" ] ; then
   install_zplug
 else
-  update_zplug
   log::done "✔ zplug"
 fi
 
