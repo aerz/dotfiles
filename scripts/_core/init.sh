@@ -1,12 +1,15 @@
 #!/usr/bin/env zsh
 
-for l in "${DOT_SCRIPTS_PATH}/_core/lib/"*".sh"; do source $l; done
+if ! [ "$DOTFILES_CONFIG" ]; then
+  echo "Error: dotfiles config is required."
+  echo "Check your script and load init after config file"
+  exit 1
+fi
 
-# with no command, context will set to self
-if ! [ $command ]; then
-  command="$context"
-  context="self"
-  shift 1
-else
-  shift 2 # to allow arguments forward to script
+for l in "${DOT_SCRIPTS_PATH}/_core/lib/"*".sh"; do
+  source $l
+done
+
+if ! [ -d "$DEPENDENCIES_PATH" ]; then
+  mkdir "$DEPENDENCIES_PATH"
 fi

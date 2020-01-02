@@ -17,5 +17,5 @@ check::command_installed() {
     return 1
   fi
 
-  log::info "✔ ${command}"
+  log::done "✔ ${command}"
 }

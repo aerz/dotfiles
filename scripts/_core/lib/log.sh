@@ -11,6 +11,11 @@ log::info() {
   echo -e "${BLUE}==> ${msg}${NO_COLOR}"
 }
 
+log::done() {
+  local msg="$1"
+  echo -e "${BLUE}==> ${BOLD_GREEN}${msg}${NO_COLOR}"
+}
+
 log::header() {
   local msg="$1"
   echo

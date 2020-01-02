@@ -1,39 +1,60 @@
 #!/usr/bin/env bash
 
+install_zplug() {
+  local zplug_url="https://github.com/zplug/zplug/archive/${ZPLUG_VERSION}.zip"
+  local zplug_zip="$ZPLUG_PATH/zplug.zip"
+  log::info "zplug not found, installing into ${ZPLUG_PATH}"
+
+  if ! [ -d "$ZPLUG_PATH" ]; then mkdir "$ZPLUG_PATH" ; fi
+
+  chronic wget -qO $zplug_zip $zplug_url
+  unzip -q "$zplug_zip" -d "$ZPLUG_PATH"
+  mv "$ZPLUG_PATH/zplug-$ZPLUG_VERSION" "$ZPLUG_HOME"
+  rm "$zplug_zip"
+
+  log::done "✔ Installed!"
+}
+
+update_zplug() {
+  local _zsh=$(which zsh)
+
+  log::info "Updating zplug plugins"
+
+  $_zsh -i -c "zplug update"
+}
+
+install_dotman() {
+  local url="https://github.com/erizocosmico/dotman/releases/download"
+  local dotman_url
+
+  log::info "dotman not found, installing into ${DOTMAN_BIN}"
+
+  if ! [ -d "$DOTMAN_PATH" ]; then mkdir "$DOTMAN_PATH" ; fi
+  if ! [ -d "$DOTMAN_HOME" ]; then mkdir "$DOTMAN_HOME" ; fi
+
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    dotman_url="${url}/${DOTMAN_VERSION}/dotman_darwin"
+  else
+    dotman_url="${url}/${DOTMAN_VERSION}/dotman_linux"
+  fi
+
+  chronic wget -qO $DOTMAN_BIN $dotman_url
+  chmod +x "$DOTMAN_BIN"
+
+  log::done "✔ Installed"
+}
+
 log::header "Checking dependencies..."
 
-if ! [ -d "${DEPENDENCIES_PATH}/zplug-${ZPLUG_VERSION}" ]; then
-  zplug_download_url="https://github.com/zplug/zplug/archive/${ZPLUG_VERSION}.zip"
-  zplug_zip_file="zplug-${ZPLUG_VERSION}.zip"
-  zplug_folder="zplug-${ZPLUG_VERSION}"
-
-  log::info "zplug not found, installing into ${DEPENDENCIES_PATH}/$zplug_folder"
-
-  run_chronic \
-    "wget -O $DEPENDENCIES_PATH/$zplug_zip_file $zplug_download_url" \
-    "unzip $DEPENDENCIES_PATH/$zplug_zip_file -d $DEPENDENCIES_PATH"
-  rm "${DEPENDENCIES_PATH}/${zplug_zip_file}"
-
-  log::info "✔ Installed!"
-elif [ "$DEPENDENCIES_PATH" == "$ZPLUG_HOME" ]; then
-  log::info "Updating zplug plugins"
-  _zsh=$(which zsh)
-  $_zsh -i -c "zplug update"
+if ! [ -d "$ZPLUG_HOME" ] && ! [ -e "$ZPLUG_HOME/init.zsh" ] ; then
+  install_zplug
 else
-  log::info "✔ zplug"
+  update_zplug
+  log::done "✔ zplug"
 fi
 
 if ! [ -e "$DOTMAN_BIN" ]; then
-  log::info "dotman not found, installing into ${DOTMAN_BIN}"
-  dotman_url="https://github.com/erizocosmico/dotman/releases/download/${DOTMAN_VERSION}/dotman_darwin"
-
-  if [[ "$OSTYPE" == "darwin"* ]]; then
-    run_chronic \
-      "wget -O $DOTMAN_BIN $dotman_url" \
-      "chmod +x $DOTMAN_BIN"
-  fi
-
-  log::info "✔ Installed"
+  install_dotman
 else
-  log::info "✔ dotman"
+  log::done "✔ dotman"
 fi

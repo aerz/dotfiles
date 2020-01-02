@@ -3,7 +3,7 @@
 
 # lock files
 *.lock
+Brewfile.lock.json
 
 # dependencies
-zplug-*
-dotman-*
+dependencies

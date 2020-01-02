@@ -8,6 +8,15 @@ command="$2"
 source "${HOME}/dotfiles/config.sh"
 source "${DOT_SCRIPTS_PATH}/_core/init.sh"
 
+# with no command, context will set to self
+if ! [ $command ]; then
+  command="$context"
+  context="self"
+  shift 1
+else
+  shift 2 # to allow arguments forward to script
+fi
+
 CONTEXT_PATH="${DOT_SCRIPTS_PATH}/${context}"
 COMMAND_EXEC="${CONTEXT_PATH}/${command}"
 

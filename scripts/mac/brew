@@ -2,56 +2,10 @@
 
 set -e
 
-if ! [ -x "$(command -v brew)" ]; then
+if ! check::command_installed "brew" &> /dev/null ; then
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
-log::info "Updating brew"
+log::info "Installing brew apps..."
 
-brew update
-
-brew tap homebrew/core
-brew tap homebrew/cask
-brew tap homebrew/cask-fonts
-brew tap homebrew/cask-versions
-
-log::info "Installing brew apps"
-
-brew install \
-  bash \
-  docker-compose \
-  exa \
-  nvm \
-  mas \
-  moreutils \
-  grep \
-  ruby \
-  shellcheck \
-  tldr \
-  tree \
-  youtube-dl \
-  wget
-
-log::info "Installing brew cask apps"
-
-brew cask install \
-  appcleaner \
-  balenaetcher \
-  clover-configurator \
-  contexts \
-  docker \
-  downie \
-  firefox \
-  firefox-developer-edition \
-  font-fira-code \
-  google-chrome \
-  google-chrome-canary \
-  iina \
-  iterm2 \
-  nativedisplaybrightness \
-  notion \
-  pocket-casts \
-  postman \
-  sensiblesidebuttons \
-  telegram-desktop \
-  visual-studio-code
+brew bundle --file="$DOTFILES_PATH/mac/Brewfile"
