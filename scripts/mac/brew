@@ -2,7 +2,7 @@
 
 set -e
 
-if ! check::command_installed "brew" &> /dev/null ; then
+if ! check::command_installed "brew" 2>&- ; then
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
