@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+##? Display a usable list of commands ready to use
+##?
+##? Usage:
+##?   cheat
+##?
+##? Options:
+##?   -h, --help   Display the help of this command
+
+navi -p "$DOTFILES_PATH/cheats"
+
+# copy
+# echo -n $(navi --print --path "$DOTFILES_PATH/cheats") | pbcopy

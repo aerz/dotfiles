@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+export DOTFILES_PATH="$HOME/.dotfiles"
+
+echo "Installing dotfiles"
+
+if [ -d "$DOTFILES_PATH" ]; then
+  echo "$DOTFILES_PATH already exist, please use dot to update or delete the folder"
+  exit 1
+fi
+
+echo "Cloning into $DOTFILES_PATH"
+git clone "https://github.com/aerz/dotfiles.git" "$DOTFILES_PATH"
+
+"$DOTFILES_PATH/bin/dot" self install

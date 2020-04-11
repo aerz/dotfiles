@@ -1,5 +1,0 @@
-#!/usr/bin/env zsh
-
-set -e
-
-$DOTFILES_PATH/bin/dot mac brew

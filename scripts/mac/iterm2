@@ -1,7 +1,17 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 
-# Change preferences directory iTerm2
-defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "${DOTFILES_PATH}/mac/iterm2"
+##? Link the iterm2 configuration of this dotfiles
+##?
+##? Usage:
+##?   iterm2
+##?
+##? Options:
+##?   -h --help  Print this help command
 
-# Load custom preferences iTerm2
+log "Setting iterm2 preferences"
+defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "$DOTFILES_PATH/mac/iterm2"
+log --success "iterm2 preferences"
+
+log "Setting custom preferences"
 defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
+log --success "iterm2 custom preferences"

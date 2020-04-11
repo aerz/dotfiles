@@ -1,15 +1,6 @@
-#!/usr/bin/env zsh
-
-if ! [ "$DOTFILES_CONFIG" ]; then
-  echo "Error: dotfiles config is required."
-  echo "Check your script and load init after config file"
-  exit 1
-fi
-
-for l in "${DOT_SCRIPTS_PATH}/_core/lib/"*".sh"; do
-  source $l
-done
-
-if ! [ -d "$DEPENDENCIES_PATH" ]; then
-  mkdir "$DEPENDENCIES_PATH"
-fi
+source "$DOTFILES_PATH/scripts/_core/colors.sh"
+source "$DOTFILES_PATH/scripts/_core/log.sh"
+source "$DOTFILES_PATH/scripts/_core/utils.sh"
+source "$DOTFILES_PATH/scripts/_core/docs.sh"
+source "$DOTFILES_PATH/scripts/_core/args.sh"
+source "$DOTFILES_PATH/scripts/_core/collection.sh"

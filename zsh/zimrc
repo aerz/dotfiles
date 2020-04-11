@@ -1,0 +1,25 @@
+#
+# Warning: It's required to run `zimfw uninstall & zimfw install` after done any modification
+#
+
+# Modules
+zmodule environment
+zmodule git
+zmodule input
+zmodule termtitle
+zmodule utility
+
+# Prompt
+zmodule denysdovhan/spaceship-prompt --name spaceship
+zmodule git-info
+zmodule zsh-users/zsh-completions
+zmodule completion
+zmodule zsh-users/zsh-autosuggestions
+zmodule zsh-users/zsh-syntax-highlighting
+zmodule zsh-users/zsh-history-substring-search
+zmodule Aloxaf/fzf-tab
+zmodule agkozak/zsh-z
+zmodule wfxr/forgit
+
+# Under test
+# zmodule b4b4r07/enhancd --source init.sh

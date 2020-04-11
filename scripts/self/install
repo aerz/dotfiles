@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+##? Install the dotfiles in this user.
+##?
+##? Usage:
+##?   install
+##?
+##? Options:
+##?   -h, --help   Display the help of this command
+
+source "$DOTFILES_PATH/scripts/self/install.sh"
+source "$DOTFILES_PATH/scripts/self/mac.sh"
+
+case $OSTYPE in
+  darwin*)
+    self::install::mac::init
+    ;;
+esac
+
+self::install::zim
+self::install::docopts
+$DOT_ROOT/bin/dot symlinks install
+self::install::last_login
+self::install::zsh

@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+##? Link configuration files to the user's Visual Studio Code
+##?
+##? Usage:
+##?   vscode
+##?
+##? Options:
+##?   -h, --help   Display the help of this command
+
+source "$DOTFILES_PATH/scripts/symlinks/utils.sh"
+
+log --header "Creating symlinks for Visual Studio Code"
+
+symlinks::utils::ln "$DOTFILES_PATH/vscode/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
+symlinks::utils::ln "$DOTFILES_PATH/vscode/keybindings.json" "$HOME/Library/Application Support/Code/User/keybindings.json"
+
+log --success "All symlinks created"

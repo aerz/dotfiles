@@ -2,7 +2,7 @@
   "editor.fontFamily": "FiraCode-Retina",
   "editor.lineHeight": 17,
   "editor.fontLigatures": true,
-  "editor.rulers": [80],
+  "editor.rulers": [80,120],
   "editor.tabSize": 2,
   "workbench.fontAliasing": "auto",
   "debug.toolBarLocation": "docked",
@@ -87,5 +87,6 @@
   "window.nativeTabs": true,
   "editor.renderWhitespace": "all",
   "workbench.colorTheme": "Min Dark",
-  "webhint.enableTelemetry": "disabled"
+  "webhint.enableTelemetry": "disabled",
+  "telemetry.enableTelemetry": false
 }

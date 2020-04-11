@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+##? Link dotfiles to the current user
+##?
+##? Usage:
+##?   dotfiles
+##?
+##? Options:
+##?   -h, --help   Display the help of this command
+
+source "$DOTFILES_PATH/scripts/symlinks/utils.sh"
+
+log --header "Symlinks"
+
+symlinks::utils::ln "$DOTFILES_PATH/bin/dot" "/usr/local/bin/dot"
+symlinks::utils::ln "$DOTFILES_PATH/zsh/zshrc" "$HOME/.zshrc"
+symlinks::utils::ln "$DOTFILES_PATH/zsh/zshlogin" "$HOME/.zshlogin"
+symlinks::utils::ln "$DOTFILES_PATH/zsh/zshenv" "$HOME/.zshenv"
+symlinks::utils::ln "$DOTFILES_PATH/zsh/zimrc" "$HOME/.zimrc"
+symlinks::utils::ln "$DOTFILES_PATH/git/gitconfig" "$HOME/.gitconfig"
+symlinks::utils::ln "$DOTFILES_PATH/git/gitignore_global" "$HOME/.gitignore_global"
+symlinks::utils::ln "$DOTFILES_BIN_PATH/docopts/docopts" "/usr/local/bin/docopts"
+
+log --success "All symlinks created!"

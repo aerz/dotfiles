@@ -1,4 +1,12 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
+
+##? Set the pre-defined macOS defaults
+##?
+##? Usage:
+##?   defaults
+##?
+##? Options:
+##?   -h --help  Print this help command
 
 sudo -v
 
@@ -12,8 +20,8 @@ osascript -e 'tell application "System Preferences" to quit'
 defaults write -g AppleShowScrollBars -string WhenScrolling
 
 # Disable blurry font rendering
-defaults write NSGlobalDomain AppleFontSmoothing -int 0
-defaults -currentHost write -globalDomain AppleFontSmoothing -int 0
+defaults write NSGlobalDomain AppleFontSmoothing -int 1
+defaults -currentHost write -globalDomain AppleFontSmoothing -int 1
 
 # Disable font smooth (since Mojave)
 defaults write -g CGFontRenderingFontSmoothingDisabled -bool YES
@@ -87,7 +95,10 @@ defaults write com.apple.Dock show-recents -int 0
 defaults write com.apple.systemuiserver menuExtras -array ""
 
 # Show Date, Volume and Bluetooth
-defaults write com.apple.systemuiserver menuExtras -array "/System/Library/CoreServices/Menu Extras/Clock.menu" "/System/Library/CoreServices/Menu Extras/Volume.menu" "/System/Library/CoreServices/Menu Extras/Bluetooth.menu"
+defaults write com.apple.systemuiserver menuExtras -array \
+  "/System/Library/CoreServices/Menu Extras/Clock.menu" \
+  "/System/Library/CoreServices/Menu Extras/Volume.menu" \
+  "/System/Library/CoreServices/Menu Extras/Bluetooth.menu"
 
 # Restart menu bar service
 killall SystemUIServer
@@ -169,11 +180,11 @@ sudo pmset -a standby 0
 
 # Set Cloudflare DNS
 networksetup -setdnsservers "Ethernet" 1.1.1.1 1.0.0.1
-# networksetup -setdnsservers "802.11n NIC" 1.1.1.1 1.0.0.1
+# networksetup -setdnsservers "802.11n NIC" 1.1.1.1 1.0.0.1 # wifi
 
 #######################################
-# SSD/M2
+# SSD
 #######################################
 
 # Enable TRIM
-sudo trimforce enable
+# sudo trimforce enable

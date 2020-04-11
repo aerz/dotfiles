@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+##? Puts all the files with the same name and diferent extension in a new folder
+##?
+##? Usage:
+##?   files_to_folders
+##?   files_to_folders [--formats=<zip>...]
+##?
+##? Options:
+##?   -h --help  Print this help command
+
+log --error "This script needs a rework"
+log "Exiting..."
+
+exit 0
+
+user_path="$(pwd)"
+
+regex_exclude_formats="(.epub|.zip|.mobi|.pdf)"
+regex_exclude_dirs="(.*)(\/)"
+
+folder_list=$(
+  ls -1p "$user_path" |
+  sed -E "/$regex_exclude_dirs/d" |
+  sed -E "s/$regex_exclude_formats//g" |
+  uniq
+)
+
+while IFS= read -r folder_name
+do
+  echo "Creating folder $folder_name"
+  mkdir "$folder_name"
+  echo "Moving files..."
+  mv -v "$user_path"/"$folder_name".* "$user_path"/"$folder_name"/
+done < <(printf '%s\n' "$folder_list")

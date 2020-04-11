@@ -1,40 +1,57 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 
-set -e
+##? Usage:
+##?   dot
+##?   dot <context>
+##?   dot <context> <command>
+##?
+##? Options:
+##?   -h --help  Print this help command
 
-context="$1"
-command="$2"
+export DOTFILES_PATH="$HOME/.dotfiles"
+export DOTFILES_BIN_PATH="$HOME/.local/bin"
 
-source "${HOME}/dotfiles/config.sh"
-source "${DOT_SCRIPTS_PATH}/_core/init.sh"
+source "$DOTFILES_PATH/scripts/_core/init.sh"
+source "$DOTFILES_BIN_PATH/docopts/docopts.sh"
 
-# with no command, context will set to self
-if ! [ $command ]; then
-  command="$context"
-  context="self"
-  shift 1
+list_command_paths() {
+  find "$DOTFILES_PATH/scripts" -maxdepth 2 -type f |
+  grep -v "\.sh" |
+  grep -v core |
+  sort
+}
+
+fzf_prompt() {
+  local paths="$1"
+
+  context_command="$(
+    echo "$paths" |
+    xargs -I % sh -c 'echo "$(basename $(dirname %)) $(basename %)"' |
+    fzf --height 100% --layout=reverse --preview-window=:wrap --preview \
+      'dot $(echo {}) -h | bat --style=snip --color=always'
+  )"
+  # exit when no command selected
+  [ -z "$context_command" ] && exit 0
+
+  printf "$context_command "
+  read command_args
+  if collection::is_empty "$context_command"; then
+    dot $context_command
+  else
+    dot $context_command $command_args
+  fi
+}
+
+if args::has_no_args "$@"; then
+  fzf_prompt "$(list_command_paths)"
+elif args::total_is 1 "$@"; then
+  fzf_prompt "$(list_command_paths | grep "/$1/")"
 else
-  shift 2 # to allow arguments forward to script
+  readonly context="$1"
+  readonly command="$2"
+  readonly command_path="$DOTFILES_PATH/scripts/$context/$command"
+  shift 2
+
+  docs::eval "$@"
+  source "$command_path" "$@"
 fi
-
-CONTEXT_PATH="${DOT_SCRIPTS_PATH}/${context}"
-COMMAND_EXEC="${CONTEXT_PATH}/${command}"
-
-if [ -z "$context" ]; then
-    echo "You have to specify a context"
-    exit 0
-fi
-
-if [ ! -d "$CONTEXT_PATH" ]; then
-    echo "The script context '$context' does not exist"
-    exit 1
-fi
-
-if [ ! -e "$COMMAND_EXEC" ]; then
-    echo "The command '$command' does not exist"
-    exit 1
-fi
-
-source "$COMMAND_EXEC" $@
-
-exit 0

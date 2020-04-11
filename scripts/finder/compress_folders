@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+
+##? Compress all the folders on the current directory to 7z or zip
+##?
+##? Usage:
+##?   compress_folders
+##?
+##? Options:
+##?   -h --help  Print this help command
+
+log --error "This script needs a rework"
+log "Exiting..."
+
+exit 0
+
+check_os_macos() {
+  if [[ "$OSTYPE" == *"darwin"* ]]; then
+    return true
+  fi
+
+  return false
+}
+
+while (( $# > 0 )); do
+  opt="$1"
+  case $opt in
+    -h|--help)
+    echo "test"
+    exit 0
+    ;;
+  esac
+  shift
+done
+
+if [ ! check_os_macos ]; then
+  echo "This script only runs on macOS"
+  exit 0
+fi
+
+read -rp "Which format do you prefer? [7z, zip] (default: 7z)" format
+
+if [ ! -x "$(command -v 7z)" ]; then
+  brew install p7zip
+fi
+
+if [ ! -x "$(command -v zip)" ]; then
+  brew install zip
+fi
+
+for folder in ./*/; do
+  # remove special chars
+  fileName="$(echo "$folder" | tr -d '/' | tr -d '.' )"
+
+  # compress the folder
+  case "$format" in
+    "7z")
+      7z a "${fileName}.7z" "$folder"
+    ;;
+
+    "zip")
+      zip -r "${fileName}.zip" "$folder"
+    ;;
+
+    # default
+    *)
+      7z a "${fileName}.7z" "$folder"
+    ;;
+  esac
+
+done

@@ -1,0 +1,36 @@
+tap "homebrew/bundle"
+tap "homebrew/cask"
+tap "homebrew/cask-drivers"
+tap "homebrew/cask-versions"
+
+brew "docker-compose"
+brew "moreutils"
+brew "nvm"
+brew "shellcheck"
+brew "tldr"
+brew "unzip"
+brew "youtube-dl"
+
+cask "appcleaner"
+cask "calibre"
+cask "contexts"
+cask "docker"
+cask "font-fira-code"
+cask "google-chrome"
+cask "firefox"
+cask "firefox-developer-edition"
+cask "iina"
+cask "iterm2"
+cask "nativedisplaybrightness"
+cask "nightowl"
+cask "notion"
+cask "sensiblesidebuttons"
+cask "spotify"
+cask "telegram-desktop"
+cask "ticktick"
+cask "transmission"
+cask "visual-studio-code"
+
+mas "Magnet", id: 441258766
+mas "Pixelmator", id: 407963104
+mas "Tweetbot", id: 1384080005

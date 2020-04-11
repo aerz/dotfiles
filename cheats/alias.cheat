@@ -1,0 +1,37 @@
+; Commands with [interactive] in the comment have to be used into an interactive shell, they won't run with navi
+; :: <alias> is the alias
+
+% exa
+
+# Display a list of files :: exl
+exa -l
+
+# Display a list of files, including hidden files :: exla
+exa -la
+
+# Display a file tree :: ext
+exa --tree --level=<tree-level>
+
+% bindkey
+
+# Display all the bindkeys available [interactive] :: bdka
+bindkey -M main
+
+% zimfw
+
+# Reload all the zim modules by uninstall and installing again [interactive] :: zimr
+zimfw uninstall & zimfw install
+
+% docker
+
+# Display all the running containers :: dckp
+docker ps
+
+# Stop all the running containers :: dcks
+docker stop $(docker ps -aq)
+
+# Remove and kill all the running containers :: dckkd
+docker rm $(docker stop $(docker ps -aq))
+
+# Remove all the running containers and remove all images (cleanup) :: dckdall
+docker rm $(docker ps -a -q) && docker rmi $(docker images -q)

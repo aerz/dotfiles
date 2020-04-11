@@ -1,0 +1,12 @@
+# zim
+: ${ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim}
+
+# nvm
+export NVM_DIR="$HOME/.nvm"
+
+# dotfiles
+export DOTFILES_PATH="$HOME/.dotfiles"
+export DOTFILES_BIN_PATH="$HOME/.local/bin"
+
+# locale
+export LC_ALL="en_US.UTF-8"

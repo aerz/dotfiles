@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+##? Install the Visual Studio Code extensions
+##?
+##? Usage:
+##?   extensions
+##?
+##? Options:
+##?   -h, --help   Display the help of this command
+
+log "Installing Visual Studio Code extensions"
+
+while IFS= read -r extension; do
+  log "$extension"
+  code --install-extension "$extension" &> /dev/null
+done < "$DOTFILES_PATH/vscode/extensions"
+
+log --success "All done!"
