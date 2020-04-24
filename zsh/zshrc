@@ -30,9 +30,6 @@ WORDCHARS=${WORDCHARS//[\/]}
 # Module configuration
 # --------------------
 
-# completion
-zstyle ':zim:completion' dumpfile "${ZDOTDIR:-${HOME}}/.config/.zcompdump-${ZSH_VERSION}"
-
 #
 # git
 #
@@ -54,7 +51,7 @@ zstyle ':zim:completion' dumpfile "${ZDOTDIR:-${HOME}}/.config/.zcompdump-${ZSH_
 # Set a custom terminal title format using prompt expansion escape sequences.
 # See http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Simple-Prompt-Escapes
 # If none is provided, the default '%n@%m: %~' is used.
-#zstyle ':zim:termtitle' format '%1~'
+zstyle ':zim:termtitle' format '%~'
 
 #
 # zsh-autosuggestions
@@ -97,3 +94,5 @@ source <(navi widget zsh)
 # Load custom config
 #
 source "$DOTFILES_PATH/zsh/init.sh"
+
+eval "$(starship init zsh)"
