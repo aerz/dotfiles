@@ -1,0 +1,76 @@
+/*
+    Rofi manual: https://github.com/davatorium/rofi/blob/next/doc/rofi.1.markdown
+    Rofi theme manual: https://github.com/davatorium/rofi/blob/next/doc/rofi-theme.5.markdown
+*/
+
+configuration {
+    font:                  "JetBrainsMono Nerd Font 14";
+    icon-theme:            "Papirus-Dark";
+    show-icons:            false;
+    drun-display-format:   "{icon} {name}";
+    display-run:           "הּ";
+    display-drun:          "";
+    display-window:        "";
+    modi:                  "window,run,drun";
+    lines:                 8;
+    line-padding:          20;
+    bw:                    0;
+    padding:               0;
+    hide-scrollbar:        true;
+    line-margin:           0;
+}
+
+* {
+    bg:  #262626;
+    se:  #181818;
+    fg:  #C1C1C1;
+    ac:  #B294BB;
+}
+
+* {
+    background-color: @bg;
+    text-color: @fg;
+    spacing: 0;
+    width: 800px;
+}
+
+inputbar {
+    border: 0 0 1px 0;
+    children: [prompt, entry];
+}
+
+prompt {
+    padding: 11px 12px 12px 12px;
+    background-color: @ac;
+    text-color: @bg;
+}
+
+textbox {
+    padding: 8px 16px;
+}
+
+entry {
+    padding: 12px;
+    background-color: @ac;
+    text-color: @bg;
+}
+
+listview {
+    cycle: false;
+    scrollbar: false;
+}
+
+element {
+    padding: 12px;
+}
+
+element selected {
+    margin : 10px;
+    background-color: @se;
+    text-color: @fg;
+}
+
+element-icon {
+    size: 26px;
+    border: 0px;
+}

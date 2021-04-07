@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+#
+# Bluetooth common actions using Rofi as interface
+#
+# Dependencies:
+#   bluetoothctl
+#   rofi
+#
+
+# ---
+
+# Rofi options
+ropts=(
+    "-i"
+    "-matching fuzzy"
+    "-dmenu"
+    "-theme ~/.config/rofi/themes/notifications.rasi"
+)
+
+# ---
+
+show_help() {
+    echo
+    echo "roblue - Bluetooth common actions using Rofi as interface"
+    echo
+    echo "usage: roblue <command>"
+    echo
+    echo "Commands:"
+    echo "  help                    Display this message"
+    echo "  connect                 Connect a paired device"
+    exit 0
+}
+
+show_cmd_err() {
+    echo "error: No command specified or no exists"
+    echo
+    echo "Use 'roblue help' to display the help message"
+    exit 1
+}
+
+open_paired_connect_menu() {
+    local title=" Connect:"
+    local devices="$1"
+    local device_name="$(echo -e "$devices" | cut -d " " -f 3- | rofi ${ropts[@]} -p "$title")"
+
+    echo -e "$devices" | grep -w "$device_name"
+}
+
+get_mac_address() {
+    local device="$1"
+
+    echo "$device" | cut -d " " -f 2
+}
+
+case $1 in
+    connect)
+        device="$(open_paired_connect_menu "$(bluetoothctl paired-devices)")"
+        [ -z "$device" ] && echo "No device selected" && exit 1
+
+        bluetoothctl connect "$(get_mac_address "$device")"
+    ;;
+    help)   show_help       ;;
+    *)      show_cmd_err    ;;
+esac

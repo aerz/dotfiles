@@ -1,0 +1,100 @@
+#!/usr/bin/env bash
+
+readonly HISTORY_FILE="$HOME/.cache/dunst-history/notifications.json"
+readonly THEME="$HOME/.config/rofi/themes/notifications.rasi"
+readonly COLOR_ALERT="#BD4E4E"
+
+show_rofi_menu() {
+    local bind_del="Alt+d"
+    local bind_delall="Alt+a"
+    local bind_reload="Alt+r"
+
+    set -x
+    local notifs="$(jq -r '
+        .[] |
+        if .urgency == "CRITICAL" then
+            "<span foreground=\"#BD4E4E\"><b>\(.summary)</b> (\(.appname)) \\n \(.body)</span>\\0"
+        else
+            "<b>\(.summary)</b> (\(.appname)) \\n \(.body)\\0"
+        end
+    ' $HISTORY_FILE)"
+    local rofi_help="<span font-size='small'><i>${bind_del}</i>: Delete notification | <i>${bind_delall}</i>: Delete all notifications | <i>${bind_reload}</i>: Reload</span>"
+
+    # add space at the beginning and remove separator at the end
+    echo -e ' '${notifs::-2} | \
+    rofi \
+        -dmenu -p '' -markup -eh '2' -sep '\0' -markup-rows -colums 3 -format 'i' \
+        -mesg "$rofi_help" \
+        -kb-custom-1 "$bind_del" \
+        -kb-custom-2 "$bind_delall" \
+        -kb-custom-3 "$bind_reload" \
+        -theme $THEME
+}
+
+show_custom_msg_rofi() {
+    local msg="$1"
+
+    rofi \
+        -dmenu -p '' -markup -eh '2' -sep '\0' -markup-rows -format 'i' \
+        -mesg "$msg" -theme $THEME
+    exit 0
+}
+
+show_default_rofi_menu() {
+    local notifid
+    local exitcode
+
+     # file exist and has content
+    if [ ! -s "$HISTORY_FILE" ]; then
+        show_custom_msg_rofi "History file does not exist"
+    fi
+
+    # file has content with no items
+    [ "$(cut -c-2 $HISTORY_FILE)" == "[]" ] && show_custom_msg_rofi "There are no notifications"
+
+    notifid="$(show_rofi_menu)"
+    exitcode="$?"
+
+    handle_exit_code "$exitcode" "$notifid"
+}
+
+delete_item() {
+    local id="$1"
+
+    echo "$(jq --compact-output "del(.[$id])" $HISTORY_FILE)" > $HISTORY_FILE
+}
+
+open_program() {
+    local id="$1"
+
+    xdg-open "$(jq -r ".[$id].appname" $HISTORY_FILE)"
+}
+
+handle_exit_code() {
+    local code="$1"
+    local id="$2"
+
+    case $code in
+        # enter #open_program $id
+        0) ;;
+        # Delete: kb-custom-1
+        10) delete_item "$id" ; show_default_rofi_menu ;;
+        # Delete all: kb-custom-2
+        11) reset_file ; show_default_rofi_menu ;;
+        # Reload: kb-custom-3
+        12) show_default_rofi_menu ;;
+    esac
+}
+
+reset_file() {
+    echo "[]" > $HISTORY_FILE
+}
+
+case $1 in
+    # delete all history
+    --delete-all) reset_file ;;
+    # reset history file
+    --reset) reset_file ;;
+    # by default show rofi menu
+    *) show_default_rofi_menu ;;
+esac

@@ -1,0 +1,83 @@
+#!/usr/bin/env bash
+
+readonly COLOR_FG_MUTED="$(xrescat polybar.colors.fg-muted)"
+readonly COLOR_SECONDARY="$(xrescat polybar.colors.secondary)"
+
+bluetooth_is_on() {
+    if [ -z "$(timeout 1 bluetoothctl show | grep 'Powered: no')" ]; then
+        echo "yes"
+    else
+        echo "no"
+    fi
+}
+
+bluetooth_print() {
+    echo "%{F${COLOR_FG_MUTED}}%{F-}"
+
+    bluetoothctl | while read -r; do
+        if [ "$(systemctl is-active bluetooth)" == "active" ] && [ "$(bluetooth_is_on)" == "yes" ]; then
+            echo ""
+
+            bluetoothctl paired-devices | grep Device | cut -d ' ' -f 2 | while read -r device; do
+                if bluetoothctl info "$device" | grep -q "Connected: yes"; then
+                    echo "%{F${COLOR_SECONDARY}}%{F-}"
+                fi
+
+            done
+        else
+            echo "%{F${COLOR_FG_MUTED}}%{F-}"
+        fi
+    done
+}
+
+connect_bluetooth_devices() {
+    local devices="$1"
+
+    bluetoothctl power on >> /dev/null
+    notify-send ' Bluetooth powered on' 'Trying to connect paired devices...'
+    sleep .5
+
+    echo "$devices" | while read -r device; do
+        bluetoothctl connect "$device" >> /dev/null
+
+        if [ $? -eq 0 ]; then
+            notify-send ' Connected' "$(bluetoothctl info $device | grep 'Name:' | cut -d ':' -f 2)"
+        fi
+    done
+}
+
+disconnect_bluetooth_devices() {
+    local devices="$1"
+
+    notify-send ' Bluetooth disconnection' 'Disconnecting paired devices...'
+    echo "$devices" | while read -r device; do
+        bluetoothctl disconnect "$device" >> /dev/null
+    done
+
+    bluetoothctl power off >> /dev/null
+    notify-send ' Bluetooth powered off'
+}
+
+case $1 in
+    -t|--toggle-connections)
+        paired="$(bluetoothctl paired-devices | grep Device | cut -d ' ' -f 2)"
+
+        if bluetoothctl show | grep -q 'Powered: no'; then
+            connect_bluetooth_devices "$paired"
+        else
+            disconnect_bluetooth_devices "$paired"
+        fi
+    ;;
+    -p|--power-switch)
+        status="$(systemctl is-active bluetooth)"
+
+        if [ "$status" == "inactive" ]; then
+            systemctl start bluetooth
+        else
+            systemctl stop bluetooth
+        fi
+    ;;
+    *)
+        bluetooth_print
+    ;;
+esac

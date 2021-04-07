@@ -1,0 +1,30 @@
+#!/usr/bin/env sh
+
+UPDATES=0
+readonly WAIT_WHEN_UPDATES=10
+readonly WAIT_NO_UPDATES=3600
+
+get_total_updates() {
+    arch=$(checkupdates 2> /dev/null | wc -l)
+    aur=$(paru -Qum 2> /dev/null | wc -l)
+
+    UPDATES=$(( $arch + $aur ))
+}
+
+send_notify() {
+    notify-send -u normal " Updates available!" "$UPDATES Packages ready to update"
+}
+
+while true; do
+    get_total_updates
+
+    while (( $UPDATES >= 10 )); do
+        echo "$UPDATES"
+        sleep $WAIT_WHEN_UPDATES
+        get_total_updates
+    done
+
+    echo ""
+    sleep $WAIT_NO_UPDATES
+    get_total_updates
+done

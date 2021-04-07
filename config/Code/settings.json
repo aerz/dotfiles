@@ -1,0 +1,37 @@
+{
+    // Theme
+    "workbench.colorTheme": "Min Tomorrow Dark",
+    "workbench.productIconTheme": "fluent-icons",
+    // Font
+    "editor.fontFamily": "'JetBrainsMono Nerd Font', feather",
+    "editor.fontLigatures": true,
+    // Editor
+    "editor.renderWhitespace": "all",
+    "editor.multiCursorModifier": "ctrlCmd",
+    "editor.suggestSelection": "first",
+    "workbench.startupEditor": "none",
+    // Format
+    "files.insertFinalNewline": true,
+    "files.trimTrailingWhitespace": true,
+    "editor.formatOnSave": true,
+    // Window
+    "window.title": "${activeEditorShort}${separator}${rootName}${separator}${appName}",
+    // Extension: Visual Studio Code IntelliCode
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "[java]": {
+        "editor.tabSize": 2,
+        "editor.insertSpaces": true,
+        "editor.detectIndentation": false,
+        "editor.rulers": [
+            100
+        ],
+        "editor.formatOnSave": false
+        //"editor.wordWrap": "wordWrapColumn",
+        //"editor.wrappingIndent": "deepIndent"
+    },
+    "editor.rulers": [
+        80,
+        120
+    ],
+    "window.menuBarVisibility": "toggle",
+}

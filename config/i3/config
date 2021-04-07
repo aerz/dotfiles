@@ -1,0 +1,439 @@
+# i3 config file (v4)
+#
+# Please see https://i3wm.org/docs/userguide.html for a complete reference!
+#
+
+## About // Main mod // <Super> ##
+## About // Secondary mod // <Super> <Shift> ##
+## About // Low usage mod // <Super> <Ctrl> [Alt|Shift] ##
+## About // Alternative mod // <Super> <Alt> [Shift|Ctrl] ##
+
+# ---
+# General
+# ---
+
+# Fonts
+set $font.jetbrains pango:JetBrainsMono Nerd Font
+
+# Default Font
+font $font.jetbrains 16px
+
+# Modifiers - Super: Mod4, Alt: Mod1
+set $mod Mod4
+set $alt Mod1
+
+# Monitors
+set $monitor1 DisplayPort-0
+set $monitor2 HDMI-A-0
+
+# Disable follow focus with mouse
+focus_follows_mouse no
+
+# ---
+# i3-gaps
+# ---
+
+# Config
+gaps inner 5
+gaps outer 3
+
+# Behaviour
+smart_gaps on
+smart_borders on
+hide_edge_borders smart
+
+# ---
+# Window Configuration
+# ---
+
+# Hide title bar by default and set border width
+for_window [class=".*"] border pixel 1
+
+# App list always start in floating mode
+for_window [class="Galculator"] floating enable
+for_window [class="Pavucontrol"] floating enable
+for_window [class="Blueman"] floating enable
+for_window [class="Nitrogen"] floating enable
+for_window [class="Xfce4-settings-manager"] floating enable
+
+# All window dialogs in floating mode
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_role="Preferences"] floating enable
+for_window [window_type="dialog"] floating enable
+for_window [window_type="menu"] floating enable
+
+# ---
+# Theme
+# ---
+
+set $base00 #181818
+set $base01 #282828
+set $base02 #383838
+set $base03 #585858
+set $base04 #b8b8b8
+set $base05 #d8d8d8
+set $base06 #e8e8e8
+set $base07 #f8f8f8
+set $base08 #BD4E4E
+set $base09 #dc9656
+set $base0A #f7ca88
+set $base0B #a1b56c
+set $base0C #86c1b9
+set $base0D #7cafc2
+set $base0E #ba8baf
+set $base0F #a16946
+
+# class                  border   background  text     indicator  child_border
+client.focused           $base03  $base02     $base05  $base02    $base0C
+client.focused_inactive  $base01  $base01     $base05  $base03    $base01
+client.unfocused         $base01  $base00     $base05  $base01    $base01
+client.urgent            $base08  $base08     $base00  $base08    $base08
+client.placeholder       $base00  $base00     $base05  $base00    $base00
+client.background        $base07
+
+# ---
+# Workspace names
+# ---
+
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# ---
+# Workspace key bindings
+# ---
+
+## Workspace // Go to number 0-9 // <Super> 0..9 ##
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+## Workspace // Jump to next // <Super> Tab ##
+bindsym $mod+Tab workspace next
+
+## Workspace // Jump to previous // <Super> <Shift> Tab ##
+bindsym $mod+Shift+Tab workspace prev
+
+# ---
+# Workspace assigments
+# ---
+
+# Monitor 1
+workspace $ws1 output $monitor1
+workspace $ws2 output $monitor1
+workspace $ws3 output $monitor1
+workspace $ws4 output $monitor1
+workspace $ws5 output $monitor1
+workspace $ws6 output $monitor1
+workspace $ws7 output $monitor1
+workspace $ws8 output $monitor1
+
+# Monitor 2
+workspace $ws9 output $monitor2
+workspace $ws10 output $monitor2
+
+# ---
+# Container focus
+# ---
+
+## Container // Focus parent container // <Super> = ##
+bindsym $mod+equal focus parent
+
+## Container // Focus child container  // <Super> - ##
+bindsym $mod+minus focus child
+
+# ---
+# Move container to workspace
+# ---
+
+## Container // Move to workspace // <Super> <Shift> 0..9 ##
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+## Container // Carry to workspace // <Super> <Shift> <Alt> 0..9 ##
+bindsym $mod+Shift+$alt+1 move container to workspace number $ws1; workspace number $ws1
+bindsym $mod+Shift+$alt+2 move container to workspace number $ws2; workspace number $ws2
+bindsym $mod+Shift+$alt+3 move container to workspace number $ws3; workspace number $ws3
+bindsym $mod+Shift+$alt+4 move container to workspace number $ws4; workspace number $ws4
+bindsym $mod+Shift+$alt+5 move container to workspace number $ws5; workspace number $ws5
+bindsym $mod+Shift+$alt+6 move container to workspace number $ws6; workspace number $ws6
+bindsym $mod+Shift+$alt+7 move container to workspace number $ws7; workspace number $ws7
+bindsym $mod+Shift+$alt+8 move container to workspace number $ws8; workspace number $ws8
+bindsym $mod+Shift+$alt+9 move container to workspace number $ws9; workspace number $ws9
+bindsym $mod+Shift+$alt+0 move container to workspace number $ws10; workspace number $ws10
+
+# ---
+# Window navigation
+# ---
+
+## Navigate // Change focus // <Super> k j h l ##
+bindsym $mod+h focus left
+bindsym $mod+l focus right
+bindsym $mod+k focus up
+bindsym $mod+j focus down
+
+## Navigate // Change focus // <Super> ↑ ↓ ← → ##
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+## Navigate // Move focused window // <Super> <Shift> k j h l ##
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+l move right
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+j move down
+
+## Navigate // Move focused window // <Super> <Shift> ↑ ↓ ← → ##
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Right move right
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Down move down
+
+## Navigate // Set split horizontal // <Super> g ##
+bindsym $mod+g split h
+
+## Navigate // Set split vertical // <Super> v ##
+bindsym $mod+v split v
+
+## Navigate // Toggle fullscreen // <Super> f ##
+bindsym $mod+f fullscreen toggle
+
+## Navigate // Mouse // <Super> Right-click Left-click ##
+floating_modifier $mod
+
+## Navigate // Toggle floating // <Super> <Shift> f ##
+bindsym $mod+Shift+f floating toggle
+
+## Navigate // Toggle focus tiling/floating // <Super> <Shift> t ##
+bindsym $mod+Shift+t focus mode_toggle
+
+## Navigate // Kill focus // <Super> <Shift> q ##
+bindsym $mod+Shift+q kill
+
+# ---
+# Resize Mode
+# ---
+
+mode "resize" {
+
+    ## Mode: Resize // Modify window size // k j h l ##
+    bindsym h resize shrink width 10 px or 10 ppt
+    bindsym l resize grow width 10 px or 10 ppt
+    bindsym k resize shrink height 10 px or 10 ppt
+    bindsym j resize grow height 10 px or 10 ppt
+
+    ## Mode: Resize // Modify window size // ↑ ↓ ← → ##
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+
+    ## Mode: Resize // Exit to default mode // Return ##
+    bindsym Return mode "default"
+
+    ## Mode: Resize // Exit to default mode // Esc ##
+    bindsym Escape mode "default"
+
+    ## Mode: Resize // Exit to default mode // <Super> <Ctrl> r ##
+    bindsym $mod+Ctrl+r mode "default"
+}
+
+## Mode // Enter to resize mode // <Super> <Ctrl> r ##
+bindsym $mod+Ctrl+r mode "resize"
+
+# ---
+# Layout Mode
+# ---
+
+mode "layout" {
+
+    ## Mode: Layout // Change to layout stacking // s ##
+    bindsym s layout stacking
+
+    ## Mode: Layout // Change to layout stacking // t ##
+    bindsym t layout tabbed
+
+    ## Mode: Layout // Toggle tabbed, splith, splitv // Tab ##
+    bindsym Tab layout toggle tabbed splith splitv
+
+    ## Mode: Layout // Exit to default mode // Return ##
+    bindsym Return mode "default"
+
+    ## Mode: Layout // Exit to default mode // Esc ##
+    bindsym Escape mode "default"
+
+    ## Mode: Layout // Exit to default mode // <Super> <Ctrl> l ##
+    bindsym $mod+Ctrl+l mode "default"
+}
+
+## Mode // Enter to layout mode // <Super> <Ctrl> l ##
+bindsym $mod+Ctrl+l mode "layout"
+
+# ---
+# i3 key bindings
+# ---
+
+## i3 // Restart // <Super> <Shift> <Ctrl> r ##
+bindsym $mod+Shift+Ctrl+r restart
+
+## i3 // Reload config // <Super> <Shift> <Ctrl> <Alt> r ##
+bindsym $mod+Shift+Ctrl+$alt+r reload
+
+# ---
+# Scratchpad
+# ---
+
+## Scratchpad // Show/Hide // <Super> <Shift> s ##
+bindsym $mod+Shift+s scratchpad show
+
+## Scratchpad // Move container to scratchpad // <Super> <Shift> <Alt> s ##
+bindsym $mod+Shift+$alt+s  move to scratchpad
+
+# ---
+# Apps key bindings
+# ---
+
+## Apps // Open terminal // <Super> Return ##
+bindsym $mod+Return exec alacritty
+
+## Apps // Open notification center // <Super> n ##
+bindsym $mod+n exec --no-startup-id rofication-gui
+
+## Apps // Open volume control // <Super> <Shift> <Alt> v ##
+bindsym $mod+Shift+$alt+v exec gtk-launch pavucontrol
+
+## Apps // Change default sound device // <Super> <Shift> v ##
+bindsym $mod+Shift+v exec --no-startup-id ~/.config/rofi/scripts/pasound -i "HDMI Audio" output
+
+## Apps // Connect to Bluetooth paired device // <Super> <Shift> b ##
+bindsym $mod+Shift+b exec --no-startup-id ~/.config/rofi/scripts/roblue connect
+
+## Apps // Select apps to mute/unmute // <Super> <Shift>  ##
+bindsym $mod+Shift+XF86AudioMute exec --no-startup-id ~/.config/rofi/scripts/pasound umute
+
+## Apps // Open power options // <Super> <Shift> e ##
+bindsym $mod+Shift+e exec ~/.config/rofi/scripts/power
+
+## Apps // Open emoji selector // <Super> <Shift> . ##
+bindsym $mod+Shift+period exec --no-startup-id ~/.config/rofi/scripts/emoji
+
+## Apps // Open application launcher // <Super> Space ##
+bindsym $mod+space exec rofi -show drun -drun-show-actions -show-icons -matching fuzzy -drun-match-fields name
+
+## Apps // Open window switcher // <Super> <Alt> Space ##
+bindsym $mod+$alt+space exec rofi -show window -show-icons -matching fuzzy
+
+## Apps // Open command runner // <Super> <Shift> Space ##
+bindsym $mod+Shift+space exec rofi -show run -matching fuzzy
+
+## Apps // Open shortcuts helper // <Super> <Shift> ? ##
+bindsym $mod+Shift+slash exec pgrep -x remontoire | xargs kill || remontoire -c ~/.config/i3/config
+
+## Apps // Generate a QR from clipboard // <Super> <Shift> <Ctrl> c ##
+bindsym $mod+Shift+Ctrl+c exec ~/.local/bin/qrgen
+
+# ---
+# xfce
+# ---
+
+## xfce // Switch Dark-Light theme // <Super> <Shift> l ##
+# Reference: https://wiki.archlinux.org/index.php/Dark_mode_switching
+bindsym $mod+$alt+l exec ~/.config/i3/scripts/switch-theme
+
+# ---
+# Brightness
+# ---
+
+# Raise/Lower brightness level
+bindsym XF86MonBrightnessUp exec ~/.local/bin/brightness -u
+bindsym XF86MonBrightnessDown exec ~/.local/bin/brightness -d
+
+## Brightness // Notify displays loaded by ddcci-backlight // <Super> <Shift> d ##
+bindsym $mod+shift+d exec --no-startup-id ~/.local/bin/brightness
+
+## Brightness // Restart ddcci-backlight service // <Super> <Shift> <Alt> d ##
+bindsym $mod+shift+$alt+d exec --no-startup-id ~/.local/bin/brightness -r
+
+# ---
+# Screenshots
+# ---
+
+## Screenshots // Open screenshoot selector // Print ##
+bindsym Print exec --no-startup-id ~/.local/bin/screenshots
+
+## Screenshots // Take a screenshoot of a region // <Shift> Print ##
+bindsym Shift+Print exec --no-startup-id ~/.local/bin/screenshots --region
+
+## Screenshots // Take a screenshoot of the selected window // <Super> Print ##
+bindsym --release $mod+Print exec --no-startup-id ~/.local/bin/screenshots --window
+
+## Screenshots // Take fullscreen screenshot // <Super> <Shift> Print ##
+bindsym $mod+Shift+Print exec --no-startup-id ~/.local/bin/screenshots --fullscreen
+
+# ---
+# Audio
+# ---
+
+# Raise/Lower volume level
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
+
+# Mute volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+# Mute mic
+bindsym $mod+XF86AudioMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+# Media player controls
+bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
+bindsym XF86AudioNext exec --no-startup-id playerctl next
+bindsym XF86AudioPrev exec --no-startup-id playerctl previous
+
+# ---
+# Autostart
+# ---
+
+# Define keyboard layouts and active toggle shortcut
+# Reference: https://wiki.archlinux.org/index.php/Xorg/Keyboard_configuration#Switching_between_keyboard_layouts
+exec_always --no-startup-id setxkbmap -option 'grp:rctrl_rshift_toggle' -layout us,es &
+
+# Start XFCE Settings daemon
+# Reference: https://docs.xfce.org/xfce/xfce4-settings/xfsettingsd
+exec --no-startup-id xfsettingsd
+
+# Start notifications daemon
+exec --no-startup-id rofication-daemon
+
+# Start Playerctl daemon
+exec --no-startup-id playerctld daemon
+
+# Wallpaper
+exec --no-startup-id nitrogen --restore &
+
+# Status bar
+exec_always --no-startup-id ~/.config/polybar/launch

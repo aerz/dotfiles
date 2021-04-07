@@ -1,0 +1,19 @@
+[user]
+    name = Agustín Cisneros
+    email = agustincc2@gmail.com
+[core]
+    autocrlf = input
+    ignorecase = false
+[alias]
+    assume = update-index --assume-unchanged
+    unassume = update-index --no-assume-unchanged
+    undo = reset --soft HEAD~1
+    amend = commit -a --amend
+    st = status
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+[init]
+    defaultBranch = master

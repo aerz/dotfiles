@@ -1,0 +1,58 @@
+! ---
+! X General Settings
+! ---
+
+! HDPI
+Xft.dpi: 123
+Xcursor.size: 36
+
+! Font rendering
+Xft.autohint: 0
+Xft.hinting: 1
+Xft.hintstyle: hintfull
+Xft.antialias: 1
+Xft.rgba: rgb
+Xft.lcdfilter: lcddefault
+
+! ---
+! Polybar Colors
+! ---
+
+polybar.colors.bg: #262626
+polybar.colors.bg-alt: #9E9E9E
+polybar.colors.bg-focus: #404040
+polybar.colors.bg-wrapper: #262626
+polybar.colors.bg-border: #1f1f1f
+
+polybar.colors.fg: #C1C1C1
+polybar.colors.fg-alt: #262626
+polybar.colors.fg-muted: #555555
+
+polybar.colors.primary: #B294BB
+polybar.colors.secondary: #8ABEB7
+polybar.colors.secondary-alt: #dc9656
+
+polybar.colors.system: #B5BD68
+polybar.colors.system-alt: #F0C674
+polybar.colors.alert: #BD4E4E
+
+polybar.colors.spotify: #1DB954
+polybar.colors.spotify-bg: #191414
+
+polybar.colors.arch-linux: #1793d1
+
+! ---
+! Polybar Rofication
+! ---
+
+polybar.value.font: "JetBrains Mono Nerd Font 14"
+
+polybar.label.notify.none: ""
+polybar.label.notify.some: ""
+polybar.label.notify.error: ""
+
+polybar.value.color: "#C1C1C1"
+polybar.label.color: "#C1C1C1"
+polybar.nominal: "#B294BB"
+polybar.warning: "#C1C1C1"
+polybar.critical.color: "#BD4E4E"

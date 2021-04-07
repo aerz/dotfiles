@@ -1,0 +1,98 @@
+#!/usr/bin/env bash
+
+readonly FILE="$(mktemp --suff=.png)"
+
+open_type_menu() {
+    declare -ar types=(
+        "麗  Region  <small>(Shift+Print)</small>"
+        "  Select window  <small>(Super+Print)</small>"
+        "  Fullscreen  <small>(Super+Shift+Print)</small>"
+    )
+
+    printf '%s\n' "${types[@]}" | rofi -dmenu -markup-rows -i -p 'Type '
+}
+
+open_destination_menu() {
+    declare -ar destinations=(
+        "Save as file"
+        "Copy to clipboard"
+        "Open"
+    )
+
+    printf '%s\n' "${destinations[@]}" | rofi -dmenu -i -p 'Destination '
+}
+
+send_notification() {
+    local msg="$1"
+    notify-send -t 10000 -u low " Screenshot done" "$msg"
+}
+
+select_destination() {
+    local destination="$1"
+
+    [ -z "$destination" ] && exit 1
+
+    case $destination in
+        "Save as file"|--file)
+            local shotpath="$HOME/Pictures/screenshots"
+            local fname="screenshot_$(date +%m-%d-%Y_%H_%M_%S).png"
+
+            # create default path if it does not exist
+            [ ! -d "$shotpath" ] && mkdir -p "$shotpath"
+
+            mv "$FILE" "${shotpath}/${fname}"
+            send_notification "Saved at ${shotpath}/${fname}"
+        ;;
+        "Copy to clipboard"|--clipboard)
+            xclip -t 'image/png' -selection clipboard "$FILE"
+            send_notification "Copied to clipboard"
+            rm "$FILE"
+        ;;
+        "Open"|--open)
+            sxiv "$FILE" && rm "$FILE"
+        ;;
+    esac
+}
+
+take_screenshot() {
+    local type="$1"
+
+    [ -z "$type" ] && exit 1
+
+    case $type in
+        *'Region'*|--region)
+            local region="$(hacksaw -f "-i %i -g %g")"
+            [ -z "$region" ] && exit 1
+
+            shotgun $region "$FILE"
+        ;;
+        *'Select window'*|--window)
+            local id="$(xdotool selectwindow)"
+            [ -z "$id" ] && exit 1
+
+            shotgun -i "$id" "$FILE"
+        ;;
+        *'Fullscreen'*|--fullscreen)
+            shotgun "$FILE"
+        ;;
+    esac
+}
+
+case $1 in
+    -f|--fullscreen)
+        take_screenshot --fullscreen
+        select_destination --file
+    ;;
+    -w|--window)
+        take_screenshot --window
+        select_destination --file
+    ;;
+    -r|--region)
+        take_screenshot --region
+        select_destination --file
+    ;;
+    *)
+        take_screenshot "$(open_type_menu)"
+        select_destination "$(open_destination_menu)"
+    ;;
+esac

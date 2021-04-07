@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+readonly HISTORY_DIR="$HOME/.cache/dunst-history"
+readonly HISTORY_FILE="${HISTORY_DIR}/notifications.json"
+
+# blacklist some apps by appname regex: (app1|app2|...)
+# to get the appname run 'dunst -print'
+blregex='(Spotify|notify-send|Brave)'
+[[ $1 =~ $blregex ]] && exit 0
+
+# add empty json file when the file does not exit
+[ ! -f "$HISTORY_FILE" ] && mkdir -p $HISTORY_DIR && echo "[]" > $HISTORY_FILE
+
+# append the new notification to the previous ones
+cat $HISTORY_FILE | \
+    jq --compact-output "$(
+        jq \
+            --null-input \
+            --arg appname "$1" \
+            --arg summary "$2" \
+            --arg body "$3" \
+            --arg icon "$4" \
+            --arg urgency "$5" \
+        '[{
+            appname: $appname,
+            summary: $summary,
+            body: $body,
+            icon: $icon,
+            urgency: $urgency
+        }]'
+    ) + ." \
+> $HISTORY_FILE

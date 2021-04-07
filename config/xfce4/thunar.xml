@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<channel name="thunar" version="1.0">
+  <property name="last-view" type="string" value="ThunarDetailsView"/>
+  <property name="last-icon-view-zoom-level" type="string" value="THUNAR_ZOOM_LEVEL_100_PERCENT"/>
+  <property name="last-window-width" type="int" value="2560"/>
+  <property name="last-window-height" type="int" value="1404"/>
+  <property name="last-window-maximized" type="bool" value="false"/>
+  <property name="last-separator-position" type="int" value="230"/>
+  <property name="last-details-view-zoom-level" type="string" value="THUNAR_ZOOM_LEVEL_75_PERCENT"/>
+  <property name="last-details-view-column-widths" type="string" value="50,158,50,50,2073,50,50,98,50,225"/>
+  <property name="misc-single-click" type="bool" value="false"/>
+  <property name="last-show-hidden" type="bool" value="false"/>
+  <property name="last-side-pane" type="string" value="ThunarShortcutsPane"/>
+  <property name="last-sort-column" type="string" value="THUNAR_COLUMN_NAME"/>
+  <property name="last-sort-order" type="string" value="GTK_SORT_ASCENDING"/>
+  <property name="last-menubar-visible" type="bool" value="true"/>
+  <property name="last-details-view-visible-columns" type="string" value="THUNAR_COLUMN_DATE_MODIFIED,THUNAR_COLUMN_NAME,THUNAR_COLUMN_SIZE"/>
+</channel>

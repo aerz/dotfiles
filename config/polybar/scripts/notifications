@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+readonly DUNST_CONFIG="$HOME/.config/dunst/dunstrc"
+readonly HISTORY_FILE="$HOME/.cache/dunst-history/notifications.json"
+# get from xresources and define color as fallback
+readonly COLOR_ALERT="#BD4E4E"
+readonly COLOR_FOREGROUND_ALT="#262626"
+readonly COLOR_FOREGROUND_MUTED="#555555"
+
+print_empty() {
+    echo "%{T2} %{T-}0"
+}
+
+print_no_urgent() {
+    [ $1 -lt 1 ] && print_empty || echo "%{T2} %{T-}${1}"
+}
+
+print_urgent() {
+    echo "%{F$COLOR_FOREGROUND_ALT}%{B$COLOR_ALERT} %{T2} %{T-}$1 %{B-}%{F-}"
+}
+
+print_muted() {
+    echo "%{F$COLOR_FOREGROUND_MUTED}%{T2} %{T-}${1:-0}%{F-}"
+}
+
+# hide polybar icon if file does not exist
+[ ! -f "$HISTORY_FILE" ] && exit 1
+
+case $1 in
+    -c|--count)
+        count=$(jq 'length' $HISTORY_FILE)
+
+        if $(dunstctl is-paused) ; then
+            print_muted $count
+            exit 0
+        fi
+
+        if [ ! -z "$(jq '.[].urgency | match("CRITICAL")' $HISTORY_FILE)" ]; then
+            print_urgent $count
+            exit 0
+        fi
+
+        print_no_urgent $count
+    ;;
+    -t|--toggle)
+        dunstctl set-paused toggle
+    ;;
+esac

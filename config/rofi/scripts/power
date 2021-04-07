@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+# rofi
+theme="~/.config/rofi/themes/power.rasi"
+uptime="Uptime: $(uptime -p | sed -e 's/up //g')"
+
+declare -a actions=(
+    "  Shutdown"
+    "  Reboot"
+    "  Lock"
+    "  Suspend"
+    "  Logout"
+)
+
+confirm() {
+    local yes=""
+    local no=""
+
+    [ "$(echo -e "$no\n$yes" | rofi -theme $theme -i -dmenu -lines 2 -p "Confirm")" == "$yes" ]
+}
+
+action="$(printf '%s\n' "${actions[@]}" | rofi -theme $theme -lines 5 -dmenu -p "$uptime")"
+
+# exit when action is empty
+[ -z "$action" ] && exit 0
+
+case $action in
+    *Shutdown) confirm && systemctl poweroff        ;;
+    *Reboot)   confirm && systemctl reboot          ;;
+    *Lock)     betterlockscreen -l blur             ;;
+    *Suspend)  confirm && betterlockscreen -s blur  ;;
+    *Logout)   confirm && i3-msg exit               ;;
+esac

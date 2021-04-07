@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+
+readonly USAGE_CACHE_FILE="$HOME/.cache/keyboard"
+layout="us"
+
+generate_cache() {
+    if [ ! -f "$USAGE_CACHE_FILE" ]; then
+        localectl list-x11-keymap-layouts | xargs -I{} echo "0 {}" > "$USAGE_CACHE_FILE"
+    fi
+}
+
+open_layout_menu() {
+    layout="$(cat $USAGE_CACHE_FILE | cut -d ' ' -f 2 | rofi -dmenu -i -p '')"
+    # no selected
+    [ -z "$layout" ] && exit 0
+    # clean cache
+    [ "$layout" == "clean" ] && clean_cache && exit 0
+}
+
+set_layout() {
+    setxkbmap $layout
+}
+
+update_cache() {
+    local usage=$(cat $USAGE_CACHE_FILE | grep $layout | cut -d ' ' -f 1)
+
+    sed -i "s/$usage $layout/$(($usage+1)) $layout/g" $USAGE_CACHE_FILE
+    cat $USAGE_CACHE_FILE | sort -n | tac | dd status=none of=$USAGE_CACHE_FILE
+}
+
+clean_cache() {
+    [ -f "$USAGE_CACHE_FILE" ] && rm -v $USAGE_CACHE_FILE
+}
+
+show_help() {
+    echo
+    echo "Keyboard Switch - Change keyboard layout"
+    echo
+    echo "Options:"
+    echo "  -c, --clean    Clean keyboard layout usage"
+    echo "  -h, --help     Display help"
+    echo
+    echo "Usage:"
+    echo "  kbswitch"
+    echo "  kbswitch [option]"
+    echo "  kbswitch [layout]"
+    echo
+}
+
+case $1 in
+    -c|--clean)
+        clean_cache
+    ;;
+    -h|--help)
+        show_help
+    ;;
+    [a-z]*)
+        layout="$1"
+        set_layout
+    ;;
+    *)
+        generate_cache
+        open_layout_menu
+        set_layout
+        update_cache
+    ;;
+esac

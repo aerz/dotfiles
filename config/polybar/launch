@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+kill_running() {
+    killall -q polybar
+    while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
+}
+
+run_debug_mode() {
+    local log_monitor1="/tmp/polybar_monitor1.log"
+    local log_monitor2="/tmp/polybar_monitor2.log"
+    local log_header="Polybar started at $(date '+%Y-%m-%d %H:%M:%S')"
+
+    echo -e "\n${log_header}\n" | tee -a "$log_monitor1"
+    echo -e "\n${log_header}\n" | tee -a "$log_monitor2"
+
+    polybar monitor1 2>&1 | tee -a "$log_monitor1" & disown
+    polybar monitor2 2>&1 | tee -a "$log_monitor2" & disown
+}
+
+run_normal_mode() {
+    polybar monitor1 & disown
+    polybar monitor2 & disown
+}
+
+case $1 in
+    -d|--debug)
+        kill_running
+        run_debug_mode
+    ;;
+    *)
+        kill_running
+        run_normal_mode
+    ;;
+esac
