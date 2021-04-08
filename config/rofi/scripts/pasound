@@ -102,6 +102,7 @@ list_sound_outputs() {
         ponymix defaults | \
         awk '
             /^sink/ {
+                gsub(/:/, "", $2)
                 id = $2
                 print id
             }
@@ -111,14 +112,15 @@ list_sound_outputs() {
     ponymix -t sink list | \
     awk -v default_id="$default_id" '
         /^sink/ {
+            gsub(/:/, "", $2)
             sinkid = $2
 
             getline
             gsub(/^ +/, "", $0)
             name = $0
-            icon = $default_id == $sinkid ? " " : ""
+            icon = (default_id == sinkid) ? " " : ""
 
-            print output icon sinkid" "name
+            print output icon sinkid": "name
         }
     '
 }
