@@ -25,31 +25,6 @@ fi
 # Alias
 # ---
 
-# Open
-alias open='mimeopen'
-
-opend() {
-    mimeopen $@ > /dev/null 2>&1 &
-}
-
-open-with() {
-    local file="$1"
-
-    mimeopen --ask-default "$file"
-    xdg-open-update "$file"
-}
-
-# xdg-open default opener of many desktop env programs
-xdg-open-update() {
-    local file="$1"
-    local filetype="$(mimetype --brief "$file")"
-    local desktop="$(cat $HOME/.config/mimeapps.list | grep "$filetype" | cut -d '=' -f 2 | cut -d ';' -f 1)"
-
-    xdg-mime default "$desktop" "$filetype"
-
-    echo -e "\n${filetype} will be open using $(xdg-mime query default ${filetype})"
-}
-
 # Enable colors
 man() {
     LESS_TERMCAP_md=$'\e[01;31m' \

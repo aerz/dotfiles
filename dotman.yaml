@@ -7,6 +7,7 @@ local/bin/brightness: ~/.local/bin/brightness
 local/bin/qrgen: ~/.local/bin/qrgen
 local/bin/screenshots: ~/.local/bin/screenshots
 local/bin/usbutils: ~/.local/bin/usbutils
+local/bin/opnr: ~/.local/bin/opnr
 local/share/fonts: ~/.local/share/fonts
 config/alacritty: ~/.config/alacritty
 config/Code/settings.json: ~/.config/Code/User/settings.json

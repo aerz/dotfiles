@@ -1,0 +1,108 @@
+#!/usr/bin/env bash
+#
+# File opener using MIME types
+#
+# Dependencies:
+#   perl-file-mimeinfo
+#   xdg-utils
+#
+
+readonly XDG_USER_MIMEAPPS="$HOME/.config/mimeapps.list"
+
+show_help() {
+    echo
+    echo "opnr - File opener using MIME types"
+    echo
+    echo "Usage:"
+    echo "  opnr [options] <file>..."
+    echo "  opnr [options] <command> <file>..."
+    echo
+    echo "Commands:"
+    echo "  help                    Display this message"
+    echo "  update                  Update program MIME databases"
+    echo
+    echo "Options:"
+    echo "  -w, --with              Select a new program to open the file type"
+    echo "  -d, --detached          Open file/s detached from terminal"
+    echo "  -x, --xdgopen           Use xdg-open from xdg-utils package"
+    exit 0
+}
+
+show_no_file_err() {
+    echo "error: No file provided"
+    echo
+    echo "Use 'opnr help' to display the help message"
+    exit 1
+}
+
+show_invalid_option_err() {
+    echo "error: Invalid option used"
+    exit 1
+}
+
+show_desktop_not_found_err() {
+    echo "error: No desktop found in mimeapps database"
+    exit 1
+}
+
+open_detached() {
+    mimeopen $@ > /dev/null 2>&1 &
+}
+
+open_with() {
+    mimeopen --ask-default $@
+
+    for file in $@; do
+        xdg_open_update "$file"
+    done
+}
+
+# xdg-open default opener used by many desktop environment programs
+xdg_open_update() {
+    local file="$1"
+    local filetype="$(mimetype --brief "$file")"
+    local desktop="$(cat $XDG_USER_MIMEAPPS | grep "$filetype" | cut -d '=' -f 2 | cut -d ';' -f 1)"
+
+    [ -z "$desktop" ] && show_desktop_not_found_err
+
+    xdg-mime default "$desktop" "$filetype"
+
+    echo "${filetype} will be open using $(xdg-mime query default ${filetype})"
+}
+
+[ -z $1 ] && show_no_file_err
+
+while (( $# > 0 )); do
+    arg="$1"
+
+    case $arg in
+        -w|--with)      shift && _arg_w=true    ;;
+        -d|--detached)  shift && _arg_d=true    ;;
+        -x|--xdgopen)   shift && _arg_x=true    ;;
+        help)           show_help               ;;
+        update)
+            shift
+            [ $# -eq 0 ] && show_no_file_err
+
+            if [ $_arg_x ]; then
+                xdg_open_update $@
+            else
+                show_invalid_option_err
+            fi
+
+            exit 0
+        ;;
+        *)
+            if [ $_arg_w ]; then
+                open_with $@
+            elif [ $_arg_d ]; then
+                open_detached $@
+            else
+                mimeopen -n $@
+            fi
+
+            exit 0
+        ;;
+    esac
+
+done
