@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+#
+# Color format: rrggbb[aa]
+#
+# ---
+# Defaults
+# ---
+display_on=1
+span_image=false
+lock_timeout=300
+fx_list=(blur)
+dim_level=40
+blur_level=1
+pixel_scale=10,1000
+
+# ---
+# Theme
+# ---
+# Login box
+loginbox=$(xrescat multilock.loginbox.color)
+loginshadow=$(xrescat multilock.loginbox.color)
+
+# Text
+locktext=""
+font="monospace"
+
+# Ring
+ringcolor=$(xrescat multilock.ring.color)
+ringvercolor=$(xrescat multilock.ring.color)
+ringwrongcolor=$(xrescat multilock.ring.color)
+verifcolor=$(xrescat multilock.ring.color)
+
+# Key highlight (ring)
+separatorcolor=$(xrescat multilock.keyhl.separator-color)
+keyhlcolor=$(xrescat multilock.keyhl.keypressed-color) # key pressed
+bshlcolor=$(xrescat multilock.keyhl.backspace-color) # backspace pressed
+
+# Circle
+insidecolor=$(xrescat multilock.circle.inside-color)
+insidevercolor=$(xrescat multilock.circle.inside-verify-color)
+insidewrongcolor=$(xrescat multilock.circle.inside-wrong-color)
+
+# Date
+timecolor=$(xrescat multilock.date.time-color)
+datecolor=$(xrescat multilock.date.date-color)
+
+# ---
+# Tasks
+# ---
+# Override tasks to empty
+prelock() {
+    echo "Running prelock..."
+}
+
+postlock() {
+    echo "Running postlock..."
+}

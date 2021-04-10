@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+multilockscreen -u $1 --blur 1 --display 1

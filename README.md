@@ -23,7 +23,7 @@
 | [regolith-rofication](https://github.com/regolith-linux/regolith-rofication)  | Minimal notification daemon                         |
 | [paru](https://github.com/morganamilo/paru)                                   | AUR helper                                          |
 | [shotgun](https://github.com/neXromancers/shotgun)                            | Minimal screenshot utility                          |
-| [betterlockscreen](https://github.com/pavanjadhaw/betterlockscreen)           | Lockscreen                                          |
+| [multilockscreen](https://github.com/jeffmhubbard/multilockscreen)            | Lockscreen                                          |
 | [XFCE Settings Daemon](https://docs.xfce.org/xfce/xfce4-settings/xfsettingsd) | Control dark/light themes and global settings       |
 | [nitrogen](https://github.com/l3ib/nitrogen)                                  | Background setter                                   |
 | [sxiv](https://github.com/muennich/sxiv)                                      | Image viewer                                        |

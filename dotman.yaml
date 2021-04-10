@@ -20,6 +20,7 @@ config/polybar: ~/.config/polybar
 config/pulse/daemon.conf: ~/.config/pulse/daemon.conf
 config/pulse/default.pa: ~/.config/pulse/default.pa
 config/rofi: ~/.config/rofi
+config/multilock: ~/.config/multilock
 config/xfce4/displays.xml: ~/.config/xfce4/xfconf/xfce-perchannel-xml/displays.xml
 config/xfce4/keyboards.xml: ~/.config/xfce4/xfconf/xfce-perchannel-xml/keyboards.xml
 config/xfce4/thunar-volman.xml: ~/.config/xfce4/xfconf/xfce-perchannel-xml/thunar-volman.xml

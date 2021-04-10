@@ -27,6 +27,18 @@ export QT_QPA_PLATFORMTHEME='gnome'
 #export QT_STYLE_OVERRIDE="Adwaita-Dark"
 
 # ---
+# X Preferences
+# ---
+# display
+standby=600; suspend=600; off=600
+xset dpms $standby $suspend $off &
+
+# Lockscreen
+inactivity=600; force_bg=180
+xset s $inactivity $force_bg s blank s noexpose &
+xss-lock -l -- multilockscreen --lock blur &
+
+# ---
 # Start i3
 # ---
 exec i3
