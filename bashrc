@@ -77,6 +77,14 @@ alias udm='sudo udevadm monitor'
 
 alias clamupdate='sudo freshclam'
 
+# Open
+alias open="mimeo"
+alias openwith="mimeopen --ask-default"
+
+opend() {
+    mimeo $@ > /dev/null 2>&1 &
+}
+
 # ---
 # Polybar
 # ---
