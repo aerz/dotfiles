@@ -1,30 +1,31 @@
 #!/usr/bin/env sh
 
-UPDATES=0
-readonly WAIT_WHEN_UPDATES=10
-readonly WAIT_NO_UPDATES=3600
+updates=0
+seconds=0
+wait_before_update=5400
 
 get_total_updates() {
     arch=$(checkupdates 2> /dev/null | wc -l)
     aur=$(paru -Qum 2> /dev/null | wc -l)
 
-    UPDATES=$(( $arch + $aur ))
+    updates=$(( $arch + $aur ))
 }
 
 send_notify() {
-    notify-send -u normal " Updates available!" "$UPDATES Packages ready to update"
+    notify-send -u normal " Updates available!" "$updates Packages ready to update"
+}
+
+no_pkgmgr_running_and_timeout_remaining() {
+    test $(pgrep "paru|pacman" &> /dev/null ; echo $?) -eq 1 && \
+    test $seconds -ne $wait_before_update
 }
 
 while true; do
+    seconds=0
     get_total_updates
+    [ $updates -gt 10 ] && echo "$updates" || echo ""
 
-    while (( $UPDATES >= 10 )); do
-        echo "$UPDATES"
-        sleep $WAIT_WHEN_UPDATES
-        get_total_updates
+    while no_pkgmgr_running_and_timeout_remaining; do
+        sleep 1 && ((seconds++))
     done
-
-    echo ""
-    sleep $WAIT_NO_UPDATES
-    get_total_updates
 done
