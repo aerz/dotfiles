@@ -62,6 +62,27 @@ alias pacl='[[ `paru -Qdtq` ]] && paru -Qdtq | paru -Rns - || echo No orphan pkg
 # Remove all pacman and aur cache files
 alias paclr="du -sh /var/cache/pacman/pkg /var/lib/pacman $HOME/.cache/paru && paru -Scc"
 
+# Show packages with dependecy cycles
+pacycles() {
+    for pkg in $(pacman -Qq); do
+        if pactree -l "$pkg" | tail -n +2 | grep -Fqx "$pkg"; then
+            echo "${pkg}"
+        fi
+    done
+}
+
+# Show package reverse tree in graph or text
+pardeps() {
+    if [ "$1" == "-g" ]; then
+        file="$(mktemp --suff=.png)"; gfile="$(mktemp --suff=.dot)"
+        pactree -g $2 > "$gfile"
+        dot "$gfile" -Tpng -o "$file"
+        sxiv "$file" && rm "$file" "$gfile" &
+    else
+        pactree -r $1
+    fi
+}
+
 # translate-shell
 alias transd='trans :en'
 alias transs='trans -t es'
