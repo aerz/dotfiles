@@ -60,7 +60,7 @@ alias gpgls='gpg --list-secret-keys --keyid-format LONG'
 # Remove orphan packages
 alias pacl='[[ `paru -Qdtq` ]] && paru -Qdtq | paru -Rns - || echo No orphan pkgs found'
 # Remove all pacman and aur cache files
-alias paclr="du -sh /var/cache/pacman/pkg /var/lib/pacman $HOME/.cache/paru && paru -Scc"
+alias paclr="du -sh /var/cache/pacman/pkg /var/lib/pacman $HOME/.cache/paru && paru -Sc"
 
 # Show packages with dependecy cycles
 pacycles() {
