@@ -1,31 +1,32 @@
 #!/usr/bin/env sh
 
-updates=0
-seconds=0
-wait_before_update=5400
-
-get_total_updates() {
-    arch=$(checkupdates 2> /dev/null | wc -l)
-    aur=$(paru -Qum 2> /dev/null | wc -l)
-
-    updates=$(( $arch + $aur ))
+is_pkgmngr_running() {
+    test $(pgrep "paru|pacman" &> /dev/null ; echo $?) -eq 0
 }
 
-send_notify() {
-    notify-send -u normal " Updates available!" "$updates Packages ready to update"
+display_downloading() {
+    echo "%{T2}%{T-}"
 }
 
-no_pkgmgr_running_and_timeout_remaining() {
-    test $(pgrep "paru|pacman" &> /dev/null ; echo $?) -eq 1 && \
-    test $seconds -ne $wait_before_update
+display_available_updates(){
+    local arch=$(checkupdates 2> /dev/null | wc -l)
+    local aur=$(paru -Qum 2> /dev/null | wc -l)
+    local updates=$(( $arch + $aur ))
+
+    [ $updates -gt 10 ] && echo "$updates" || echo ""
+}
+
+sleep_refresh() {
+    local times=0
+    local total_times=675 # 5400 (seconds) / 8 (sleep)
+
+    while ! is_pkgmngr_running && [ $times -ne $total_times ]; do
+        sleep 8 && ((times++))
+    done
 }
 
 while true; do
-    seconds=0
-    get_total_updates
-    [ $updates -gt 10 ] && echo "$updates" || echo ""
-
-    while no_pkgmgr_running_and_timeout_remaining; do
-        sleep 1 && ((seconds++))
-    done
+    is_pkgmngr_running && display_downloading && exit 0
+    display_available_updates
+    sleep_refresh
 done
