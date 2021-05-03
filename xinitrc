@@ -29,7 +29,7 @@ export QT_QPA_PLATFORMTHEME='gnome'
 # ---
 # X Preferences
 # ---
-# display
+# Monitor
 standby=600; suspend=600; off=600
 xset dpms $standby $suspend $off &
 
