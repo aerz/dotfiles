@@ -36,13 +36,17 @@ man() {
     command man "$@"
 }
 
-alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias tree='tree -C'
 alias diff='diff --color=always'
 
-alias l='ls -lh'
-alias la='ls -lah'
+alias ..='cd ..'
+alias ls='exa --icons'
+alias l='ls -lgh'
+alias la='ls -lgah'
+
+alias df='df -h'
+alias cp='cp -i'
 
 # Change terminal emulator on ssh connections
 alias ssh='TERM=xterm-256color ssh'
