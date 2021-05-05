@@ -19,10 +19,10 @@ fi
 # ---
 # Session env vars
 # ---
-export PATH="$PATH:$HOME/.local/bin"
 export QT_QPA_PLATFORMTHEME='gnome'
 
 # Unused
+#export PATH="$PATH:$HOME/.local/bin"
 #export GTK_THEME=":dark"
 #export QT_STYLE_OVERRIDE="Adwaita-Dark"
 
