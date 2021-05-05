@@ -1,27 +1,31 @@
-cat: ~/cat
-Xresources: ~/.Xresources
-xinitrc: ~/.xinitrc
 bash_profile: ~/.bash_profile
 bashrc: ~/.bashrc
+cat: ~/cat
+xinitrc: ~/.xinitrc
+Xresources: ~/.Xresources
+
 local/bin/brightness: ~/.local/bin/brightness
 local/bin/qrgen: ~/.local/bin/qrgen
 local/bin/screenshots: ~/.local/bin/screenshots
 local/bin/usbutils: ~/.local/bin/usbutils
-local/share/fonts: ~/.local/share/fonts
+
 local/share/applications/text.desktop: ~/.local/share/applications/text.desktop
+local/share/fonts: ~/.local/share/fonts
+
 config/alacritty: ~/.config/alacritty
 config/Code/settings.json: ~/.config/Code/User/settings.json
 config/fontconfig: ~/.config/fontconfig
 config/git: ~/.config/git
 config/gtk-3.0/settings.ini: ~/.config/gtk-3.0/settings.ini
 config/i3: ~/.config/i3
+config/multilock: ~/.config/multilock
+config/mimeapps.list: ~/.config/mimeapps.list
 config/neofetch: ~/.config/neofetch
+config/paru/paru.conf: ~/.config/paru/paru.conf
 config/polybar: ~/.config/polybar
 config/pulse/daemon.conf: ~/.config/pulse/daemon.conf
 config/pulse/default.pa: ~/.config/pulse/default.pa
 config/rofi: ~/.config/rofi
-config/multilock: ~/.config/multilock
-config/mimeapps.list: ~/.config/mimeapps.list
 config/user-dirs.dirs: ~/.config/user-dirs.dirs
 config/xfce4/displays.xml: ~/.config/xfce4/xfconf/xfce-perchannel-xml/displays.xml
 config/xfce4/keyboards.xml: ~/.config/xfce4/xfconf/xfce-perchannel-xml/keyboards.xml
