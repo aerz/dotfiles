@@ -1,0 +1,137 @@
+#!/usr/bin/env bash
+#
+# Common folder operations
+#
+# Dependencies:
+#   - zip   (http://infozip.sourceforge.net/Zip.html)
+#   - 7zip  (https://github.com/jinfeihan57/p7zip)
+#
+
+# enable extended pattern matching
+shopt -s 'extglob'
+
+# catch Ctrl+c signal
+trap ctrl_c INT
+
+ctrl_c() {
+    echo "Operation cancelled"
+    exit 1
+}
+
+show_help() {
+    echo
+    echo "fld - Common folder operations"
+    echo
+    echo "Usage: fld <operation> [options...]"
+    echo
+    echo "Operation:"
+    echo "  sweep                       Removes all dotfiles recursively from current directory"
+    echo "  compress                    Compress all folders in the current directory"
+    echo
+    echo "Options:"
+    echo "  --zip                       Compress using zip format"
+    echo "  --7z                        Compress using 7z format"
+    echo
+    exit 0
+}
+
+show_compress_help() {
+    echo
+    echo "Usage: fld compress <format>"
+    echo
+    echo "Formats:"
+    echo "  --zip"
+    echo "  --7z"
+    echo
+    exit 0
+}
+
+show_operation_err() {
+    echo "error: '$1' is not a valid operation"
+    echo "Use 'fld --help' for more information"
+    exit 1
+}
+
+show_compress_format_err() {
+    echo "error: No format specified or format not found"
+    echo "Use 'fld compress --help' to see the available formats"
+    exit 1
+}
+
+sweep_dotfiles() {
+    local dotfiles=$(find . -type f -name '.*' -print)
+    printf '%s\n' ${dotfiles[@]}
+
+    [ -z "$dotfiles" ] && echo "No dotfiles found" && exit 0
+
+    read -r -p 'Do you want to delete all of these dotfiles [Y/n]' confirm
+
+    case $confirm in
+        [Yy]*)
+            find . -type f -name '.*' -print -delete
+            echo "Done"
+        ;;
+        [Nn]*)
+            echo "Aborted"
+            exit  1
+        ;;
+    esac
+}
+
+rm_folder_chars() {
+    echo "$1" | tr -d '/' | tr -d '.'
+}
+
+compress_all_folders_zip() {
+    for folder in ./*/; do
+        file_name="$(rm_folder_chars "$folder")"
+        zip -r "${file_name}.zip" "$folder"
+    done
+}
+
+compress_all_folders_7z() {
+    for folder in ./*/; do
+        file_name="$(rm_folder_chars "$folder")"
+        7z a "${file_name}.7z" "$folder"
+    done
+}
+
+while (( $# > 0 )); do
+    case $1 in
+        sweep)
+            sweep_dotfiles && exit 0
+            exit 1
+        ;;
+        compress)
+            format="$2"
+            folder="$3"
+
+            [ -z "$format" ] && show_compress_format_err
+            [[ $format == @(-h|--help) ]] && show_compress_help
+
+            case $format in
+                --zip)
+                    [ -z "$folder" ] && compress_all_folders_zip && exit 0
+                    #compress_folder_zip "$folder" && exit 0
+                    exit 1
+                ;;
+                --7z)
+                    [ -z "$folder" ] && compress_all_folders_7z && exit 0
+                    #compress_folder_7z "$folder" && exit 0
+                    exit 1
+                ;;
+                *)
+                    show_compress_format_err
+                ;;
+            esac
+        ;;
+        --help|-h)
+            show_help
+        ;;
+        *)
+            show_operation_err "$1"
+        ;;
+    esac
+done
+
+

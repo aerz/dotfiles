@@ -7,7 +7,7 @@ Xresources: ~/.Xresources
 local/bin/brightness: ~/.local/bin/brightness
 local/bin/qrgen: ~/.local/bin/qrgen
 local/bin/screenshots: ~/.local/bin/screenshots
-local/bin/usbutils: ~/.local/bin/usbutils
+local/bin/fldr: ~/.local/bin/fldr
 
 local/share/applications/text.desktop: ~/.local/share/applications/text.desktop
 local/share/fonts: ~/.local/share/fonts

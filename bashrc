@@ -45,6 +45,10 @@ alias ls='exa --icons'
 alias l='ls -lgh'
 alias la='ls -lgah'
 
+lt() {
+    [ -z "$1" ] && exa --tree || exa --tree --level=$1
+}
+
 alias df='df -h'
 alias cp='cp -i'
 
@@ -52,8 +56,8 @@ alias cp='cp -i'
 alias ssh='TERM=xterm-256color ssh'
 
 # Add GPG or SSH keys to default agent
-alias sshak='keychain --quiet --attempts 2 --agents ssh'
-alias gpgak='keychain --quiet --nogui --attempts 2 --agents gpg'
+alias sshak="keychain --quiet --attempts 2 --agents ${KEYCHAIN_SSH_AGENT}"
+alias gpgak="keychain --quiet --nogui --attempts 2 --agents ${KEYCHAIN_GPG_AGENT}"
 # Clean all the identities loaded
 alias sshcl='keychain --clear'
 alias sshsum='ssh-keygen -l -f'

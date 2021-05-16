@@ -25,9 +25,17 @@ export CARGO_HOME="$XDG_DATA_HOME/cargo"
 export PATH="$PATH:$HOME/.local/bin:$GOPATH/bin:$CARGO_HOME/bin"
 
 # ---
+# AUR Flags
+# ---
+# brave
+export USE_SCCACHE=1
+
+# ---
 # Start a default keychain agent
 # ---
-eval `keychain --eval --quiet --systemd --agents ssh,gpg`
+export KEYCHAIN_SSH_AGENT="ssh"
+export KEYCHAIN_GPG_AGENT="gpg"
+eval `keychain --eval --quiet --systemd --agents ${KEYCHAIN_SSH_AGENT},${KEYCHAIN_GPG_AGENT}`
 
 # ---
 # Load bashrc
