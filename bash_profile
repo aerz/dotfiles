@@ -5,7 +5,7 @@
 # ---
 # Defaults
 # ---
-export EDITOR="vim"
+export EDITOR="emacs"
 export TERMINAL="alacritty"
 export BROWSER="brave"
 
@@ -17,12 +17,15 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 
-# Apps
+# Programs
 export GOPATH="$XDG_DATA_HOME/go"
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
 
 # Add bin paths to env
-export PATH="$PATH:$HOME/.local/bin:$GOPATH/bin:$CARGO_HOME/bin"
+export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:$GOPATH/bin"
+export PATH="$PATH:$CARGO_HOME/bin"
+export PATH="$PATH:$XDG_CONFIG_HOME/emacs/bin"
 
 # ---
 # AUR Flags
