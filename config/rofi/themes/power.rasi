@@ -1,8 +1,9 @@
 configuration {
-    line-padding:          20;
-    separator-style:       none;
-    hide-scrollbar:        true;
-    show-icons:            false;
+    font:                   "JetBrainsMono Nerd Font, Feather, 14";
+    line-padding:           20;
+    separator-style:        none;
+    hide-scrollbar:         true;
+    show-icons:             false;
 }
 
 * {
