@@ -425,7 +425,7 @@ exec_always --no-startup-id setxkbmap -option 'grp:rctrl_rshift_toggle' -layout 
 
 # Start XFCE Settings daemon
 # Reference: https://docs.xfce.org/xfce/xfce4-settings/xfsettingsd
-exec --no-startup-id xfsettingsd
+exec --no-startup-id xfsettingsd --replace --daemon
 
 # Start notifications daemon
 exec --no-startup-id rofication-daemon
