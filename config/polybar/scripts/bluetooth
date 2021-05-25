@@ -53,29 +53,18 @@ disconnect_bluetooth_devices() {
     echo "$devices" | while read -r device; do
         bluetoothctl disconnect "$device" >> /dev/null
     done
-
-    bluetoothctl power off >> /dev/null
-    notify-send ' Bluetooth powered off'
 }
 
 case $1 in
-    -t|--toggle-connections)
+    -c|--connect-paired)
         paired="$(bluetoothctl paired-devices | grep Device | cut -d ' ' -f 2)"
-
-        if bluetoothctl show | grep -q 'Powered: no'; then
-            connect_bluetooth_devices "$paired"
-        else
-            disconnect_bluetooth_devices "$paired"
-        fi
+        connect_bluetooth_devices "$paired"
     ;;
     -p|--power-switch)
-        status="$(systemctl is-active bluetooth)"
-
-        if [ "$status" == "inactive" ]; then
-            systemctl start bluetooth
-        else
-            systemctl stop bluetooth
-        fi
+        case "$(bluetooth_is_on)" in
+            yes)    bluetoothctl power off  ;;
+            no)     bluetoothctl power on   ;;
+        esac
     ;;
     *)
         bluetooth_print
