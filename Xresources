@@ -2,8 +2,7 @@
 ! X General Settings
 ! ---
 
-! HDPI
-Xft.dpi:        123
+! HiDPI
 Xcursor.size:   36
 
 ! Font rendering
