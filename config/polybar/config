@@ -252,7 +252,7 @@ double-click-left   = playerctl -p spotify play-pause
 format                      = <label>
 format-prefix               = %{T2}阮 %{T-}
 format-prefix-foreground    = ${colors.spotify}
-format-background           = ${colors.bg-border}
+;format-background           = ${colors.bg-border}
 format-padding              = 1
 
 ; ---
