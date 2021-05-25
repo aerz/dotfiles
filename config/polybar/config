@@ -503,8 +503,8 @@ type        = custom/script
 exec        = ~/.config/polybar/scripts/bluetooth
 tail        = true
 
-click-right = ~/.config/polybar/scripts/bluetooth -t &
-click-left  = ~/.config/polybar/scripts/bluetooth -p &
+click-right = ~/.config/polybar/scripts/bluetooth --connect-paired &
+click-left  = ~/.config/polybar/scripts/bluetooth --power-switch &
 
 label       = %{T2}%output%%{T-}
 
