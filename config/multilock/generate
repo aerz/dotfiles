@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
 
-multilockscreen -u $1 --blur 1 --display 1
+wallpath=$1
+
+multilockscreen -u $wallpath --blur 1 --display 1

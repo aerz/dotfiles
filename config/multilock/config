@@ -2,6 +2,12 @@
 #
 # Color format: rrggbb[aa]
 #
+
+# xrescat unsigned
+xrc() {
+    xrescat "$1" | sed s/^\#//
+}
+
 # ---
 # Defaults
 # ---
@@ -17,32 +23,32 @@ pixel_scale=10,1000
 # Theme
 # ---
 # Login box
-loginbox=$(xrescat multilock.loginbox.color)
-loginshadow=$(xrescat multilock.loginbox.color)
+loginbox=$(xrc multilock.loginbox.color)
+loginshadow=$(xrc multilock.loginbox.color)
 
 # Text
 locktext=""
 font="monospace"
 
 # Ring
-ringcolor=$(xrescat multilock.ring.color)
-ringvercolor=$(xrescat multilock.ring.color)
-ringwrongcolor=$(xrescat multilock.ring.color)
-verifcolor=$(xrescat multilock.ring.color)
+ringcolor=$(xrc multilock.ring.color)
+ringvercolor=$(xrc multilock.ring.color)
+ringwrongcolor=$(xrc multilock.ring.color)
+verifcolor=$(xrc multilock.ring.color)
 
 # Key highlight (ring)
-separatorcolor=$(xrescat multilock.keyhl.separator-color)
-keyhlcolor=$(xrescat multilock.keyhl.keypressed-color) # key pressed
-bshlcolor=$(xrescat multilock.keyhl.backspace-color) # backspace pressed
+separatorcolor=$(xrc multilock.keyhl.separator-color)
+keyhlcolor=$(xrc multilock.keyhl.keypressed-color) # key pressed
+bshlcolor=$(xrc multilock.keyhl.backspace-color) # backspace pressed
 
 # Circle
-insidecolor=$(xrescat multilock.circle.inside-color)
-insidevercolor=$(xrescat multilock.circle.inside-verify-color)
-insidewrongcolor=$(xrescat multilock.circle.inside-wrong-color)
+insidecolor=$(xrc multilock.circle.inside-color)
+insidevercolor=$(xrc multilock.circle.inside-verify-color)
+insidewrongcolor=$(xrc multilock.circle.inside-wrong-color)
 
 # Date
-timecolor=$(xrescat multilock.date.time-color)
-datecolor=$(xrescat multilock.date.date-color)
+timecolor=$(xrc multilock.date.time-color)
+datecolor=$(xrc multilock.date.date-color)
 
 # ---
 # Tasks
