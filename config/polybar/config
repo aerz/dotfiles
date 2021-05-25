@@ -119,6 +119,56 @@ cursor-scroll = ns-resize
 enable-ipc = true
 
 ; ---
+; Laptop Status bar
+; ---
+
+[bar/laptop]
+monitor = ${env:MONITOR:eDP1}
+width   = 100%
+height  = 32
+
+; Base colors
+background = ${colors.bg}
+foreground = ${colors.fg}
+
+; Borders
+line-size    = 2
+border-size  = 2
+border-color = ${colors.bg-border}
+
+; Spaces
+module-margin-left  = 1
+module-margin-right = 1
+;padding-left  = 0
+;padding-right = 0
+
+; Fonts
+; font-N = <fontconfig pattern>;<vertical offset>
+font-0 = "JetBrainsMono Nerd Font:size=11;2"
+font-1 = "JetBrainsMono Nerd Font:size=14;3"
+font-2 = "Noto Color Emoji:style=Regular:scale=9;2"
+font-3 = "fixed:pixelsize=10;1"
+font-4 = "unifont:fontformat=truetype:size=8:antialias=false;0"
+font-5 = "siji:pixelsize=10;1"
+
+; Modules
+modules-left   = i3 sep xwindow
+modules-center = spotify
+modules-right  = updates rofication intel_backlight pulseaudio mic bt wifinet battery date xkeyboard
+
+; Tray Icons
+tray-position = right
+tray-padding  = 2
+tray-maxsize  = 22
+
+; Mouse Options
+cursor-click  = pointer
+cursor-scroll = ns-resize
+
+; Allow external communication (polybar-msg)
+enable-ipc = true
+
+; ---
 ; i3 Module
 ; ---
 
@@ -308,6 +358,18 @@ ramp-0 = %{T2}%{T-}
 ramp-1 = %{T2}%{T-}
 ramp-2 = %{T2}%{T-}
 
+[module/intel_backlight]
+type = internal/backlight
+card = intel_backlight
+
+format          = <ramp> <label>
+label           = %percentage%%
+;format-padding  = 1
+
+ramp-0 = %{T2}%{T-}
+ramp-1 = %{T2}%{T-}
+ramp-2 = %{T2}%{T-}
+
 ; ---
 ; PulseAudio Module
 ; ---
@@ -368,6 +430,61 @@ label-disconnected-foreground   = ${colors.alert}
 format-packetloss           = <label-packetloss>
 label-packetloss            = %{T2}%{T-}
 label-packetloss-foreground = ${colors.fg-muted}
+
+; ---
+; Wifi network Module
+; ---
+
+[module/wifinet]
+type                            = internal/network
+interface                       = wlp2s0
+ping-interval                   = 3
+
+; Connected
+format-connected                = <label-connected>
+label-connected                 = "%{T2}%{T-} "
+
+; Disconnected
+format-disconnected             = <label-disconnected>
+label-disconnected              = "%{T2}%{T-} "
+label-disconnected-foreground   = ${colors.alert}
+
+; Packet loss
+format-packetloss               = <label-packetloss>
+label-packetloss                = "%{T2}%{T-} "
+label-packetloss-foreground     = ${colors.fg-muted}
+
+; ---
+; Battery Module
+; ---
+
+[module/battery]
+type                        = internal/battery
+full-at                     = 99
+battery                     = BAT0
+adapter                     = ADP1
+poll-interval               = 15
+
+format-discharging          = %{T2}<ramp-capacity>%{T-} <label-discharging>
+label-discharging           = %percentage%%
+
+format-charging             = %{T2}<ramp-capacity>%{T-} <label-charging>
+format-charging-foreground  = ${colors.system-alt}
+label-charging              = %percentage%%
+label-charging-foreground   = ${colors.fg}
+
+label-full                  = "%{T2} %{T-}"
+label-full-foreground       = ${colors.system}
+
+ramp-capacity-0             = " "
+ramp-capacity-1             = " "
+ramp-capacity-2             = " "
+ramp-capacity-3             = " "
+ramp-capacity-4             = " "
+
+ramp-capacity-0-foreground  = ${colors.alert}
+ramp-capacity-1-foreground  = ${colors.system-alt}
+ramp-capacity-2-foreground  = ${colors.system-alt}
 
 ; ---
 ; Separator Module

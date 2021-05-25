@@ -353,7 +353,7 @@ bindsym $mod+$alt+space exec rofi -show window -show-icons -matching fuzzy
 bindsym $mod+Shift+space exec rofi -show run -matching fuzzy
 
 ## Apps // Open shortcuts helper // <Super> <Shift> ? ##
-bindsym $mod+Shift+slash exec pgrep -x remontoire | xargs kill || remontoire -c ~/.config/i3/config
+bindsym $mod+Shift+question exec pgrep -x remontoire | xargs kill || remontoire -c ~/.config/i3/config
 
 ## Apps // Generate a QR from clipboard // <Super> <Shift> <Ctrl> c ##
 bindsym $mod+Shift+Ctrl+c exec ~/.local/bin/qrgen
@@ -371,8 +371,8 @@ bindsym $mod+$alt+l exec ~/.config/i3/scripts/switch-theme
 # ---
 
 # Raise/Lower brightness level
-bindsym XF86MonBrightnessUp exec ~/.local/bin/brightness -u
-bindsym XF86MonBrightnessDown exec ~/.local/bin/brightness -d
+bindsym XF86MonBrightnessUp exec light -A 5
+bindsym XF86MonBrightnessDown exec light -U 5
 
 ## Brightness // Notify displays loaded by ddcci-backlight // <Super> <Shift> d ##
 bindsym $mod+shift+d exec --no-startup-id ~/.local/bin/brightness
@@ -421,7 +421,7 @@ bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 
 # Define keyboard layouts and active toggle shortcut
 # Reference: https://wiki.archlinux.org/index.php/Xorg/Keyboard_configuration#Switching_between_keyboard_layouts
-exec_always --no-startup-id setxkbmap -option 'grp:rctrl_rshift_toggle' -layout us,es &
+exec_always --no-startup-id setxkbmap -option 'grp:rctrl_rshift_toggle' -layout es &
 
 # Start XFCE Settings daemon
 # Reference: https://docs.xfce.org/xfce/xfce4-settings/xfsettingsd
@@ -437,4 +437,7 @@ exec --no-startup-id playerctld daemon
 exec --no-startup-id nitrogen --restore &
 
 # Status bar
-exec_always --no-startup-id ~/.config/polybar/launch
+exec_always --no-startup-id ~/.config/polybar/launch laptop
+
+# Touchpad gestures
+exec --no-startup-id touchegg &
