@@ -1,34 +1,93 @@
 #!/usr/bin/env bash
 
-kill_running() {
+show_help() {
+    echo
+    echo "Polybar launcher"
+    echo
+    echo "usage: polybar-launch [options] <mode>"
+    echo
+    echo "Modes:"
+    echo "  laptop"
+    echo "  workstation"
+    echo
+    echo "Options:"
+    echo "  -d, --debug                 Create log file in /tmp to debug the process"
+    echo "  -h, --help                  Display help info"
+    exit 0
+}
+
+show_no_mode_err() {
+    echo "error: No valid mode specified. No status bar loadded."
+    echo "See --help for more info"
+    exit 1
+}
+
+kill_process_running() {
     killall -q polybar
     while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 }
 
-run_debug_mode() {
-    local log_monitor1="/tmp/polybar_monitor1.log"
-    local log_monitor2="/tmp/polybar_monitor2.log"
-    local log_header="Polybar started at $(date '+%Y-%m-%d %H:%M:%S')"
+create_log() {
+    local filepath="$1"
+    local logfile="${filepath}"
+    local header="Polybar started at $(date '+%Y-%m-%d %H:%M:%S')"
 
-    echo -e "\n${log_header}\n" | tee -a "$log_monitor1"
-    echo -e "\n${log_header}\n" | tee -a "$log_monitor2"
-
-    polybar monitor1 2>&1 | tee -a "$log_monitor1" & disown
-    polybar monitor2 2>&1 | tee -a "$log_monitor2" & disown
+    echo -e "\n${header}\n" | tee -a "$logfile"
 }
 
-run_normal_mode() {
+run_workstation_mode_debug() {
+    local logfile1="/tmp/polybar_monitor1.log"
+    local logfile2="/tmp/polybar_monitor2.log"
+
+    create_log "$logfile1"
+    create_log "$logfile2"
+    polybar monitor1 2>&1 | tee -a "$logfile1" & disown
+    polybar monitor2 2>&1 | tee -a "$logfile2" & disown
+}
+
+run_workstation_mode() {
     polybar monitor1 & disown
     polybar monitor2 & disown
 }
 
-case $1 in
-    -d|--debug)
-        kill_running
-        run_debug_mode
-    ;;
-    *)
-        kill_running
-        run_normal_mode
-    ;;
-esac
+run_laptop_mode_debug() {
+    local logfile="/tmp/polybar_laptop.log"
+
+    echo "running debug mode"
+
+    create_log "$logfile"
+    polybar laptop 2>&1 | tee -a "$logfile" & disown
+}
+
+run_laptop_mode() {
+    polybar laptop & disown
+}
+
+[[ $# -eq 0 ]] && show_no_mode_err
+
+while (( $# > 0 )); do
+    arg="$1"
+
+    case $arg in
+        -d|--debug)
+            shift
+            arg_debug=true
+        ;;
+        laptop)
+            kill_process_running
+            [ -z $arg_debug ] && run_laptop_mode || run_laptop_mode_debug
+            exit 0
+        ;;
+        workstation)
+            kill_process_running
+            [ -z $arg_debug ] &&  run_workstation_mode || run_workstation_mode_debug
+            exit 0
+        ;;
+        -h|--help)
+            show_help
+        ;;
+        *)
+            show_no_mode_err
+        ;;
+    esac
+done
