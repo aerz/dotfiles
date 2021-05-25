@@ -1,23 +1,28 @@
 {
+    // ---
     // Theme
+    // ---
     "workbench.colorTheme": "Min Tomorrow Dark",
     "workbench.productIconTheme": "fluent-icons",
+    "workbench.iconTheme": "file-icons",
+    "workbench.startupEditor": "none",
+    // ---
     // Font
+    // ---
     "editor.fontFamily": "'JetBrainsMono Nerd Font', feather",
     "editor.fontLigatures": true,
+    // ---
     // Editor
+    // ---
     "editor.renderWhitespace": "all",
     "editor.multiCursorModifier": "ctrlCmd",
     "editor.suggestSelection": "first",
-    "workbench.startupEditor": "none",
-    // Format
-    "files.insertFinalNewline": true,
-    "files.trimTrailingWhitespace": true,
     "editor.formatOnSave": true,
-    // Window
-    "window.title": "${activeEditorShort}${separator}${rootName}${separator}${appName}",
-    // Extension: Visual Studio Code IntelliCode
-    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "editor.rulers": [
+        80,
+        120
+    ],
+    // Languages
     "[java]": {
         "editor.tabSize": 2,
         "editor.insertSpaces": true,
@@ -29,9 +34,22 @@
         //"editor.wordWrap": "wordWrapColumn",
         //"editor.wrappingIndent": "deepIndent"
     },
-    "editor.rulers": [
-        80,
-        120
-    ],
+    // ---
+    // Format
+    // ---
+    "files.insertFinalNewline": true,
+    "files.trimTrailingWhitespace": true,
+    // ---
+    // Window
+    // ---
+    "window.title": "${activeEditorShort}${separator}${rootName}${separator}${appName}",
     "window.menuBarVisibility": "toggle",
+    // ---
+    // Ext: visualstudioexptteam.vscodeintellicode
+    // ---
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    // ---
+    // Ext: naumovs.color-highlight
+    // ---
+    "color-highlight.markerType": "dot-after"
 }
