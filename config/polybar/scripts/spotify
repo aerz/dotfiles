@@ -33,8 +33,9 @@ update_hooks() {
 
 scroll_media_status() {
     # see man zscroll for documentation of the following parameters
-    zscroll -l 18 \
-        --delay 0.2 \
+    zscroll \
+        --length 28 \
+        --delay 0.8 \
         --scroll-padding "    " \
         --match-command "$0 --status" \
         --match-text "Playing" "--scroll 1" \
