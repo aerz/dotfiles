@@ -48,3 +48,8 @@ go get github.com/erizocosmico/dotman
 cd ~/.config/dotfiles
 dotman -config dotman.yaml
 ```
+
+## Additional configuration scripts
+
+- `config/multilock/generate` Executed with the wallpaper path as first argument will configure multilockscreen
+- `config/dconf/configure` Configure dconf database using gsettings, this step is required because of many apps use this configuration first
