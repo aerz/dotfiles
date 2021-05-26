@@ -435,24 +435,46 @@ label-packetloss-foreground = ${colors.fg-muted}
 ; Wifi network Module
 ; ---
 
+[wifinet-vars]
+label = %{A1:pgrep -x nm-applet | xargs kill || nm-applet:}%{T2}%{T-} %{A}
+
+[wifinet-colors]
+signal-very-low     = #474747
+signal-low          = #666666
+signal-mid          = #858585
+signal-good         = #a3a3a3
+signal-very-good    = #C1C1C1
+
 [module/wifinet]
 type                            = internal/network
 interface                       = wlp2s0
 ping-interval                   = 3
 
 ; Connected
-format-connected                = <label-connected>
-label-connected                 = "%{T2}%{T-} "
+format-connected                = <ramp-signal>
 
 ; Disconnected
 format-disconnected             = <label-disconnected>
-label-disconnected              = "%{T2}%{T-} "
+label-disconnected              = ${wifinet-vars.label}
 label-disconnected-foreground   = ${colors.alert}
 
 ; Packet loss
 format-packetloss               = <label-packetloss>
-label-packetloss                = "%{T2}%{T-} "
-label-packetloss-foreground     = ${colors.fg-muted}
+label-packetloss                = ${wifinet-vars.label}
+label-packetloss-foreground     = ${colors.secondary-alt}
+
+; Connected: Signal strength
+ramp-signal-0               = ${wifinet-vars.label}
+ramp-signal-1               = ${wifinet-vars.label}
+ramp-signal-2               = ${wifinet-vars.label}
+ramp-signal-3               = ${wifinet-vars.label}
+ramp-signal-4               = ${wifinet-vars.label}
+
+ramp-signal-0-foreground    = ${wifinet-colors.signal-very-low}
+ramp-signal-1-foreground    = ${wifinet-colors.signal-low}
+ramp-signal-2-foreground    = ${wifinet-colors.signal-mid}
+ramp-signal-3-foreground    = ${wifinet-colors.signal-good}
+ramp-signal-4-foreground    = ${wifinet-colors.signal-very-good}
 
 ; ---
 ; Battery Module
