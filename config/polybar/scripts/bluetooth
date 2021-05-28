@@ -1,4 +1,14 @@
 #!/usr/bin/env bash
+# ---
+#
+# Bluetooth status icon module script.
+#
+# Dependencies:
+#   - xrescat       (https://github.com/aerz/xrescat)
+#   - libnotify     (https://archlinux.org/packages/extra/x86_64/libnotify/)
+#   - bluez-utils   (https://archlinux.org/packages/extra/x86_64/bluez-utils/)
+#
+# ---
 
 readonly COLOR_FG_MUTED="$(xrescat polybar.colors.fg-muted)"
 readonly COLOR_SECONDARY="$(xrescat polybar.colors.secondary)"
