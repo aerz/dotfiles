@@ -1,7 +1,16 @@
 #!/usr/bin/env sh
+# ---
 #
-# Source: https://github.com/polybar/polybar-scripts/blob/master/polybar-scripts/pulseaudio-microphone/
+# Microphone status icon module script.
 #
+# Source:
+#   - https://github.com/polybar/polybar-scripts/blob/master/polybar-scripts/pulseaudio-microphone/
+#
+# Dependencies:
+#   - xrescat       (https://github.com/aerz/xrescat)
+#   - pulseaudio    (https://archlinux.org/packages/extra/x86_64/pulseaudio/)
+#
+# ---
 
 readonly COLOR_FG_MUTED="$(xrescat polybar.colors.fg-muted)"
 

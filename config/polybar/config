@@ -61,8 +61,8 @@ font-5 = "siji:pixelsize=10;1"
 
 ; Modules
 modules-left   = i3 sep xwindow
-modules-center =
-modules-right  = spotify updates timew rofication backlight1 pulseaudio mic bt wnet date xkeyboard
+modules-center = spotify
+modules-right  = updates rofication backlight1 pulseaudio mic bt wnet date xkeyboard
 
 ; Tray Icons
 tray-position = right

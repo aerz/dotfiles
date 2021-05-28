@@ -1,4 +1,15 @@
 #!/usr/bin/env bash
+# ---
+# Notice: Archived. I don't use it anymore.
+# ---
+#
+# Notification history icon module script for dunst using Rofi as interface.
+#
+# Dependencies:
+#   - dunst (https://github.com/dunst-project/dunst)
+#   - jq    (https://github.com/stedolan/jq)
+#
+# ---
 
 readonly DUNST_CONFIG="$HOME/.config/dunst/dunstrc"
 readonly HISTORY_FILE="$HOME/.cache/dunst-history/notifications.json"

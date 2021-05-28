@@ -1,7 +1,18 @@
 #!/usr/bin/env sh
+# ---
+#
+# Pacman updates indicator module script.
+#
+# Dependencies:
+#   - paru (optional) (https://github.com/Morganamilo/paru/)
+#
+# ---
+
+# regex list with package managers installed on the system to get updates
+PKG_MGRS_RE="paru|pacman"
 
 is_pkgmngr_running() {
-    test $(pgrep "paru|pacman" &> /dev/null ; echo $?) -eq 0
+    test $(pgrep "$PKG_MGRS_RE" &> /dev/null ; echo $?) -eq 0
 }
 
 display_downloading() {

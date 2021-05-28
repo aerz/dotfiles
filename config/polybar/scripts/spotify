@@ -1,4 +1,17 @@
 #!/bin/bash
+# ---
+#
+# Spotify and media status module script.
+#
+# Source:
+#   - https://github.com/PrayagS/polybar-spotify
+#
+# Dependencies:
+#   - zscroll   (https://github.com/noctuid/zscroll)
+#   - playerctl (https://github.com/altdesktop/playerctl)
+#   - polybar   (https://github.com/polybar/polybar)
+#
+# ---
 
 # The name of polybar bar which houses the main spotify module and the control modules.
 readonly PARENT_BAR="monitor1"

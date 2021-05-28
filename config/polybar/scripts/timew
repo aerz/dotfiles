@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-if [ $(timew get dom.active) -eq 1 ]; then
-    echo "%{T2}祥 %{T-}$(timew | grep 'Total' | sed -E 's/(\s+Total\s+)//g')"
-else
-    echo ""
-fi
