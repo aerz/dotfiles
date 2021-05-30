@@ -419,10 +419,6 @@ bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 # Autostart
 # ---
 
-# Define keyboard layouts and active toggle shortcut
-# Reference: https://wiki.archlinux.org/index.php/Xorg/Keyboard_configuration#Switching_between_keyboard_layouts
-exec_always --no-startup-id setxkbmap -option 'grp:rctrl_rshift_toggle' -layout es &
-
 # Start XFCE Settings daemon
 # Reference: https://docs.xfce.org/xfce/xfce4-settings/xfsettingsd
 exec --no-startup-id xfsettingsd --replace --daemon
@@ -440,7 +436,7 @@ exec --no-startup-id light -I &
 exec --no-startup-id nitrogen --restore &
 
 # Status bar
-exec_always --no-startup-id ~/.config/polybar/launch laptop
+exec_always --no-startup-id ~/.config/polybar/launch laptop &
 
 # Touchpad gestures
-exec --no-startup-id touchegg &
+exec_always --no-startup-id touchegg &
