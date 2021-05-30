@@ -36,7 +36,7 @@ xset dpms $standby $suspend $off &
 # Lockscreen
 inactivity=600; force_bg=180
 xset s $inactivity $force_bg s blank s noexpose &
-xss-lock -l -- multilockscreen --lock blur &
+xss-lock -l -- multilockscreen --suspend blur &
 
 # ---
 # Start i3
