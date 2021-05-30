@@ -65,6 +65,7 @@ alias sshsum='ssh-keygen -l -f'
 # List GPG keys loaded
 alias gpgls='gpg --list-secret-keys --keyid-format LONG'
 
+alias pa='paru'
 # Remove orphan packages
 alias pacl='[[ `paru -Qdtq` ]] && paru -Qdtq | paru -Rns - || echo No orphan pkgs found'
 # Remove all pacman and aur cache files
