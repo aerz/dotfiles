@@ -433,6 +433,9 @@ exec --no-startup-id rofication-daemon
 # Start Playerctl daemon
 exec --no-startup-id playerctld daemon
 
+# Restore saved brightness
+exec --no-startup-id light -I &
+
 # Wallpaper
 exec --no-startup-id nitrogen --restore &
 
