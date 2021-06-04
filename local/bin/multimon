@@ -1,0 +1,91 @@
+#!/usr/bin/env bash
+#
+# Simple multihead manager.
+#
+# Dependencies:
+#   - xorg-xrandr       (https://archlinux.org/packages/extra/x86_64/xorg-xrandr/)
+#
+
+show_help() {
+    echo
+    echo "multimon - Simple multihead manager"
+    echo
+    echo "Usage: multimon [options...] <command> <args...>"
+    echo
+    echo "Commands:"
+    echo "  modeline            Adds a new modeline to a display"
+    echo
+    echo "Options:"
+    echo "  -h, --help          Display this help message"
+    exit 0
+}
+
+show_modeline_help() {
+    echo
+    echo "modeline command"
+    echo
+    echo "Usage:"
+    echo "  multimon [options...] modeline <display> <axis-x> <axis-y>"
+    echo
+    echo "Options:"
+    echo "  -r          Use reduced flag to generate the modeline"
+    echo
+    exit 0
+}
+
+err_no_cmd() {
+    echo "error: No command provided."
+    echo "Use 'multimon -h' to see all the commands available"
+    exit 1
+}
+
+err_modeline_monitor() {
+    echo "error: No monitor argument provided."
+    echo "Use 'multimon modeline -h' to see the info about the command."
+    exit 1
+}
+
+err_modeline_res() {
+    echo "error: bad resolution."
+    exit 1
+}
+
+set_reduced_modeline_res() {
+    local monitor="$1"
+    local resx="$2"
+    local resy="$3"
+    local modeline="$(cvt -r $resx $resy | grep --color=never -Po '(?<=Modeline ).*' | sed s/\"//g)"
+    local modeline_name="${resx}x${resy}R"
+
+    xrandr --newmode $modeline
+    xrandr --addmode $monitor "$modeline_name"
+    xrandr --output "$monitor" --mode "$modeline_name"
+}
+
+[ $# -eq 0 ] && err_no_cmd
+
+while (( $# > 0 )); do
+    case $1 in
+        -r)
+            shift
+            modeline_r=true
+        ;;
+        modeline)
+            shift
+            monitor=$1; resx=$2; resy=$3
+
+            [ "$1" == "-h" ] && show_modeline_help
+            [ -z "$monitor" ] && err_modeline_monitor
+            [ -z "$resx" ] || [ -z "$resy" ] && err_modeline_res
+
+            [[ -v modeline_r ]] && set_reduced_modeline_res $monitor $resx $resy
+            exit 0
+        ;;
+        -h|--help)
+            show_help
+        ;;
+        *)
+            err_no_cmd
+        ;;
+    esac
+done
