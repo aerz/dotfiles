@@ -4,8 +4,8 @@ cat: ~/cat
 xinitrc: ~/.xinitrc
 Xresources: ~/.Xresources
 
-local/bin/brightness: ~/.local/bin/brightness
 local/bin/fldr: ~/.local/bin/fldr
+local/bin/mlight: ~/.local/bin/mlight
 local/bin/multimon: ~/.local/bin/multimon
 local/bin/qrgen: ~/.local/bin/qrgen
 local/bin/screenshots: ~/.local/bin/screenshots

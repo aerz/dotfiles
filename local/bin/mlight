@@ -1,0 +1,153 @@
+#!/usr/bin/env bash
+#
+# multilight, controls brightness for multiple displays at time
+#
+# Dependencies:
+#   - light (https://archlinux.org/packages/community/x86_64/light/)
+#   - ddcci-driver-linux-dkms (optional) (https://aur.archlinux.org/packages/ddcci-driver-linux-dkms/)
+#   - polybar (optional) (https://aur.archlinux.org/packages/polybar/)
+#
+
+# ---
+# Config
+# ---
+# Backlight names are exposed in /sys/class/backlight
+default_backlight="ddcci"
+
+# ---
+
+list_ddcci_paths() {
+    light -L | grep "sysfs/backlight/ddcci*" | sed 's/\s//g'
+}
+
+lower_ddcci_brightness() {
+    local percentage=$1
+
+    list_ddcci_paths | xargs -I{} light -s {} -U $percentage &
+}
+
+raise_ddcci_brightness() {
+    local percentage=$1
+
+    list_ddcci_paths | xargs -I{} light -s {} -A $percentage &
+}
+
+show_ddcci_displays_loaded() {
+    echo -e "Displays loaded:\n$(list_ddcci_paths | cut -d '/' -f 3)"
+}
+
+restart_polybar() {
+    [[ $(pgrep -x polybar) ]] && polybar-msg cmd restart &> /dev/null
+}
+
+exec_cmd_up() {
+    local percentage=$1
+
+    case $backlight in
+        ddcci)
+            raise_ddcci_brightness $percentage
+        ;;
+    esac
+}
+
+exec_cmd_down() {
+    local percentage=$1
+
+    case $backlight in
+        ddcci)
+            lower_ddcci_brightness $percentage
+        ;;
+    esac
+}
+
+exec_cmd_reload() {
+    case $backlight in
+        ddcci)
+            if [[ -v notify ]]; then
+                notify-send -t 10000 -u low ' Brightness' 'Restarting service...'
+                systemctl restart ddcci-backlight
+                notify-send -t 10000 -u normal \
+                    ' Brightness' \
+                    "Service restarted, displays loaded:\n$(list_ddcci_paths | cut -d '/' -f 3)"
+                restart_polybar
+            else
+                echo "Restarting ddcci-backlight service..."
+                systemctl restart ddcci-backlight
+                show_ddcci_displays_loaded
+                restart_polybar
+            fi
+        ;;
+    esac
+}
+
+exec_cmd_set() {
+    local level=$1
+
+    case $backlight in
+        ddcci)
+            list_ddcci_paths | xargs -I{} light -s {} -S $level
+        ;;
+    esac
+}
+
+exec_default_cmd() {
+    case $backlight in
+        ddcci)
+            if [[ -v notify ]]; then
+                notify-send -t 10000 -u normal ' Brightness' "$(show_ddcci_displays_loaded)"
+            else
+                show_ddcci_displays_loaded
+            fi
+        ;;
+    esac
+}
+
+backlight="$default_backlight"
+
+[ $# -eq 0 ] && exec_default_cmd && exit 0
+
+while (( $# > 0 )); do
+    case $1 in
+        up)
+            shift
+            percentage=$1
+            exec_cmd_up $percentage
+            exit 0
+        ;;
+        down)
+            shift
+            percentage=$1
+            exec_cmd_down $percentage
+            exit 0
+        ;;
+        set)
+            shift
+            level=$1
+            exec_cmd_set $level
+            exit 0
+        ;;
+        [0-9]*)
+            level=$1
+            exec_cmd_set $level
+            exit 0
+        ;;
+        reload)
+            exec_cmd_reload
+            exit 0
+        ;;
+        -b|--backlight)
+            backlight="$2"
+            shift 2
+        ;;
+        -n|--notify)
+            shift
+            notify=true
+
+            [ $# -eq 0 ] && exec_default_cmd && exit 0
+        ;;
+        *)
+            shift
+            # error invalid command
+        ;;
+    esac
+done

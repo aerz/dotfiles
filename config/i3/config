@@ -375,10 +375,10 @@ bindsym XF86MonBrightnessUp exec light -A 5
 bindsym XF86MonBrightnessDown exec light -U 5
 
 ## Brightness // Notify displays loaded by ddcci-backlight // <Super> <Shift> d ##
-bindsym $mod+shift+d exec --no-startup-id ~/.local/bin/brightness
+bindsym $mod+shift+d exec --no-startup-id ~/.local/bin/mlight -n
 
 ## Brightness // Restart ddcci-backlight service // <Super> <Shift> <Alt> d ##
-bindsym $mod+shift+$alt+d exec --no-startup-id ~/.local/bin/brightness -r
+bindsym $mod+shift+$alt+d exec --no-startup-id ~/.local/bin/mlight -n reload
 
 # ---
 # Screenshots
