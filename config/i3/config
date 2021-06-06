@@ -371,14 +371,14 @@ bindsym $mod+$alt+l exec ~/.config/i3/scripts/switch-theme
 # ---
 
 # Raise/Lower brightness level
-bindsym XF86MonBrightnessUp exec ~/.local/bin/brightness -u
-bindsym XF86MonBrightnessDown exec ~/.local/bin/brightness -d
+bindsym XF86MonBrightnessUp exec ~/.local/bin/mlight up 5
+bindsym XF86MonBrightnessDown exec ~/.local/bin/mlight down 5
 
 ## Brightness // Notify displays loaded by ddcci-backlight // <Super> <Shift> d ##
-bindsym $mod+shift+d exec --no-startup-id ~/.local/bin/brightness
+bindsym $mod+shift+d exec --no-startup-id ~/.local/bin/mlight -n
 
 ## Brightness // Restart ddcci-backlight service // <Super> <Shift> <Alt> d ##
-bindsym $mod+shift+$alt+d exec --no-startup-id ~/.local/bin/brightness -r
+bindsym $mod+shift+$alt+d exec --no-startup-id ~/.local/bin/mlight -n reload
 
 # ---
 # Screenshots
