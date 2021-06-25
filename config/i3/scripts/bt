@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+is_power_on() {
+    if [ -z "$(timeout 1 bluetoothctl show | grep 'Powered: no')" ]; then
+        echo "yes"
+    else
+        echo "no"
+    fi
+}
+
+shc_power_toggle() {
+    case "$(is_power_on)" in
+        yes)    bluetoothctl power off  ;;
+        no)     bluetoothctl power on   ;;
+    esac
+}
+
+export local shc=$1
+
+case $shc in
+    power_toggle) shc_power_toggle ;;
+esac
