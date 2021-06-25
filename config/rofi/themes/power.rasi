@@ -1,7 +1,7 @@
 configuration {
     font:                   "JetBrainsMono Nerd Font, Feather, 14";
     line-padding:           20;
-    separator-style:        none;
+    separator-style:        "none";
     hide-scrollbar:         true;
     show-icons:             false;
 }
