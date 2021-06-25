@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+#
+# Theme mode switcher menu
+#
+
+# ---
+# Config
+# ---
+# GTK variants
+GTK_LIGHT='Adwaita'
+GTK_DARK='Adwaita-dark'
+
+# Icon variants
+ICON_LIGHT='Papirus'
+ICON_DARK='Papirus-Dark'
+
+# ---
+
+set_gtk() {
+    case $1 in
+        *Dark)   theme="$GTK_DARK"   ;;
+        *Light)  theme="$GTK_LIGHT"  ;;
+    esac
+
+    xfconf-query -c xsettings -p /Net/ThemeName -s "$theme"
+    gsettings set org.gnome.desktop.interface gtk-theme "$theme"
+}
+
+set_gtk_icon() {
+    case $1 in
+        *Dark)   theme="$ICON_DARK"   ;;
+        *Light)  theme="$ICON_LIGHT"  ;;
+    esac
+
+    xfconf-query -c xsettings -p /Net/IconThemeName -s "$theme"
+    gsettings set org.gnome.desktop.interface icon-theme "$theme"
+}
+
+open_light_menu() {
+    rofi -i -matching fuzzy -theme ~/.config/rofi/themes/theme-mode/light.rasi -lines 2 -dmenu -p 'Change Mode:'
+}
+
+open_dark_menu() {
+    rofi -i -matching fuzzy -theme ~/.config/rofi/themes/theme-mode/dark.rasi -lines 2 -dmenu -p 'Change Mode:'
+}
+
+gtkc="$(xfconf-query -c xsettings -p /Net/ThemeName)"
+
+case $gtkc in
+    $GTK_DARK)   sel=$(printf "%s\n%s" "  Light" "  Dark" | open_dark_menu)   ;;
+    $GTK_LIGHT)  sel=$(printf "%s\n%s" "  Dark" "  Light" | open_light_menu)  ;;
+esac
+
+[ -z "$sel" ] && exit 1
+
+set_gtk "$sel"
+set_gtk_icon "$sel"

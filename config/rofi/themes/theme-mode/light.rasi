@@ -1,0 +1,53 @@
+configuration {
+    line-padding:           20;
+    separator-style:        "none";
+    hide-scrollbar:         true;
+    show-icons:             false;
+}
+
+* {
+    bg:  #E3E3E3;
+    se:  #C1C1C1;
+    fg:  #262626;
+    ac:  #EDEDED;
+}
+
+* {
+    background-color: @bg;
+    text-color: @fg;
+    spacing: 0;
+    width: 400px;
+}
+
+window {
+    location: north east;
+    x-offset: -20px;
+    y-offset: 55px;
+}
+
+inputbar {
+    children: [ prompt, textbox-prompt-colon ];
+}
+
+textbox-prompt-colon {
+    background-color: @ac;
+    text-color: @bg;
+}
+
+prompt {
+    padding: 11px 12px 12px 12px;
+    enabled: true;
+    background-color: @ac;
+    text-color: @fg;
+}
+
+listview {
+    cycle: true;
+    scrollbar: false;
+}
+
+element selected {
+    margin: 10px;
+    background-color: @se;
+    text-color: @fg;
+}

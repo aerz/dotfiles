@@ -367,7 +367,7 @@ bindsym $mod+Shift+Ctrl+c exec ~/.local/bin/qrgen
 
 ## xfce // Switch Dark-Light theme // <Super> <Shift> l ##
 # Reference: https://wiki.archlinux.org/index.php/Dark_mode_switching
-bindsym $mod+$alt+l exec ~/.config/i3/scripts/switch-theme
+bindsym $mod+$alt+l exec ~/.config/rofi/scripts/theme-mode
 
 # ---
 # Brightness
