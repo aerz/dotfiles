@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 # ---
 #
-# Pacman updates indicator module script.
+# Package updates indicator module script.
 #
 # Dependencies:
 #   - paru (optional) (https://github.com/Morganamilo/paru/)
@@ -24,7 +24,7 @@ display_available_updates(){
     local aur=$(paru -Qum 2> /dev/null | wc -l)
     local updates=$(( $arch + $aur ))
 
-    [ $updates -gt 10 ] && echo "$updates" || echo ""
+    [ $updates -ge 25 ] && echo "$updates" || echo ""
 }
 
 sleep_refresh() {
