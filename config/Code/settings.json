@@ -1,55 +1,70 @@
 {
-    // ---
-    // Theme
-    // ---
-    "workbench.colorTheme": "Min Tomorrow Dark",
-    "workbench.productIconTheme": "fluent-icons",
-    "workbench.iconTheme": "file-icons",
-    "workbench.startupEditor": "none",
-    // ---
-    // Font
-    // ---
-    "editor.fontFamily": "'JetBrainsMono Nerd Font', feather",
-    "editor.fontLigatures": true,
-    // ---
-    // Editor
-    // ---
-    "editor.renderWhitespace": "all",
-    "editor.multiCursorModifier": "ctrlCmd",
-    "editor.suggestSelection": "first",
-    "editor.formatOnSave": true,
+  // ---
+  // Theme
+  // ---
+  "workbench.colorTheme": "Min Tomorrow Dark",
+  "workbench.productIconTheme": "fluent-icons",
+  "workbench.iconTheme": "file-icons",
+  "workbench.startupEditor": "none",
+  "workbench.editor.untitled.hint": "hidden",
+  // ---
+  // Font
+  // ---
+  "editor.fontFamily": "'JetBrainsMono Nerd Font', feather",
+  "editor.fontLigatures": true,
+  // ---
+  // Editor
+  // ---
+  "editor.renderWhitespace": "all",
+  "editor.multiCursorModifier": "ctrlCmd",
+  "editor.suggestSelection": "first",
+  "editor.formatOnSave": true,
+  "editor.rulers": [
+    80,
+    120
+  ],
+  // Telemetry
+  "telemetry.enableTelemetry": false,
+  "telemetry.enableCrashReporter": false,
+  // Languages
+  "files.associations": {
+    "*.rasi": "css"
+  },
+  "[java]": {
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false,
     "editor.rulers": [
-        80,
-        120
+      100
     ],
-    // Languages
-    "[java]": {
-        "editor.tabSize": 2,
-        "editor.insertSpaces": true,
-        "editor.detectIndentation": false,
-        "editor.rulers": [
-            100
-        ],
-        "editor.formatOnSave": false
-        //"editor.wordWrap": "wordWrapColumn",
-        //"editor.wrappingIndent": "deepIndent"
-    },
-    // ---
-    // Format
-    // ---
-    "files.insertFinalNewline": true,
-    "files.trimTrailingWhitespace": true,
-    // ---
-    // Window
-    // ---
-    "window.title": "${activeEditorShort}${separator}${rootName}${separator}${appName}",
-    "window.menuBarVisibility": "toggle",
-    // ---
-    // Ext: visualstudioexptteam.vscodeintellicode
-    // ---
-    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-    // ---
-    // Ext: naumovs.color-highlight
-    // ---
-    "color-highlight.markerType": "dot-after"
+    "editor.formatOnSave": false
+    //"editor.wordWrap": "wordWrapColumn",
+    //"editor.wrappingIndent": "deepIndent"
+  },
+  "[javascript]": {
+    "editor.tabSize": 2,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  // ---
+  // Format
+  // ---
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  // ---
+  // Window
+  // ---
+  "window.title": "${activeEditorShort}${separator}${rootName}${separator}${appName}",
+  "window.menuBarVisibility": "toggle",
+  // ---
+  // Ext: visualstudioexptteam.vscodeintellicode
+  // ---
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  // ---
+  // Ext: naumovs.color-highlight
+  // ---
+  "color-highlight.markerType": "dot-after",
+  // ---
+  // Ext: redhat.java
+  // ---
+  "redhat.telemetry.enabled": false
 }
