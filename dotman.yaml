@@ -8,7 +8,6 @@ local/bin/fldr: ~/.local/bin/fldr
 local/bin/mlight: ~/.local/bin/mlight
 local/bin/multimon: ~/.local/bin/multimon
 local/bin/qrgen: ~/.local/bin/qrgen
-local/bin/screenshots: ~/.local/bin/screenshots
 
 local/share/applications/text.desktop: ~/.local/share/applications/text.desktop
 local/share/fonts: ~/.local/share/fonts

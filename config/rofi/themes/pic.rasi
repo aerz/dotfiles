@@ -1,0 +1,51 @@
+/*-*- mode: css; -*-*/
+
+configuration {
+    line-padding:           20;
+    separator-style:        "none";
+    hide-scrollbar:         true;
+    show-icons:             false;
+    theme:                  "pic";
+}
+
+* {
+    bg:  #1C1C1C;
+    se:  #3E3E3E;
+    fg:  #D9D9D9;
+    ac:  #121212;
+}
+
+* {
+    background-color: @bg;
+    text-color: @fg;
+    spacing: 0;
+    width: 400px;
+}
+
+window {
+    location: north west;
+    x-offset: 20px;
+    y-offset: 55px;
+}
+
+prompt {
+    padding: 11px 12px 12px 12px;
+    enabled: true;
+    background-color: @ac;
+    text-color: @fg;
+}
+
+entry {
+    text-color: @fg;
+}
+
+listview {
+    cycle: true;
+    scrollbar: false;
+}
+
+element selected {
+    margin: 10px;
+    background-color: @se;
+    text-color: @fg;
+}
