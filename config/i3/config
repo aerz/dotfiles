@@ -334,8 +334,8 @@ bindsym $mod+Shift+v exec --no-startup-id ~/.config/rofi/scripts/pasound -i "HDM
 ## Apps // Connect to Bluetooth paired device // <Super> <Shift> b ##
 bindsym $mod+Shift+b exec --no-startup-id ~/.config/rofi/scripts/roblue connect
 
-## Apps // Select apps to mute/unmute // <Super> <Shift>  ##
-bindsym $mod+Shift+XF86AudioMute exec --no-startup-id ~/.config/rofi/scripts/pasound umute
+## Apps // Select apps to mute/unmute // <Super>  ##
+bindsym $mod+XF86AudioMute exec --no-startup-id ~/.config/rofi/scripts/pasound umute
 
 ## Apps // Open power options // <Super> <Shift> e ##
 bindsym $mod+Shift+e exec ~/.config/rofi/scripts/power
@@ -401,14 +401,14 @@ bindsym $mod+Shift+Print exec --no-startup-id ~/.local/bin/screenshots --fullscr
 # ---
 
 # Raise/Lower volume level
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioRaiseVolume exec --no-startup-id ponymix increase 5
+bindsym XF86AudioLowerVolume exec --no-startup-id ponymix decrease 5
 
 # Mute volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMute exec --no-startup-id ponymix toggle
 
 # Mute mic
-bindsym $mod+XF86AudioMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym $mod+$alt+XF86AudioMute exec --no-startup-id ponymix --input toggle
 
 # Media player controls
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause

@@ -24,8 +24,6 @@ config/multilock: ~/.config/multilock
 config/mimeapps.list: ~/.config/mimeapps.list
 config/paru/paru.conf: ~/.config/paru/paru.conf
 config/polybar: ~/.config/polybar
-config/pulse/daemon.conf: ~/.config/pulse/daemon.conf
-config/pulse/default.pa: ~/.config/pulse/default.pa
 config/rofi: ~/.config/rofi
 config/touchegg/touchegg.conf: ~/.config/touchegg/touchegg.conf
 config/user-dirs.dirs: ~/.config/user-dirs.dirs
