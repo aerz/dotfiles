@@ -19,13 +19,24 @@
   "editor.multiCursorModifier": "ctrlCmd",
   "editor.suggestSelection": "first",
   "editor.formatOnSave": true,
-  "editor.rulers": [80, 120],
+  "editor.rulers": [
+    80,
+    120
+  ],
+  // Telemetry
+  "telemetry.enableTelemetry": false,
+  "telemetry.enableCrashReporter": false,
   // Languages
+  "files.associations": {
+    "*.rasi": "css"
+  },
   "[java]": {
     "editor.tabSize": 2,
     "editor.insertSpaces": true,
     "editor.detectIndentation": false,
-    "editor.rulers": [100],
+    "editor.rulers": [
+      100
+    ],
     "editor.formatOnSave": false
     //"editor.wordWrap": "wordWrapColumn",
     //"editor.wrappingIndent": "deepIndent"
