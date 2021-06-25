@@ -1,15 +1,19 @@
 #!/usr/bin/env bash
 
+# Global vars
 readonly FILE="$(mktemp --suff=.png)"
+
+# Rofi
+readonly rotheme="~/.config/rofi/themes/pic.rasi"
 
 open_type_menu() {
     declare -ar types=(
-        "麗  Region  <small>(Shift+Print)</small>"
-        "  Select window  <small>(Super+Print)</small>"
-        "  Fullscreen  <small>(Super+Shift+Print)</small>"
+        "麗  Region"
+        "  Select window"
+        "  Fullscreen"
     )
 
-    printf '%s\n' "${types[@]}" | rofi -dmenu -markup-rows -i -p 'Type '
+    printf '%s\n' "${types[@]}" | rofi -dmenu -theme $rotheme -i -lines ${#types[@]} -p 'Capture:'
 }
 
 open_destination_menu() {
@@ -19,7 +23,7 @@ open_destination_menu() {
         "Open"
     )
 
-    printf '%s\n' "${destinations[@]}" | rofi -dmenu -i -p 'Destination '
+    printf '%s\n' "${destinations[@]}" | rofi -dmenu -theme $rotheme -i -lines ${#destinations[@]} -p 'Action:'
 }
 
 send_notification() {

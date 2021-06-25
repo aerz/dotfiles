@@ -388,16 +388,16 @@ bindsym $mod+shift+$alt+d exec --no-startup-id ~/.local/bin/mlight -n reload
 # ---
 
 ## Screenshots // Open screenshoot selector // Print ##
-bindsym Print exec --no-startup-id ~/.local/bin/screenshots
+bindsym Print exec --no-startup-id ~/.config/rofi/scripts/pic
 
 ## Screenshots // Take a screenshoot of a region // <Shift> Print ##
-bindsym Shift+Print exec --no-startup-id ~/.local/bin/screenshots --region
+bindsym Shift+Print exec --no-startup-id ~/.config/rofi/scripts/pic --region
 
 ## Screenshots // Take a screenshoot of the selected window // <Super> Print ##
-bindsym --release $mod+Print exec --no-startup-id ~/.local/bin/screenshots --window
+bindsym --release $mod+Print exec --no-startup-id ~/.config/rofi/scripts/pic --window
 
 ## Screenshots // Take fullscreen screenshot // <Super> <Shift> Print ##
-bindsym $mod+Shift+Print exec --no-startup-id ~/.local/bin/screenshots --fullscreen
+bindsym $mod+Shift+Print exec --no-startup-id ~/.config/rofi/scripts/pic --fullscreen
 
 # ---
 # Audio
