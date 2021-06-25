@@ -398,10 +398,10 @@ label       = %{T2}%output%%{T-}
 
 [module/mic]
 type        = custom/script
-exec        = ~/.config/polybar/scripts/microphone
+exec        = ~/.config/polybar/scripts/mic
 tail        = true
 
-click-left  = ~/.config/polybar/scripts/microphone --toggle &
+click-left  = ~/.config/polybar/scripts/mic toggle &
 
 ; ---
 ; Timewarrior module
