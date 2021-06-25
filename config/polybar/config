@@ -54,10 +54,11 @@ module-margin-right = 1
 ; font-N = <fontconfig pattern>;<vertical offset>
 font-0 = "JetBrainsMono Nerd Font:size=11;2"
 font-1 = "JetBrainsMono Nerd Font:size=14;3"
-font-2 = "Noto Color Emoji:style=Regular:scale=9;2"
-font-3 = "fixed:pixelsize=10;1"
-font-4 = "unifont:fontformat=truetype:size=8:antialias=false;0"
-font-5 = "siji:pixelsize=10;1"
+font-2 = "JetBrainsMono Nerd Font:size=13;3"
+font-3 = "Noto Color Emoji:style=Regular:scale=9;2"
+font-4 = "fixed:pixelsize=10;1"
+font-5 = "unifont:fontformat=truetype:size=8:antialias=false;0"
+font-6 = "siji:pixelsize=10;1"
 
 ; Modules
 modules-left   = i3 sep xwindow
@@ -356,18 +357,18 @@ ping-interval   = 3
 
 ; Connected
 format-connected            = <label-connected>
-label-connected             = %{T2}%{T-}
-label-connected-foreground  = ${colors.system}
+label-connected             = "%{T3}%{T-}%{T5} %{T-}"
+label-connected-foreground  = ${colors.fg}
 
 ; Disconnected
 format-disconnected             = <label-disconnected>
-label-disconnected              = %{T2}%{T-}
-label-disconnected-foreground   = ${colors.alert}
+label-disconnected              = "%{T3}%{T-}%{T5} %{T-}"
+label-disconnected-foreground   = ${colors.fg-muted}
 
 ; Packet loss
 format-packetloss           = <label-packetloss>
-label-packetloss            = %{T2}%{T-}
-label-packetloss-foreground = ${colors.fg-muted}
+label-packetloss            = "%{T3}%{T-}%{T5} %{T-}"
+label-packetloss-foreground = ${colors.secondary-alt}
 
 ; ---
 ; Separator Module
