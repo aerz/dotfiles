@@ -9,7 +9,7 @@ configuration {
     bg:  #262626;
     se:  #181818;
     fg:  #C1C1C1;
-    ac:  #68acff;
+    ac:  #7caabd;
 }
 
 * {
