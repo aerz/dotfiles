@@ -1,0 +1,188 @@
+#!/usr/bin/env bash
+#
+# nmcli wireless common operations using Rofi
+#
+# Dependencies:
+#   - nmcli (https://archlinux.org/packages/extra/x86_64/networkmanager/)
+#   - rofi (https://archlinux.org/packages/community/x86_64/rofi/)
+#
+# ---
+
+ROFI_OPTS=(
+    "-i"
+    "-matching fuzzy"
+    "-theme ~/.config/rofi/themes/nmwifi/default.rasi"
+    "-dmenu"
+)
+
+ROFI_THEME_LONGER="-theme ~/.config/rofi/themes/nmwifi/longer.rasi"
+
+err_no_bssid() {
+    echo 'error: bssid argument is empty or was not provided'
+    echo 'can not connect to a wireless network'
+    exit 1
+}
+
+is_wifi_disabled() {
+    [ "$(nmcli radio wifi)" == "disabled" ]
+}
+
+get_wl_active_name() {
+    nmcli -t -f NAME,TYPE,ACTIVE con show --active | grep 'wireless:yes' | cut -d ':' -f 1
+}
+
+list_known_wl() {
+    nmcli -t -f NAME,TYPE con show | grep 'wireless' | xargs -I{} echo {} | cut -d ':' -f 1
+}
+
+list_available_wl() {
+    nmcli -f IN-USE,SSID,RATE,SECURITY,BARS d wifi list | tail -n +2 | sed 's/^\* */  /;s/^\s\+/   /'
+}
+
+list_available_wl_bssids() {
+    nmcli -f BSSID d wifi list | tail -n +2
+}
+
+show_loading_menu() {
+    local cmd="$1"
+    local title="$2"
+    local pid_loading pid_cmd
+
+    exec $cmd &> /dev/null &
+    pid_cmd="$!"
+
+    rofi ${ROFI_OPTS[@]} -l 0 -mesg "Loading..." -p "$title" &
+    pid_loading="$!"
+
+    wait $pid_cmd && kill -9 $pid_loading
+}
+
+show_search_menu() {
+    local title="  Connect to:"
+    local opts=(
+        "  Rescan"
+        "  Back"
+        ""
+    )
+    local wlbssids="$(list_available_wl_bssids)"
+    local sel="$(
+        (printf '%s\n' "${opts[@]}" && list_available_wl) | \
+        rofi ${ROFI_THEME_LONGER} ${ROFI_OPTS[@]} -format i -p "$title"
+    )"
+
+    case $sel in
+        # Rescan
+        0)
+                show_loading_menu "nmcli d wifi list --rescan yes" "  Rescanning Networks:"
+                show_search_menu
+        ;;
+        # Back
+        1)
+            main
+        ;;
+        # Empty selection
+        2)
+            exit
+        ;;
+        # Wireless network
+        [0-9]*)
+            # +1 because index starts at 0
+            local sel_nopts=$(( $sel - ${#opts[@]} + 1 ))
+            echo -e "$wlbssids" | sed "s/\s//;${sel_nopts}q;d"
+        ;;
+    esac
+}
+
+show_known_wl_menu() {
+    local title="  Wifi Profiles:"
+    local opts=(
+        ""
+        "  Reload"
+        "  Connect to network"
+        "  Turn Off"
+    )
+    local wlconn="$(get_wl_active_name)"
+    local wlnets num_wlnets num_menu
+
+    case "$wlconn" in
+        "") wlnets="$(list_known_wl)"                               ;;
+        *)  wlnets="$(list_known_wl | sed "s/^${wlconn}$/ ${wlconn}/")" ;;
+    esac
+
+    num_wlnets=$(echo -e "$wlnets" | wc -l)
+
+    case $num_wlnets in
+        # no known wireless networks yet
+        0)
+            opts=("${opts[@]:2}"); num_menu=${#opts[@]}
+            printf '%s\n' "${opts[@]}" | rofi ${ROFI_OPTS[@]} -l $num_menu -p "$title"
+        ;;
+        # at least one wireless network saved
+        *)
+            num_menu=$(($num_wlnets + ${#opts[@]}))
+            printf '%s\n' "$wlnets" "${opts[@]}" | rofi ${ROFI_OPTS[@]} -l $num_menu -p "$title"
+        ;;
+    esac
+}
+
+show_suggest_menu() {
+    local title="  Wifi Off:"
+    local opts=(
+        "  Turn On"
+        "Close"
+    )
+    local sel="$(
+        printf "%s\n" "${opts[@]}" | rofi ${ROFI_OPTS[@]} -l ${#opts[@]} -p "$title"
+    )"
+
+    case $sel in
+        *"Turn On") nmcli -w 3 radio wifi on  ;;
+        *)          exit 1                    ;;
+    esac
+}
+
+show_req_passwd_menu() {
+    rofi ${ROFI_OPTS[@]} -password -p "Password:" -mesg "Enter the network password" -lines 0
+}
+
+connect_wifi_bssid() {
+    local bssid="$1"; [ -z "$bssid" ] && err_no_bssid
+    local passwd="$(show_req_passwd_menu)"
+
+    if [ -z "$passwd" ]; then
+        nmcli device wifi con "$bssid"
+    else
+        nmcli device wifi con "$bssid" password "$passwd"
+    fi
+}
+
+main() {
+    local sel="$(show_known_wl_menu)"
+
+    case "$sel" in
+        *"Reload")
+            main
+        ;;
+        *"Connect to network")
+            show_loading_menu "nmcli d wifi list" "  Scanning networks:"
+            local bssid="$(show_search_menu)"
+            connect_wifi_bssid "$bssid"
+        ;;
+        *"Turn Off")
+            nmcli radio wifi off
+        ;;
+        "")
+            exit
+        ;;
+        " "*)
+            nmcli con down ${sel:2}
+        ;;
+        *)
+            nmcli con up $sel
+        ;;
+    esac
+}
+
+is_wifi_disabled && show_suggest_menu
+
+main

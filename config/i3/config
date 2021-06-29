@@ -332,6 +332,9 @@ bindsym $mod+Shift+$alt+v exec gtk-launch pavucontrol
 ## Apps // Change default sound device // <Super> <Shift> v ##
 bindsym $mod+Shift+v exec --no-startup-id ~/.config/rofi/scripts/pasound -i "HDMI Audio" output
 
+## Apps // Open Wifi menu // <Super> <Shift> w ##
+bindsym $mod+Shift+w exec --no-startup-id ~/.config/rofi/scripts/nmwifi
+
 ## Apps // Connect to Bluetooth paired device // <Super> <Shift> b ##
 bindsym $mod+Shift+b exec --no-startup-id ~/.config/rofi/scripts/roblue paired
 
