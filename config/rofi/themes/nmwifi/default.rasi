@@ -1,0 +1,44 @@
+configuration {
+    line-padding:          20;
+    lines:                 10;
+    hide-scrollbar:        true;
+    show-icons:            false;
+}
+
+* {
+    bg:  #262626;
+    se:  #181818;
+    fg:  #C1C1C1;
+    ac:  #7caabd;
+}
+
+* {
+    background-color: @bg;
+    text-color: @fg;
+    spacing: 0;
+    width: 600px;
+}
+
+window {
+    location: north east;
+    x-offset: -20px;
+    y-offset: 55px;
+}
+
+prompt {
+    padding: 11px 12px 12px 12px;
+    enabled: true;
+    background-color: @ac;
+    text-color: @bg;
+}
+
+listview {
+    cycle: false;
+    scrollbar: false;
+}
+
+element selected {
+    margin: 10px;
+    background-color: @se;
+    text-color: @fg;
+}
