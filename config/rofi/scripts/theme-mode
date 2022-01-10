@@ -37,11 +37,11 @@ set_gtk_icon() {
 }
 
 open_light_menu() {
-    rofi -i -matching fuzzy -theme ~/.config/rofi/themes/theme-mode/light.rasi -lines 2 -dmenu -p 'Change Mode:'
+    rofi -i -matching fuzzy -theme ~/.config/rofi/themes/theme-mode/light.rasi -lines 2 -dmenu -p 'Change Mode'
 }
 
 open_dark_menu() {
-    rofi -i -matching fuzzy -theme ~/.config/rofi/themes/theme-mode/dark.rasi -lines 2 -dmenu -p 'Change Mode:'
+    rofi -i -matching fuzzy -theme ~/.config/rofi/themes/theme-mode/dark.rasi -lines 2 -dmenu -p 'Change Mode'
 }
 
 gtkc="$(xfconf-query -c xsettings -p /Net/ThemeName)"
