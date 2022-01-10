@@ -2,32 +2,20 @@
 #
 # Source: https://gist.github.com/Tadly/0741821d3694deaec1ee454a95c591fa
 #
-#   Use rofi to pick emoji because that's what this
-#   century is about apparently...
-#
 #   Requirements:
 #     rofi, xsel, xdotool, curl, xmllint
 #
-#   Usage:
-#     1. Download all emoji
-#        $ rofi-emoji --download
-#
-#     2. Run it!
-#        $ rofi-emoji
-#
 #   Notes:
 #     * You'll need a emoji font like "Noto Emoji" or "EmojiOne".
-#     * Confirming an item will automatically paste it WITHOUT
-#       writing it to your clipboard.
-#     * Ctrl+C will copy it to your clipboard WITHOUT pasting it.
 #
 
-# Where to save the emojis file.
-EMOJI_FILE="$HOME/.cache/emojis.txt"
+# ---
+# Config
+# ---
 
-# Urls of emoji to download.
-# You can remove what you don't need.
-URLS=(
+EMOJI_CACHE_FILE="$HOME/.cache/emojis.txt"
+
+URL_EMOJI_CATEGORIES=(
     'https://emojipedia.org/people/'
     'https://emojipedia.org/nature/'
     'https://emojipedia.org/food-drink/'
@@ -38,62 +26,117 @@ URLS=(
     'https://emojipedia.org/flags/'
 )
 
+URL_EMOJI_UPDATES=(
+    'https://emojipedia.org/emoji-14.0/'
+)
 
-function download() {
-    echo "" > "$EMOJI_FILE"
+# ---
 
-    for url in "${URLS[@]}"; do
+show_help() {
+    echo
+    echo "$0 - Emoji list viewer using rofi"
+    echo
+    echo "usage: $0 [option]"
+    echo
+    echo "Options:"
+    echo "  -h, --help          Display help message"
+    echo "  -d, --download      Downloads the emoji list from emojipedia.org"
+    exit 0
+}
+
+show_cmd_err() {
+    echo "error: Not a valid option or command."
+    echo "Use '$0 --help' to display the help message"
+    exit 1
+}
+
+filter_emojis_html_tags() {
+    echo "$1" | head -n -1 | tail -n +1 | \
+    sed -rn 's/.*<span class="emoji">(.*)<\/span> (.*)<\/a><\/li>/\1 \2/p'
+}
+
+download_emoji_cats() {
+    local emojis
+
+    for url in "${URL_EMOJI_CATEGORIES[@]}"; do
         echo "Downloading: $url"
 
-        # Download the list of emoji and remove all the junk around it
         emojis=$(curl -s "$url" | \
                  xmllint --html \
                          --xpath '//ul[@class="emoji-list"]' - 2>/dev/null)
+        emojis=$(filter_emojis_html_tags "$emojis")
 
-        # Get rid of starting/closing ul tags
-        emojis=$(echo "$emojis" | head -n -1 | tail -n +1)
-
-        # Extract the emoji and its description
-        emojis=$(echo "$emojis" | \
-                 sed -rn 's/.*<span class="emoji">(.*)<\/span> (.*)<\/a><\/li>/\1 \2/p')
-
-        echo "$emojis" >> "$EMOJI_FILE"
+        echo "$emojis" >> "$EMOJI_CACHE_FILE"
     done
-
-    echo -e "\nEmojis downloaded at $EMOJI_FILE"
 }
 
+download_emoji_updates() {
+    local emojis
 
-function display() {
-    emoji=$(cat "$EMOJI_FILE" | grep -v '#' | grep -v '^[[:space:]]*$')
-    line=$(echo "$emoji" | rofi -dmenu -i -p "" -mesg "<small>Ctrl+C: Copy  -  Return: Paste</small>" -kb-custom-1 Ctrl+c $@)
+    for url in "${URL_EMOJI_UPDATES[@]}"; do
+        echo "Downloading: $url"
+
+        emojis=$(curl -s "$url" | \
+                 xmllint --html \
+                         --xpath '//article/ul' - 2>/dev/null)
+        emojis=$(filter_emojis_html_tags "$emojis")
+
+        echo "$emojis" >> "$EMOJI_CACHE_FILE"
+    done
+}
+
+open_rofi_menu() {
+    local emojis emoji exit_code
+    local random=($(shuf -n 1 "$EMOJI_CACHE_FILE"))
+
+    emojis=$(cat "$EMOJI_CACHE_FILE" | grep -v '#' | grep -v '^[[:space:]]*$')
+    emoji=$(
+        echo "$emojis" | \
+        rofi -dmenu -i -p "$random" \
+            -mesg "<small>Ctrl+C: Copy | Ctrl+R: Copy Random | Return: Paste</small>" \
+            -kb-custom-1 Ctrl+c \
+            -kb-custom-2 Ctrl+r \
+            $@
+    )
     exit_code=$?
+    emoji=($emoji)
 
-    line=($line)
-
-    if [ $exit_code == 0 ]; then
-        sleep 0.1  # Delay pasting so the text-entry can come active
-        xdotool type --clearmodifiers "${line[0]}"
-    elif [ $exit_code == 10 ]; then
-        echo -n "${line[0]}" | xclip -selection clipboard
-        notify-send --urgency=low --expire-time=10000 'Emoji selector' "${line[0]} Copied to clipboard"
-    fi
+    case $exit_code in
+        # Return: Paste
+        0)
+            sleep 0.3 # Wait text-entry come active
+            xdotool type --clearmodifiers "${emoji}"
+        ;;
+        # Ctrl+C: Copy selected emoji
+        10)
+            echo -n "${emoji}" | xclip -selection clipboard
+            notify-send --urgency=low --expire-time=10000 \
+                'Emoji Viewer' "$(echo "${emoji[@]}") Copied to clipboard"
+        ;;
+        # Ctrl+R: Copy random emoji
+        11)
+            echo -n "${random}" | xclip -selection clipboard
+            notify-send --urgency=low --expire-time=10000 \
+                'Emoji Viewer' "$(echo "${random[@]}") Copied to clipboard"
+        ;;
+    esac
 }
 
-
-# Some simple argparsing
-if [[ "$1" =~ -D|--download ]]; then
-    download
-    exit 0
-elif [[ "$1" =~ -h|--help ]]; then
-    echo "usage: $0 [-D|--download]"
-    exit 0
-fi
-
-# Download all emoji if they don't exist yet
-if [ ! -f "$EMOJI_FILE" ]; then
-    download
-fi
-
-# display displays :)
-display
+case $1 in
+    -h|--help)
+        show_help
+    ;;
+    -d|--download)
+        echo "" > "$EMOJI_CACHE_FILE"
+        echo "Cache file flushed"
+        download_emoji_cats
+        download_emoji_updates
+        echo "Emojis downloaded at $EMOJI_CACHE_FILE"
+    ;;
+    *)
+        [ "$1" != "" ] && show_cmd_err
+        # download emojis if cache's file not found
+        [ ! -f "$EMOJI_CACHE_FILE" ] && ./$0 --download
+        open_rofi_menu
+    ;;
+esac
