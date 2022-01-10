@@ -14,7 +14,7 @@ shopt -s 'extglob'
 trap ctrl_c INT
 
 ctrl_c() {
-    echo "Operation cancelled"
+    echo -e "\nOperation cancelled"
     exit 1
 }
 
@@ -58,20 +58,50 @@ show_compress_format_err() {
     exit 1
 }
 
+countln() {
+    local input="$1"
+
+    [ ! -z "${input[@]}" ] && echo "${input[@]}" | wc -l || echo 0
+}
+
 sweep_dotfiles() {
     local dotfiles=$(find . -type f -name '.*' -print)
-    printf '%s\n' ${dotfiles[@]}
+    local dotdirs=$(find . -mindepth 1 -type d -name '.*' -print)
 
-    [ -z "$dotfiles" ] && echo "No dotfiles found" && exit 0
+    if [ -z "${dotfiles}${dotdirs}" ]; then
+        echo "No dotfiles found, everything is clean!"
+        exit 0
+    fi
 
-    read -r -p 'Do you want to delete all of these dotfiles [Y/n]' confirm
+    if [ ! -z "$dotfiles" ]; then
+        echo "Files:"
+        echo "${dotfiles[@]}" | while read dotfile; do
+            printf '  %s\n' "$dotfile"
+        done
+        echo
+    fi
+
+    if [ ! -z "$dotdirs" ]; then
+        echo "Directories:"
+        echo "${dotdirs[@]}" | while read dotdir; do
+            printf '  %s\n' "$dotdir"
+        done
+    fi
+
+    echo -e "\n$(countln "${dotfiles[@]}") Files and $(countln "${dotdirs[@]}") Directories found"
+    read -r -p 'Delete all? [y/N]' confirm
 
     case $confirm in
         [Yy]*)
-            find . -type f -name '.*' -print -delete
+            find . -type f -name '.*' -delete
+            find . -mindepth 1 -type d -name '.*' -delete
             echo "Done"
         ;;
         [Nn]*)
+            echo "Aborted"
+            exit  1
+        ;;
+        *)
             echo "Aborted"
             exit  1
         ;;
@@ -133,5 +163,3 @@ while (( $# > 0 )); do
         ;;
     esac
 done
-
-
