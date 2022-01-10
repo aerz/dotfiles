@@ -426,10 +426,6 @@ bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 # Reference: https://wiki.archlinux.org/index.php/Xorg/Keyboard_configuration#Switching_between_keyboard_layouts
 exec_always --no-startup-id setxkbmap -option 'grp:rctrl_rshift_toggle' -layout us,es &
 
-# Start XFCE Settings daemon
-# Reference: https://docs.xfce.org/xfce/xfce4-settings/xfsettingsd
-exec --no-startup-id xfsettingsd --replace --daemon
-
 # Start notifications daemon
 exec --no-startup-id rofication-daemon
 
