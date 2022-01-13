@@ -30,13 +30,20 @@ export QT_QPA_PLATFORMTHEME='gnome'
 # X Preferences
 # ---
 # Monitor
-standby=600; suspend=600; off=600
+standby=300; suspend=300; off=300
 xset dpms $standby $suspend $off &
 
 # Lockscreen
-inactivity=600; force_bg=180
-xset s $inactivity $force_bg s blank s noexpose &
-xss-lock -l -- multilockscreen --suspend blur &
+inactivity=300; refresh=60
+xset s $inactivity $refresh s blank s noexpose &
+xss-lock -l -- multilockscreen --lock blur &
+
+# Idle actions
+xidlehook --detect-sleep --not-when-audio --not-when-fullscreen \
+    --timer 180 \
+        'light -O && light -S 5' 'light -I' \
+    --timer 180 \
+        'systemctl suspend' 'light -I' &
 
 # ---
 # Start i3
