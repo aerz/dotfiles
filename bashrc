@@ -219,3 +219,13 @@ npx() {
     lazynvm
     npx $@
 }
+
+# ---
+# Autostart
+# ---
+
+# mcfly
+if which mcfly &> /dev/null; then
+    export MCFLY_RESULTS=200 MCFLY_FUZZY=2
+    eval "$(mcfly init bash)"
+fi
