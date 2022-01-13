@@ -29,9 +29,9 @@ action="$(printf '%s\n' "${actions[@]}" | rofi -theme $theme -lines 5 -dmenu -p 
 [ -z "$action" ] && exit 0
 
 case $action in
-    *Shutdown) confirm && save_brightness && systemctl poweroff    ;;
-    *Reboot)   confirm && save_brightness && systemctl reboot      ;;
-    *Lock)     multilockscreen -l blur                      ;;
-    *Suspend)  confirm && multilockscreen -s blur           ;;
-    *Logout)   confirm && i3-msg exit                       ;;
+    *Shutdown) confirm && save_brightness && systemctl poweroff ;;
+    *Reboot)   confirm && save_brightness && systemctl reboot   ;;
+    *Lock)     loginctl lock-session                            ;;
+    *Suspend)  confirm && systemctl suspend                     ;;
+    *Logout)   confirm && i3-msg exit                           ;;
 esac
