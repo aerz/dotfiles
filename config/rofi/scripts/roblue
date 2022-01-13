@@ -91,22 +91,40 @@ list_paired_devices() {
 
 open_paired_devices_menu() {
     local title=" Paired devices:"
-    local dev="$(list_paired_devices | rofi ${ropts[@]} -p "$title" | sed 's/^ //')"
+    local opts=(
+        ""
+        "  Reload"
+        "  Turn Off"
+    )
+    local devs; readarray devs <<<"$(list_paired_devices)"
+    local num_opts=$(( ${#devs[@]} + ${#opts[@]}))
+    local sel="$(
+        (printf '%s' "${devs[@]}" && printf '%s\n' "${opts[@]}") \
+        | rofi ${ropts[@]} -l $num_opts -p "$title"
+    )"
 
-    bluetoothctl paired-devices | grep -w "$dev"
+    case $sel in
+        "")             exit                            ;;
+        *"Reload")      open_paired_devices_menu        ;;
+        *"Turn Off")    bluetoothctl power off && exit  ;;
+        *)
+            local dev="$(echo "$sel" | sed 's/^ //')"
+            bluetoothctl paired-devices | grep -w "$dev"
+        ;;
+    esac
 }
 
 open_power_off_suggestions_menu() {
     local title=" Bluetooth off:"
-    local action="$(printf "%s\n" "Turn on" "Close" | rofi ${ropts[@]} -lines 2 -p "$title")"
+    local action="$(printf "%s\n" "  Turn on" "Close" | rofi ${ropts[@]} -lines 2 -p "$title")"
 
     case $action in
-        "Turn on")  bluetoothctl power on && sleep .5   ;;
+        *"Turn on")  bluetoothctl power on && sleep .5   ;;
         *)          exit 1                              ;;
     esac
 }
 
-is_power_off() {
+is_bt_power_off() {
     bluetoothctl show | grep -q 'Powered: no'
 }
 
@@ -114,7 +132,7 @@ is_power_off() {
 
 case $1 in
     paired)
-        is_power_off && open_power_off_suggestions_menu
+        is_bt_power_off && open_power_off_suggestions_menu
 
         dev="$(open_paired_devices_menu)"
         [ -z "$dev" ] && err_no_dev
