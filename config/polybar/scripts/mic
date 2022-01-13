@@ -12,36 +12,23 @@
 #
 # ---
 
-readonly COLOR_FG_MUTED="$(xrescat polybar.colors.fg-muted)"
-
-is_muted() {
-    #pacmd list-sources | awk '/\*/,EOF {print}' | awk '/muted/ {print $2; exit}'
-    ponymix --input is-muted
+is_unmuted() {
+    test $(ponymix --input is-muted; echo $?) -eq 1
 }
 
-status() {
-  is_muted && echo "%{F$COLOR_FG_MUTED}%{T2}%{T-}%{F-}" || echo ""
+print_status() {
+    is_unmuted && echo "%{T2}%{T-}" || echo ''
 }
 
 listen() {
-    status
+    print_status
 
     LANG=EN; pactl subscribe | while read -r event; do
         if echo "$event" | grep -q "source" || echo "$event" | grep -q "server"; then
-            status
+            print_status
         fi
     done
 }
-
-#toggle() {
-  #DEFAULT_SOURCE=$(pacmd list-sources | awk '/\*/,EOF {print $3; exit}')
-
-  #if [ "$(is_muted)" = "yes" ]; then
-  #    pacmd set-source-mute "$DEFAULT_SOURCE" 0
-  #else
-  #    pacmd set-source-mute "$DEFAULT_SOURCE" 1
-  #fi
-#}
 
 case "$1" in
     toggle) ponymix --input toggle  ;;
