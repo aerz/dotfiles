@@ -22,7 +22,6 @@ confirm() {
 logout_session() {
     i3-msg exit
     loginctl terminate-session "$(cat /proc/self/sessionid)"
-
 }
 
 save_brightness() {
@@ -35,9 +34,9 @@ action="$(printf '%s\n' "${actions[@]}" | rofi -theme $theme -dmenu -l 5 -p "$up
 [ -z "$action" ] && exit 0
 
 case $action in
-    *Shutdown) confirm && save_brightness && systemctl poweroff    ;;
-    *Reboot)   confirm && save_brightness && systemctl reboot      ;;
-    *Lock)     multilockscreen -l blur                      ;;
-    *Suspend)  confirm && multilockscreen -s blur           ;;
-    *Logout)   confirm && logout_session                       ;;
+    *Shutdown) confirm && save_brightness && systemctl poweroff     ;;
+    *Reboot)   confirm && save_brightness && systemctl reboot       ;;
+    *Lock)     loginctl lock-session                                ;;
+    *Suspend)  confirm && systemctl suspend                         ;;
+    *Logout)   confirm && logout_session                            ;;
 esac
