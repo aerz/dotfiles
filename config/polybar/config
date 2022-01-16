@@ -315,7 +315,7 @@ exec = ~/.config/polybar/scripts/updates
 tail = true
 
 format              = <label>
-label               = %{T2}  %{T-}%output%
+label               = %output%
 label-background    = ${colors.bg-focus}
 label-foreground    = ${colors.system-alt}
 label-padding-right = 1
@@ -337,7 +337,7 @@ interval    = 5
 
 [module/backlight1]
 type = internal/backlight
-card = ddcci8
+card = ddcci4
 
 format = <ramp> <label>
 label  = %percentage%%
