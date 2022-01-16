@@ -115,6 +115,33 @@ opend() {
     mimeo $@ > /dev/null 2>&1 &
 }
 
+# Files
+extract() {
+    if [ ! -f "$1" ]; then
+        echo "'$1' is not a valid file" && return 1
+    fi
+
+    # folder name
+    local fn="$(echo "$1" | sed 's/\.\w*$//;s/\.tar$//')"
+
+    case $1 in
+        *.tar)       tar xvf $1      ;;
+        *.tar.bz2)   tar xvjf $1     ;;
+        *.tar.gz)    tar xvzf $1     ;;
+        *.tar.zst)
+            mkdir "$fn" && tar --use-compress-program=unzstd -xvf $1 -C "$fn"
+        ;;
+        *.tbz2)      tar xvjf $1     ;;
+        *.tgz)       tar xvzf $1     ;;
+        *.bz2)       bunzip2 $1     ;;
+        *.rar)       unrar e $1     ;;
+        *.gz)        gunzip $1      ;;
+        *.zip)       unzip $1 -d "$fn"      ;;
+        *.Z)         uncompress $1  ;;
+        *.7z)        7z x $1        ;;
+        *)     echo "'$1' cannot be extracted via extract()" ;;
+    esac
+}
 # ---
 # Polybar
 # ---
