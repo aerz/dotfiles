@@ -46,8 +46,8 @@ run_workstation_mode_debug() {
 }
 
 run_workstation_mode() {
-    polybar monitor1 & disown
-    polybar monitor2 & disown
+    { while :; do polybar monitor1; done } & disown
+    { while :; do polybar monitor2; done } & disown
 }
 
 run_laptop_mode_debug() {
