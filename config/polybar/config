@@ -540,15 +540,6 @@ tail        = true
 click-left  = ~/.config/polybar/scripts/mic toggle &
 
 ; ---
-; Timewarrior module
-; ---
-
-[module/timew]
-type        = custom/script
-exec        = ~/.config/polybar/scripts/timew
-interval    = 10
-
-; ---
 ; Settings
 ; ---
 
