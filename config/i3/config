@@ -55,6 +55,7 @@ for_window [class="Pavucontrol"] floating enable
 for_window [class="Blueman"] floating enable
 for_window [class="Nitrogen"] floating enable
 for_window [class="Xfce4-settings-manager"] floating enable
+for_window [class="TelegramDesktop"] floating enable
 
 # All window dialogs in floating mode
 for_window [window_role="pop-up"] floating enable
@@ -361,6 +362,9 @@ bindsym $mod+Shift+space exec rofi -show run -matching fuzzy
 ## Apps // Open shortcuts helper // <Super> <Shift> ? ##
 bindsym $mod+Shift+question exec pgrep -x remontoire | xargs kill || remontoire -c ~/.config/i3/config
 
+## Apps // Open rofi-calc // <Super> <Shift> c ##
+bindsym $mod+Shift+c exec rofi -show calc -modi calc -no-show-match -no-sort
+
 ## Apps // Generate a QR from clipboard // <Super> <Shift> <Ctrl> c ##
 bindsym $mod+Shift+Ctrl+c exec ~/.local/bin/qrgen
 
@@ -424,13 +428,6 @@ bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 # ---
 # Autostart
 # ---
-
-# Start XFCE Settings daemon
-# Reference: https://docs.xfce.org/xfce/xfce4-settings/xfsettingsd
-exec --no-startup-id xfsettingsd --replace --daemon
-
-# Start notifications daemon
-exec --no-startup-id rofication-daemon
 
 # Start Playerctl daemon
 exec --no-startup-id playerctld daemon
