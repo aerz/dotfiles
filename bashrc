@@ -1,6 +1,4 @@
-#
-# ~/.bashrc
-#
+#!/usr/bin/env bash
 
 # ---
 # Shell
@@ -65,31 +63,70 @@ alias sshsum='ssh-keygen -l -f'
 # List GPG keys loaded
 alias gpgls='gpg --list-secret-keys --keyid-format LONG'
 
-alias pa='paru'
+yay() {
+    local ybin="$(which yay)"
+
+    case "$1" in
+        # Show help
+        "-Xh")
+            echo "Usage:"
+            echo "    yay -X[custom] [package]"
+            echo
+            echo "Custom options:"
+            echo "    yay -Xco              Removes orphan packages"
+            echo "    yay -Xcc              Extend clear cache command showing cache sizes"
+            echo "    yay -Xrd  <package>   Show package reverse dependencies in a text tree"
+            echo "    yay -Xrdg <package>   Show package reverse dependencies in a graph"
+            echo "    yay -Xdc              Show packages with dependency cycles"
+            echo "    yay -Xh               Show this help"
+        ;;
 # Remove orphan packages
-alias pacl='[[ `paru -Qdtq` ]] && paru -Qdtq | paru -Rns - || echo No orphan pkgs found'
-# Remove all pacman and aur cache files
-alias paclr="du -sh /var/cache/pacman/pkg /var/lib/pacman $HOME/.cache/paru && paru -Sc"
+        "-Xco")
+            [[ `$ybin -Qdtq` ]] && $ybin -Qdtq | $ybin -Rns - || echo "No orphan pkgs found"
+        ;;
+        # Extend clear cache command showing cache sizes
+        "-Xcc")
+            echo "Cache size by path:"
+            du -sh /var/cache/pacman/pkg /var/lib/pacman $HOME/.cache/yay
+            echo && $ybin -Sc
+        ;;
+        # Show package reverse dependencies in a text tree
+        "-Xrd")
+            if [ "$2" == "" ]; then
+                echo "err: you must provide a package name"
+                echo "usage: yay -Xrd <pkg>"
+                return 1
+            fi
 
-# Show packages with dependecy cycles
-pacycles() {
-    for pkg in $(pacman -Qq); do
-        if pactree -l "$pkg" | tail -n +2 | grep -Fqx "$pkg"; then
-            echo "${pkg}"
+            pactree -r $2
+        ;;
+        # Show package reverse dependencies in a graph
+        "-Xrdg")
+            if [ "$2" == "" ]; then
+                echo "err: you must provide a package name"
+                echo "usage: yay -Xrdg <pkg>"
+                return 1
         fi
-    done
-}
 
-# Show package reverse tree in graph or text
-pardeps() {
-    if [ "$1" == "-g" ]; then
         file="$(mktemp --suff=.png)"; gfile="$(mktemp --suff=.dot)"
         pactree -g $2 > "$gfile"
         dot "$gfile" -Tpng -o "$file"
         sxiv "$file" && rm "$file" "$gfile" &
-    else
-        pactree -r $1
+        ;;
+        # Show packages with dependency cycles
+        "-Xdc")
+            echo "Packages with dependency cycles:"
+            for pkg in $(pacman -Qq); do
+                if pactree -l "$pkg" | tail -n +2 | grep -Fqx "$pkg"; then
+                    echo "  ${pkg}"
     fi
+            done
+        ;;
+        # Default
+        *)
+            $ybin $@
+        ;;
+    esac
 }
 
 # translate-shell
