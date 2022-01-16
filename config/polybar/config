@@ -63,7 +63,7 @@ font-6 = "siji:pixelsize=10;1"
 ; Modules
 modules-left   = i3 sep xwindow
 modules-center = spotify
-modules-right  = updates rofication backlight1 pulseaudio mic bt wnet date xkeyboard
+modules-right  = updates cpu memory rofication backlight1 pulseaudio mic bt wnet date xkeyboard
 
 ; Tray Icons
 tray-position = right
@@ -418,6 +418,22 @@ screenchange-reload = true
 [global/wm]
 margin-top    = 0
 margin-bottom = 0
+
+[module/cpu]
+type = internal/cpu
+
+; Seconds to sleep between updates
+; Default: 1
+interval = 3
+label = CPU %percentage%%
+
+[module/memory]
+type = internal/memory
+
+; Seconds to sleep between updates
+; Default: 1
+interval = 3
+label = RAM %percentage_used%%
 
 ; ---
 ; Arch Module
