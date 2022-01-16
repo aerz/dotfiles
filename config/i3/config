@@ -55,6 +55,7 @@ for_window [class="Pavucontrol"] floating enable
 for_window [class="Blueman"] floating enable
 for_window [class="Nitrogen"] floating enable
 for_window [class="Xfce4-settings-manager"] floating enable
+for_window [class="TelegramDesktop"] floating enable
 
 # All window dialogs in floating mode
 for_window [window_role="pop-up"] floating enable
@@ -358,6 +359,9 @@ bindsym $mod+Shift+space exec rofi -show run -matching fuzzy
 ## Apps // Open shortcuts helper // <Super> <Shift> ? ##
 bindsym $mod+Shift+slash exec pgrep -x remontoire | xargs kill || remontoire -c ~/.config/i3/config
 
+## Apps // Open rofi-calc // <Super> <Shift> c ##
+bindsym $mod+Shift+c exec rofi -show calc -modi calc -no-show-match -no-sort
+
 ## Apps // Generate a QR from clipboard // <Super> <Shift> <Ctrl> c ##
 bindsym $mod+Shift+Ctrl+c exec ~/.local/bin/qrgen
 
@@ -421,13 +425,6 @@ bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 # ---
 # Autostart
 # ---
-
-# Define keyboard layouts and active toggle shortcut
-# Reference: https://wiki.archlinux.org/index.php/Xorg/Keyboard_configuration#Switching_between_keyboard_layouts
-exec_always --no-startup-id setxkbmap -option 'grp:rctrl_rshift_toggle' -layout us,es &
-
-# Start notifications daemon
-exec --no-startup-id rofication-daemon
 
 # Start Playerctl daemon
 exec --no-startup-id playerctld daemon
