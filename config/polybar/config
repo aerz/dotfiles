@@ -357,18 +357,18 @@ ping-interval   = 3
 
 ; Connected
 format-connected            = <label-connected>
-label-connected             = "%{T3}%{T-}%{T5} %{T-}"
+label-connected             = ""
 label-connected-foreground  = ${colors.fg}
 
 ; Disconnected
 format-disconnected             = <label-disconnected>
-label-disconnected              = "%{T3}%{T-}%{T5} %{T-}"
-label-disconnected-foreground   = ${colors.fg-muted}
+label-disconnected              = "%{T2}%{T-}%{T5} %{T-}"
+label-disconnected-foreground   = ${colors.alert}
 
 ; Packet loss
 format-packetloss           = <label-packetloss>
-label-packetloss            = "%{T3}%{T-}%{T5} %{T-}"
-label-packetloss-foreground = ${colors.secondary-alt}
+label-packetloss            = "%{T2}%{T-}%{T5} %{T-}"
+label-packetloss-foreground = ${colors.system-alt}
 
 ; ---
 ; Separator Module
