@@ -41,7 +41,7 @@ display_downloading() {
 
 display_available_updates(){
     local arch=$(checkupdates 2> /dev/null | wc -l)
-    local aur=$($AUR_HELPER -Qu 2> /dev/null | wc -l)
+    local aur=$($AUR_HELPER -Qum 2> /dev/null | wc -l)
     local updates=$(( $arch + $aur ))
 
     [ $updates -ge $PKGS_MIN ] && echo "%{T2}  %{T-}$updates" || echo ""
