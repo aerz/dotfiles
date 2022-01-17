@@ -446,7 +446,6 @@ signal-high     = #A7BEBB
 [module/wifinet]
 type                            = internal/network
 interface                       = wlp2s0
-ping-interval                   = 3
 
 ; Connected
 format-connected                = <ramp-signal>
