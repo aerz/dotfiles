@@ -19,11 +19,17 @@ confirm() {
     [ "$(echo -e "$no\n$yes" | rofi -theme $theme -i -dmenu -lines 2 -p "Confirm")" == "$yes" ]
 }
 
+logout_session() {
+    i3-msg exit
+    loginctl terminate-session "$(cat /proc/self/sessionid)"
+
+}
+
 save_brightness() {
     light -O
 }
 
-action="$(printf '%s\n' "${actions[@]}" | rofi -theme $theme -lines 5 -dmenu -p "$uptime")"
+action="$(printf '%s\n' "${actions[@]}" | rofi -theme $theme -dmenu -l 5 -p "$uptime")"
 
 # exit when action is empty
 [ -z "$action" ] && exit 0
@@ -33,5 +39,5 @@ case $action in
     *Reboot)   confirm && save_brightness && systemctl reboot      ;;
     *Lock)     multilockscreen -l blur                      ;;
     *Suspend)  confirm && multilockscreen -s blur           ;;
-    *Logout)   confirm && i3-msg exit                       ;;
+    *Logout)   confirm && logout_session                       ;;
 esac
