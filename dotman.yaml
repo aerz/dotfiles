@@ -1,8 +1,6 @@
 bash_profile: ~/.bash_profile
 bashrc: ~/.bashrc
 cat: ~/cat
-xinitrc: ~/.xinitrc
-Xresources: ~/.Xresources
 
 local/bin/fldr: ~/.local/bin/fldr
 local/bin/mlight: ~/.local/bin/mlight
@@ -25,6 +23,8 @@ config/paru/paru.conf: ~/.config/paru/paru.conf
 config/polybar: ~/.config/polybar
 config/rofi: ~/.config/rofi
 config/user-dirs.dirs: ~/.config/user-dirs.dirs
+config/X11/xinitrc: ~/.config/X11/xinitrc
+config/X11/Xresources: ~/.config/X11/Xresources
 config/xfce4/displays.xml: ~/.config/xfce4/xfconf/xfce-perchannel-xml/displays.xml
 config/xfce4/keyboards.xml: ~/.config/xfce4/xfconf/xfce-perchannel-xml/keyboards.xml
 config/xfce4/thunar-volman.xml: ~/.config/xfce4/xfconf/xfce-perchannel-xml/thunar-volman.xml

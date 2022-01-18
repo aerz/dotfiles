@@ -19,7 +19,7 @@ fi
 # ---
 # Load Xresources
 # ---
-[[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
+[[ -f $XRESOURCES ]] && xrdb -merge -I$HOME $XRESOURCES
 
 # ---
 # Session env vars
