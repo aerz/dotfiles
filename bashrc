@@ -16,7 +16,7 @@ PS1='[\u@\h \W]\$ '
 
 # Start a new xorg session by default wether it does not exist
 if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
-  exec startx
+    exec startx "$XINITRC" --
 fi
 
 # ---
@@ -80,7 +80,7 @@ yay() {
             echo "    yay -Xdc              Show packages with dependency cycles"
             echo "    yay -Xh               Show this help"
         ;;
-# Remove orphan packages
+        # Remove orphan packages
         "-Xco")
             [[ `$ybin -Qdtq` ]] && $ybin -Qdtq | $ybin -Rns - || echo "No orphan pkgs found"
         ;;
@@ -106,12 +106,12 @@ yay() {
                 echo "err: you must provide a package name"
                 echo "usage: yay -Xrdg <pkg>"
                 return 1
-        fi
+            fi
 
-        file="$(mktemp --suff=.png)"; gfile="$(mktemp --suff=.dot)"
-        pactree -g $2 > "$gfile"
-        dot "$gfile" -Tpng -o "$file"
-        sxiv "$file" && rm "$file" "$gfile" &
+            file="$(mktemp --suff=.png)"; gfile="$(mktemp --suff=.dot)"
+            pactree -g $2 > "$gfile"
+            dot "$gfile" -Tpng -o "$file"
+            sxiv "$file" && rm "$file" "$gfile" &
         ;;
         # Show packages with dependency cycles
         "-Xdc")
@@ -119,7 +119,7 @@ yay() {
             for pkg in $(pacman -Qq); do
                 if pactree -l "$pkg" | tail -n +2 | grep -Fqx "$pkg"; then
                     echo "  ${pkg}"
-    fi
+                fi
             done
         ;;
         # Default

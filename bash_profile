@@ -18,6 +18,8 @@ export XDG_CACHE_HOME="$HOME/.cache"
 # Programs
 export GOPATH="$XDG_DATA_HOME/go"
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
+export XINITRC="$XDG_CONFIG_HOME/X11/xinitrc"
+export XRESOURCES="$XDG_CONFIG_HOME/X11/Xresources"
 
 # Add bin paths to env
 export PATH="$PATH:$HOME/.local/bin"
