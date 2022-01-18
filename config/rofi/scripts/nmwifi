@@ -109,7 +109,7 @@ show_known_wl_menu() {
         *)  wlnets="$(list_known_wl | sed "s/^${wlconn}$/ ${wlconn}/")" ;;
     esac
 
-    num_wlnets=$(echo -e "$wlnets" | wc -l)
+    [ "$wlnets" == "" ] && num_wlnets=0 || num_wlnets=$(echo -e "$wlnets" | wc -l)
 
     case $num_wlnets in
         # no known wireless networks yet
