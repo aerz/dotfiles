@@ -6,8 +6,8 @@ Wants=network-online.target
 [Service]
 Type=simple
 ExecStartPre=/usr/bin/sh -c 'while ! ping -c 1 -n -w 1 8.8.8.8 &> /dev/null; do sleep 3; done'
-ExecStart=/usr/bin/rclone mount --verbose --config /home/aerz/.config/rclone/rclone.conf "aerz@gdrive:/" "/home/aerz/Documents/Google Drive"
-ExecStop=/bin/fusermount -uz "/home/aerz/Documents/Google Drive"
+ExecStart=/usr/bin/rclone mount --verbose --config %h/.config/rclone/rclone.conf "aerz-gd:/" "%h/Documents/Google Drive"
+ExecStop=/bin/fusermount -uz "%h/Documents/Google Drive"
 Restart=on-abnormal
 RestartSec=5
 
