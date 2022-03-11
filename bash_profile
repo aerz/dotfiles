@@ -29,12 +29,6 @@ export PATH="$PATH:$CARGO_HOME/bin"
 export PATH="$PATH:$XDG_CONFIG_HOME/emacs/bin"
 
 # ---
-# AUR Flags
-# ---
-# brave
-export USE_SCCACHE=1
-
-# ---
 # Start a default keychain agent
 # ---
 export KEYCHAIN_SSH_AGENT="ssh"

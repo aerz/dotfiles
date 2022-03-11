@@ -62,6 +62,9 @@ alias gpgak="keychain --quiet --nogui --attempts 2 --agents ${KEYCHAIN_GPG_AGENT
 alias sshcl='keychain --clear'
 alias sshsum='ssh-keygen -l -f'
 
+# git
+alias gitlg='git log --graph --all --topo-order --decorate --oneline --boundary'
+
 # List GPG keys loaded
 alias gpgls='gpg --list-secret-keys --keyid-format LONG'
 
