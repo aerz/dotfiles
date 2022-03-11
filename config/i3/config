@@ -1,24 +1,11 @@
-# i3 config file (v4)
-#
-# Please see https://i3wm.org/docs/userguide.html for a complete reference!
-#
-
-## About // Main mod // <Super> ##
-## About // Secondary mod // <Super> <Shift> ##
-## About // Low usage mod // <Super> <Ctrl> [Alt|Shift] ##
-## About // Alternative mod // <Super> <Alt> [Shift|Ctrl] ##
-
 # ---
 # General
 # ---
-
 # Fonts
 set $font.jetbrains pango:JetBrainsMono Nerd Font
-
-# Default Font
 font $font.jetbrains 16px
 
-# Modifiers - Super: Mod4, Alt: Mod1
+# Modifiers. Super: Mod4, Alt: Mod1
 set $mod Mod4
 set $alt Mod1
 
@@ -32,7 +19,6 @@ focus_follows_mouse no
 # ---
 # i3-gaps
 # ---
-
 # Config
 gaps inner 5
 gaps outer 3
@@ -45,12 +31,10 @@ hide_edge_borders smart
 # ---
 # Window Configuration
 # ---
-
 # Hide title bar by default and set border width
 for_window [class=".*"] border pixel 1
 
 # App list always start in floating mode
-for_window [class="Galculator"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="Blueman"] floating enable
 for_window [class="Nitrogen"] floating enable
@@ -68,7 +52,6 @@ for_window [window_type="menu"] floating enable
 # ---
 # Theme
 # ---
-
 set $base00 #181818
 set $base01 #282828
 set $base02 #383838
@@ -98,7 +81,6 @@ client.background        $base07
 # ---
 # Workspace names
 # ---
-
 set $ws1 "1"
 set $ws2 "2"
 set $ws3 "3"
@@ -113,7 +95,6 @@ set $ws10 "10"
 # ---
 # Workspace key bindings
 # ---
-
 ## Workspace // Go to number 0-9 // <Super> 0..9 ##
 bindsym $mod+1 workspace number $ws1
 bindsym $mod+2 workspace number $ws2
@@ -135,7 +116,6 @@ bindsym $mod+Shift+Tab workspace prev
 # ---
 # Workspace assigments
 # ---
-
 # Monitor 1
 workspace $ws1 output $monitor1
 workspace $ws2 output $monitor1
@@ -153,7 +133,6 @@ workspace $ws10 output $monitor2
 # ---
 # Container focus
 # ---
-
 ## Container // Focus parent container // <Super> = ##
 bindsym $mod+equal focus parent
 
@@ -163,7 +142,6 @@ bindsym $mod+minus focus child
 # ---
 # Move container to workspace
 # ---
-
 ## Container // Move to workspace // <Super> <Shift> 0..9 ##
 bindsym $mod+Shift+1 move container to workspace number $ws1
 bindsym $mod+Shift+2 move container to workspace number $ws2
@@ -191,30 +169,17 @@ bindsym $mod+Shift+$alt+0 move container to workspace number $ws10; workspace nu
 # ---
 # Window navigation
 # ---
-
 ## Navigate // Change focus // <Super> k j h l ##
 bindsym $mod+h focus left
 bindsym $mod+l focus right
 bindsym $mod+k focus up
 bindsym $mod+j focus down
 
-## Navigate // Change focus // <Super> ↑ ↓ ← → ##
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
-
 ## Navigate // Move focused window // <Super> <Shift> k j h l ##
 bindsym $mod+Shift+h move left
 bindsym $mod+Shift+l move right
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+j move down
-
-## Navigate // Move focused window // <Super> <Shift> ↑ ↓ ← → ##
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Right move right
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Down move down
 
 ## Navigate // Set split horizontal // <Super> g ##
 bindsym $mod+g split h
@@ -240,29 +205,15 @@ bindsym $mod+Shift+q kill
 # ---
 # Resize Mode
 # ---
-
 mode "resize" {
+    ## Resize Mode // Modify window size // k j h l ##
+    bindsym h resize shrink width 3 px or 3 ppt
+    bindsym l resize grow width 3 px or 3 ppt
+    bindsym k resize shrink height 3 px or 3 ppt
+    bindsym j resize grow height 3 px or 3 ppt
 
-    ## Mode: Resize // Modify window size // k j h l ##
-    bindsym h resize shrink width 10 px or 10 ppt
-    bindsym l resize grow width 10 px or 10 ppt
-    bindsym k resize shrink height 10 px or 10 ppt
-    bindsym j resize grow height 10 px or 10 ppt
-
-    ## Mode: Resize // Modify window size // ↑ ↓ ← → ##
-    bindsym Left resize shrink width 10 px or 10 ppt
-    bindsym Right resize grow width 10 px or 10 ppt
-    bindsym Up resize shrink height 10 px or 10 ppt
-    bindsym Down resize grow height 10 px or 10 ppt
-
-    ## Mode: Resize // Exit to default mode // Return ##
-    bindsym Return mode "default"
-
-    ## Mode: Resize // Exit to default mode // Esc ##
+    ## Resize Mode // Exit to default mode // Esc ##
     bindsym Escape mode "default"
-
-    ## Mode: Resize // Exit to default mode // <Super> <Ctrl> r ##
-    bindsym $mod+Ctrl+r mode "default"
 }
 
 ## Mode // Enter to resize mode // <Super> <Ctrl> r ##
@@ -271,45 +222,35 @@ bindsym $mod+Ctrl+r mode "resize"
 # ---
 # Layout Mode
 # ---
-
 mode "layout" {
-
-    ## Mode: Layout // Change to layout stacking // s ##
+    ## Layout Mode // Change to layout stacking // s ##
     bindsym s layout stacking
 
-    ## Mode: Layout // Change to layout stacking // t ##
+    ## Layout Mode // Change to layout stacking // t ##
     bindsym t layout tabbed
 
-    ## Mode: Layout // Toggle tabbed, splith, splitv // Tab ##
+    ## Layout Mode // Toggle tabbed, splith, splitv // Tab ##
     bindsym Tab layout toggle tabbed splith splitv
 
-    ## Mode: Layout // Exit to default mode // Return ##
-    bindsym Return mode "default"
-
-    ## Mode: Layout // Exit to default mode // Esc ##
+    ## Layout Mode // Exit to default mode // Esc ##
     bindsym Escape mode "default"
-
-    ## Mode: Layout // Exit to default mode // <Super> <Ctrl> l ##
-    bindsym $mod+Ctrl+l mode "default"
 }
 
 ## Mode // Enter to layout mode // <Super> <Ctrl> l ##
 bindsym $mod+Ctrl+l mode "layout"
 
 # ---
-# i3 key bindings
+# i3 Config
 # ---
+## i3 // Reload config // <Super> Esc ##
+bindsym $mod+Escape reload
 
-## i3 // Restart // <Super> <Shift> <Ctrl> r ##
-bindsym $mod+Shift+Ctrl+r restart
-
-## i3 // Reload config // <Super> <Shift> <Ctrl> <Alt> r ##
-bindsym $mod+Shift+Ctrl+$alt+r reload
+# i3 // Restart // <Super> <Alt> Esc ##
+bindsym $mod+$alt+Escape restart
 
 # ---
 # Scratchpad
 # ---
-
 ## Scratchpad // Show/Hide // <Super> <Shift> s ##
 bindsym $mod+Shift+s scratchpad show
 
@@ -317,14 +258,16 @@ bindsym $mod+Shift+s scratchpad show
 bindsym $mod+Shift+$alt+s  move to scratchpad
 
 # ---
-# Apps key bindings
+# Apps
 # ---
-
-## Apps // Open terminal // <Super> Return ##
+## Apps // Open Alacritty // <Super> RET ##
 bindsym $mod+Return exec alacritty
 
-## Apps // Open notification center // <Super> n ##
-bindsym $mod+n exec --no-startup-id rofication-gui
+## Apps // Open Alacritty in a new tab // <Super> <Alt> RET //
+bindsym $mod+$alt+Return; layout tabbed; exec alacritty
+
+## Apps // Open notification center // <Super> <Shift> n ##
+bindsym $mod+Shift+n exec --no-startup-id rofication-gui
 
 ## Apps // Open volume control // <Super> <Shift> <Alt> v ##
 bindsym $mod+Shift+$alt+v exec gtk-launch pavucontrol
@@ -341,7 +284,7 @@ bindsym $mod+Shift+b exec --no-startup-id ~/.config/rofi/scripts/roblue paired
 ## Apps // Toggle Bluetooth power // <Super> <Shift> <Alt> b ##
 bindsym $mod+Shift+$alt+b exec --no-startup-id ~/.config/i3/scripts/bt power_toggle
 
-## Apps // Select apps to mute/unmute // <Super>  ##
+## Apps // Select apps to mute/unmute // <Super> 奄 ##
 bindsym $mod+XF86AudioMute exec --no-startup-id ~/.config/rofi/scripts/pasound umute
 
 ## Apps // Open power options // <Super> <Shift> e ##
@@ -371,7 +314,6 @@ bindsym $mod+Shift+Ctrl+c exec ~/.local/bin/qrgen
 # ---
 # xfce
 # ---
-
 ## xfce // Switch Dark-Light theme // <Super> <Shift> l ##
 # Reference: https://wiki.archlinux.org/index.php/Dark_mode_switching
 bindsym $mod+$alt+l exec ~/.config/rofi/scripts/theme-mode
@@ -379,7 +321,6 @@ bindsym $mod+$alt+l exec ~/.config/rofi/scripts/theme-mode
 # ---
 # Brightness
 # ---
-
 # Raise/Lower brightness level
 bindsym XF86MonBrightnessUp exec ~/.local/bin/mlight up 5
 bindsym XF86MonBrightnessDown exec ~/.local/bin/mlight down 5
@@ -393,7 +334,6 @@ bindsym $mod+shift+$alt+d exec --no-startup-id ~/.local/bin/mlight -n reload
 # ---
 # Screenshots
 # ---
-
 ## Screenshots // Open screenshoot selector // Print ##
 bindsym Print exec --no-startup-id ~/.config/rofi/scripts/pic
 
@@ -409,7 +349,6 @@ bindsym $mod+Shift+Print exec --no-startup-id ~/.config/rofi/scripts/pic --fulls
 # ---
 # Audio
 # ---
-
 # Raise/Lower volume level
 bindsym XF86AudioRaiseVolume exec --no-startup-id ponymix increase 5
 bindsym XF86AudioLowerVolume exec --no-startup-id ponymix decrease 5
@@ -422,13 +361,13 @@ bindsym $mod+$alt+XF86AudioMute exec --no-startup-id ponymix --input toggle
 
 # Media player controls
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
+bindsym XF86AudioPause exec --no-startup-id playerctl play-pause
 bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 
 # ---
 # Autostart
 # ---
-
 # Start Playerctl daemon
 exec --no-startup-id playerctld daemon
 
