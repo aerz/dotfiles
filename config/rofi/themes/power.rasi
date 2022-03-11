@@ -14,8 +14,8 @@ configuration {
 }
 
 * {
-    background-color: @bg;
-    text-color: @fg;
+    background-color: var(bg);
+    text-color: var(fg);
     spacing: 0;
     width: 400px;
 }
@@ -30,14 +30,14 @@ inputbar {
     children: [ prompt, textbox-prompt-colon ];
 }
 
-textbox-prompt-colon {
+prompt {
+    padding: 11px 12px 12px 12px;
+    enabled: true;
     background-color: @ac;
     text-color: @bg;
 }
 
-prompt {
-    padding: 11px 12px 12px 12px;
-    enabled: true;
+textbox-prompt-colon {
     background-color: @ac;
     text-color: @bg;
 }
@@ -47,8 +47,8 @@ listview {
     scrollbar: false;
 }
 
-element selected {
+element-text selected {
+    background-color: var(se);
+    text-color: var(fg);
     margin: 10px;
-    background-color: @se;
-    text-color: @fg;
 }
