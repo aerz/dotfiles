@@ -1,7 +1,6 @@
 ; ---
 ; Theme
 ; ---
-
 [colors]
 bg              = ${xrdb:polybar.colors.bg}
 bg-alt          = ${xrdb:polybar.colors.bg-alt}
@@ -24,12 +23,9 @@ alert           = ${xrdb:polybar.colors.alert}
 spotify         = ${xrdb:polybar.colors.spotify}
 spotify-bg      = ${xrdb:polybar.colors.spotify-bg}
 
-archlinux       = ${xrdb:polybar.colors.arch-linux}
-
 ; ---
-; Monitor 1 Status bar
+; Status Bars
 ; ---
-
 [bar/monitor1]
 monitor = ${env:MONITOR:DisplayPort-0}
 width   = 100%
@@ -63,7 +59,7 @@ font-6 = "siji:pixelsize=10;1"
 ; Modules
 modules-left   = i3 sep xwindow
 modules-center = spotify
-modules-right  = updates cpu memory rofication backlight1 pulseaudio mic bt wnet date xkeyboard
+modules-right  = updates rofication ddcci1 pa mic bt wnet date xkeyboard
 
 ; Tray Icons
 tray-position = right
@@ -76,10 +72,6 @@ cursor-scroll = ns-resize
 
 ; Allow external communication (polybar-msg)
 enable-ipc = true
-
-; ---
-; Monitor 2 status bar
-; ---
 
 [bar/monitor2]
 monitor = ${env:MONITOR:HDMI-A-0}
@@ -108,7 +100,7 @@ font-4 = ${bar/monitor1.font-4}
 font-5 = ${bar/monitor1.font-5}
 
 ; Modules
-modules-left   = i3 sep backlight2
+modules-left   = i3 sep ddcci2
 modules-center =
 modules-right  =
 
@@ -118,10 +110,6 @@ cursor-scroll = ns-resize
 
 ; Allow external communication (polybar-msg)
 enable-ipc = true
-
-; ---
-; i3 Module
-; ---
 
 [module/i3]
 type            = internal/i3
@@ -139,7 +127,6 @@ format = <label-state><label-mode>
 format-label-state-margin-left = 0
 
 ; Icons
-
 ws-icon-0 = 1;
 ws-icon-1 = 2;
 ws-icon-2 = 3;
@@ -153,7 +140,6 @@ ws-icon-9 = 10;
 ;ws-icon-default =
 
 ; Mode indicator
-
 label-mode              = %mode%
 label-mode-background   = ${colors.secondary}
 label-mode-foreground   = ${colors.fg-alt}
@@ -189,20 +175,14 @@ label-urgent-foreground = ${colors.fg-alt}
 label-urgent-padding    = 2
 
 ; ---
-; Window title Module
+; System Info
 ; ---
-
 [module/xwindow]
 type = internal/xwindow
 
-format = <label>
-
-label = %title:0:40:...%
+format      = <label>
+label       = %title:0:40:...%
 label-empty = Desktop
-
-; ---
-; Keyboard layout Module
-; ---
 
 [module/xkeyboard]
 type = internal/xkeyboard
@@ -229,91 +209,7 @@ label-indicator-on-background   = ${colors.secondary-alt}
 label-indicator-on-foreground   = ${colors.fg-alt}
 label-indicator-on-padding      = 2
 
-; ---
-; Spotify Module
-; ---
-; Source: https://github.com/PrayagS/polybar-spotify
-; ---
-
-[module/spotify]
-type    = custom/script
-exec    = ~/.config/polybar/scripts/spotify --scrollable
-exec-if = pgrep -x spotify
-
-; Interval
-tail     = true
-interval = 1
-
-; Mouse
-click-left          = playerctl -p spotify previous
-click-right         = playerctl -p spotify next
-double-click-left   = playerctl -p spotify play-pause
-
-; Format
-format                      = <label>
-format-prefix               = %{T2}阮 %{T-}
-format-prefix-foreground    = ${colors.spotify}
-;format-background           = ${colors.bg-border}
-format-padding              = 1
-
-; ---
-; Updates Module
-; ---
-
-[module/updates]
-type = custom/script
-exec = ~/.config/polybar/scripts/updates
-tail = true
-
-format              = <label>
-label               = %output%
-label-background    = ${colors.bg-focus}
-label-foreground    = ${colors.system-alt}
-label-padding-right = 1
-label-alignment     = center
-
-; ---
-; Rofication Module
-; ---
-
-[module/rofication]
-type        = custom/script
-exec        = rofication-status
-click-left  = rofication-gui
-interval    = 5
-
-; ---
-; Brightness Module
-; ---
-
-[module/backlight1]
-type = internal/backlight
-card = ddcci4
-
-format = <ramp> <label>
-label  = %percentage%%
-
-ramp-0 = %{T2}%{T-}
-ramp-1 = %{T2}%{T-}
-ramp-2 = %{T2}%{T-}
-
-[module/backlight2]
-type = internal/backlight
-card = ddcci1
-
-format          = <ramp> <label>
-label           = %percentage%%
-;format-padding  = 1
-
-ramp-0 = %{T2}%{T-}
-ramp-1 = %{T2}%{T-}
-ramp-2 = %{T2}%{T-}
-
-; ---
-; PulseAudio Module
-; ---
-
-[module/pulseaudio]
+[module/pa]
 type = internal/pulseaudio
 
 format-volume           = <ramp-volume> <label-volume>
@@ -330,10 +226,6 @@ ramp-volume-2 = %{T2}%{T-}
 
 click-right = gtk-launch pavucontrol
 
-; ---
-; Date Module
-; ---
-
 [module/date]
 type     = internal/date
 interval = 5
@@ -345,10 +237,6 @@ time     = "%{T2}%{T-} %H:%M"
 time-alt = "%{T2}%{T-} %H:%M:%S"
 
 label = %date% %time%
-
-; ---
-; Wired network Module
-; ---
 
 [module/wnet]
 type            = internal/network
@@ -370,17 +258,68 @@ format-packetloss           = <label-packetloss>
 label-packetloss            = "%{T2}%{T-}%{T5} %{T-}"
 label-packetloss-foreground = ${colors.system-alt}
 
-; ---
-; Separator Module
-; ---
+[module/ddcci1]
+type = internal/backlight
+card = ddcci4
 
-[module/sep]
-type    = custom/text
-content = |
+format = <ramp> <label>
+label  = %percentage%%
+
+ramp-0 = %{T2}%{T-}
+ramp-1 = %{T2}%{T-}
+ramp-2 = %{T2}%{T-}
+
+[module/ddcci2]
+type = internal/backlight
+card = ddcci1
+
+format          = <ramp> <label>
+label           = %percentage%%
+
+ramp-0 = %{T2}%{T-}
+ramp-1 = %{T2}%{T-}
+ramp-2 = %{T2}%{T-}
 
 ; ---
-; Bluetooth Module
+; Event Indicators
 ; ---
+[module/spotify]
+type    = custom/script
+exec    = ~/.config/polybar/scripts/spotify --scrollable
+exec-if = pgrep -x spotify
+
+; Interval
+tail     = true
+interval = 1
+
+; Mouse
+click-left          = playerctl -p spotify previous
+click-right         = playerctl -p spotify next
+double-click-left   = playerctl -p spotify play-pause
+
+; Format
+format                      = <label>
+format-prefix               = %{T2}阮 %{T-}
+format-prefix-foreground    = ${colors.spotify}
+format-padding              = 1
+
+[module/updates]
+type = custom/script
+exec = ~/.config/polybar/scripts/updates
+tail = true
+
+format              = <label>
+label               = %output%
+label-background    = ${colors.bg-focus}
+label-foreground    = ${colors.system-alt}
+label-padding-right = 1
+label-alignment     = center
+
+[module/rofication]
+type        = custom/script
+exec        = rofication-status
+click-left  = rofication-gui
+interval    = 5
 
 [module/bt]
 type        = custom/script
@@ -392,10 +331,6 @@ click-left  = ~/.config/polybar/scripts/bluetooth --power-switch &
 
 label       = %{T2}%output%%{T-}
 
-; ---
-; Microphone module
-; ---
-
 [module/mic]
 type        = custom/script
 exec        = ~/.config/polybar/scripts/mic
@@ -404,60 +339,25 @@ tail        = true
 click-left  = ~/.config/polybar/scripts/mic toggle &
 
 ; ---
+; Separator
+; ---
+[module/sep]
+type    = custom/text
+content = |
+
+; ---
 ; Settings
 ; ---
-
 [settings]
 screenchange-reload = true
-;compositing-background = xor
-;compositing-background = screen
-;compositing-foreground = source
-;compositing-border = over
-;pseudo-transparency = false
 
 [global/wm]
 margin-top    = 0
 margin-bottom = 0
 
-[module/cpu]
-type = internal/cpu
-
-; Seconds to sleep between updates
-; Default: 1
-interval = 3
-label = CPU %percentage%%
-
-[module/memory]
-type = internal/memory
-
-; Seconds to sleep between updates
-; Default: 1
-interval = 3
-label = RAM %percentage_used%%
-
-; ---
-; Arch Module
-; ---
-
-;[module/arch]
-;type                = custom/text
-;content             = %{T2} %{T-}
-;content-font        = 2
-;content-background  = ${colors.bg-focus}
-;content-foreground  = ${colors.archlinux}
-
-; ---
-; Space Module
-; ---
-
-;[module/spa]
-;type    = custom/text
-;content = " "
-
 ; ---
 ; Notifications Module
 ; ---
-
 ;[module/notifications]
 ;type        = custom/script
 ;exec        = ~/.config/polybar/scripts/notifications -c
