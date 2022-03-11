@@ -10,9 +10,9 @@
 
 set -o pipefail
 
-qrfile=`mktemp --suff=.png`
+readonly QRFILE=`mktemp --suff=.png`
 
-xclip -selection clipboard -o | qrencode -o "$qrfile"
+xclip -selection clipboard -o | qrencode -o "${QRFILE}"
 [ $? -ne 0 ] && exit 1
 
 # stdin to qr
@@ -20,38 +20,7 @@ xclip -selection clipboard -o | qrencode -o "$qrfile"
 #   qrencode -o ${qrfile} "$*";
 
 # Open the QR code for viewing
-display ${qrfile} &
+sxiv ${QRFILE} &
 pid="$!"
-
-# If i3 is active, trickery to get a floating viewer
-# instead of madness (cf. https://github.com/ImageMagick/ImageMagick/issues/1213).
-if wmctrl -m | grep "Name: i3" > /dev/null; then
-  # cf. https://unix.stackexchange.com/a/474300/17409
-
-  # Can't search for the PID (display doesn't tell it to wmctrl).
-  # Turns out the window name is
-  #
-  #     ImageMagick: tmp.tmp.XXXX.png
-  #
-  # so we can use that to search for the window ID.
-  # We use only the filename which ends up in its own column in awk.
-  winname="`basename "${qrfile}" | sed -e 's/\\//./'`"
-
-  # Wait for the window to open
-  winid=''
-  while : ; do
-    winid="`wmctrl -l | awk -vwinname="${winname}" '$5==winname  {print $1; exit}'`"
-    [[ -z "${winid}" ]] || break
-  done
-
-  # Focus the window
-  wmctrl -ia "${winid}"
-
-  # Make it float
-  i3-msg floating enable > /dev/null;
-  i3-msg move position center > /dev/null;
-fi
-
-# Wait for the user to close display and clean up
-wait "${pid}";
-rm ${qrfile};
+wait "${pid}"
+rm ${QRFILE}
