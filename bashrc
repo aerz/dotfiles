@@ -22,6 +22,8 @@ fi
 # ---
 # Alias
 # ---
+alias emacs="emacsclient -c -a 'emacs'"
+alias em="/usr/bin/emacs -nw"
 
 # Enable colors
 man() {

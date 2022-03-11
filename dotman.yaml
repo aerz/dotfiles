@@ -8,11 +8,13 @@ local/bin/multimon: ~/.local/bin/multimon
 local/bin/qrgen: ~/.local/bin/qrgen
 
 local/share/applications/text.desktop: ~/.local/share/applications/text.desktop
-local/share/fonts: ~/.local/share/fonts
+local/share/fonts/Feather.ttf: ~/.local/share/fonts/Feather.ttf
 
 config/alacritty: ~/.config/alacritty
 config/Code/settings.json: ~/.config/Code/User/settings.json
-config/emacs/init.el: ~/.config/emacs/init.el
+config/doom/config.el: ~/.config/doom/config.el
+config/doom/init.el: ~/.config/doom/init.el
+config/doom/packages.el: ~/.config/doom/packages.el
 config/fontconfig: ~/.config/fontconfig
 config/git: ~/.config/git
 config/gtk-3.0/settings.ini: ~/.config/gtk-3.0/settings.ini

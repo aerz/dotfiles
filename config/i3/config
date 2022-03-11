@@ -440,3 +440,6 @@ exec --no-startup-id nitrogen --restore &
 
 # Status bar
 exec_always --no-startup-id ~/.config/polybar/launch_workstation.sh
+
+# Emacs
+#exec --no-startup-id emacs --daemon &

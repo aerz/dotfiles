@@ -3,7 +3,8 @@
 # ---
 # Defaults
 # ---
-export EDITOR="emacs"
+export EDITOR="emacsclient -t -a ''"
+export VISUAL="emacsclient -c -a emacs"
 export TERMINAL="alacritty"
 export BROWSER="brave"
 
