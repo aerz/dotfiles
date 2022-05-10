@@ -37,11 +37,12 @@
 
 ;; TODO: Add hooks for progn mode + config files instead enable it globally
 ;; Show whitespaces by default
-(global-whitespace-mode +1)
+;; (global-whitespace-mode +1)
+(setq org-startup-folded t)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type t)
+(setq display-line-numbers-type relative')
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
