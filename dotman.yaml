@@ -11,7 +11,7 @@ local/share/applications/text.desktop: ~/.local/share/applications/text.desktop
 local/share/fonts/Feather.ttf: ~/.local/share/fonts/Feather.ttf
 
 config/alacritty: ~/.config/alacritty
-config/Code/settings.json: ~/.config/Code/User/settings.json
+config/bat/config: ~/.config/bat/config
 config/doom/config.el: ~/.config/doom/config.el
 config/doom/init.el: ~/.config/doom/init.el
 config/doom/packages.el: ~/.config/doom/packages.el
