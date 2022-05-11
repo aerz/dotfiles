@@ -31,7 +31,7 @@ Options:
   --mute                    Toggle program muting
   --input                   Set the default microphone device
   --output                  Set the default sound device
-  --ignore <regex>          Do not display results found with regex to Rofi"
+  --ignore <regex>          Do not display matches found by regex"
     exit 0
 }
 
@@ -43,6 +43,10 @@ err_no_regex() {
 err_no_opt_exist() {
     echo "$1 option does not exist. See $0 --help"
     exit 1
+}
+
+filter_id_selection() {
+    grep -Po '([0-9]+)(?=:)'
 }
 
 menu_output_devices() {
@@ -74,8 +78,7 @@ menu_input_devices() {
 }
 
 list_apps_sound() {
-    ponymix -t sink-input list | \
-    awk '
+    ponymix -t sink-input list | awk '
         /^sink-input/ {
             sid = $2
 
@@ -87,8 +90,7 @@ list_apps_sound() {
             icon = match($0, /\[Muted\]/) ? "" : ""
 
             print icon" "sid" "app
-        }
-    '
+        }'
 }
 
 list_input_devices() {
@@ -150,19 +152,19 @@ done
 
 case "$cmd_arg" in
     mute)
-        id=$(list_apps_sound | menu_mute_programs | grep -Po '([0-9]+)(?=:)')
+        id=$(list_apps_sound | menu_mute_programs | filter_id_selection)
         [ -z "$id" ] && exit 0
 
         ponymix --sink-input -d "$id" toggle
     ;;
     input)
-        id=$(list_input_devices | menu_input_devices "$ignore_arg" | grep -Po '([0-9]+)(?=:)')
+        id=$(list_input_devices | menu_input_devices "$ignore_arg" | filter_id_selection)
         [ -z "$id" ] && exit 0
 
         ponymix --input -d "$id" set-default
     ;;
     output)
-        id=$(list_sound_outputs | menu_output_devices "$ignore_arg" | grep -Po '[0-9]+(?=:)')
+        id=$(list_sound_outputs | menu_output_devices "$ignore_arg" | filter_id_selection)
         [ -z "$id" ] && exit 0
 
         ponymix set-default -d "$id"

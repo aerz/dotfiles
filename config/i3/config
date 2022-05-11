@@ -270,10 +270,10 @@ bindsym $mod+$alt+Return; layout tabbed; exec alacritty
 bindsym $mod+Shift+n exec --no-startup-id rofication-gui
 
 ## Apps // Set default microphone device // <Super> <Shift> <Alt> v ##
-bindsym $mod+Shift+$alt+v exec --no-startup-id ~/.config/rofi/scripts/pasound input
+bindsym $mod+Shift+$alt+v exec --no-startup-id ~/.config/rofi/scripts/pasound --input
 
 ## Apps // Change default sound device // <Super> <Shift> v ##
-bindsym $mod+Shift+v exec --no-startup-id ~/.config/rofi/scripts/pasound -i "HDMI Audio" output
+bindsym $mod+Shift+v exec --no-startup-id ~/.config/rofi/scripts/pasound --ignore "HDMI Audio" --output
 
 ## Apps // Open Wifi menu // <Super> <Shift> w ##
 bindsym $mod+Shift+w exec --no-startup-id ~/.config/rofi/scripts/nmwifi
@@ -284,8 +284,8 @@ bindsym $mod+Shift+b exec --no-startup-id ~/.config/rofi/scripts/roblue paired
 ## Apps // Toggle Bluetooth power // <Super> <Shift> <Alt> b ##
 bindsym $mod+Shift+$alt+b exec --no-startup-id ~/.config/i3/scripts/bt power_toggle
 
-## Apps // Select apps to mute/unmute // <Super> 奄 ##
-bindsym $mod+XF86AudioMute exec --no-startup-id ~/.config/rofi/scripts/pasound umute
+## Apps // Toggle program mute // <Super> 奄 ##
+bindsym $mod+XF86AudioMute exec --no-startup-id ~/.config/rofi/scripts/pasound --mute
 
 ## Apps // Open power options // <Super> <Shift> e ##
 bindsym $mod+Shift+e exec ~/.config/rofi/scripts/power
