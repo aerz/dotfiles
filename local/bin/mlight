@@ -17,19 +17,19 @@ default_backlight="ddcci"
 # ---
 
 list_ddcci_paths() {
-    light -L | grep "sysfs/backlight/ddcci*" | sed 's/\s//g'
+    light -L | grep 'sysfs/backlight/ddcci' | sed 's/\s//g'
 }
 
 lower_ddcci_brightness() {
     local percentage=$1
 
-    list_ddcci_paths | xargs -I{} light -s {} -U $percentage &
+    list_ddcci_paths | xargs -I{} light -s {} -U "$percentage" &
 }
 
 raise_ddcci_brightness() {
     local percentage=$1
 
-    list_ddcci_paths | xargs -I{} light -s {} -A $percentage &
+    list_ddcci_paths | xargs -I{} light -s {} -A "$percentage" &
 }
 
 show_ddcci_displays_loaded() {
@@ -45,7 +45,7 @@ exec_cmd_up() {
 
     case $backlight in
         ddcci)
-            raise_ddcci_brightness $percentage
+            raise_ddcci_brightness "$percentage"
         ;;
     esac
 }
@@ -55,7 +55,7 @@ exec_cmd_down() {
 
     case $backlight in
         ddcci)
-            lower_ddcci_brightness $percentage
+            lower_ddcci_brightne
         ;;
     esac
 }
@@ -66,6 +66,7 @@ exec_cmd_reload() {
             if [[ -v notify ]]; then
                 notify-send -t 10000 -u low ' Brightness' 'Restarting service...'
                 systemctl restart ddcci-backlight
+                sleep 5
                 notify-send -t 10000 -u normal \
                     ' Brightness' \
                     "Service restarted, displays loaded:\n$(list_ddcci_paths | cut -d '/' -f 3)"
@@ -73,6 +74,7 @@ exec_cmd_reload() {
             else
                 echo "Restarting ddcci-backlight service..."
                 systemctl restart ddcci-backlight
+                sleep 5
                 show_ddcci_displays_loaded
                 restart_polybar
             fi
@@ -85,7 +87,7 @@ exec_cmd_set() {
 
     case $backlight in
         ddcci)
-            list_ddcci_paths | xargs -I{} light -s {} -S $level
+            list_ddcci_paths | xargs -I{} light -s {} -S "$level"
         ;;
     esac
 }
@@ -111,24 +113,24 @@ while (( $# > 0 )); do
         up)
             shift
             percentage=$1
-            exec_cmd_up $percentage
+            exec_cmd_up "$percentage"
             exit 0
         ;;
         down)
             shift
             percentage=$1
-            exec_cmd_down $percentage
+            exec_cmd_down "$percentage"
             exit 0
         ;;
         set)
             shift
             level=$1
-            exec_cmd_set $level
+            exec_cmd_set "$level"
             exit 0
         ;;
         [0-9]*)
             level=$1
-            exec_cmd_set $level
+            exec_cmd_set "$level"
             exit 0
         ;;
         reload)
