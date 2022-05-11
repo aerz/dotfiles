@@ -1,17 +1,16 @@
 #!/usr/bin/env bash
 #
-# PulseAudio operations using Rofi as interface
-#
-# Source:
-#   https://gist.github.com/Nervengift/844a597104631c36513c
+# Description:
+#   Common sound operations using rofi
 #
 # Dependencies:
 #   ponymix
 #   pulseaudio
 #   rofi
 #
-
+# ---
 # Config
+# ---
 readonly ROFI_OPTS=(
     -i
     -matching fuzzy
@@ -21,49 +20,28 @@ readonly ROFI_OPTS=(
 
 # ---
 
-show_help() {
+help_msg() {
     echo "
-$0 - PulseAudio control using Rofi
+$0 - Common sound operations using rofi
 
-usage: $0 [options] <command>
-
-Commands:
-  help                    Display this message
-  umute                   Toggle mute on apps playing sound
-  input                   Set default sound device input
-  output                  Set default sound device output
+usage: $0 [options]
 
 Options:
-  -i, --ignore REGEX      Do not display results found with regex to Rofi"
+  --help                    Display help message
+  --mute                    Toggle program muting
+  --input                   Set the default microphone device
+  --output                  Set the default sound device
+  --ignore <regex>          Do not display results found with regex to Rofi"
     exit 0
 }
 
-show_no_cmd_err() {
-    echo "error: No command found
-
-Use '$0 help' to display the help message"
+err_no_regex() {
+    echo "No regex expression provided in ignore option"
     exit 1
 }
 
-show_cmd_err() {
-    echo "error: No command specified
-
-Use 'pasound help' to display the help message"
-    exit 1
-}
-
-show_no_dev_err() {
-    echo "No sound device selected"
-    exit 1
-}
-
-show_no_app_err() {
-    echo "No app selected"
-    exit 1
-}
-
-show_bad_args_err() {
-    echo "error: No options or arguments are allowed after command"
+err_no_opt_exist() {
+    echo "$1 option does not exist. See $0 --help"
     exit 1
 }
 
@@ -84,7 +62,6 @@ menu_mute_programs() {
     rofi "${ROFI_OPTS[@]}" -p "$title"
 }
 
-# Given a piped text, displays it in a rofi menu
 menu_input_devices() {
     local title=" Default Microphone"
     local ignore_arg="$1"
@@ -155,44 +132,42 @@ list_sound_outputs() {
         }'
 }
 
-[ -z "$1" ] && show_cmd_err
-
 while (( $# > 0 )); do
     arg="$1"
 
     case $arg in
-        -i|--ignore)
-            ignore_arg="$2"
-            shift 2
+        --ignore)
+            [ -z "$2" ] && err_no_regex
+            ignore_arg="$2" && shift 2
         ;;
-        umute)
-            shift
-            [ $# -gt 0 ] && show_bad_args_err
-
-            id=$(list_apps_sound | menu_mute_programs | grep -Po '([0-9]+)(?=:)')
-            [ -z "$id" ] && show_no_app_err
-
-            ponymix --sink-input -d "$id" toggle
-        ;;
-        input)
-            shift
-            [ $# -gt 0 ] && show_bad_args_err
-
-            id=$(list_input_devices | menu_input_devices "$ignore_arg" | grep -Po '([0-9]+)(?=:)')
-            [ -z "$id" ] && exit 1
-
-            ponymix --input -d "$id" set-default
-        ;;
-        output)
-            shift
-            [ $# -gt 0 ] && show_bad_args_err
-
-            id=$(list_sound_outputs | menu_output_devices "$ignore_arg" | grep -Po '[0-9]+(?=:)')
-            [ -z "$id" ] && show_no_dev_err
-
-            ponymix set-default -d "$id"
-        ;;
-        help)   show_help           ;;
-        *)      show_no_cmd_err     ;;
+        --mute)     shift && cmd_arg="mute"     ;;
+        --input)    shift && cmd_arg="input"    ;;
+        --output)   shift && cmd_arg="output"   ;;
+        --help)     help_msg                    ;;
+        *)          err_no_opt_exist "$1"       ;;
     esac
 done
+
+case "$cmd_arg" in
+    mute)
+        id=$(list_apps_sound | menu_mute_programs | grep -Po '([0-9]+)(?=:)')
+        [ -z "$id" ] && exit 0
+
+        ponymix --sink-input -d "$id" toggle
+    ;;
+    input)
+        id=$(list_input_devices | menu_input_devices "$ignore_arg" | grep -Po '([0-9]+)(?=:)')
+        [ -z "$id" ] && exit 0
+
+        ponymix --input -d "$id" set-default
+    ;;
+    output)
+        id=$(list_sound_outputs | menu_output_devices "$ignore_arg" | grep -Po '[0-9]+(?=:)')
+        [ -z "$id" ] && exit 0
+
+        ponymix set-default -d "$id"
+    ;;
+    *)
+        ./"$0" --output
+    ;;
+esac
