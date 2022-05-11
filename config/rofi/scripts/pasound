@@ -11,39 +11,44 @@
 #   rofi
 #
 
-# ---
-
-# Rofi options
-rofi_opts=(
-    "-i"
-    "-matching fuzzy"
-    "-theme ~/.config/rofi/themes/notifications.rasi"
-    "-dmenu"
+# Config
+readonly ROFI_OPTS=(
+    -i
+    -matching fuzzy
+    -theme ~/.config/rofi/themes/notifications.rasi
+    -dmenu
 )
 
 # ---
 
 show_help() {
-    echo
-    echo "pasound - PulseAudio control using Rofi"
-    echo
-    echo "usage: pasound [options] <command>"
-    echo
-    echo "Commands:"
-    echo "  help                    Display this message"
-    echo "  umute                   Toggle mute on apps playing sound"
-    echo "  input                   Set default sound device input"
-    echo "  output                  Set default sound device output"
-    echo
-    echo "Options:"
-    echo "  -i, --ignore REGEX      Do not display results found with regex to Rofi"
+    echo "
+$0 - PulseAudio control using Rofi
+
+usage: $0 [options] <command>
+
+Commands:
+  help                    Display this message
+  umute                   Toggle mute on apps playing sound
+  input                   Set default sound device input
+  output                  Set default sound device output
+
+Options:
+  -i, --ignore REGEX      Do not display results found with regex to Rofi"
     exit 0
 }
 
+show_no_cmd_err() {
+    echo "error: No command found
+
+Use '$0 help' to display the help message"
+    exit 1
+}
+
 show_cmd_err() {
-    echo "error: No command specified"
-    echo
-    echo "Use 'pasound help' to display the help message"
+    echo "error: No command specified
+
+Use 'pasound help' to display the help message"
     exit 1
 }
 
@@ -62,21 +67,33 @@ show_bad_args_err() {
     exit 1
 }
 
-open_output_menu() {
-    local title="墳 Default Output:"
-    local ignore="$1"
-
-    if [ ! -z "$ignore" ]; then
-        grep -Pv "$ignore"  | rofi ${rofi_opts[@]} -p "$title"
+menu_output_devices() {
+    local title="墳 Default Output"
+    local ignore_arg="$1"
+    
+    if [ -n "$ignore_arg" ]; then
+        grep -Pv "$ignore_arg" | rofi "${ROFI_OPTS[@]}" -p "$title"
     else
-        rofi ${rofi_opts[@]} -p "$title"
+        rofi "${ROFI_OPTS[@]}" -p "$title"
     fi
 }
 
-open_input_menu() {
-    local title="墳 Toggle mute:"
+menu_mute_programs() {
+    local title="墳 Toggle mute"
 
-    rofi ${rofi_opts[@]} -p "$title"
+    rofi "${ROFI_OPTS[@]}" -p "$title"
+}
+
+# Given a piped text, displays it in a rofi menu
+menu_input_devices() {
+    local title=" Default Microphone"
+    local ignore_arg="$1"
+
+    if [ -n "$ignore_opt" ]; then
+        grep -Pv "$ignore_arg" | rofi "${ROFI_OPTS[@]}" -p "$title"
+    else
+        rofi "${ROFI_OPTS[@]}" -p "$title"
+    fi
 }
 
 list_apps_sound() {
@@ -97,61 +114,83 @@ list_apps_sound() {
     '
 }
 
-list_sound_outputs() {
-    local default_id="$(
-        ponymix defaults | \
-        awk '
-            /^sink/ {
-                gsub(/:/, "", $2)
-                id = $2
-                print id
-            }
-        '
-    )"
-
-    ponymix -t sink list | \
-    awk -v default_id="$default_id" '
-        /^sink/ {
+list_input_devices() {
+    local default_id
+    default_id="$(ponymix --short | awk '/^source/ { print $2 }')"
+    
+    ponymix --input list | awk -v default_id="$default_id" '
+        /input/ {
             gsub(/:/, "", $2)
-            sinkid = $2
+            id = $2
 
             getline
             gsub(/^ +/, "", $0)
             name = $0
-            icon = (default_id == sinkid) ? " " : ""
+            icon = (default_id == id) ? " " : ""
 
-            print output icon sinkid": "name
-        }
-    '
+            print icon id": "name
+        }'
 }
 
-[ -z $1 ] && show_cmd_err
+list_sound_outputs() {
+    local default_id
+    default_id="$(ponymix defaults | awk '
+        /^sink/ {
+            gsub(/:/, "", $2)
+            id = $2
+            print id
+        }')"
+
+    ponymix -t sink list | awk -v default_id="$default_id" '
+        /^sink/ {
+            gsub(/:/, "", $2)
+            id = $2
+
+            getline
+            gsub(/^ +/, "", $0)
+            name = $0
+            icon = (default_id == id) ? " " : ""
+
+            print icon id": "name
+        }'
+}
+
+[ -z "$1" ] && show_cmd_err
 
 while (( $# > 0 )); do
     arg="$1"
 
     case $arg in
         -i|--ignore)
-            ignore="$2"
+            ignore_arg="$2"
             shift 2
         ;;
         umute)
             shift
             [ $# -gt 0 ] && show_bad_args_err
 
-            id=$(list_apps_sound | open_input_menu | grep -Po '([0-9]+)(?=:)')
+            id=$(list_apps_sound | menu_mute_programs | grep -Po '([0-9]+)(?=:)')
             [ -z "$id" ] && show_no_app_err
 
-            ponymix --sink-input -d $id toggle
+            ponymix --sink-input -d "$id" toggle
+        ;;
+        input)
+            shift
+            [ $# -gt 0 ] && show_bad_args_err
+
+            id=$(list_input_devices | menu_input_devices "$ignore_arg" | grep -Po '([0-9]+)(?=:)')
+            [ -z "$id" ] && exit 1
+
+            ponymix --input -d "$id" set-default
         ;;
         output)
             shift
             [ $# -gt 0 ] && show_bad_args_err
 
-            id=$(list_sound_outputs | open_output_menu "$ignore" | grep -Po '[0-9]+(?=:)')
+            id=$(list_sound_outputs | menu_output_devices "$ignore_arg" | grep -Po '[0-9]+(?=:)')
             [ -z "$id" ] && show_no_dev_err
 
-            ponymix set-default -d $id
+            ponymix set-default -d "$id"
         ;;
         help)   show_help           ;;
         *)      show_no_cmd_err     ;;

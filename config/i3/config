@@ -269,8 +269,8 @@ bindsym $mod+$alt+Return; layout tabbed; exec alacritty
 ## Apps // Open notification center // <Super> <Shift> n ##
 bindsym $mod+Shift+n exec --no-startup-id rofication-gui
 
-## Apps // Open volume control // <Super> <Shift> <Alt> v ##
-bindsym $mod+Shift+$alt+v exec gtk-launch pavucontrol
+## Apps // Set default microphone device // <Super> <Shift> <Alt> v ##
+bindsym $mod+Shift+$alt+v exec --no-startup-id ~/.config/rofi/scripts/pasound input
 
 ## Apps // Change default sound device // <Super> <Shift> v ##
 bindsym $mod+Shift+v exec --no-startup-id ~/.config/rofi/scripts/pasound -i "HDMI Audio" output
