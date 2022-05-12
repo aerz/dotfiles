@@ -34,14 +34,10 @@ export QT_QPA_PLATFORMTHEME='gnome'
 # ---
 # X Preferences
 # ---
-# Monitor
-standby=300; suspend=300; off=300
-xset dpms $standby $suspend $off &
+xss-lock --transfer-sleep-lock -- betterlockscreen --lock blur &
 
-# Lockscreen
-inactivity=300; refresh=60
-xset s $inactivity $refresh s blank s noexpose &
-xss-lock -l -- multilockscreen --lock blur &
+# Disable screensaver and dpms
+xset s off -dpms
 
 # Idle actions
 xidlehook --detect-sleep --not-when-audio --not-when-fullscreen \

@@ -23,7 +23,7 @@
 | [regolith-rofication](https://github.com/regolith-linux/regolith-rofication)  | Minimal notification daemon                         |
 | [paru](https://github.com/morganamilo/paru)                                   | AUR helper                                          |
 | [shotgun](https://github.com/neXromancers/shotgun)                            | Minimal screenshot utility                          |
-| [multilockscreen](https://github.com/jeffmhubbard/multilockscreen)            | Lockscreen                                          |
+| [betterlockscreen](https://github.com/betterlockscreen/betterlockscreen)      | Xorg Lockscreen                                     |
 | [XFCE Settings Daemon](https://docs.xfce.org/xfce/xfce4-settings/xfsettingsd) | Control dark/light themes and global settings       |
 | [nitrogen](https://github.com/l3ib/nitrogen)                                  | Background setter                                   |
 | [sxiv](https://github.com/muennich/sxiv)                                      | Image viewer                                        |
@@ -51,5 +51,5 @@ dotman -config dotman.yaml
 
 ## Additional configuration scripts
 
-- `config/multilock/generate` Executed with the wallpaper path as first argument will configure multilockscreen
+- `config/betterlockscreen/generate` Generate a new wallpaper for the lockscreen
 - `config/dconf/configure` Configure dconf database using gsettings, this step is required because of many apps use this configuration first

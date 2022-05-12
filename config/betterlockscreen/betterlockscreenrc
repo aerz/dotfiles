@@ -29,6 +29,7 @@ loginshadow=$(xrc multilock.loginbox.color)
 # Text
 locktext=""
 font="monospace"
+layoutcolor=00000000
 
 # Ring
 ringcolor=$(xrc multilock.ring.color)
