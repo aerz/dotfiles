@@ -8,7 +8,8 @@ declare -a actions=(
     "  Shutdown"
     "  Reboot"
     "  Lock"
-    "  Suspend"
+    "  Suspend"
+    "  Hibernate"
     "  Logout"
 )
 
@@ -28,15 +29,16 @@ save_brightness() {
     light -O
 }
 
-action="$(printf '%s\n' "${actions[@]}" | rofi -theme $theme -dmenu -l 5 -p "$uptime")"
+action="$(printf '%s\n' "${actions[@]}" | rofi -theme $theme -dmenu -l 6 -p "$uptime")"
 
 # exit when action is empty
 [ -z "$action" ] && exit 0
 
 case $action in
-    *Shutdown) confirm && save_brightness && systemctl poweroff    ;;
-    *Reboot)   confirm && save_brightness && systemctl reboot      ;;
-    *Lock)     multilockscreen -l blur                      ;;
-    *Suspend)  confirm && multilockscreen -s blur           ;;
-    *Logout)   confirm && logout_session                       ;;
+    *Shutdown)  confirm && save_brightness && systemctl poweroff ;;
+    *Reboot)    confirm && save_brightness && systemctl reboot   ;;
+    *Lock)      loginctl lock-session                            ;;
+    *Suspend)   confirm && systemctl suspend                     ;;
+    *Hibernate) confirm && systemctl hibernate                   ;;
+    *Logout)    confirm && logout_session                        ;;
 esac
