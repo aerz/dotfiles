@@ -381,8 +381,8 @@ bindsym $mod+$alt+l exec ~/.config/rofi/scripts/theme-mode
 # ---
 
 # Raise/Lower brightness level
-bindsym XF86MonBrightnessUp exec light -A 5
-bindsym XF86MonBrightnessDown exec light -U 5
+bindsym XF86MonBrightnessUp exec brillo -q -u 100000 -A 2
+bindsym XF86MonBrightnessDown exec brillo -q -u 100000 -U 2
 
 ## Brightness // Notify displays loaded by ddcci-backlight // <Super> <Shift> d ##
 bindsym $mod+shift+d exec --no-startup-id ~/.local/bin/mlight -n
@@ -432,13 +432,8 @@ bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 
 # Start Playerctl daemon
 exec --no-startup-id playerctld daemon
-
-# Restore saved brightness
-exec --no-startup-id light -I &
-
-# Wallpaper
+exec --no-startup-id brillo -I &
 exec --no-startup-id nitrogen --restore &
-
 # Status bar
 exec_always --no-startup-id ~/.config/polybar/launch_laptop.sh &
 # TODO: Fix nmcli does not work with gnome-keyring
