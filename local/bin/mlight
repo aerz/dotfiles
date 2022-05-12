@@ -55,7 +55,7 @@ exec_cmd_down() {
 
     case $backlight in
         ddcci)
-            lower_ddcci_brightne
+            lower_ddcci_brightness "$percentage"
         ;;
     esac
 }
