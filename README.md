@@ -1,6 +1,6 @@
 # dotfiles
 
-<img src="img/desktop.png" alt="desktop" align="right" width="400px">
+<img src="img/ufetch.png" alt="desktop" align="right" width="400px">
 
 - **OS**: [Arch Linux](https://archlinux.org)
 - **WM**: [i3-gaps](https://github.com/Airblader/i3)
