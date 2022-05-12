@@ -32,6 +32,12 @@ export QT_QPA_PLATFORMTHEME='gnome'
 #export QT_STYLE_OVERRIDE="Adwaita-Dark"
 
 # ---
+# GNOME Keyring
+# ---
+eval $(gnome-keyring-daemon --start)
+export SSH_AUTH_SOCK
+
+# ---
 # X Preferences
 # ---
 xss-lock --transfer-sleep-lock -- betterlockscreen --lock blur &

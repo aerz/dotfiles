@@ -50,16 +50,14 @@ lt() {
 alias df='df -h'
 alias cp='cp -i'
 
+
+# SSH/GPG
 # Change terminal emulator on ssh connections
 alias ssh='TERM=xterm-256color ssh'
-
-# Add GPG or SSH keys to default agent
-alias sshak="keychain --quiet --attempts 2 --agents ${KEYCHAIN_SSH_AGENT}"
-alias gpgak="keychain --quiet --nogui --attempts 2 --agents ${KEYCHAIN_GPG_AGENT}"
-# Clean all the identities loaded
-alias sshcl='keychain --clear'
+alias keychain='keychain --quiet'
+alias sshak="keychain --quiet --inherit any --attempts 2"
+alias gpgak="keychain --quiet --nogui --attempts 2"
 alias sshsum='ssh-keygen -l -f'
-
 # List GPG keys loaded
 alias gpgls='gpg --list-secret-keys --keyid-format LONG'
 

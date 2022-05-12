@@ -441,3 +441,6 @@ exec --no-startup-id nitrogen --restore &
 
 # Status bar
 exec_always --no-startup-id ~/.config/polybar/launch_laptop.sh &
+# TODO: Fix nmcli does not work with gnome-keyring
+# As a workaround, nm-applet is needed
+exec --no-startup-id nm-applet &
