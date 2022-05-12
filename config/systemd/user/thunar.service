@@ -1,8 +1,8 @@
 [Unit]
 Description=Thunar Daemon
+After=gvfs-daemon.service
 
 [Service]
-After=gvfs-daemon.service
 ExecStart=/usr/bin/thunar --daemon
 Restart=always
 RestartSec=5

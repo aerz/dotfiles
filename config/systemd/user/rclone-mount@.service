@@ -1,0 +1,20 @@
+[Unit]
+Description=Mounts %i storage using rclone
+Documentation=man:rclone(1)
+After=NetworkManager-wait-online.service
+
+[Service]
+Type=notify
+Environment=RCLONE_MOUNT_POINT=%h/Documents/rclone/%i
+ExecStartPre=/usr/bin/mkdir -p ${RCLONE_MOUNT_POINT}
+ExecStart=/usr/bin/rclone mount --verbose --vfs-cache-mode full --config %h/.config/rclone/rclone.conf %i:/ ${RCLONE_MOUNT_POINT}
+# Workaround to prevent service failure
+# https://github.com/systemd/systemd/issues/13284
+# https://stegard.net/2016/08/gracefully-killing-a-java-process-managed-by-systemd/
+SuccessExitStatus=143
+ExecStop=/usr/bin/fusermount -u ${RCLONE_MOUNT_POINT}
+Restart=on-abnormal
+RestartSec=5
+
+[Install]
+WantedBy=default.target

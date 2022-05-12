@@ -441,6 +441,3 @@ exec --no-startup-id nitrogen --restore &
 
 # Status bar
 exec_always --no-startup-id ~/.config/polybar/launch_laptop.sh &
-
-# Touchpad gestures
-exec_always --no-startup-id touchegg &

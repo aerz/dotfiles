@@ -23,7 +23,11 @@ config/mimeapps.list: ~/.config/mimeapps.list
 config/paru/paru.conf: ~/.config/paru/paru.conf
 config/polybar: ~/.config/polybar
 config/rofi: ~/.config/rofi
+config/systemd/user/rclone-mount@.service: ~/.config/systemd/user/rclone-mount@.service
+config/systemd/user/touchegg-client.service: ~/.config/systemd/user/touchegg-client.service
 config/touchegg/touchegg.conf: ~/.config/touchegg/touchegg.conf
+config/systemd/user/thunar.service: ~/.config/systemd/user/thunar.service
+config/systemd/user/rofication-daemon.service: ~/.config/systemd/user/rofication-daemon.service
 config/user-dirs.dirs: ~/.config/user-dirs.dirs
 config/X11/xinitrc: ~/.config/X11/xinitrc
 config/X11/Xresources: ~/.config/X11/Xresources
