@@ -429,13 +429,11 @@ bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 # ---
 # Autostart
 # ---
-
-# Start Playerctl daemon
 exec --no-startup-id playerctld daemon
 exec --no-startup-id brillo -I &
 exec --no-startup-id nitrogen --restore &
-# Status bar
 exec_always --no-startup-id ~/.config/polybar/launch_laptop.sh &
 # TODO: Fix nmcli does not work with gnome-keyring
 # As a workaround, nm-applet is needed
 exec --no-startup-id nm-applet &
+exec --no-startup-id /usr/lib/deja-dup/deja-dup-monitor &

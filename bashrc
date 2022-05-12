@@ -16,7 +16,7 @@ PS1='[\u@\h \W]\$ '
 
 # Start a new xorg session by default wether it does not exist
 if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
-    exec startx "$XINITRC" --
+    exec startx "$XINITRC" -- -keeptty >$XDG_DATA_HOME/xorg/xorg.tty.log 2>&1
 fi
 
 # ---
