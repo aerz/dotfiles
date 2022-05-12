@@ -122,6 +122,18 @@ open_rofi_menu() {
     esac
 }
 
+rofi_download_emojis() {
+    local pid_rofi pid_cmd
+
+    exec $0 --download &
+    pid_cmd="$!"
+
+    rofi -dmenu -l 0 -mesg "Downloading emojis..." -p "Running in background" &
+    pid_rofi="$!"
+
+    wait $pid_cmd && kill -9 $pid_rofi
+}
+
 case $1 in
     -h|--help)
         show_help
@@ -135,8 +147,7 @@ case $1 in
     ;;
     *)
         [ "$1" != "" ] && show_cmd_err
-        # download emojis if cache's file not found
-        [ ! -f "$EMOJI_CACHE_FILE" ] && ./$0 --download
+        [ ! -f "$EMOJI_CACHE_FILE" ] && rofi_download_emojis
         open_rofi_menu
     ;;
 esac
