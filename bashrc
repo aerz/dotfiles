@@ -10,6 +10,10 @@
 # Prompt configuration
 PS1='[\u@\h \W]\$ '
 
+# Use bash-completion when available
+[[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
+    . /usr/share/bash-completion/bash_completion
+
 # ---
 # X Session
 # ---
