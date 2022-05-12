@@ -7,9 +7,9 @@
 - **Bar**: [Polybar](https://github.com/polybar/polybar)
 - **Shell**: [Bash](https://www.gnu.org/software/bash/)
 - **Terminal emulator**: [Alacritty](https://github.com/alacritty/alacritty)
-- **Editor**: [Visual Studio Code](https://code.visualstudio.com/)
+- **Editor**: [Emacs](https://www.gnu.org/software/emacs/)
 - **Icon theme**: [Papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme)
-- **Color Scheme**: Custom based on [Min Tomorrow Theme](https://github.com/musm/min-tomorrow-theme)
+- **Color Scheme**: Based on [Min Tomorrow Theme](https://github.com/musm/min-tomorrow-theme)
 
 # Details
 
