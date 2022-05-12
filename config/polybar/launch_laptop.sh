@@ -1,6 +1,14 @@
 #!/usr/bin/env bash
 
-killall -q polybar
-while pgrep -u $UID -x polybar > /dev/null; do sleep 1; done
+polybar-msg cmd quit
+while pgrep -u $UID -x polybar > /dev/null; do sleep .5; done
 
-{ while :; do polybar laptop; done } & disown
+msg_start_header() {
+    echo "---"
+    echo "Starting Polybar"
+    date
+    echo "---"
+}
+
+msg_start_header | tee -a /tmp/polybar.laptop.log
+polybar laptop --reload 2>&1 | tee -a /tmp/polybar.laptop.log & disown
