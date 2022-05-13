@@ -25,6 +25,8 @@ config/paru/paru.conf: ~/.config/paru/paru.conf
 config/polybar: ~/.config/polybar
 config/rofi: ~/.config/rofi
 config/user-dirs.dirs: ~/.config/user-dirs.dirs
+config/systemd/user/kopia-backup@.service: ~/.config/systemd/user/kopia-backup@.service
+config/systemd/user/kopia-backup@.timer: ~/.config/systemd/user/kopia-backup@.timer
 config/systemd/user/google-drive.service: ~/.config/systemd/user/google-drive.service
 config/systemd/user/rofication-daemon.service: ~/.config/systemd/user/rofication-daemon.service
 config/systemd/user/thunar.service: ~/.config/systemd/user/thunar.service

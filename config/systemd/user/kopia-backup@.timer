@@ -1,0 +1,14 @@
+[Unit]
+Description=Kopia repository snapshot backup timer
+Documentation=https://kopia.io/docs
+After=network-online.target
+Wants=network-online.target
+
+[Timer]
+OnCalendar=6/8:0:0
+AccuracySec=1h
+Persistent=true
+Unit=kopia-backup@%i.service
+
+[Install]
+WantedBy=timers.target

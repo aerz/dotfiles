@@ -1,0 +1,12 @@
+[Unit]
+Description=Kopia repository snapshot backup
+Documentation=https://kopia.io/docs
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/kopia snapshot create --config-file=%h/.config/kopia/%i/repository.config --use-keyring --all
+
+[Install]
+WantedBy=multi-user.target
