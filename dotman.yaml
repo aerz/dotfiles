@@ -30,8 +30,7 @@ config/systemd/user/kopia-backup@.timer: ~/.config/systemd/user/kopia-backup@.ti
 config/systemd/user/google-drive.service: ~/.config/systemd/user/google-drive.service
 config/systemd/user/rofication-daemon.service: ~/.config/systemd/user/rofication-daemon.service
 config/systemd/user/thunar.service: ~/.config/systemd/user/thunar.service
-config/X11/xinitrc: ~/.config/X11/xinitrc
-config/X11/Xresources: ~/.config/X11/Xresources
+config/X11: ~/.config/X11
 config/xfce4/displays.xml: ~/.config/xfce4/xfconf/xfce-perchannel-xml/displays.xml
 config/xfce4/keyboards.xml: ~/.config/xfce4/xfconf/xfce-perchannel-xml/keyboards.xml
 config/xfce4/thunar-volman.xml: ~/.config/xfce4/xfconf/xfce-perchannel-xml/thunar-volman.xml
