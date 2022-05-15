@@ -39,9 +39,9 @@ export USE_SCCACHE=1
 # ---
 # Check gnome-keyring is running
 if [[ ! -v $SSH_AUTH_SOCK ]]; then
-    eval $(keychain --eval --quiet --systemd --agents ssh,gpg)
+    eval "$(keychain --eval --quiet --systemd --agents ssh,gpg)"
 else
-    eval $(keychain --eval --quiet --systemd --inherit any)
+    eval "$(keychain --eval --quiet --systemd --inherit any)"
 fi
 
 # ---
