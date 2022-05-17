@@ -1,38 +1,23 @@
-# i3 config file (v4)
-#
-# Please see https://i3wm.org/docs/userguide.html for a complete reference!
-#
-
-## About // Main mod // <Super> ##
-## About // Secondary mod // <Super> <Shift> ##
-## About // Low usage mod // <Super> <Ctrl> [Alt|Shift] ##
-## About // Alternative mod // <Super> <Alt> [Shift|Ctrl] ##
+#-*- mode: Conf[Space] -*-
 
 # ---
 # General
 # ---
-
-# Fonts
 set $font.jetbrains pango:JetBrainsMono Nerd Font
-
-# Default Font
-font $font.jetbrains 16px
 
 # Modifiers - Super: Mod4, Alt: Mod1
 set $mod Mod4
 set $alt Mod1
 
-# Monitors
-set $monitor1 DisplayPort-0
-set $monitor2 HDMI-A-0
-
 # Disable follow focus with mouse
 focus_follows_mouse no
+
+# Load specific settings
+include `hostname`.conf
 
 # ---
 # i3-gaps
 # ---
-
 # Config
 gaps inner 5
 gaps outer 3
@@ -45,12 +30,10 @@ hide_edge_borders smart
 # ---
 # Window Configuration
 # ---
-
 # Hide title bar by default and set border width
 for_window [class=".*"] border pixel 1
 
 # App list always start in floating mode
-for_window [class="Galculator"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="Blueman"] floating enable
 for_window [class="Nitrogen"] floating enable
@@ -68,7 +51,6 @@ for_window [window_type="menu"] floating enable
 # ---
 # Theme
 # ---
-
 set $base00 #181818
 set $base01 #282828
 set $base02 #383838
@@ -96,9 +78,8 @@ client.placeholder       $base00  $base00     $base05  $base00    $base00
 client.background        $base07
 
 # ---
-# Workspace names
+# Workspaces
 # ---
-
 set $ws1 "1"
 set $ws2 "2"
 set $ws3 "3"
@@ -109,10 +90,6 @@ set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
-
-# ---
-# Workspace key bindings
-# ---
 
 ## Workspace // Go to number 0-9 // <Super> 0..9 ##
 bindsym $mod+1 workspace number $ws1
@@ -132,28 +109,6 @@ bindsym $mod+Tab workspace next
 ## Workspace // Jump to previous // <Super> <Shift> Tab ##
 bindsym $mod+Shift+Tab workspace prev
 
-# ---
-# Workspace assigments
-# ---
-
-# Monitor 1
-workspace $ws1 output $monitor1
-workspace $ws2 output $monitor1
-workspace $ws3 output $monitor1
-workspace $ws4 output $monitor1
-workspace $ws5 output $monitor1
-workspace $ws6 output $monitor1
-workspace $ws7 output $monitor1
-workspace $ws8 output $monitor1
-
-# Monitor 2
-workspace $ws9 output $monitor2
-workspace $ws10 output $monitor2
-
-# ---
-# Container focus
-# ---
-
 ## Container // Focus parent container // <Super> = ##
 bindsym $mod+equal focus parent
 
@@ -161,9 +116,8 @@ bindsym $mod+equal focus parent
 bindsym $mod+minus focus child
 
 # ---
-# Move container to workspace
+# Containers
 # ---
-
 ## Container // Move to workspace // <Super> <Shift> 0..9 ##
 bindsym $mod+Shift+1 move container to workspace number $ws1
 bindsym $mod+Shift+2 move container to workspace number $ws2
@@ -189,127 +143,117 @@ bindsym $mod+Shift+$alt+9 move container to workspace number $ws9; workspace num
 bindsym $mod+Shift+$alt+0 move container to workspace number $ws10; workspace number $ws10
 
 # ---
-# Window navigation
+# Window Navigation
 # ---
-
-## Navigate // Change focus // <Super> k j h l ##
+## Navigation // Change focus // <Super> k j h l ##
 bindsym $mod+h focus left
 bindsym $mod+l focus right
 bindsym $mod+k focus up
 bindsym $mod+j focus down
 
-## Navigate // Change focus // <Super> ↑ ↓ ← → ##
+## Navigation // Change focus // <Super> ↑ ↓ ← → ##
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
-## Navigate // Move focused window // <Super> <Shift> k j h l ##
+## Navigation // Move focused window // <Super> <Shift> k j h l ##
 bindsym $mod+Shift+h move left
 bindsym $mod+Shift+l move right
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+j move down
 
-## Navigate // Move focused window // <Super> <Shift> ↑ ↓ ← → ##
+## Navigation // Move focused window // <Super> <Shift> ↑ ↓ ← → ##
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Right move right
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Down move down
 
-## Navigate // Set split horizontal // <Super> g ##
+## Navigation // Set split horizontal // <Super> g ##
 bindsym $mod+g split h
 
-## Navigate // Set split vertical // <Super> v ##
+## Navigation // Set split vertical // <Super> v ##
 bindsym $mod+v split v
 
-## Navigate // Toggle fullscreen // <Super> f ##
+## Navigation // Toggle fullscreen // <Super> f ##
 bindsym $mod+f fullscreen toggle
 
-## Navigate // Mouse // <Super> Right-click Left-click ##
+## Navigation // Mouse // <Super> Right-click Left-click ##
 floating_modifier $mod
 
-## Navigate // Toggle floating // <Super> <Shift> f ##
+## Navigation // Toggle floating // <Super> <Shift> f ##
 bindsym $mod+Shift+f floating toggle
 
-## Navigate // Toggle focus tiling/floating // <Super> <Shift> t ##
+## Navigation // Toggle focus tiling/floating // <Super> <Shift> t ##
 bindsym $mod+Shift+t focus mode_toggle
 
-## Navigate // Kill focus // <Super> <Shift> q ##
+## Navigation // Kill focus // <Super> <Shift> q ##
 bindsym $mod+Shift+q kill
 
 # ---
-# Resize Mode
+# Modes
 # ---
+## Resize Mode // Enter to resize mode // <Super> <Ctrl> r ##
+bindsym $mod+Ctrl+r mode "resize"
 
 mode "resize" {
-
-    ## Mode: Resize // Modify window size // k j h l ##
+    ## Resize Mode // Modify window size // k j h l ##
     bindsym h resize shrink width 10 px or 10 ppt
     bindsym l resize grow width 10 px or 10 ppt
     bindsym k resize shrink height 10 px or 10 ppt
     bindsym j resize grow height 10 px or 10 ppt
 
-    ## Mode: Resize // Modify window size // ↑ ↓ ← → ##
+    ## Resize Mode // Modify window size // ↑ ↓ ← → ##
     bindsym Left resize shrink width 10 px or 10 ppt
     bindsym Right resize grow width 10 px or 10 ppt
     bindsym Up resize shrink height 10 px or 10 ppt
     bindsym Down resize grow height 10 px or 10 ppt
 
-    ## Mode: Resize // Exit to default mode // Return ##
+    ## Resize Mode // Exit to default mode // Return ##
     bindsym Return mode "default"
 
-    ## Mode: Resize // Exit to default mode // Esc ##
+    ## Resize Mode // Exit to default mode // Esc ##
     bindsym Escape mode "default"
 
-    ## Mode: Resize // Exit to default mode // <Super> <Ctrl> r ##
+    ## Resize Mode // Exit to default mode // <Super> <Ctrl> r ##
     bindsym $mod+Ctrl+r mode "default"
 }
 
-## Mode // Enter to resize mode // <Super> <Ctrl> r ##
-bindsym $mod+Ctrl+r mode "resize"
-
-# ---
-# Layout Mode
-# ---
+## Layout Mode // Enter to layout mode // <Super> <Ctrl> l ##
+bindsym $mod+Ctrl+l mode "layout"
 
 mode "layout" {
-
-    ## Mode: Layout // Change to layout stacking // s ##
+    ## Layout Mode // Change to layout stacking // s ##
     bindsym s layout stacking
 
-    ## Mode: Layout // Change to layout stacking // t ##
+    ## Layout Mode // Change to layout stacking // t ##
     bindsym t layout tabbed
 
-    ## Mode: Layout // Toggle tabbed, splith, splitv // Tab ##
+    ## Layout Mode // Toggle tabbed, splith, splitv // Tab ##
     bindsym Tab layout toggle tabbed splith splitv
 
-    ## Mode: Layout // Exit to default mode // Return ##
+    ## Layout Mode // Exit to default mode // Return ##
     bindsym Return mode "default"
 
-    ## Mode: Layout // Exit to default mode // Esc ##
+    ## Layout Mode // Exit to default mode // Esc ##
     bindsym Escape mode "default"
 
-    ## Mode: Layout // Exit to default mode // <Super> <Ctrl> l ##
+    ## Layout Mode // Exit to default mode // <Super> <Ctrl> l ##
     bindsym $mod+Ctrl+l mode "default"
 }
 
-## Mode // Enter to layout mode // <Super> <Ctrl> l ##
-bindsym $mod+Ctrl+l mode "layout"
-
 # ---
-# i3 key bindings
+# i3 Keybindings
 # ---
+## i3 // Reload config // <Super> Esc ##
+bindsym $mod+Escape reload
 
-## i3 // Restart // <Super> <Shift> <Ctrl> r ##
-bindsym $mod+Shift+Ctrl+r restart
-
-## i3 // Reload config // <Super> <Shift> <Ctrl> <Alt> r ##
-bindsym $mod+Shift+Ctrl+$alt+r reload
+## i3 // Restart // <Super> <Alt> Esc ##
+bindsym $mod+$alt+Escape restart
 
 # ---
 # Scratchpad
 # ---
-
 ## Scratchpad // Show/Hide // <Super> <Shift> s ##
 bindsym $mod+Shift+s scratchpad show
 
@@ -319,7 +263,6 @@ bindsym $mod+Shift+$alt+s  move to scratchpad
 # ---
 # Apps key bindings
 # ---
-
 ## Apps // Open terminal // <Super> Return ##
 bindsym $mod+Return exec alacritty
 
@@ -368,32 +311,13 @@ bindsym $mod+Shift+c exec rofi -show calc -modi calc -no-show-match -no-sort
 ## Apps // Generate a QR from clipboard // <Super> <Shift> <Ctrl> c ##
 bindsym $mod+Shift+Ctrl+c exec ~/.local/bin/qrgen
 
-# ---
-# xfce
-# ---
-
-## xfce // Switch Dark-Light theme // <Super> <Shift> l ##
+## Apps // Toggle theme mode // <Super> <Shift> l ##
 # Reference: https://wiki.archlinux.org/index.php/Dark_mode_switching
 bindsym $mod+$alt+l exec ~/.config/rofi/scripts/theme-mode
 
 # ---
-# Brightness
-# ---
-
-# Raise/Lower brightness level
-bindsym XF86MonBrightnessUp exec brillo -q -u 100000 -A 2
-bindsym XF86MonBrightnessDown exec brillo -q -u 100000 -U 2
-
-## Brightness // Notify displays loaded by ddcci-backlight // <Super> <Shift> d ##
-bindsym $mod+shift+d exec --no-startup-id ~/.local/bin/mlight -n
-
-## Brightness // Restart ddcci-backlight service // <Super> <Shift> <Alt> d ##
-bindsym $mod+shift+$alt+d exec --no-startup-id ~/.local/bin/mlight -n reload
-
-# ---
 # Screenshots
 # ---
-
 ## Screenshots // Open screenshoot selector // Print ##
 bindsym Print exec --no-startup-id ~/.config/rofi/scripts/pic
 
@@ -409,7 +333,6 @@ bindsym $mod+Shift+Print exec --no-startup-id ~/.config/rofi/scripts/pic --fulls
 # ---
 # Audio
 # ---
-
 # Raise/Lower volume level
 bindsym XF86AudioRaiseVolume exec --no-startup-id ponymix increase 5
 bindsym XF86AudioLowerVolume exec --no-startup-id ponymix decrease 5
@@ -430,6 +353,4 @@ bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 # Autostart
 # ---
 exec --no-startup-id playerctld daemon
-exec --no-startup-id brillo -I &
 exec --no-startup-id nitrogen --restore &
-exec_always --no-startup-id ~/.config/polybar/launch_laptop.sh &
