@@ -47,13 +47,4 @@ xss-lock -l -- multilockscreen --lock blur &
 # ---
 # Start i3
 # ---
-i3cfg="$XDG_CONFIG_HOME/i3/config"
-
-touch "$i3cfg.md5"
-
-if ! md5sum --quiet --check "$i3cfg.md5"; then
-    md5sum "$i3cfg.base" "$i3cfg.$(hostname)" > "$i3cfg.md5"
-    cat "$i3cfg.base" "$i3cfg.$(hostname)" > "$i3cfg.out"
-fi
-
-exec i3 -c "$i3cfg.out"
+exec i3
