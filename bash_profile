@@ -29,11 +29,19 @@ export PATH="$PATH:$CARGO_HOME/bin"
 export PATH="$PATH:$XDG_CONFIG_HOME/emacs/bin"
 
 # ---
-# Start a default keychain agent
+# SSH/GPG Agent
 # ---
-export KEYCHAIN_SSH_AGENT="ssh"
-export KEYCHAIN_GPG_AGENT="gpg"
-eval `keychain --eval --quiet --systemd --agents ${KEYCHAIN_SSH_AGENT},${KEYCHAIN_GPG_AGENT}`
+# Check gnome-keyring is running
+if [[ ! -v $SSH_AUTH_SOCK ]]; then
+    eval "$(keychain --eval --quiet --systemd --agents ssh,gpg)"
+else
+    eval "$(keychain --eval --quiet --systemd --inherit any)"
+fi
+
+# ---
+# Program vars
+# ---
+export KOPIA_USE_KEYRING=1
 
 # ---
 # Load bashrc
