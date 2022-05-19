@@ -1,15 +1,15 @@
 # dotfiles
 
-<img src="img/desktop.png" alt="desktop" align="right" width="400px">
+<img src="img/ufetch.png" alt="desktop" align="right" width="400px">
 
 - **OS**: [Arch Linux](https://archlinux.org)
 - **WM**: [i3-gaps](https://github.com/Airblader/i3)
 - **Bar**: [Polybar](https://github.com/polybar/polybar)
 - **Shell**: [Bash](https://www.gnu.org/software/bash/)
 - **Terminal emulator**: [Alacritty](https://github.com/alacritty/alacritty)
-- **Editor**: [Visual Studio Code](https://code.visualstudio.com/)
+- **Editor**: [Emacs](https://www.gnu.org/software/emacs/)
 - **Icon theme**: [Papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme)
-- **Color Scheme**: Custom based on [Min Tomorrow Theme](https://github.com/musm/min-tomorrow-theme)
+- **Color Scheme**: Based on [Min Tomorrow Theme](https://github.com/musm/min-tomorrow-theme)
 
 # Details
 
@@ -23,7 +23,7 @@
 | [regolith-rofication](https://github.com/regolith-linux/regolith-rofication)  | Minimal notification daemon                         |
 | [paru](https://github.com/morganamilo/paru)                                   | AUR helper                                          |
 | [shotgun](https://github.com/neXromancers/shotgun)                            | Minimal screenshot utility                          |
-| [multilockscreen](https://github.com/jeffmhubbard/multilockscreen)            | Lockscreen                                          |
+| [betterlockscreen](https://github.com/betterlockscreen/betterlockscreen)      | Xorg Lockscreen                                     |
 | [XFCE Settings Daemon](https://docs.xfce.org/xfce/xfce4-settings/xfsettingsd) | Control dark/light themes and global settings       |
 | [nitrogen](https://github.com/l3ib/nitrogen)                                  | Background setter                                   |
 | [sxiv](https://github.com/muennich/sxiv)                                      | Image viewer                                        |
@@ -51,5 +51,5 @@ dotman -config dotman.yaml
 
 ## Additional configuration scripts
 
-- `config/multilock/generate` Executed with the wallpaper path as first argument will configure multilockscreen
+- `config/betterlockscreen/generate` Generate a new wallpaper for the lockscreen
 - `config/dconf/configure` Configure dconf database using gsettings, this step is required because of many apps use this configuration first

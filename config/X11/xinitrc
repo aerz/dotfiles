@@ -14,36 +14,35 @@ export SSH_AUTH_SOCK
 # ---
 # Systemd bus import environments
 # ---
-# Source: /etc/X11/xinit/xinitrc.d/50-systemd-user.sh
-#
-systemctl --user import-environment DISPLAY XAUTHORITY
+. /etc/X11/xinit/xinitrc.d/50-systemd-user.sh
+systemctl --user import-environment PATH
 
-if command -v dbus-update-activation-environment >/dev/null 2>&1; then
-    dbus-update-activation-environment DISPLAY XAUTHORITY
-fi
-
-# ---
 # Xresources
 # ---
 [ -f "$XRESOURCES" ] && xrdb -merge -I"$HOME" "$XRESOURCES"
 [ -f "${XRESOURCES}.$(hostname)" ] && xrdb -merge -I"$HOME" "${XRESOURCES}.$(hostname)"
 
 # ---
-# Environment
+# Session Env Variables
 # ---
 export QT_QPA_PLATFORMTHEME='gnome'
+export MOZ_USE_XINPUT2=1
 
 # ---
 # X Preferences
 # ---
-# Monitor
-standby=600; suspend=600; off=600
-xset dpms $standby $suspend $off &
+xss-lock --transfer-sleep-lock -- betterlockscreen --lock blur &
 
-# Lockscreen
-inactivity=600; force_bg=180
-xset s $inactivity $force_bg s blank s noexpose &
-xss-lock -l -- multilockscreen --lock blur &
+# Disable screensaver and dpms
+xset s off -dpms
+
+# Idle actions
+xidlehook \
+    --detect-sleep --not-when-audio --not-when-fullscreen \
+    --socket /tmp/xidlehook.sock \
+    --timer 300 'brillo -O && brillo -u 800000 -S 10' 'brillo -u 100000 -I' \
+    --timer 10 'loginctl lock-session' 'brillo -u 100000 -I' \
+    --timer 60 'systemctl suspend' 'brillo -u 100000 -I' &
 
 # ---
 # Start i3

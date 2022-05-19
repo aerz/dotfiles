@@ -13,4 +13,8 @@ case "$(hostname)" in
               polybar --reload --config="$HOME/.config/polybar/config.gigavac.ini" monitor2
           done } & disown
     ;;
+    minivac)
+        polybar --reload --config="$HOME/.config/polybar/minivac.ini" laptop 2>&1 | \
+            tee -a /tmp/polybar.laptop.log & disown
+    ;;
 esac

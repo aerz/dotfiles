@@ -2,38 +2,41 @@
 #
 # Theme mode switcher menu
 #
-
-# ---
 # Config
-# ---
-# GTK variants
-GTK_LIGHT='Adwaita'
-GTK_DARK='Adwaita-dark'
-
-# Icon variants
-ICON_LIGHT='Papirus'
-ICON_DARK='Papirus-Dark'
+readonly GTK_LIGHT='Adwaita'
+readonly GTK_DARK='Adwaita-dark'
+readonly ICON_LIGHT='Papirus'
+readonly ICON_DARK='Papirus-Dark'
 
 # ---
 
-set_gtk() {
+set_gtk_theme() {
+    local gtk_theme color
+
     case $1 in
-        *Dark)   theme="$GTK_DARK"   ;;
-        *Light)  theme="$GTK_LIGHT"  ;;
+        *Dark)   gtk_theme="$GTK_DARK" color="prefer-dark"   ;;
+        *Light)  gtk_theme="$GTK_LIGHT" color="prefer-light" ;;
     esac
 
-    xfconf-query -c xsettings -p /Net/ThemeName -s "$theme"
-    gsettings set org.gnome.desktop.interface gtk-theme "$theme"
+    # distro specific
+    xfconf-query -c xsettings -p /Net/ThemeName -s "$gtk_theme"
+    gsettings set org.gnome.desktop.interface gtk-theme "$gtk_theme"
+
+    # xdg-desktop-portal-gtk
+    gsettings set org.gnome.desktop.interface color-scheme "$color"
+    gsettings set org.freedesktop.appearance color-scheme "$color"
 }
 
-set_gtk_icon() {
+set_gtk_icon_theme() {
+    local icon_theme
+
     case $1 in
-        *Dark)   theme="$ICON_DARK"   ;;
-        *Light)  theme="$ICON_LIGHT"  ;;
+        *Dark)   icon_theme="$ICON_DARK"   ;;
+        *Light)  icon_theme="$ICON_LIGHT"  ;;
     esac
 
-    xfconf-query -c xsettings -p /Net/IconThemeName -s "$theme"
-    gsettings set org.gnome.desktop.interface icon-theme "$theme"
+    xfconf-query -c xsettings -p /Net/IconThemeName -s "$icon_theme"
+    gsettings set org.gnome.desktop.interface icon-theme "$icon_theme"
 }
 
 open_light_menu() {
@@ -53,5 +56,5 @@ esac
 
 [ -z "$sel" ] && exit 1
 
-set_gtk "$sel"
-set_gtk_icon "$sel"
+set_gtk_theme "$sel"
+set_gtk_icon_theme "$sel"

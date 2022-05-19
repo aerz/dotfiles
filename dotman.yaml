@@ -1,3 +1,4 @@
+---
 bash_profile: ~/.bash_profile
 bashrc: ~/.bashrc
 cat: ~/cat
@@ -12,18 +13,21 @@ local/share/fonts/Feather.ttf: ~/.local/share/fonts/Feather.ttf
 
 config/alacritty: ~/.config/alacritty
 config/bat/config: ~/.config/bat/config
-config/doom/config.el: ~/.config/doom/config.el
 config/doom/init.el: ~/.config/doom/init.el
+config/doom/config.el: ~/.config/doom/config.el
 config/doom/packages.el: ~/.config/doom/packages.el
 config/fontconfig: ~/.config/fontconfig
 config/git: ~/.config/git
 config/gtk-3.0/settings.ini: ~/.config/gtk-3.0/settings.ini
 config/i3: ~/.config/i3
-config/multilock: ~/.config/multilock
+config/betterlockscreen/betterlockscreenrc: ~/.config/betterlockscreenrc
 config/mimeapps.list: ~/.config/mimeapps.list
 config/paru/paru.conf: ~/.config/paru/paru.conf
 config/polybar: ~/.config/polybar
 config/rofi: ~/.config/rofi
+config/systemd/user/rclone-mount@.service: ~/.config/systemd/user/rclone-mount@.service
+config/systemd/user/touchegg-client.service: ~/.config/systemd/user/touchegg-client.service
+config/touchegg/touchegg.conf: ~/.config/touchegg/touchegg.conf
 config/user-dirs.dirs: ~/.config/user-dirs.dirs
 config/systemd/user/kopia-backup@.service: ~/.config/systemd/user/kopia-backup@.service
 config/systemd/user/kopia-backup@.timer: ~/.config/systemd/user/kopia-backup@.timer

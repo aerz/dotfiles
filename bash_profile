@@ -15,6 +15,7 @@ export BROWSER="brave"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_DATA_DIRS="/usr/local/share/:/usr/share/:$XDG_DATA_HOME/flatpak/exports/share:flatpak/exports/share:/var/lib/flatpak/exports/share"
 
 # Programs
 export GOPATH="$XDG_DATA_HOME/go"
@@ -29,6 +30,11 @@ export PATH="$PATH:$CARGO_HOME/bin"
 export PATH="$PATH:$XDG_CONFIG_HOME/emacs/bin"
 
 # ---
+# Other vars
+# ---
+export KOPIA_USE_KEYRING=1
+
+# ---
 # SSH/GPG Agent
 # ---
 # Check gnome-keyring is running
@@ -37,11 +43,6 @@ if [[ ! -v $SSH_AUTH_SOCK ]]; then
 else
     eval "$(keychain --eval --quiet --systemd --inherit any)"
 fi
-
-# ---
-# Program vars
-# ---
-export KOPIA_USE_KEYRING=1
 
 # ---
 # Load bashrc

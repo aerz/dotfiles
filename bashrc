@@ -3,38 +3,82 @@
 # ---
 # Shell
 # ---
-
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
 # Prompt configuration
 PS1='[\u@\h \W]\$ '
 
+# Use bash-completion when available
+[[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
+    . /usr/share/bash-completion/bash_completion
+
 # ---
 # X Session
 # ---
-
 # Start a new xorg session by default wether it does not exist
 if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
-  exec startx "$XINITRC" --
+    exec startx "$XINITRC" -- -keeptty >$XDG_DATA_HOME/xorg/xorg.tty.log 2>&1
 fi
 
 # ---
 # Alias
 # ---
 alias emacs="emacsclient -c -a 'emacs'"
-alias em="/usr/bin/emacs -nw"
 
 # Enable colors
 man() {
+    local page
+
+    if [[ $# -eq 0 ]]; then
+         page=$(man -k . | fzf --prompt='Man> ' | awk '{print $1}')
+    fi
+
     LESS_TERMCAP_md=$'\e[01;31m' \
     LESS_TERMCAP_me=$'\e[0m' \
     LESS_TERMCAP_se=$'\e[0m' \
     LESS_TERMCAP_so=$'\e[01;44;33m' \
     LESS_TERMCAP_ue=$'\e[0m' \
     LESS_TERMCAP_us=$'\e[01;32m' \
-    command man "$@"
+    command man "${@:-$page}"
 }
+
+# Another CTRL-R script to insert the selected command from history into the command line/region
+__fzf_history ()
+{
+    builtin history -a;
+    builtin history -c;
+    builtin history -r;
+    builtin typeset \
+        READLINE_LINE_NEW="$(
+            HISTTIMEFORMAT= builtin history |
+            command fzf +s --tac +m -n2..,.. --tiebreak=index --toggle-sort=ctrl-r |
+            command sed '
+                /^ *[0-9]/ {
+                    s/ *\([0-9]*\) .*/!\1/;
+                    b end;
+                };
+                d;
+                : end
+            '
+        )";
+
+        if
+                [[ -n $READLINE_LINE_NEW ]]
+        then
+                builtin bind '"\er": redraw-current-line'
+                builtin bind '"\e^": magic-space'
+                READLINE_LINE=${READLINE_LINE:+${READLINE_LINE:0:READLINE_POINT}}${READLINE_LINE_NEW}${READLINE_LINE:+${READLINE_LINE:READLINE_POINT}}
+                READLINE_POINT=$(( READLINE_POINT + ${#READLINE_LINE_NEW} ))
+        else
+                builtin bind '"\er":'
+                builtin bind '"\e^":'
+        fi
+}
+
+builtin set -o histexpand;
+builtin bind -x '"\C-x1": __fzf_history';
+builtin bind '"\C-r": "\C-x1\e^\er"'
 
 alias grep='grep --color=auto'
 alias tree='tree -C'
@@ -52,14 +96,13 @@ lt() {
 alias df='df -h'
 alias cp='cp -i'
 
+
+# SSH/GPG
 # Change terminal emulator on ssh connections
 alias ssh='TERM=xterm-256color ssh'
-
-# Add GPG or SSH keys to default agent
-alias sshak="keychain --quiet --attempts 2 --agents ${KEYCHAIN_SSH_AGENT}"
-alias gpgak="keychain --quiet --nogui --attempts 2 --agents ${KEYCHAIN_GPG_AGENT}"
-# Clean all the identities loaded
-alias sshcl='keychain --clear'
+alias keychain='keychain --quiet'
+alias sshak="keychain --quiet --inherit any --attempts 2"
+alias gpgak="keychain --quiet --nogui --attempts 2"
 alias sshsum='ssh-keygen -l -f'
 
 # git
@@ -226,12 +269,3 @@ npx() {
     npx $@
 }
 
-# ---
-# Autostart
-# ---
-
-# mcfly
-if which mcfly &> /dev/null; then
-    export MCFLY_RESULTS=200 MCFLY_FUZZY=2
-    eval "$(mcfly init bash)"
-fi

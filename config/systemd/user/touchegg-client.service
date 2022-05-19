@@ -1,0 +1,12 @@
+[Unit]
+Description=Touchegg Client, a multi-touch gesture recognizer
+Documentation=https://github.com/JoseExposito/touchegg#installation
+AssertEnvironment=DISPLAY
+
+[Service]
+ExecStart=/usr/bin/touchegg --client
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=default.target

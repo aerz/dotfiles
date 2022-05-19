@@ -190,13 +190,25 @@ bindsym $mod+Ctrl+r mode "resize"
 
 mode "resize" {
     ## Resize Mode // Modify window size // k j h l ##
-    bindsym h resize shrink width 3 px or 3 ppt
-    bindsym l resize grow width 3 px or 3 ppt
-    bindsym k resize shrink height 3 px or 3 ppt
-    bindsym j resize grow height 3 px or 3 ppt
+    bindsym h resize shrink width 10 px or 10 ppt
+    bindsym l resize grow width 10 px or 10 ppt
+    bindsym k resize shrink height 10 px or 10 ppt
+    bindsym j resize grow height 10 px or 10 ppt
+
+    ## Resize Mode // Modify window size // ↑ ↓ ← → ##
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+
+    ## Resize Mode // Exit to default mode // Return ##
+    bindsym Return mode "default"
 
     ## Resize Mode // Exit to default mode // Esc ##
     bindsym Escape mode "default"
+
+    ## Resize Mode // Exit to default mode // <Super> <Ctrl> r ##
+    bindsym $mod+Ctrl+r mode "default"
 }
 
 ## Layout Mode // Enter to layout mode // <Super> <Ctrl> l ##
@@ -212,8 +224,14 @@ mode "layout" {
     ## Layout Mode // Toggle tabbed, splith, splitv // Tab ##
     bindsym Tab layout toggle tabbed splith splitv
 
+    ## Layout Mode // Exit to default mode // Return ##
+    bindsym Return mode "default"
+
     ## Layout Mode // Exit to default mode // Esc ##
     bindsym Escape mode "default"
+
+    ## Layout Mode // Exit to default mode // <Super> <Ctrl> l ##
+    bindsym $mod+Ctrl+l mode "default"
 }
 
 # ---
@@ -222,7 +240,7 @@ mode "layout" {
 ## i3 // Reload config // <Super> Esc ##
 bindsym $mod+Escape reload
 
-# i3 // Restart // <Super> <Alt> Esc ##
+## i3 // Restart // <Super> <Alt> Esc ##
 bindsym $mod+$alt+Escape restart
 
 # ---
@@ -280,7 +298,10 @@ bindsym $mod+$alt+space exec rofi -show window -show-icons -matching fuzzy
 bindsym $mod+Shift+space exec rofi -show run -matching fuzzy
 
 ## Apps // Open shortcuts helper // <Super> <Shift> ? ##
-bindsym $mod+Shift+slash exec pgrep -x remontoire | xargs kill || remontoire -c ~/.config/i3/config
+bindsym $mod+Shift+question exec pgrep -x remontoire | xargs kill || remontoire -c ~/.config/i3/config
+
+## Apps // Open rofi-calc // <Super> <Shift> c ##
+bindsym $mod+Shift+c exec rofi -show calc -modi calc -no-show-match -no-sort
 
 ## Apps // Open rofi-calc // <Super> <Shift> c ##
 bindsym $mod+Shift+c exec rofi -show calc -modi calc -no-show-match -no-sort
