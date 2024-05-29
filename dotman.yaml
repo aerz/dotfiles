@@ -4,7 +4,7 @@ bashrc: ~/.bashrc
 cat: ~/cat
 
 local/bin/fldr: ~/.local/bin/fldr
-local/bin/mlight: ~/.local/bin/mlight
+local/bin/ddccictrl: ~/.local/bin/ddccictrl
 local/bin/multimon: ~/.local/bin/multimon
 local/bin/qrgen: ~/.local/bin/qrgen
 

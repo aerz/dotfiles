@@ -1,0 +1,74 @@
+#!/usr/bin/env bash
+#
+# Control ddcci backlight driver.
+#
+# ------------------------------------------------------------------------------
+# Dependencies
+# ------------------------------------------------------------------------------
+# brillo (https://aur.archlinux.org/packages/brillo)
+# ddcci-driver (https://aur.archlinux.org/packages/ddcci-driver-linux-dkms/)
+# ------------------------------------------------------------------------------
+
+show_device_idmodel() {
+    cat "/sys/class/backlight/$1/device/idModel"
+}
+
+notify-send() {
+    /usr/bin/notify-send \
+        --expire-time=2000 \
+        --icon /usr/share/icons/Papirus-Dark/symbolic/status/display-brightness-symbolic.svg \
+        "$@"
+}
+
+notify_monitor_list() {
+    mapfile -t displays < <(brillo -L)
+
+    echo "Displays detected"
+    for display in "${displays[@]}"; do
+        echo \
+            "$(show_device_idmodel "$display")" "($display):" \
+            "$(brillo -s "$display" | cut -d '.' -f1)%"
+    done
+}
+
+exec_restart_notify() {
+    notify-send 'Backlight' 'Restarting ddcci-backlight service...'
+    systemctl restart --wait ddcci-backlight.service
+    notify-send 'Backlight' "$(notify_monitor_list)"
+}
+
+exec_restart() {
+    echo "Restarting ddcci-backlight service..."
+    systemctl restart --wait ddcci-backlight.service
+    notify_monitor_list
+}
+
+exec_default_notify() {
+    notify-send 'Backlight' "$(notify_monitor_list)"
+}
+
+exec_default() {
+    notify_monitor_list
+}
+
+while (($# > 0)); do
+    case $1 in
+        -r | --restart)
+            shift && restart=true
+            ;;
+        -n | --notification)
+            shift && notification=true
+            ;;
+        *)
+            shift
+            ;;
+    esac
+done
+
+if [[ -v notification ]]; then
+    [[ -v restart ]] && exec_restart_notify && exit 0
+    exec_default_notify && exit 0
+fi
+
+[[ -v restart ]] && exec_restart && exit 0
+exec_default
