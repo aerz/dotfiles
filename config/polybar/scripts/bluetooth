@@ -28,7 +28,7 @@ bluetooth_print() {
         if [ "$(systemctl is-active bluetooth)" == "active" ] && [ "$(bluetooth_is_on)" == "yes" ]; then
             echo ""
 
-            bluetoothctl paired-devices | grep Device | cut -d ' ' -f 2 | while read -r device; do
+            bluetoothctl devices Paired | grep Device | cut -d ' ' -f 2 | while read -r device; do
                 if bluetoothctl info "$device" | grep -q "Connected: yes"; then
                     echo "%{F${COLOR_SECONDARY}}%{F-}"
                 fi
