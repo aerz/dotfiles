@@ -9,10 +9,20 @@
 # If no parameters are given, reads from STDIN.
 
 set -o pipefail
+set -x
 
-readonly QRFILE=`mktemp --suff=.png`
+tmpfile=$(mktemp --suff=.png)
+readonly tmpfile
 
-xclip -selection clipboard -o | qrencode -o "${QRFILE}"
+case $XDG_SESSION_TYPE in
+    wayland)
+        wl-paste | qrencode -o "$tmpfile"
+        ;;
+    *)
+        xclip -selection clipboard -o | qrencode -o "$tmpfile"
+        ;;
+esac
+
 [ $? -ne 0 ] && exit 1
 
 # stdin to qr
@@ -20,7 +30,7 @@ xclip -selection clipboard -o | qrencode -o "${QRFILE}"
 #   qrencode -o ${qrfile} "$*";
 
 # Open the QR code for viewing
-sxiv ${QRFILE} &
+xdg-open "$tmpfile" &
 pid="$!"
-wait "${pid}"
-rm ${QRFILE}
+wait "$pid"
+rm "$tmpfile"
