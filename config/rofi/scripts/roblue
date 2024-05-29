@@ -76,7 +76,7 @@ toggle_conn_paired_dev() {
 }
 
 list_paired_devices() {
-    bluetoothctl paired-devices | cut -d " " -f 2 | xargs -I{} bluetoothctl info {} | \
+    bluetoothctl devices Paired | cut -d " " -f 2 | xargs -I{} bluetoothctl info {} | \
     awk '
         /Name: / {
             name = substr($0, index($0, $2))
@@ -109,7 +109,7 @@ open_paired_devices_menu() {
         *"Turn Off")    bluetoothctl power off && exit  ;;
         *)
             local dev="$(echo "$sel" | sed 's/^ //')"
-            bluetoothctl paired-devices | grep -w "$dev"
+            bluetoothctl devices Paired | grep -w "$dev"
         ;;
     esac
 }

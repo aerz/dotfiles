@@ -49,9 +49,9 @@ open_dark_menu() {
 
 gtkc="$(xfconf-query -c xsettings -p /Net/ThemeName)"
 
-case $gtkc in
-    $GTK_DARK)   sel=$(printf "%s\n%s" "  Light" "  Dark" | open_dark_menu)   ;;
-    $GTK_LIGHT)  sel=$(printf "%s\n%s" "  Dark" "  Light" | open_light_menu)  ;;
+case "$gtkc" in
+    "$GTK_DARK")   sel=$(printf "%s\n%s" "  Light" "  Dark" | open_dark_menu)   ;;
+    "$GTK_LIGHT")  sel=$(printf "%s\n%s" "  Dark" "  Light" | open_light_menu)  ;;
 esac
 
 [ -z "$sel" ] && exit 1
