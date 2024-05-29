@@ -303,9 +303,6 @@ bindsym $mod+Shift+question exec pgrep -x remontoire | xargs kill || remontoire 
 ## Apps // Open rofi-calc // <Super> <Shift> c ##
 bindsym $mod+Shift+c exec rofi -show calc -modi calc -no-show-match -no-sort
 
-## Apps // Open rofi-calc // <Super> <Shift> c ##
-bindsym $mod+Shift+c exec rofi -show calc -modi calc -no-show-match -no-sort
-
 ## Apps // Generate a QR from clipboard // <Super> <Shift> <Ctrl> c ##
 bindsym $mod+Shift+Ctrl+c exec ~/.local/bin/qrgen
 
