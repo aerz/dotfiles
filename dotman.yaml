@@ -13,9 +13,7 @@ local/share/fonts/Feather.ttf: ~/.local/share/fonts/Feather.ttf
 
 config/alacritty: ~/.config/alacritty
 config/bat/config: ~/.config/bat/config
-config/doom/init.el: ~/.config/doom/init.el
-config/doom/config.el: ~/.config/doom/config.el
-config/doom/packages.el: ~/.config/doom/packages.el
+config/doom: ~/.config/doom
 config/dunst: ~/.config/dunst
 config/fontconfig: ~/.config/fontconfig
 config/git: ~/.config/git

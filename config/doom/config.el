@@ -1,81 +1,179 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
-
-;; Place your private configuration here! Remember, you do not need to run 'doom
-;; sync' after modifying this file!
-
-
-;; Some functionality uses this to identify you, e.g. GPG configuration, email
-;; clients, file templates and snippets. It is optional.
+;; -----------------------------------------------------------------------------
+;; Global
+;; -----------------------------------------------------------------------------
 (setq user-full-name "Agustin Cisneros"
-      user-mail-address "agustincc@tutanota.com")
+      user-mail-address "agustincc@tutanota.com"
+      +zen-text-scale 1
 
-;; Doom exposes five (optional) variables for controlling fonts in Doom:
-;;
-;; - `doom-font' -- the primary font to use
-;; - `doom-variable-pitch-font' -- a non-monospace font (where applicable)
-;; - `doom-big-font' -- used for `doom-big-font-mode'; use this for
-;;   presentations or streaming.
-;; - `doom-unicode-font' -- for unicode glyphs
-;; - `doom-serif-font' -- for the `fixed-pitch-serif' face
-;;
-;; See 'C-h v doom-font' for documentation and more examples of what they
-;; accept. For example:
-;;
-(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 20)
-      doom-variable-pitch-font (font-spec :family "Inter"))
-;;
-;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
-;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
-;; refresh your font settings. If Emacs still can't find your font, it likely
-;; wasn't installed correctly. Font issues are rarely Doom issues!
+      doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 15)
+      ;; doom-font (font-spec :family "Iosevka" :size 16)
+      ;; doom-variable-pitch-font (font-spec :family "Iosevka")
+      doom-theme 'doom-tomorrow-night
+      +doom-dashboard-functions '(doom-dashboard-widget-shortmenu
+                                  doom-dashboard-widget-loaded))
 
-;; There are two ways to load a theme. Both assume the theme is installed and
-;; available. You can either set `doom-theme' or manually load a theme with the
-;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-tomorrow-night)
+;; Do not create a new perspective for a new frame
+(after! persp-mode
+  (setq persp-emacsclient-init-frame-behaviour-override "main"))
 
-;; TODO: Add hooks for progn mode + config files instead enable it globally
-;; Show whitespaces by default
-;; (global-whitespace-mode +1)
-(setq org-startup-folded t)
+(map! :map 'override :leader ":" nil
+      :leader
+      :prefix (":" . "execute")
+      :desc "M-x" ":" #'execute-extended-command
+      :desc "M-x for buffer" "." #'execute-extended-command-for-buffer)
 
-;; This determines the style of line numbers in effect. If set to `nil', line
-;; numbers are disabled. For relative line numbers, set this to `relative'.
+(map! :leader :desc "Search file" "\\" #'consult-find)
+
+;; Enable smooth scrolling (touchpad)
+(when (and (not (version<= emacs-version "29"))
+           (string= (system-name) "minivac"))
+  (add-hook! 'after-init-hook (pixel-scroll-precision-mode +1)))
+
+;; -----------------------------------------------------------------------------
+;; Editor
+;; -----------------------------------------------------------------------------
 (setq display-line-numbers-type 'relative)
 
-;; If you use `org' and don't want your org files in the default location below,
-;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
+;; ansible
+(setq lsp-yaml-custom-tags ["!vault"])
+
+;; ansible/jinja2
+(after! jinja2-mode (set-formatter!
+                      'prettier-jinja2 '("") :modes '(jinja2-mode)))
+
+;; -----------------------------------------------------------------------------
+;; org
+;; -----------------------------------------------------------------------------
+(setq org-agenda-include-diary t
+      org-agenda-start-on-weekday 1
+
+      org-directory "~/Documents/Emacs"
+      ;; org-roam-directory "~/Documents/Emacs/Pyramid Notebook"
+      org-cite-global-bibliography '("~/Documents/Emacs/citations.bib")
+      org-startup-folded t
+      org-ellipsis " ›")
+
+(use-package! olivetti
+  :after org
+  :custom
+  (olivetti-style 'fancy))
+
+(defun aerz/default-org-mode ()
+  "Set the defaults for org-mode personal usage."
+  (interactive)
+  (hl-line-mode -1)
+  (display-line-numbers-mode -1)
+  (vi-tilde-fringe-mode -1)
+  ;; (git-gutter-mode -1)
+  (auto-fill-mode +1)
+  (olivetti-mode +1))
+
+;; (add-hook! 'org-mode-hook #'aerz/default-org-mode)
+(add-hook! 'org-mode-hook #'auto-fill-mode)
+(add-hook! 'org-mode-hook #'+org-enable-auto-reformat-tables-h)
+
+(after! org
+  ;; defaults
+  (setq org-attach-dir-relative t
+        time-stamp-format "%Y-%02m-%02d %02H:%02M")
+  ;; hooks
+  (add-hook! 'before-save-hook 'time-stamp))
 
 
-;; Whenever you reconfigure a package, make sure to wrap your config in an
-;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
-;;
-;;   (after! PACKAGE
-;;     (setq x y))
-;;
-;; The exceptions to this rule:
-;;
-;;   - Setting file/directory variables (like `org-directory')
-;;   - Setting variables which explicitly tell you to set them before their
-;;     package is loaded (see 'C-h v VARIABLE' to look up their documentation).
-;;   - Setting doom variables (which start with 'doom-' or '+').
-;;
-;; Here are some additional functions/macros that will help you configure Doom.
-;;
-;; - `load!' for loading external *.el files relative to this one
-;; - `use-package!' for configuring packages
-;; - `after!' for running code after a package has loaded
-;; - `add-load-path!' for adding directories to the `load-path', relative to
-;;   this file. Emacs searches the `load-path' when you load packages with
-;;   `require' or `use-package'.
-;; - `map!' for binding new keys
-;;
-;; To get information about any of these functions/macros, move the cursor over
-;; the highlighted symbol at press 'K' (non-evil users must press 'C-c c k').
-;; This will open documentation for it, including demos of how they are used.
-;; Alternatively, use `C-h o' to look up a symbol (functions, variables, faces,
-;; etc).
-;;
-;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
-;; they are implemented.
+(use-package! org-modern
+  :hook (org-mode . global-org-modern-mode)
+  :config
+  (setq org-modern-label-border 0.3))
+
+(defun org-roam-node-insert-immediate (arg &rest args)
+  "Inserts a new node without the need of pop-up the capture buffer."
+  (interactive "P")
+  (let ((args (cons arg args))
+        (org-roam-capture-templates (list (append (car org-roam-capture-templates)
+                                                  '(:immediate-finish t)))))
+    (apply #'org-roam-node-insert args)))
+
+(use-package! org-roam
+  :init
+  (map! :leader
+        :prefix "nr"
+        :desc "Insert node immediate" "I" #'org-roam-node-insert-immediate)
+  :config
+  (org-roam-db-autosync-mode +1)
+  (setq org-roam-capture-templates
+        '(
+          ("d" "default" plain "%?"
+           :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+                              "#+title: ${title}\n")
+           :unnarrowed t)
+          ("p" "project" plain "%?"
+           :target (file+head "projects/%<%Y%m%d%H%M%S>-${slug}.org"
+                              "#+title: ${title}\n#+filetags:\n")
+           :unnarrowed t)
+          ("a" "area" plain "%?"
+           :target (file+head "areas/%<%Y%m%d%H%M%S>-${slug}.org"
+                              "#+title: ${title}\n#+filetags:\n")
+           :unnarrowed t)
+          ("r" "resource" plain "%?"
+           :target (file+head "resources/%<%Y%m%d%H%M%S>-${slug}.org"
+                              "#+title: ${title}\n#+filetags:\n")
+           :unnarrowed t)
+          )))
+
+(use-package! websocket
+  :after org-roam)
+
+(use-package! org-roam-ui
+  :init
+  (map! :leader
+        :prefix "nr"
+        :desc "Open orui" "u" #'org-roam-ui-open
+        :desc "Sync theme with orui" "t" #'org-roam-ui-sync-theme)
+  :custom
+  (org-roam-ui-sync-theme t)
+  (org-roam-ui-follow t)
+  (org-roam-ui-update-on-save t)
+  (org-roam-ui-open-on-start nil))
+
+;; biblio
+(setq! citar-bibliography '("~/Documents/org/citations.bib"))
+
+;; reftex
+(setq reftex-default-bibliography "~/Documents/org/citations.bib")
+
+;; latex
+(setq +latex-viewers '(zathura))
+
+;; -----------------------------------------------------------------------------
+;; sh-mode
+;; -----------------------------------------------------------------------------
+(pushnew! +lookup-provider-url-alist
+          '("ShellCheck Wiki" "https://www.shellcheck.net/wiki/%s"))
+
+;; -----------------------------------------------------------------------------
+;; Snippets
+;; -----------------------------------------------------------------------------
+(after! yasnippet
+  (add-to-list 'warning-suppress-types '(yasnippet backquote-change)))
+
+(after! sh-script
+  (set-company-backend! 'sh-mode
+                        '(company-shell :with company-yasnippet)))
+
+;; -----------------------------------------------------------------------------
+;; Themes
+;; -----------------------------------------------------------------------------
+(use-package! darkman
+  :custom
+  (darkman-themes '(:light doom-tomorrow-day
+                    :dark doom-tomorrow-night))
+  (darkman-switch-themes-silently nil)
+  :config
+  (when (display-graphic-p)
+    (add-hook! 'window-setup-hook (darkman-mode))) ;; after custom.el is loaded
+  (when (daemonp)
+    (add-hook 'server-after-make-frame-hook #'darkman-mode)
+    (advice-add 'darkman-mode :after
+                (lambda ()
+                  (remove-hook 'server-after-make-frame-hook #'darkman-mode)))))
