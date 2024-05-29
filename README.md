@@ -1,10 +1,13 @@
 # dotfiles
 
-<img src="img/ufetch.png" alt="desktop" align="right" width="400px">
+<figure>
+  <img src="img/ufetch.png" alt="desktop" align="right" width="400px">
+  <figcaption><i>Outdated</i></figcaption>
+<figure>
 
 - **OS**: [Arch Linux](https://archlinux.org)
-- **WM**: [i3-gaps](https://github.com/Airblader/i3)
-- **Bar**: [Polybar](https://github.com/polybar/polybar)
+- **WM**: [sway](https://github.com/swaywm/sway)
+- **Bar**: [waybar](https://github.com/Alexays/Waybar)
 - **Shell**: [Bash](https://www.gnu.org/software/bash/)
 - **Terminal emulator**: [Alacritty](https://github.com/alacritty/alacritty)
 - **Editor**: [Emacs](https://www.gnu.org/software/emacs/)
@@ -20,21 +23,20 @@
 | [rofi](https://github.com/davatorium/rofi)                                    | Dmenu replacement                                   |
 | [playerctl](https://github.com/altdesktop/playerctl)                          | Fetch metadata about what is being played           |
 | [ponymix](https://github.com/falconindy/ponymix)                              | Pulseaudio frontend to control output/input devices |
-| [regolith-rofication](https://github.com/regolith-linux/regolith-rofication)  | Minimal notification daemon                         |
-| [paru](https://github.com/morganamilo/paru)                                   | AUR helper                                          |
-| [shotgun](https://github.com/neXromancers/shotgun)                            | Minimal screenshot utility                          |
-| [betterlockscreen](https://github.com/betterlockscreen/betterlockscreen)      | Xorg Lockscreen                                     |
-| [XFCE Settings Daemon](https://docs.xfce.org/xfce/xfce4-settings/xfsettingsd) | Control dark/light themes and global settings       |
-| [nitrogen](https://github.com/l3ib/nitrogen)                                  | Background setter                                   |
-| [sxiv](https://github.com/muennich/sxiv)                                      | Image viewer                                        |
-| [Zathura](https://pwmt.org/projects/zathura)                                  | Document viewer                                     |
-| [keychain](https://www.funtoo.org/Keychain)                                   | SSH and GPG key manager                             |
+| [yay](https://github.com/Jguer/yay)                                           | AUR helper                                          |
+| [grimshot](https://github.com/OctopusET/sway-contrib)                         | Screenshot utility combines grim with slurp         |
+| [swaylock](https://github.com/mortie/swaylock-effects)                        | swaylock with effects                               |
+| [swayidle](https://github.com/swaywm/swayidle)                                | Idle manager doesn't care about media               |
+| [imv](https://sr.ht/~exec64/imv/)                                             | Image viewer                                        |
+| [zathura](https://pwmt.org/projects/zathura)                                  | Best document viewer                                |
+| [gnome-keyring](https://archlinux.org/packages/extra/x86_64/gnome-keyring/)   | Save secrets safe, unlocks with Linux PAM           |
+| [keepassxc](https://keepassxc.org)                                            | Portable secrets vault with agent integration       |
 
 ## Fonts
 
-- [Inter](https://rsms.me/inter) - System UI, Sans serif
-- [JetBrainsMono Nerd Font](https://www.nerdfonts.com) - Monospace + Icons
-- [Google Noto Emojis](https://www.google.com/get/noto/) - Emojis
+- [Inter](https://rsms.me/inter)
+- [JetBrainsMono Nerd Font](https://www.nerdfonts.com)
+- [twemoji](https://github.com/twitter/twemoji). I like their flags.
 
 ## Wallpaper
 

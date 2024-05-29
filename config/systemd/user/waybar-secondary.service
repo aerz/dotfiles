@@ -1,0 +1,15 @@
+[Unit]
+Description=Highly customizable Wayland bar for Sway and Wlroots based compositors
+Documentation=https://github.com/Alexays/Waybar/wiki/
+Requires=sway.service
+PartOf=graphical-session.target
+StartLimitIntervalSec=30
+StartLimitBurst=5
+
+[Service]
+Type=simple
+Restart=on-failure
+ExecStart=/usr/bin/waybar \
+    --log-level info \
+    --config "%h/.config/waybar/config.secondary.json" \
+    --style "%h/.config/waybar/style.secondary.css"

@@ -1,0 +1,352 @@
+# ------------------------------------------------------------------------------
+# General
+# ------------------------------------------------------------------------------
+include /etc/sway/config.d/*
+
+set $font.jetbrains pango:JetBrainsMono NerdFont
+
+# Super: Mod4 - Alt: Mod1
+set $mod Mod4
+set $alt Mod1
+
+# Disable follow focus with mouse
+focus_follows_mouse no
+
+gaps inner 5
+gaps outer 3
+
+default_border pixel 2
+smart_gaps on
+smart_borders on
+hide_edge_borders smart
+
+# ------------------------------------------------------------------------------
+# Workspaces
+# ------------------------------------------------------------------------------
+bindsym $mod+Tab workspace next
+bindsym $mod+Shift+Tab workspace prev
+
+# ------------------------------------------------------------------------------
+# Containers
+# ------------------------------------------------------------------------------
+bindsym $mod+equal focus parent
+bindsym $mod+minus focus child
+
+# ------------------------------------------------------------------------------
+# Navigation
+# ------------------------------------------------------------------------------
+bindsym $mod+h focus left
+bindsym $mod+l focus right
+bindsym $mod+k focus up
+bindsym $mod+j focus down
+
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+l move right
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+j move down
+
+bindsym $mod+g split h
+bindsym $mod+v split v
+
+bindsym $mod+f fullscreen toggle
+floating_modifier $mod
+
+bindsym $mod+Shift+f floating toggle
+bindsym $mod+Shift+t focus mode_toggle
+bindsym $mod+Shift+q kill
+
+# ------------------------------------------------------------------------------
+# Window Configuration
+# ------------------------------------------------------------------------------
+# Hide all window titlebars
+# https://github.com/swaywm/sway/issues/7409
+# for_window * titlebar hide
+
+for_window [app_id="LibreWolf" title="^Picture-in-Picture$"] floating enable
+for_window [app_id="pavucontrol"] floating enable
+for_window [app_id="blueman-manager"] floating enable
+for_window [app_id="org.gnome.gitlab.YaLTeR.VideoTrimmer"] floating enable
+for_window [app_id="org.telegram.desktop" title="^(.+(\s\(\d+\))|Telegram)$"] {
+    floating enable
+    resize set 450 780
+    move position center
+}
+
+for_window [app_id="org.keepassxc.KeePassXC" title="Unlock Database.*"] {
+    floating enable
+}
+
+# All window dialogs in floating mode
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_role="Preferences"] floating enable
+for_window [window_type="dialog"] floating enable
+for_window [window_type="menu"] floating enable
+
+for_window [app_id="engrampa" title="Compress"] floating enable
+for_window [app_id="org.gnome.FileRoller"] floating enable
+for_window [app_id="file-roller"] floating enable
+for_window [app_id="org.gnome.NautilusPreviewer"] floating enable; move position center
+for_window [app_id="com.belmoussaoui.Obfuscate"] floating enable
+for_window [app_id="com.github.johnfactotum.Foliate"] floating enable
+for_window [app_id="localsend_app"] floating enable
+for_window [app_id="electron" title="Open folder as vault"] floating enable; resize set 1000 800
+
+# https://github.com/Martchus/syncthingtray/blob/6b7d9169142936a42f2eb614981d4ab09980abdb/README.md#workaround-positioning-issues-under-wayland
+for_window [app_id="syncthingtray" title="^Syncthing Tray( \(.*\))?$"] {
+    border none
+    floating enable
+    resize set 450 400
+    move position center
+}
+
+for_window [app_id="syncthingtray" title="^.*Syncthing Tray( \(.*\))?$"] {
+    floating enable
+    resize set 1000 800
+    move position center
+}
+
+for_window [app_id="com.github.finefindus.eyedropper"] {
+    floating enable
+    resize set 300 450
+    move position center
+}
+
+for_window [app_id="thunar" title="^File Operation Progress$"] {
+    floating enable
+    move position center
+}
+
+for_window [app_id="com.github.huluti.Curtail"] {
+    border none
+    floating enable
+    move position center
+}
+
+for_window [app_id="page.codeberg.Imaginer.Imaginer"] {
+    border none
+    floating enable
+    resize set 650 850
+    move position center
+}
+
+for_window [app_id="org.nickvision.tagger"] {
+    border none
+    floating enable
+    resize set 400 600
+    move position center
+}
+
+for_window [app_id="LibreWolf" title="Enter name of file.*"] {
+    border none
+    resize set 800 700
+    move position center
+}
+
+# https://github.com/flameshot-org/flameshot/blob/3d21e4967b68e9ce80fb2238857aa1bf12c7b905/docs/Sway%20and%20wlroots%20support.md
+for_window [app_id="flameshot"] {
+    border pixel 0
+    floating enable
+    fullscreen disable
+    move absolute position 0 0
+}
+
+for_window [app_id="org.gnome.Calculator"] floating enable
+
+# Disable idle
+for_window [app_id="LibreWolf"] inhibit_idle fullscreen
+for_window [app_id="firefox"] inhibit_idle fullscreen
+
+# ------------------------------------------------------------------------------
+# Theme
+# ------------------------------------------------------------------------------
+# tomorrow-night
+# https://github.com/chriskempson/tomorrow-theme
+# ------------------------------------------------------------------------------
+set $base00 #181818
+set $base01 #282828
+set $base02 #383838
+set $base03 #585858
+set $base04 #b8b8b8
+set $base05 #d8d8d8
+set $base06 #e8e8e8
+set $base07 #f8f8f8
+set $base08 #BD4E4E
+set $base09 #dc9656
+set $base0A #f7ca88
+set $base0B #a1b56c
+set $base0C #86c1b9
+set $baseFC #638A86
+set $base0D #7cafc2
+set $base0E #ba8baf
+set $base0F #a16946
+
+# class                  border   background  text     indicator  child_border
+client.focused           $base03  $base02     $base05  $base02    #908caa
+client.focused_inactive  $base01  $base01     $base05  $base03    $base01
+client.unfocused         $base01  $base00     $base05  $base01    $base01
+client.urgent            $base08  $base08     $base00  $base08    $base08
+client.placeholder       $base00  $base00     $base05  $base00    $base00
+client.background        $base07
+
+# ------------------------------------------------------------------------------
+# Workspaces
+# ------------------------------------------------------------------------------
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws0 "0"
+
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws0
+
+# ------------------------------------------------------------------------------
+# Containers
+# ------------------------------------------------------------------------------
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws0
+
+bindsym $mod+Shift+$alt+1 move container to workspace number $ws1; workspace number $ws1
+bindsym $mod+Shift+$alt+2 move container to workspace number $ws2; workspace number $ws2
+bindsym $mod+Shift+$alt+3 move container to workspace number $ws3; workspace number $ws3
+bindsym $mod+Shift+$alt+4 move container to workspace number $ws4; workspace number $ws4
+bindsym $mod+Shift+$alt+5 move container to workspace number $ws5; workspace number $ws5
+bindsym $mod+Shift+$alt+6 move container to workspace number $ws6; workspace number $ws6
+bindsym $mod+Shift+$alt+7 move container to workspace number $ws7; workspace number $ws7
+bindsym $mod+Shift+$alt+8 move container to workspace number $ws8; workspace number $ws8
+bindsym $mod+Shift+$alt+9 move container to workspace number $ws9; workspace number $ws9
+bindsym $mod+Shift+$alt+0 move container to workspace number $ws0; workspace number $ws0
+
+# ------------------------------------------------------------------------------
+# Modes
+# ------------------------------------------------------------------------------
+# Resize
+bindsym $mod+Ctrl+r mode "Resize"
+
+mode "Resize" {
+    bindsym h resize shrink width 10 px or 10 ppt
+    bindsym l resize grow width 10 px or 10 ppt
+    bindsym k resize shrink height 10 px or 10 ppt
+    bindsym j resize grow height 10 px or 10 ppt
+
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+Ctrl+r mode "default"
+}
+
+# Layout
+bindsym $mod+Ctrl+l mode "Layout"
+
+mode "Layout" {
+    bindsym s layout stacking
+    bindsym t layout tabbed
+    bindsym Tab layout toggle tabbed splith splitv
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+Ctrl+l mode "default"
+}
+
+# ------------------------------------------------------------------------------
+# Sway
+# ------------------------------------------------------------------------------
+bindsym $mod+Escape exec swaymsg reload && notify-send "Sway config was reloaded"
+
+# ------------------------------------------------------------------------------
+# Scratchpad
+# ------------------------------------------------------------------------------
+bindsym $mod+Shift+s scratchpad show
+bindsym $mod+Shift+$alt+s move to scratchpad
+
+# ------------------------------------------------------------------------------
+# Keybindings
+# ------------------------------------------------------------------------------
+bindsym $mod+Return         exec alacritty
+bindsym $mod+Shift+period   exec emote
+
+bindsym $mod+Shift+n        exec dunstctl close-all
+bindsym $mod+n              exec dunstctl history-pop
+
+bindsym $mod+Shift+$alt+v exec ~/.config/rofi/scripts/pasound --input
+bindsym $mod+Shift+v exec ~/.config/rofi/scripts/pasound --ignore "HDMI" --output
+
+# bindsym $mod+Shift+w exec  ~/.config/rofi/scripts/nmwifi
+bindsym $mod+Shift+b exec ~/.config/rofi/scripts/roblue paired
+# bindsym $mod+Shift+$alt+b exec ~/.config/i3/scripts/bt power_toggle
+bindsym $mod+XF86AudioMute exec ~/.config/rofi/scripts/pasound --mute
+
+bindsym $mod+Shift+e exec ~/.config/rofi/scripts/power
+bindsym $mod+$alt+l exec ~/.config/rofi/scripts/theme-mode
+
+bindsym $mod+space exec rofi -show drun -modi drun -drun-show-actions -show-icons -drun-match-fields name -matching prefix -theme ~/.config/rofi/themes/appmenu.rasi
+bindsym $mod+$alt+space exec ~/.config/rofi/scripts/sway-window-menu
+bindsym $mod+Shift+space exec rofi -show run -modi run -matching fuzzy -theme ~/.config/rofi/themes/windows.rasi
+
+# bindsym $mod+Shift+c exec rofi -show calc -modi calc -n
+
+bindsym $mod+Shift+Ctrl+c exec ~/.local/bin/qrgen
+
+# ------------------------------------------------------------------------------
+# Screen capture
+# ------------------------------------------------------------------------------
+set $screenctl ~/.local/bin/screenshot
+
+bindsym Print            exec $screenctl --area
+bindsym $mod+Print       exec $screenctl --window
+bindsym $mod+Shift+Print exec $screenctl --screen
+
+# ------------------------------------------------------------------------------
+# Audio
+# ------------------------------------------------------------------------------
+# set $audioctl ~/.config/sway/scripts/audio.sh
+
+bindsym XF86AudioRaiseVolume    exec ponymix increase 5
+bindsym XF86AudioLowerVolume    exec ponymix decrease 5
+
+bindsym XF86AudioMute           exec ponymix toggle
+bindsym $mod+$alt+XF86AudioMute exec ponymix --input toggle
+
+bindsym XF86AudioPlay           exec playerctl play-pause
+bindsym XF86AudioPause          exec playerctl play-pause
+bindsym $mod+XF86AudioPlay      exec playerctl stop
+bindsym $mod+XF86AudioPause     exec playerctl stop
+
+bindsym XF86AudioNext           exec playerctl next
+bindsym XF86AudioPrev           exec playerctl previous
+
+# ------------------------------------------------------------------------------
+# Autostart
+# ------------------------------------------------------------------------------
+exec systemd-run --user --unit=playerctld playerctld
+exec systemd-run --user --unit=emote emote
+exec systemd-run --user --unit=sway-autotiling autotiling-rs
+
+include `hostname`.conf

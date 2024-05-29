@@ -1,11 +1,16 @@
 [Unit]
 Description=Thunar Daemon
+Requires=sway.service
+After=sway.service
 After=gvfs-daemon.service
+StartLimitIntervalSec=30
+StartLimitBurst=5
 
 [Service]
+Type=simple
+Environment=WAYLAND_DISPLAY=wayland-1
 ExecStart=/usr/bin/thunar --daemon
-Restart=always
-RestartSec=5
+Restart=on-failure
 
 [Install]
 WantedBy=default.target

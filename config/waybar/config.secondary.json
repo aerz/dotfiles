@@ -1,0 +1,39 @@
+//-*- mode: jsonc -*-
+{
+  // General
+  "layer": "top",
+  "position": "top",
+  "height": 37,
+  "spacing": 4,
+  "output": "HDMI-A-1",
+  "modules-left": ["backlight"],
+  "modules-center": ["sway/mode"],
+  "modules-right": ["sway/window", "sway/workspaces"],
+  // Modules
+  "sway/window": {
+    "max-length": 80
+  },
+  "sway/workspaces": {
+    "disable-scroll": true,
+    "all-outputs": false,
+    "format": "{name}"
+  },
+  "backlight": {
+    "device": "ddcci1",
+    "format": "{percent}%  "
+  },
+  "cpu": {
+    "format": "{usage}% ",
+    "interval": 10
+  },
+  "memory": {
+    "format": "{used:0.1f}G/{total:0.1f}G",
+    "interval": 30
+  },
+  "temperature": {
+    "critical-threshold": 80,
+    "format-critical": "{temperatureC}°C {icon}",
+    "format": "{temperatureC}°C {icon}",
+    "format-icons": ["", "", "󰈸"]
+  }
+}

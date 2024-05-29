@@ -1,0 +1,94 @@
+#!/usr/bin/env bash
+#
+# Multimedia scrolling display
+#
+# Dependencies:
+#   - zscroll   (https://github.com/noctuid/zscroll)
+#   - playerctl (https://github.com/altdesktop/playerctl)
+#
+# Config:
+# Format of the information displayed
+# https://github.com/altdesktop/playerctl/#printing-properties-and-metadata
+META_FORMAT="{{ title }} - {{ artist }}"
+META_FORMAT_TOOLTIP="{{ playerName }} is playing {{ title }} - {{ artist }}"
+
+# Max characters to scroll
+MAX_SCROLL_CHARS=20
+
+# Scrolling display speed
+SCROLLING_DELAY=1.5
+
+check_cmd_installed() {
+    local cmds=("$@")
+
+    for cmd in "${cmds[@]}"; do
+        if ! command -v "$cmd" &>/dev/null; then
+            echo "err: ${cmd} is not installed, install it before use this script"
+            exit 1
+        fi
+    done
+}
+
+display_metadata() {
+    local metadata="$1"
+
+    case $(playerctl status 2>/dev/null) in
+        Playing | Paused)
+            playerctl metadata --format "$metadata" |
+                sed 's/"*//g'
+            ;;
+        *)
+            echo ""
+            ;;
+    esac
+}
+
+scrolling_display() {
+    local zspid
+
+    # this wrapper prevents unwanted behavior
+    # when the text is less than the maximum set
+    while true; do
+        zscroll \
+            --length $MAX_SCROLL_CHARS \
+            --delay $SCROLLING_DELAY \
+            --scroll-padding "  " \
+            --scroll 1 \
+            --update-check true \
+            --update-interval 2 \
+            "$0 --metadata" &
+
+        zspid=$!
+        watch \
+            --interval $SCROLLING_DELAY \
+            --chgexit \
+            'playerctl status' >/dev/null 2>&1
+        kill $zspid
+    done
+}
+
+check_cmd_installed "playerctl" "zscroll"
+
+case $1 in
+    --metadata) display_metadata "$META_FORMAT" ;;
+    --tooltip) display_metadata "$META_FORMAT_TOOLTIP" ;;
+    --paused) display_metadata "{{ playerName }}" ;;
+    *)
+        while read -r -e text; do
+            case "$(playerctl status 2>/dev/null)" in
+                Playing)
+                    printf '{"text":"󰎈 %s","tooltip":"%s","class":"active"}\n' \
+                        "$text" \
+                        "$($0 --tooltip)"
+                    ;;
+                Paused)
+                    printf '{"text":"󰐎 %s","tooltip":"Player is paused","class":""}\n' \
+                        "$($0 --paused)"
+                    ;;
+                *)
+                    printf '{"text":"","tooltip":"","class":""}\n'
+                    ;;
+            esac
+        done < <(scrolling_display)
+        ;;
+esac

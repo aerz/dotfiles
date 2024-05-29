@@ -3,7 +3,12 @@
 ## Set default settings
 
 ```shell
-sh ~/.config/dconf/configure
+bash ~/.config/dotfiles/config/gsettings.sh
 ```
 
-Configures `dconf` database using gsettings, this step is required because of many apps use this configuration first.
+Populates `dconf` database using `gsettings`.
+
+# References
+
+- https://wiki.archlinux.org/title/Dark_mode_switching#gsettings
+- https://wiki.archlinux.org/title/GNOME#Configuration

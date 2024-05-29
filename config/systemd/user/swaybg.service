@@ -1,0 +1,12 @@
+[Unit]
+Description=Set wallpaper background
+Requires=sway.service
+After=darkman.service
+After=sway.service
+StartLimitIntervalSec=60
+StartLimitBurst=3
+
+[Service]
+Type=simple
+Restart=on-failure
+ExecStart=/usr/bin/swaybg -i %h/Pictures/Wallpapers/default-${DARKMAN_MODE}.png -o "*" -m stretch

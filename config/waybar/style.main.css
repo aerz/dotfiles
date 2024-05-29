@@ -1,0 +1,139 @@
+/*-*- mode: css -*-*/
+@import url("colors.css");
+@import url("shared.css");
+
+/* ---
+ * Modules
+ * --- */
+
+/* Updates */
+#custom-updates {
+  /* background: @rose-gold; */
+  /* color: @rose-base; */
+  color: @rose-gold;
+}
+
+/* Media Player */
+#custom-player-status {
+  font-weight: normal;
+  /* background: @doom-base3; */
+  color: @doom-fg;
+  opacity: 0.5;
+}
+
+#custom-player-status.active {
+  font-weight: bold;
+  /* background: @doom-base3; */
+  opacity: 1;
+}
+
+/* dunst */
+#custom-dunst {
+  background: inherit;
+  color: @doom-fg;
+  border-radius: 3px;
+}
+
+#custom-dunst.disabled {
+  background: @doom-base3;
+  color: @doom-base5;
+}
+
+#custom-dunst.error {
+  background: @doom-base3;
+  color: @doom-red;
+}
+
+/* Pulseaudio */
+#pulseaudio {
+  background: @doom-magenta;
+  color: @rose-base;
+}
+
+#pulseaudio.muted.sink-muted.source-muted {
+  background: @doom-base3;
+  color: @doom-base5;
+}
+
+#pulseaudio.source-muted {
+  padding-left: 0.6em;
+  padding-right: 0.9em;
+  background: @doom-base4;
+  color: @doom-fg;
+}
+
+/* Bluetooth */
+#bluetooth {
+  padding: 0 1em;
+  color: @doom-fg;
+  background: @doom-base3;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+#bluetooth.connected {
+  background: @doom-magenta;
+  color: @rose-base;
+}
+
+#bluetooth.disabled,
+#bluetooth.off {
+  background: @doom-base3;
+  color: @doom-base5;
+}
+
+/* Idle Inhibitor */
+#idle_inhibitor {
+  background: inherit;
+  color: @doom-fg;
+  margin-right: 0.4em;
+  margin-left: 0.4em;
+  padding: 0 0.6em 0 0.4em;
+  border-radius: 3px;
+  font-weight: bold;
+}
+
+#idle_inhibitor.activated {
+  background: @doom-base3;
+  color: @doom-magenta;
+  /* background: @doom-magenta; */
+  /* color: @rose-base; */
+}
+
+/* Sway/Language */
+#language {
+  border-radius: 3px;
+  background: @doom-base3;
+  color: @doom-fg;
+}
+
+/* Keyboard State */
+#keyboard-state {
+  margin: 0 -0.3em;
+}
+
+#keyboard-state label.locked {
+  background: @doom-cyan;
+  color: @rose-base;
+  margin: 0.2em 0.6em;
+}
+
+/* Clock */
+#clock {
+  border-radius: 3px;
+  background: @doom-base3;
+  color: @doom-fg;
+}
+
+#clock.date {
+  /* background: @rose-highlight-med; */
+}
+
+#clock.time {
+  /* background: @rose-highlight-med; */
+}
+
+/* Systray */
+#tray {
+  background: @doom-base3;
+}

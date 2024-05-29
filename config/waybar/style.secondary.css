@@ -1,0 +1,33 @@
+/*-*- mode: css -*-*/
+@import url("colors.css");
+@import url("shared.css");
+
+/* ---
+ * Overrides
+ * --- */
+* {
+    border: none;
+    min-height: 0;
+    margin: 0.2em 0.1em;
+}
+
+/* ---
+ * Modules
+ * --- */
+/* Memory */
+#memory {
+    background: @doom-base3;
+    color: @doom-fg;
+}
+
+/* CPU */
+#cpu {
+    background: @doom-base3;
+    color: @doom-fg;
+}
+
+/* Temperature */
+#temperature {
+    background-color: @doom-base3;
+    color: @doom-fg;
+}

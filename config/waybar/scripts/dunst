@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+dbus-monitor path='/org/freedesktop/Notifications',interface='org.freedesktop.DBus.Properties',member='PropertiesChanged' --profile | \
+    while read -r _; do
+        COUNT="$(dunstctl count waiting)"
+        ENABLED=󰂜
+        DISABLED=󰪑
+        DISABLED_PENDING=󰂛
+
+        while [[ -z "$COUNT" ]]; do
+            printf '{"text":"%s","tooltip":"Notification service is starting","class":"error"}\n' "$DISABLED"
+            COUNT="$(dunstctl count waiting)"
+            sleep .5
+        done
+
+        if [[ $COUNT != 0 ]]; then
+            DISABLED="${COUNT} ${DISABLED_PENDING}"
+        fi
+
+        if dunstctl is-paused | grep -q "false"; then
+            printf '{"text":"%s","tooltip":"Notifications are active","class":""}\n' "$ENABLED"
+        else
+            printf '{"text":"%s","tooltip":"Notifications are paused","class":"disabled"}\n' "$DISABLED"
+        fi
+    done

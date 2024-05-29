@@ -1,9 +1,0 @@
-[Unit]
-Description=Touchegg client, a multi-touch gesture recognizer
-Documentation=https://github.com/JoseExposito/touchegg#installation
-
-[Timer]
-OnStartupSec=10
-
-[Install]
-WantedBy=timers.target

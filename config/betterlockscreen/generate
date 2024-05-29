@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-
-wallpath=$1
-
-betterlockscreen -u $wallpath --blur 1.0 --display 1

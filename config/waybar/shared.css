@@ -1,0 +1,193 @@
+/*-*- mode: css -*-*/
+
+/* Inspiration: https://github.com/Pipshag/dotfiles_nord/ */
+
+/* ---
+ * General
+ * --- */
+* {
+    /* border: none; */
+    min-height: 0;
+    margin: 0.2em 0.3em;
+}
+
+*:hover {
+    box-shadow: inherit;
+    text-shadow: inherit;
+}
+
+/* Remove border effect on hover*/
+/* https://github.com/Alexays/Waybar/pull/1729 */
+button {
+    box-shadow: inset 0 -3px transparent;
+    border: none;
+    border-radius: 0;
+}
+
+#waybar {
+    background: @doom-bg;
+    color: @doom-fg;
+    font-family: "JetBrainsMono NF";
+    font-size: 12px;
+    font-weight: bold;
+    border-bottom: 1px solid @doom-base0;
+}
+
+#window {
+    margin-right: 0.2em;
+    margin-left: 0.2em;
+    font-weight: normal;
+}
+
+#tray {
+    font-family: "Inter Medium";
+    font-size: 12px;
+    font-weight: normal;
+}
+
+/* ---
+ * Animations
+ * --- */
+@keyframes blink-warning {
+    70% {
+        color: @rose-text;
+    }
+
+    to {
+        color: @rose-gold;
+        /* background-color: @rose-gold; */
+    }
+}
+
+@keyframes blink-critical {
+    70% {
+      color: @rose-text;
+    }
+
+    to {
+        color: @rose-rose;
+        /* background-color: @doom-violet; */
+    }
+}
+
+/* Animation: Module list that blinks */
+#cpu.warning {
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+/* Animation: Module list that blinks (critical) */
+#memory.critical,
+#temperature.critical {
+    animation-name: blink-critical;
+    animation-duration: 2s;
+}
+
+/* Default module content spacing */
+#custom-dunst,
+#custom-updates,
+#custom-media-player,
+#clock,
+#mode,
+#network,
+#tray,
+#backlight,
+#language,
+#pulseaudio,
+#keyboard-state label.locked,
+#cpu,
+#memory,
+#temperature {
+    padding-left: 0.6em;
+    padding-right: 0.6em;
+}
+
+/* Default module border radius */
+#backlight,
+#bluetooth,
+#clock,
+#cpu,
+#custom-dunst,
+#custom-updates,
+#custom-media-player,
+#idle_inhibitor,
+#keyboard-state label.locked,
+#tray,
+#language,
+#memory,
+#mode,
+#network.disconnected,
+#network.linked,
+#temperature,
+#pulseaudio {
+    border-radius: 3px;
+}
+
+/* Default critical modules  */
+#network.disconnected,
+#memory.critical,
+#cpu.critical,
+#temperature.critical {
+    background: @doom-red;
+    color: @doom-base0;
+}
+
+/* Default warning modules */
+#network.linked,
+#memory.warning,
+#cpu.warning,
+#temperature.warning {
+    background: @rose-gold;
+    color: @rose-base;
+}
+
+/* ---
+ * Modules
+ * --- */
+/* Sway/Mode */
+#mode {
+    background: @doom-cyan;
+    color: @rose-base;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+}
+
+/* Workspaces */
+#workspaces {
+    border-radius: 5px;
+    margin-right: 1em;
+    color: @doom-magenta;
+    background: @doom-base3;
+}
+
+#workspaces button {
+    padding: 0 0.3em;
+    font-weight: normal; /* Somewhy the bar-wide setting is ignored*/
+    font-size: 1em;
+    color: @rose-text;
+    background: none;
+    opacity: 0.5;
+}
+
+#workspaces button.focused {
+    padding: 0 0.3em;
+    border-radius: 3px;
+    font-weight: bold;
+    color: @doom-violet;
+    opacity: 1;
+}
+
+#workspaces button.urgent {
+    padding: 0 0.3em;
+    border-radius: 3px;
+    font-weight: bold;
+    color: @doom-red;
+    opacity: 1;
+}
+
+/* Backlight */
+#backlight {
+    color: @doom-fg;
+    background: @doom-base4;
+}

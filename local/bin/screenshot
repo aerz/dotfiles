@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+dir="$(xdg-user-dir PICTURES)/Screenshots"
+filename="$(date +%F-%H%M%S).png"
+path="$dir/$filename"
+
+case $1 in
+    --area|-a)
+        grimshot save area "$path" || exit 1
+        title='Screenshot of area'
+    ;;
+    --window|-w)
+        grimshot save window "$path" || exit 1
+        title='Screenshot of window'
+    ;;
+    --screen|-s)
+        grimshot save screen "$path" || exit 1
+        title='Screenshot of screen'
+    ;;
+esac
+
+action=$(notify-send "$title" "$filename" \
+    --action='preview=Preview' \
+    --action='directory=Open Directory')
+
+case "$action" in
+    preview)    xdg-open "$path" ;;
+    directory)  xdg-open "$dir" ;;
+esac

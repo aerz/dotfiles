@@ -1,0 +1,20 @@
+[Unit]
+Description=Idle manager for Wayland
+Documentation=man:swayidle(1)
+PartOf=wayland-session.target
+Requires=wayland-session.target
+After=wayland-session.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/swayidle -w \
+    timeout 600 '/usr/bin/brillo -O -e && /usr/bin/brillo -S 10 -e -u 200000' \
+    resume '/usr/bin/brillo -I -u 100000 -e' \
+    timeout 660 '%h/.config/sway/scripts/swaylock.sh' \
+    resume '/usr/bin/brillo -I -e -u 100000' \
+    lock '%h/.config/sway/scripts/swaylock.sh' \
+    before-sleep '%h/.config/sway/scripts/swaylock.sh'
+Restart=always
+
+[Install]
+WantedBy=sway-session.target

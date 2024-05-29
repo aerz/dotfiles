@@ -1,0 +1,45 @@
+/* doom-tomorrow-night */
+/* https://github.com/doomemacs/themes/blob/master/themes/doom-tomorrow-night-theme.el */
+@define-color doom-bg        #1d1f21;
+@define-color doom-bg-alt    #161719;
+@define-color doom-base0     #0d0d0d;
+@define-color doom-base1     #1b1b1b;
+@define-color doom-base2     #212122;
+@define-color doom-base3     #292b2b;
+@define-color doom-base4     #3f4040;
+@define-color doom-base5     #5c5e5e;
+@define-color doom-base6     #757878;
+@define-color doom-base7     #969896;
+@define-color doom-base8     #ffffff;
+@define-color doom-fg        #c5c8c6;
+@define-color doom-fg-alt    #5e6360;
+
+@define-color doom-grey      #5a5b5a;
+@define-color doom-red       #cc6666;
+@define-color doom-orange    #de935f;
+@define-color doom-yellow    #f0c674;
+@define-color doom-green     #b5bd68;
+@define-color doom-blue      #81a2be;
+@define-color doom-dark-blue #41728e;
+@define-color doom-magenta   #c9b4cf;
+@define-color doom-violet    #b294bb;
+@define-color doom-cyan      #8abeb7;
+@define-color doom-dark-cyan #2c504b;
+
+/* Rosé Pine Moon */
+/* https://rosepinetheme.com/palette */
+@define-color rose-base           #232136;
+@define-color rose-surface        #2a273f;
+@define-color rose-overlay        #393552;
+@define-color rose-muted          #6e6a86;
+@define-color rose-subtle         #908caa;
+@define-color rose-text           #e0def4;
+@define-color rose-love           #eb6f92;
+@define-color rose-gold           #f6c177;
+@define-color rose-rose           #ea9a97;
+@define-color rose-pine           #3e8fb0;
+@define-color rose-foam           #9ccfd8;
+@define-color rose-iris           #c4a7e7;
+@define-color rose-highlight-low  #2a283e;
+@define-color rose-highlight-med  #44415a;
+@define-color rose-highlight-high #56526e;

@@ -1,0 +1,138 @@
+//-*- mode: jsonc -*-
+{
+  // General
+  "layer": "top",
+  "position": "top",
+  "height": 35,
+  "spacing": 0,
+  "output": "DP-1",
+  "modules-left": ["sway/workspaces", "sway/window"],
+  "modules-center": ["sway/mode"],
+  "modules-right": [
+    "custom/player-status",
+    "custom/updates",
+    "custom/dunst",
+    "idle_inhibitor",
+    "pulseaudio",
+    "backlight",
+    "network",
+    "bluetooth",
+    "clock",
+    "sway/language",
+    "keyboard-state",
+    "tray"
+  ],
+  // Modules
+  "sway/workspaces": {
+    "disable-scroll": true,
+    "all-outputs": false,
+    "format": "{name}"
+  },
+  "sway/window": {
+    "max-length": 80
+  },
+  "sway/language": {
+    "format": "{flag} {}",
+    "on-click": "swaymsg input type:keyboard xkb_switch_layout next",
+    "tooltip-format": "{long}"
+  },
+  "keyboard-state": {
+    "numlock": false,
+    "capslock": true,
+    "format": "{icon}",
+    "format-icons": {
+      "locked": "Caps Lock",
+      "unlocked": ""
+    }
+  },
+  "sway/mode": {
+    "format": "{}"
+  },
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": " 󰃚 ",
+      "deactivated": "  "
+    },
+    "tooltip": false
+  },
+  "tray": {
+    "spacing": 10
+  },
+  "clock": {
+    "format": "󰅐 {:%H:%M  󰃶 %b %d}",
+    "format-alt": "󰅐 {:%H:%M  󰃶 %b %d, %Y}",
+    "timezone": "Europe/Madrid"
+    // "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    // "today-format": "<span color='#ff6699'><b><u>{}</u></b></span>",
+    // "format-calendar-weeks": "<span color='#99ffdd'><b>{}</b></span>",
+  },
+  "backlight": {
+    "device": "ddcci4",
+    "format": "{percent}%  "
+  },
+  "network": {
+    "interface": "enp6s0",
+    "format-wifi": "({signalStrength}%) ",
+    "format-ethernet": "",
+    "tooltip-format": "{ifname} via {gwaddr}",
+    "format-linked": "Connecting 󰈀 ",
+    "format-disconnected": "Disconnected 󰈀 ",
+    "format-alt": "{ifname}: {ipaddr}/{cidr}"
+  },
+  "custom/dunst": {
+    "exec": "~/.config/waybar/scripts/dunst",
+    "format": " {} ",
+    "return-type": "json",
+    "on-click": "dunstctl set-paused toggle",
+    "restart-interval": 1
+  },
+  "pulseaudio": {
+    "format": "{volume}% {icon}{format_source}",
+    "format-bluetooth": "{volume}% {icon}",
+    "format-bluetooth-muted": "󰖁 {icon}",
+    "format-muted": " 󰖁 {format_source}",
+    "format-source": "  {volume}% ",
+    "format-source-muted": "",
+    "format-icons": {
+      "headphone": "󰋋",
+      "hands-free": "󰋋",
+      "headset": "󰋋",
+      "phone": "󰣒",
+      "portable": "󰣒",
+      "car": "󰄋",
+      "default": ["", "", ""]
+    },
+    "on-click": "pavucontrol",
+    "on-click-right": "~/.config/polybar/scripts/mic toggle &"
+  },
+  "bluetooth": {
+    "controller": "ASUS-BT500",
+    "format": "{Status} 󰂯",
+    "format-on": "󰂯",
+    "foramt-disabled": "󰂲",
+    "format-off": "󰂲",
+    "format-connected": "󰂱",
+    "tooltip-format-connected-battery": "Battery {device_battery_percentage}",
+    "on-click": "~/.config/polybar/scripts/bluetooth --power-switch &",
+    "on-click-right": "~/.config/polybar/scripts/bluetooth --connect-paired &"
+  },
+  "custom/player-status": {
+    "exec": "~/.config/waybar/scripts/player-status.sh",
+    "return-type": "json",
+    "format-active": "{}",
+    "max-length": 20,
+    "restart-interval": 5,
+    "on-click": "playerctl play-pause",
+    "on-click-right": "playerctl stop"
+  },
+  "custom/updates": {
+    "interval": 5400,
+    "exec": "~/.config/waybar/scripts/updates.sh",
+    "signal": 8
+  },
+  "tray": {
+    "icon-size": 12,
+    "spacing": 1
+  }
+}
