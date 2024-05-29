@@ -37,12 +37,23 @@ xss-lock --transfer-sleep-lock -- betterlockscreen --lock blur &
 xset s off -dpms
 
 # Idle actions
-xidlehook \
-    --detect-sleep --not-when-audio --not-when-fullscreen \
-    --socket /tmp/xidlehook.sock \
-    --timer 300 'brillo -O && brillo -u 800000 -S 10' 'brillo -u 100000 -I' \
-    --timer 10 'loginctl lock-session' 'brillo -u 100000 -I' \
-    --timer 60 'systemctl suspend' 'brillo -u 100000 -I' &
+case "$(hostname)" in
+    minivac)
+        xidlehook \
+            --detect-sleep --not-when-audio --not-when-fullscreen \
+            --socket /tmp/xidlehook.sock \
+            --timer 300 'brillo -O && brillo -u 800000 -S 10' 'brillo -u 100000 -I' \
+            --timer 10 'loginctl lock-session' 'brillo -u 100000 -I' \
+            --timer 60 'systemctl suspend' 'brillo -u 100000 -I' &
+    ;;
+    gigavac)
+        xidlehook \
+            --detect-sleep --not-when-audio --not-when-fullscreen \
+            --socket /tmp/xidlehook.sock \
+            --timer 600 'brillo -O && brillo -u 800000 -S 10' 'brillo -u 100000 -I' \
+            --timer 60 'loginctl lock-session' 'brillo -u 100000 -I' &
+    ;;
+esac
 
 # ---
 # Start i3
