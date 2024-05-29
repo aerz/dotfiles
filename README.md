@@ -49,7 +49,4 @@ cd ~/.config/dotfiles
 dotman -config dotman.yaml
 ```
 
-## Additional configuration scripts
-
-- `config/betterlockscreen/generate` Generate a new wallpaper for the lockscreen
-- `config/dconf/configure` Configure dconf database using gsettings, this step is required because of many apps use this configuration first
+After you complete the basic installation, there are more topics covered in [docs](./docs).

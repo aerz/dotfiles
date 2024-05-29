@@ -1,0 +1,31 @@
+@import "chrome/tabs_on_bottom.css";
+@import "chrome/autohide_bookmarks_toolbar.css";
+@import "chrome/autohide_tabstoolbar.css";
+@import "chrome/urlbar_info_icons_on_hover.css";
+@import "chrome/urlbar_container_color_border.css";
+@import "chrome/page_action_buttons_on_urlbar_hover.css";
+@import "chrome/tab_close_button_always_on_hover.css";
+
+/*
+ * -----------------------------------------------------------------------------
+ * Custom
+ * -----------------------------------------------------------------------------
+*/
+/* Hide window controls */
+.titlebar-min { display:none!important; }
+.titlebar-max { display:none!important; }
+.titlebar-restore { display:none!important; }
+.titlebar-close { display:none!important; }
+
+/*
+ * -----------------------------------------------------------------------------
+ * urlbar_container_color_border.css
+ * -----------------------------------------------------------------------------
+*/
+/* Hide the container line above tabs */
+.tab-context-line { display: none }
+
+/* Dimming container items */
+#userContext-icons::before, #userContext-indicator, #userContext-label {
+    opacity: 0.5;
+}

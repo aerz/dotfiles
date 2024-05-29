@@ -2,6 +2,7 @@
 bash_profile: ~/.bash_profile
 bashrc: ~/.bashrc
 cat: ~/cat
+librewolf/librewolf.overrides.cfg: ~/.librewolf/librewolf.overrides.cfg
 
 local/bin/fldr: ~/.local/bin/fldr
 local/bin/ddccictrl: ~/.local/bin/ddccictrl
