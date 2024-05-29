@@ -4,6 +4,7 @@
 # XFCE Settings Daemon
 # ---
 xfsettingsd --replace --daemon
+# systemctl start --user xsettingsd.service
 
 # ---
 # Systemd bus import environments
@@ -45,7 +46,7 @@ xidlehook \
     --socket /tmp/xidlehook.sock \
     --timer 300 'brillo -O && brillo -u 800000 -S 10' 'brillo -u 100000 -I' \
     --timer 10 'loginctl lock-session' 'brillo -u 100000 -I' \
-    --timer 60 'systemctl suspend' 'brillo -u 100000 -I' &
+    --timer 60 'systemctl suspend-then-hibernate' 'brillo -u 100000 -I' &
 
 # ---
 # Start i3
