@@ -36,12 +36,23 @@
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type t)
+(setq display-line-numbers-type "relative")
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
+(setq org-directory "~/Documents/Emacs"
+      org-roam-directory "~/Documents/Emacs/Pyramid Notebook")
 
+;; Enable smooth scrolling on laptop
+(when (and (not (version<= emacs-version "29"))
+           (string= (system-name) "minivac"))
+  (pixel-scroll-precision-mode 1))
+
+(map! :map 'override :leader ":" nil
+      :leader
+      :prefix (":" . "execute")
+      :desc "M-x" ":" #'execute-extended-command
+      :desc "M-x for buffer" "." #'execute-extended-command-for-buffer)
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
@@ -74,3 +85,4 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+
