@@ -9,7 +9,6 @@ local/bin/multimon: ~/.local/bin/multimon
 local/bin/qrgen: ~/.local/bin/qrgen
 
 local/share/applications/text.desktop: ~/.local/share/applications/text.desktop
-local/share/fonts/Feather.ttf: ~/.local/share/fonts/Feather.ttf
 
 config/alacritty: ~/.config/alacritty
 config/bat/config: ~/.config/bat/config

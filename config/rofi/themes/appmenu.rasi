@@ -1,0 +1,9 @@
+/* -*- mode: css; -*- */
+
+@import "config.rasi" textbox-icon {
+  str: "  ";
+}
+
+prompt {
+  enabled: false;
+}

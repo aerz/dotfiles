@@ -50,8 +50,8 @@ show_cmd_err() {
 }
 
 filter_emojis_html_tags() {
-    echo "$1" | head -n -1 | tail -n +1 | \
-    sed -rn 's/.*<span class="emoji">(.*)<\/span> (.*)<\/a><\/li>/\1 \2/p'
+    echo "$1" | head -n -1 | tail -n +1 |
+        sed -rn 's/.*<span class="emoji">(.*)<\/span> (.*)<\/a><\/li>/\1 \2/p'
 }
 
 download_emoji_cats() {
@@ -60,12 +60,12 @@ download_emoji_cats() {
     for url in "${URL_EMOJI_CATEGORIES[@]}"; do
         echo "Downloading: $url"
 
-        emojis=$(curl -s "$url" | \
-                 xmllint --html \
-                         --xpath '//ul[@class="emoji-list"]' - 2>/dev/null)
+        emojis=$(curl -s "$url" |
+            xmllint --html \
+                --xpath '//ul[@class="emoji-list"]' - 2>/dev/null)
         emojis=$(filter_emojis_html_tags "$emojis")
 
-        echo "$emojis" >> "$EMOJI_CACHE_FILE"
+        echo "$emojis" >>"$EMOJI_CACHE_FILE"
     done
 }
 
@@ -75,12 +75,12 @@ download_emoji_updates() {
     for url in "${URL_EMOJI_UPDATES[@]}"; do
         echo "Downloading: $url"
 
-        emojis=$(curl -s "$url" | \
-                 xmllint --html \
-                         --xpath '//article/ul' - 2>/dev/null)
+        emojis=$(curl -s "$url" |
+            xmllint --html \
+                --xpath '//article/ul' - 2>/dev/null)
         emojis=$(filter_emojis_html_tags "$emojis")
 
-        echo "$emojis" >> "$EMOJI_CACHE_FILE"
+        echo "$emojis" >>"$EMOJI_CACHE_FILE"
     done
 }
 
@@ -90,11 +90,11 @@ open_rofi_menu() {
 
     emojis=$(cat "$EMOJI_CACHE_FILE" | grep -v '#' | grep -v '^[[:space:]]*$')
     emoji=$(
-        echo "$emojis" | \
-        rofi -dmenu -i -p "$random" \
-            -mesg "<small>Ctrl+C: Copy | Ctrl+R: Copy Random | Return: Paste</small>" \
-            -kb-custom-1 Ctrl+c \
-            -kb-custom-2 Ctrl+r \
+        echo "$emojis" |
+            rofi -dmenu -i -p "$random" \
+                -mesg "<small>Ctrl+C: Copy | Ctrl+R: Copy Random | Return: Paste</small>" \
+                -kb-secondary-copy "Control+c" \
+        -kb-custom-2 Ctrl+r \
             $@
     )
     exit_code=$?
@@ -103,21 +103,22 @@ open_rofi_menu() {
     case $exit_code in
         # Return: Paste
         0)
-            sleep 0.3 # Wait text-entry come active
-            xdotool type --clearmodifiers "${emoji}"
-        ;;
+            # sleep 0.3 # Wait text-entry come active
+            wtype "${emoji}"
+            # xdotool type --clearmodifiers "${emoji}"
+            ;;
         # Ctrl+C: Copy selected emoji
         10)
-            echo -n "${emoji}" | xclip -selection clipboard
+            echo -n "${emoji}" | wl-copy
             notify-send --urgency=low --expire-time=10000 \
                 'Emoji Viewer' "$(echo "${emoji[@]}") Copied to clipboard"
-        ;;
+            ;;
         # Ctrl+R: Copy random emoji
         11)
-            echo -n "${random}" | xclip -selection clipboard
+            echo -n "${random}" | wl-copy
             notify-send --urgency=low --expire-time=10000 \
                 'Emoji Viewer' "$(echo "${random[@]}") Copied to clipboard"
-        ;;
+            ;;
     esac
 }
 
@@ -134,19 +135,19 @@ rofi_download_emojis() {
 }
 
 case $1 in
-    -h|--help)
+    -h | --help)
         show_help
-    ;;
-    -d|--download)
-        echo "" > "$EMOJI_CACHE_FILE"
+        ;;
+    -d | --download)
+        echo "" >"$EMOJI_CACHE_FILE"
         echo "Cache file flushed"
         download_emoji_cats
         download_emoji_updates
         echo "Emojis downloaded at $EMOJI_CACHE_FILE"
-    ;;
+        ;;
     *)
         [ "$1" != "" ] && show_cmd_err
         [ ! -f "$EMOJI_CACHE_FILE" ] && rofi_download_emojis
         open_rofi_menu
-    ;;
+        ;;
 esac

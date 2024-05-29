@@ -12,13 +12,14 @@
 # Config
 # ---
 readonly ROFI_OPTS=(
-    -i
-    -matching fuzzy
-    -theme ~/.config/rofi/themes/notifications.rasi
     -dmenu
+    -theme ~/.config/rofi/themes/popup.rasi
 )
-
-# ---
+export ROFI_BG="#292B2B"
+export ROFI_FG="#C5C8C6"
+export ROFI_SEL_BG="#5C5E5E"
+export ROFI_PROMPT_BG="#8ABEB7"
+export ROFI_WIDTH="500px"
 
 help_msg() {
     echo "
@@ -49,35 +50,45 @@ filter_id_selection() {
     grep -Po '([0-9]+)(?=:)'
 }
 
+filter_ignore_pattern() {
+    local pattern="$1"
+
+    while read -r line; do
+        if [ -z "$pattern" ]; then
+            echo "$line"
+        else
+            echo "$line" | grep -Pv "$pattern"
+        fi
+    done
+}
+
 menu_output_devices() {
-    local title="墳 Default Output"
-    local ignore_arg="$1"
-    
-    if [ -n "$ignore_arg" ]; then
-        grep -Pv "$ignore_arg" | rofi "${ROFI_OPTS[@]}" -p "$title"
-    else
-        rofi "${ROFI_OPTS[@]}" -p "$title"
-    fi
+    local prompt="󰕾 Default:"
+    local devices
+
+    readarray devices <<<"$(filter_ignore_pattern "$1")"
+
+    printf '%s' "${devices[@]}" |
+        rofi "${ROFI_OPTS[@]}" -p "$prompt" -l "${#devices[@]}" -i
 }
 
 menu_mute_programs() {
-    local title="墳 Toggle mute"
+    local prompt="󰕾 Toggle mute"
 
-    rofi "${ROFI_OPTS[@]}" -p "$title"
+    rofi "${ROFI_OPTS[@]}" -p "$prompt"
 }
 
 menu_input_devices() {
-    local title=" Default Microphone"
-    local ignore_arg="$1"
+    local prompt="󰍬 Default Microphone"
+    local devices
 
-    if [ -n "$ignore_opt" ]; then
-        grep -Pv "$ignore_arg" | rofi "${ROFI_OPTS[@]}" -p "$title"
-    else
-        rofi "${ROFI_OPTS[@]}" -p "$title"
-    fi
+    readarray devices <<<"$(filter_ignore_pattern "$1")"
+
+    printf '%s' "${devices[@]}" |
+        rofi "${ROFI_OPTS[@]}" -p "$prompt" -l "${#devices[@]}"
 }
 
-list_apps_sound() {
+list_apps() {
     ponymix -t sink-input list | awk '
         /^sink-input/ {
             sid = $2
@@ -87,16 +98,16 @@ list_apps_sound() {
             app = $0
 
             getline
-            icon = match($0, /\[Muted\]/) ? "" : ""
+            icon = match($0, /\[Muted\]/) ? "" : "󰄬"
 
             print icon" "sid" "app
         }'
 }
 
-list_input_devices() {
+list_input_dev() {
     local default_id
     default_id="$(ponymix --short | awk '/^source/ { print $2 }')"
-    
+
     ponymix --input list | awk -v default_id="$default_id" '
         /input/ {
             gsub(/:/, "", $2)
@@ -105,13 +116,13 @@ list_input_devices() {
             getline
             gsub(/^ +/, "", $0)
             name = $0
-            icon = (default_id == id) ? " " : ""
+            icon = (default_id == id) ? "󰄬 " : ""
 
             print icon id": "name
         }'
 }
 
-list_sound_outputs() {
+list_output_dev() {
     local default_id
     default_id="$(ponymix defaults | awk '
         /^sink/ {
@@ -128,48 +139,48 @@ list_sound_outputs() {
             getline
             gsub(/^ +/, "", $0)
             name = $0
-            icon = (default_id == id) ? " " : ""
+            icon = (default_id == id) ? "󰄬 " : ""
 
             print icon id": "name
         }'
 }
 
-while (( $# > 0 )); do
+while (($# > 0)); do
     arg="$1"
 
     case $arg in
         --ignore)
             [ -z "$2" ] && err_no_regex
             ignore_arg="$2" && shift 2
-        ;;
-        --mute)     shift && cmd_arg="mute"     ;;
-        --input)    shift && cmd_arg="input"    ;;
-        --output)   shift && cmd_arg="output"   ;;
-        --help)     help_msg                    ;;
-        *)          err_no_opt_exist "$1"       ;;
+            ;;
+        --mute) shift && cmd_arg="mute" ;;
+        --input) shift && cmd_arg="input" ;;
+        --output) shift && cmd_arg="output" ;;
+        --help) help_msg ;;
+        *) err_no_opt_exist "$1" ;;
     esac
 done
 
 case "$cmd_arg" in
     mute)
-        id=$(list_apps_sound | menu_mute_programs | filter_id_selection)
+        id=$(list_apps | menu_mute_programs | filter_id_selection)
         [ -z "$id" ] && exit 0
 
         ponymix --sink-input -d "$id" toggle
-    ;;
+        ;;
     input)
-        id=$(list_input_devices | menu_input_devices "$ignore_arg" | filter_id_selection)
+        id=$(list_input_dev | menu_input_devices "$ignore_arg" | filter_id_selection)
         [ -z "$id" ] && exit 0
 
         ponymix --input -d "$id" set-default
-    ;;
+        ;;
     output)
-        id=$(list_sound_outputs | menu_output_devices "$ignore_arg" | filter_id_selection)
+        id=$(list_output_dev | menu_output_devices "$ignore_arg" | filter_id_selection)
         [ -z "$id" ] && exit 0
 
         ponymix set-default -d "$id"
-    ;;
+        ;;
     *)
         ./"$0" --output
-    ;;
+        ;;
 esac

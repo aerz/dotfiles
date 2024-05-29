@@ -1,10 +1,13 @@
 #!/usr/bin/env bash
 
-# Global vars
-readonly FILE="$(mktemp --suff=.png)"
-
-# Rofi
-readonly rotheme="~/.config/rofi/themes/pic.rasi"
+FILE="$(mktemp --suff=.png)"
+readonly FILE
+readonly ROFI_THEME=~/.config/rofi/themes/popup.rasi
+export ROFI_BG=""
+export ROFI_FG=""
+export ROFI_SEL_BG=""
+export ROFI_PROMPT_BG=""
+export ROFI_PROMPT_FG=""
 
 open_type_menu() {
     declare -ar types=(
@@ -13,7 +16,8 @@ open_type_menu() {
         "  Fullscreen"
     )
 
-    printf '%s\n' "${types[@]}" | rofi -dmenu -theme $rotheme -i -lines ${#types[@]} -p 'Capture:'
+    printf '%s\n' "${types[@]}" |
+        rofi -dmenu -theme $ROFI_THEME -l ${#types[@]} -p 'Capture:'
 }
 
 open_destination_menu() {
@@ -23,12 +27,13 @@ open_destination_menu() {
         "Open"
     )
 
-    printf '%s\n' "${destinations[@]}" | rofi -dmenu -theme $rotheme -i -lines ${#destinations[@]} -p 'Action:'
+    printf '%s\n' "${destinations[@]}" |
+        rofi -dmenu -theme $ROFI_THEME -l ${#destinations[@]} -p 'Action:'
 }
 
 send_notification() {
     local msg="$1"
-    notify-send -t 10000 -u low " Screenshot done" "$msg"
+    notify-send -t 3000 -u low " Screenshot done" "$msg"
 }
 
 select_destination() {
@@ -37,24 +42,25 @@ select_destination() {
     [ -z "$destination" ] && exit 1
 
     case $destination in
-        "Save as file"|--file)
+        "Save as file" | --file)
             local shotpath="$HOME/Pictures/screenshots"
-            local fname="screenshot_$(date +%m-%d-%Y_%H_%M_%S).png"
+            local fname=
+            fname="screenshot_$(date +%m-%d-%Y_%H_%M_%S).png"
 
             # create default path if it does not exist
             [ ! -d "$shotpath" ] && mkdir -p "$shotpath"
 
             mv "$FILE" "${shotpath}/${fname}"
             send_notification "Saved at ${shotpath}/${fname}"
-        ;;
-        "Copy to clipboard"|--clipboard)
+            ;;
+        "Copy to clipboard" | --clipboard)
             xclip -t 'image/png' -selection clipboard "$FILE"
             send_notification "Copied to clipboard"
             rm "$FILE"
-        ;;
-        "Open"|--open)
+            ;;
+        "Open" | --open)
             sxiv "$FILE" && rm "$FILE"
-        ;;
+            ;;
     esac
 }
 
@@ -64,39 +70,41 @@ take_screenshot() {
     [ -z "$type" ] && exit 1
 
     case $type in
-        *'Region'*|--region)
-            local region="$(hacksaw -f "-i %i -g %g")"
+        *'Region'* | --region)
+            local region
+            region="$(hacksaw -f "-i %i -g %g")"
+
             [ -z "$region" ] && exit 1
-
             shotgun $region "$FILE"
-        ;;
-        *'Select window'*|--window)
-            local id="$(xdotool selectwindow)"
-            [ -z "$id" ] && exit 1
+            ;;
+        *'Select window'* | --window)
+            local id
+            id="$(xdotool selectwindow)"
 
+            [ -z "$id" ] && exit 1
             shotgun -i "$id" "$FILE"
-        ;;
-        *'Fullscreen'*|--fullscreen)
+            ;;
+        *'Fullscreen'* | --fullscreen)
             shotgun "$FILE"
-        ;;
+            ;;
     esac
 }
 
 case $1 in
-    -f|--fullscreen)
+    -f | --fullscreen)
         take_screenshot --fullscreen
         select_destination --file
-    ;;
-    -w|--window)
+        ;;
+    -w | --window)
         take_screenshot --window
         select_destination --file
-    ;;
-    -r|--region)
+        ;;
+    -r | --region)
         take_screenshot --region
         select_destination --file
-    ;;
+        ;;
     *)
         take_screenshot "$(open_type_menu)"
         select_destination "$(open_destination_menu)"
-    ;;
+        ;;
 esac

@@ -1,44 +1,49 @@
 #!/usr/bin/env bash
 
-# rofi
-theme="~/.config/rofi/themes/power.rasi"
-uptime="Uptime: $(uptime -p | sed -e 's/up //g')"
-
-declare -a actions=(
-    "  Shutdown"
-    "  Reboot"
-    "  Lock"
-    "  Suspend"
-    "  Hibernate"
-    "  Logout"
-)
+readonly ROFI_THEME=~/.config/rofi/themes/popup.rasi
+export ROFI_BG="#292B2B"
+export ROFI_FG="#C5C8C6"
+export ROFI_SEL_BG="#5C5E5E"
+export ROFI_PROMPT_BG="#F0C674"
 
 confirm() {
-    local yes=""
-    local no=""
+    local yes="Yes"
+    local no="No"
 
-    [ "$(echo -e "$no\n$yes" | rofi -theme $theme -i -dmenu -lines 2 -p "Confirm")" == "$yes" ]
+    [[ "$(echo -e "$no\n$yes" |
+        rofi -dmenu -i -l 2 -p "Confirm:" -theme $ROFI_THEME)" == "$yes" ]]
 }
 
-logout_session() {
-    i3-msg exit
+logout() {
+    swaymsg exit || i3-msg exit
     loginctl terminate-session "$(cat /proc/self/sessionid)"
 }
 
-save_brightness() {
-    brillo -O
+select_action() {
+    uptime="Uptime $(uptime -p | sed -e 's/up //g;s/,.*//g'):"
+    declare -ar actions=(
+        "   Shutdown"
+        "   Reboot"
+        "   Lock"
+        "   Suspend"
+        "   Hibernate"
+        "   Logout"
+    )
+
+    printf '%s\n' "${actions[@]}" | rofi \
+        -dmenu -i -l ${#actions[@]} -p "$uptime" -theme $ROFI_THEME
 }
 
-action="$(printf '%s\n' "${actions[@]}" | rofi -theme $theme -dmenu -l 6 -p "$uptime")"
+action="$(select_action)"
 
-# exit when action is empty
+# no action selected
 [ -z "$action" ] && exit 0
 
 case $action in
-    *Shutdown)  confirm && save_brightness && systemctl poweroff ;;
-    *Reboot)    confirm && save_brightness && systemctl reboot   ;;
-    *Lock)      loginctl lock-session                            ;;
-    *Suspend)   confirm && systemctl suspend                     ;;
-    *Hibernate) confirm && systemctl hibernate                   ;;
-    *Logout)    confirm && logout_session                        ;;
+    *Shutdown) confirm && systemctl poweroff ;;
+    *Reboot) confirm && systemctl reboot ;;
+    *Lock) loginctl lock-session "$XDG_SESSION_ID" ;;
+    *Suspend) confirm && systemctl suspend ;;
+    *Hibernate) confirm && systemctl hibernate ;;
+    *Logout) confirm && logout ;;
 esac

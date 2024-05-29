@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# Source
+# https://gist.github.com/lbonn/89d064cde963cfbacabd77e0d3801398?permalink_comment_id=4181591#gistcomment-4181591
+
+ropts=(
+    -dmenu
+    -show-icons
+    -markup-rows
+    -i
+    -p 'window'
+    -theme "$XDG_CONFIG_HOME/rofi/themes/appmenu.rasi"
+)
+
+row=$(swaymsg -t get_tree | jq -r '
+    ..
+    | objects
+    | select(.type == "workspace") as $ws
+    | ..
+    | objects
+    | select(has("app_id"))
+    | (if .focused == true then "*" else " " end) as $asterisk
+    | (
+        if .window_properties.class == "Spotify" then "spotify-client"
+        elif .window_properties.class == "LM Studio" then "lm-studio"
+        else .app_id // .window_properties.class // .name
+      end ) as $icon_name
+    | "[\($ws.name)] \($asterisk) <span weight=\"bold\">\(.app_id // .window_properties.class)</span>  - \(.name) <!-- \(.id) -->\u0000icon\u001f\($icon_name)"
+    ' |
+	sed 's/&/&amp;/g' |
+	rofi "${ropts[@]}")
+
+if [ -n "$row" ]; then
+    # shellcheck disable=SC2001
+    wid=$(echo "$row" | sed 's/.*<!-- \([0-9]*\) -->.*/\1/')
+	swaymsg "[con_id=$wid] focus"
+fi

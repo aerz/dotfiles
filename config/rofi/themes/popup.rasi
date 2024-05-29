@@ -1,0 +1,53 @@
+/* -*- mode: css -*- */
+
+* {
+    bg: env(ROFI_BG, #E3E3E3);
+    fg: env(ROFI_FG, #262626);
+    sel-bg: env(ROFI_SEL_BG, #C1C1C1);
+    prompt-bg: env(ROFI_PROMPT_BG, #EDEDED);
+    prompt-fg: env(ROFI_PROMPT_FG, #262626);
+    width: env(ROFI_WIDTH, 300px);
+    spacing: 0;
+    background-color: @bg;
+    text-color: @fg;
+    font: "JetBrains Mono NF 12";
+}
+
+window {
+    location: north west;
+    x-offset: 20px;
+    y-offset: 20px;
+    border-radius: 6px;
+}
+
+inputbar {
+    children: [ prompt, entry ];
+}
+
+prompt {
+    enabled: true;
+    background-color: @prompt-bg;
+    text-color: @prompt-fg;
+    padding: 10px 0px 0px 10px;
+}
+
+entry {
+    background-color: @prompt-bg;
+    text-color: @bg;
+    padding: 10px;
+}
+
+textbox-prompt-colon {
+    background-color: @prompt-bg;
+    text-color: @bg;
+}
+
+element-text {
+    padding: 8px;
+}
+
+element-text.selected {
+    margin: 10px;
+    background-color: @sel-bg;
+    text-color: @fg;
+}

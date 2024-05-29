@@ -1,54 +1,65 @@
-configuration {
-    font:                   "JetBrainsMono Nerd Font, Feather, 14";
-    line-padding:           20;
-    separator-style:        "none";
-    hide-scrollbar:         true;
-    show-icons:             false;
-}
+/* -*- mode: css -*- */
 
-* {
-    bg:  #262626;
-    se:  #181818;
-    fg:  #C1C1C1;
-    ac:  #F0C674;
-}
+@import "config.rasi"
 
-* {
-    background-color: var(bg);
-    text-color: var(fg);
-    spacing: 0;
-    width: 400px;
-}
-
-window {
-    location: north west;
-    x-offset: 20px;
-    y-offset: 55px;
-}
-
-inputbar {
-    children: [ prompt, textbox-prompt-colon ];
+listview {
+    columns: 1;
 }
 
 prompt {
-    padding: 11px 12px 12px 12px;
-    enabled: true;
-    background-color: @ac;
-    text-color: @bg;
+    enabled: false;
 }
 
-textbox-prompt-colon {
-    background-color: @ac;
-    text-color: @bg;
-}
+/* configuration { */
+/*     font:                   "JetBrainsMono Nerd Font, Feather, 14"; */
+/*     line-padding:           20; */
+/*     separator-style:        "none"; */
+/*     hide-scrollbar:         true; */
+/*     show-icons:             false; */
 
-listview {
-    cycle: true;
-    scrollbar: false;
-}
+/*     kb-row-down: "Down,Control+n,Control+j"; */
+/*     kb-row-up: "Up,Control+p,Control+k"; */
+/* } */
 
-element-text selected {
-    background-color: var(se);
-    text-color: var(fg);
-    margin: 10px;
-}
+/* * { */
+/*     bg:  #262626; */
+/*     se:  #181818; */
+/*     fg:  #C1C1C1; */
+/*     accent:  #F0C674; */
+
+/*     background-color: var(bg); */
+/*     text-color: var(fg); */
+/* } */
+
+/* window { */
+/*     /\* location: north west; *\/ */
+/*     x-offset: 20px; */
+/*     y-offset: 55px; */
+/* } */
+
+/* inputbar { */
+/*     children: [ prompt, textbox-prompt-colon ]; */
+/* } */
+
+/* prompt { */
+/*     /\* padding: 11px 12px 12px 12px; *\/ */
+/*     enabled: false; */
+/*     background-color: @accent; */
+/*     text-color: @bg; */
+/* } */
+
+/* textbox-prompt-colon { */
+/*     background-color: @accent; */
+/*     text-color: @bg; */
+/* } */
+
+/* listview { */
+/*     cycle: true; */
+/*     scrollbar: false; */
+/* } */
+
+/* element-text selected { */
+/*     background-color: var(se); */
+/*     text-color: var(fg); */
+/*     margin: 10px; */
+/* } */

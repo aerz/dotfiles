@@ -1,3 +1,5 @@
+/* -*- mode: css; -*- */
+
 configuration {
     line-padding:          20;
     lines:                 10;

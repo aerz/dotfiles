@@ -16,7 +16,7 @@ ropts=(
     "-i"
     "-matching fuzzy"
     "-dmenu"
-    "-theme ~/.config/rofi/themes/roblue.rasi"
+    # "-theme ~/.config/rofi/themes/windowmenu.rasi"
 )
 
 # ---
@@ -70,14 +70,14 @@ toggle_conn_paired_dev() {
     local conn="$(bluetoothctl info "$mac" | grep 'Connected: yes')"
 
     case $conn in
-        *yes)   bluetoothctl disconnect "$mac"  ;;
-        *)      bluetoothctl connect    "$mac"  ;;
+        *yes) bluetoothctl disconnect "$mac" ;;
+        *) bluetoothctl connect "$mac" ;;
     esac
 }
 
 list_paired_devices() {
-    bluetoothctl paired-devices | cut -d " " -f 2 | xargs -I{} bluetoothctl info {} | \
-    awk '
+    bluetoothctl devices Paired | cut -d " " -f 2 | xargs -0 -I {} bluetoothctl info {} |
+        awk '
         /Name: / {
             name = substr($0, index($0, $2))
         }
@@ -96,21 +96,22 @@ open_paired_devices_menu() {
         "  Reload"
         "  Turn Off"
     )
-    local devs; readarray devs <<<"$(list_paired_devices)"
-    local num_opts=$(( ${#devs[@]} + ${#opts[@]}))
+    local devs
+    readarray devs <<<"$(list_paired_devices)"
+    local num_opts=$((${#devs[@]} + ${#opts[@]}))
     local sel="$(
-        (printf '%s' "${devs[@]}" && printf '%s\n' "${opts[@]}") \
-        | rofi ${ropts[@]} -l $num_opts -p "$title"
+        (printf '%s' "${devs[@]}" && printf '%s\n' "${opts[@]}") |
+            rofi ${ropts[@]} -l $num_opts -p "$title"
     )"
 
     case $sel in
-        "")             exit                            ;;
-        *"Reload")      open_paired_devices_menu        ;;
-        *"Turn Off")    bluetoothctl power off && exit  ;;
+        "") exit ;;
+        *"Reload") open_paired_devices_menu ;;
+        *"Turn Off") bluetoothctl power off && exit ;;
         *)
             local dev="$(echo "$sel" | sed 's/^ //')"
             bluetoothctl paired-devices | grep -w "$dev"
-        ;;
+            ;;
     esac
 }
 
@@ -119,8 +120,8 @@ open_power_off_suggestions_menu() {
     local action="$(printf "%s\n" "  Turn on" "Close" | rofi ${ropts[@]} -lines 2 -p "$title")"
 
     case $action in
-        *"Turn on")  bluetoothctl power on && sleep .5   ;;
-        *)          exit 1                              ;;
+        *"Turn on") bluetoothctl power on && sleep .5 ;;
+        *) exit 1 ;;
     esac
 }
 
@@ -138,7 +139,7 @@ case $1 in
         [ -z "$dev" ] && err_no_dev
 
         toggle_conn_paired_dev "$(get_mac_address "$dev")"
-    ;;
-    help)   help       ;;
-    *)      err_unkown_cmd    ;;
+        ;;
+    help) help ;;
+    *) err_unkown_cmd ;;
 esac

@@ -1,0 +1,9 @@
+/* -*- mode: css -*- */
+
+* {
+    bg: Wheat;
+}
+
+element-text.selected {
+    background-color: var(bg);
+}
