@@ -1,9 +1,6 @@
 # dotfiles
 
-<figure>
-  <img src="img/ufetch.png" alt="desktop" align="right" width="400px">
-  <figcaption><i>Outdated</i></figcaption>
-<figure>
+<img src="img/ufetch.png" align="right" alt="fetch image" width="400">
 
 - **OS**: [Arch Linux](https://archlinux.org)
 - **WM**: [sway](https://github.com/swaywm/sway)
