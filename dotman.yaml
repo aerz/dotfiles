@@ -16,6 +16,7 @@ config/bat/config: ~/.config/bat/config
 config/doom/init.el: ~/.config/doom/init.el
 config/doom/config.el: ~/.config/doom/config.el
 config/doom/packages.el: ~/.config/doom/packages.el
+config/dunst: ~/.config/dunst
 config/fontconfig: ~/.config/fontconfig
 config/git: ~/.config/git
 config/gtk-3.0/settings.ini: ~/.config/gtk-3.0/settings.ini
