@@ -38,7 +38,7 @@ for_window [class="Pavucontrol"] floating enable
 for_window [class="Blueman"] floating enable
 for_window [class="Nitrogen"] floating enable
 for_window [class="Xfce4-settings-manager"] floating enable
-for_window [class="TelegramDesktop"] floating enable
+# for_window [class="TelegramDesktop"] floating enable
 
 # All window dialogs in floating mode
 for_window [window_role="pop-up"] floating enable
@@ -246,7 +246,7 @@ mode "layout" {
 # i3 Keybindings
 # ---
 ## i3 // Reload config // <Super> Esc ##
-bindsym $mod+Escape reload
+bindsym $mod+Escape exec i3-msg reload && notify-send "Window Manager" "i3 was reloaded"
 
 ## i3 // Restart // <Super> <Alt> Esc ##
 bindsym $mod+$alt+Escape restart
@@ -267,7 +267,7 @@ bindsym $mod+Shift+$alt+s  move to scratchpad
 bindsym $mod+Return exec alacritty
 
 ## Apps // Open notification center // <Super> n ##
-bindsym $mod+n exec --no-startup-id rofication-gui
+# bindsym $mod+n exec --no-startup-id rofication-gui
 
 ## Apps // Open volume control // <Super> <Shift> <Alt> v ##
 bindsym $mod+Shift+$alt+v exec gtk-launch pavucontrol
