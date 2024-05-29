@@ -22,3 +22,5 @@
     defaultBranch = master
 [diff]
     tool = nvimdiff
+[credential]
+    helper = /usr/lib/git-core/git-credential-libsecret
