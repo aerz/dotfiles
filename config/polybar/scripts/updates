@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 #
 # Package updates indicator module script.
 #
@@ -26,12 +26,12 @@ TIME_TO_WAIT=5400
 TIME_CHECK_MGR=8
 
 # Minimum number of packages to show in the bar
-PKGS_MIN=50
+PKGS_MIN=100
 
 # ---
 
 is_pkgmngr_running() {
-    test $(pgrep "$REGEX_MGRS" &> /dev/null ; echo $?) -eq 0
+    test "$(pgrep "$REGEX_MGRS" &> /dev/null ; echo $?)" -eq 0
 }
 
 display_downloading() {
@@ -41,16 +41,17 @@ display_downloading() {
 }
 
 display_available_updates(){
-    local arch=$(checkupdates 2> /dev/null | wc -l)
-    local aur=$($AUR_HELPER -Qum 2> /dev/null | wc -l)
-    local updates=$(( $arch + $aur ))
+    local arch aur updates
+    arch=$(checkupdates 2> /dev/null | wc -l)
+    aur=$($AUR_HELPER -Qum 2> /dev/null | wc -l)
+    updates=$(( arch + aur ))
 
     [ $updates -ge $PKGS_MIN ] && echo "%{T2} %{T-}$updates" || echo ""
 }
 
 sleep_refresh() {
     local times=0
-    local total_times=$(( $TIME_TO_WAIT / $TIME_CHECK_MGR ))
+    local total_times=$(( TIME_TO_WAIT / TIME_CHECK_MGR ))
 
     while ! is_pkgmngr_running && [ $times -ne $total_times ]; do
         sleep $TIME_CHECK_MGR && ((times++))

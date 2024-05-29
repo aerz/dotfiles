@@ -31,8 +31,8 @@ bluetooth_print() {
             bluetoothctl paired-devices | grep Device | cut -d ' ' -f 2 | while read -r device; do
                 if bluetoothctl info "$device" | grep -q "Connected: yes"; then
                     echo "%{F${COLOR_SECONDARY}}%{F-}"
+                    sleep 5
                 fi
-
             done
         else
             echo "%{F${COLOR_FG_MUTED}}%{F-}"
