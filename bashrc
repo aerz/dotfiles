@@ -19,8 +19,8 @@ PS1='[\u@\h \W]\$ '
 # ---
 
 # Start a new xorg session by default wether it does not exist
-if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
-    exec startx "$XINITRC" -- -keeptty >$XDG_DATA_HOME/xorg/xorg.tty.log 2>&1
+if [ -z "${DISPLAY}" ]; then
+    exec startx "$XINITRC" -- -keeptty >$HOME/.local/share/xorg/xorg.tty.log 2>&1
 fi
 
 # ---
@@ -95,10 +95,9 @@ lt() {
 alias df='df -h'
 alias cp='cp -i'
 
-
 # SSH/GPG
 # Change terminal emulator on ssh connections
-alias ssh='TERM=xterm-256color ssh'
+alias ssh-xterm='TERM=xterm-256color ssh'
 alias keychain='keychain --quiet'
 alias sshak="keychain --quiet --inherit any --attempts 2"
 alias gpgak="keychain --quiet --nogui --attempts 2"
@@ -168,6 +167,19 @@ yay() {
         # Default
         *)
             $ybin $@
+        ;;
+    esac
+}
+
+yt-dlp() {
+    case $1 in
+        --with-subs)
+            langs="$2"
+            shift 2
+            /usr/bin/yt-dlp --embed-subs --write-auto-sub --sub-lang "$langs" $@
+        ;;
+        *)
+            /usr/bin/yt-dlp $@
         ;;
     esac
 }
@@ -262,3 +274,5 @@ npx() {
     lazynvm
     npx $@
 }
+
+eval "$(zoxide init bash)"
