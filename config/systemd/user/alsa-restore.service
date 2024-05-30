@@ -1,0 +1,13 @@
+[Unit]
+Description=Save/Restore Sound Card State
+ConditionPathExists=!/etc/alsa/state-daemon.conf
+ConditionPathExistsGlob=/dev/snd/control*
+
+[Service]
+Type=oneshot
+RemainAfterExit=true
+ExecStart=-/usr/bin/alsactl -d -f %h/.config/asound.state restore
+ExecStop=-/usr/bin/alsactl -f %h/.config/asound.state store
+
+[Install]
+WantedBy=default.target
