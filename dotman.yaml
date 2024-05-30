@@ -22,6 +22,7 @@ config/mimeapps.list: ~/.config/mimeapps.list
 config/aur/paru.conf: ~/.config/paru/paru.conf
 config/aur/yay.json: ~/.config/yay/config.json
 config/rofi: ~/.config/rofi
+config/starship.toml: ~/.config/starship.toml
 config/systemd/environment.d: ~/.config/environment.d
 config/systemd/user/alsa-restore.service: ~/.config/systemd/user/alsa-restore.service
 config/systemd/user/brillo.service: ~/.config/systemd/user/brillo.service
