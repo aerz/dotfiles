@@ -22,9 +22,12 @@ config/mimeapps.list: ~/.config/mimeapps.list
 config/paru/paru.conf: ~/.config/paru/paru.conf
 config/rofi: ~/.config/rofi
 config/systemd/environment.d: ~/.config/environment.d
+config/systemd/user/alsa-restore.service: ~/.config/systemd/user/alsa-restore.service
+config/systemd/user/brillo.service: ~/.config/systemd/user/brillo.service
+config/systemd/user/dunst.service: ~/.config/systemd/user/dunst.service
+config/systemd/user/google-drive.service: ~/.config/systemd/user/google-drive.service
 config/systemd/user/kopia-backup@.service: ~/.config/systemd/user/kopia-backup@.service
 config/systemd/user/kopia-backup@.timer: ~/.config/systemd/user/kopia-backup@.timer
-config/systemd/user/google-drive.service: ~/.config/systemd/user/google-drive.service
 config/systemd/user/rclone-mount@.service: ~/.config/systemd/user/rclone-mount@.service
 config/systemd/user/swaybg.service: ~/.config/systemd/user/swaybg.service
 config/systemd/user/swayidle.service: ~/.config/systemd/user/swayidle.service
