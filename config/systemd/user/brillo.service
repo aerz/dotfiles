@@ -1,0 +1,15 @@
+[Unit]
+Description=Load/Save Backlight Brightness
+DefaultDependencies=no
+PartOf=graphical-session.target
+Conflicts=shutdown.target
+Before=sysinit.target shutdown.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/brillo -I -e
+ExecStop=/usr/bin/brillo -O -e
+
+[Install]
+WantedBy=default.target
