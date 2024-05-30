@@ -19,7 +19,8 @@ config/git: ~/.config/git
 config/gtk/settings-3.0.ini: ~/.config/gtk-3.0/settings.ini
 config/gtk/settings-4.0.ini: ~/.config/gtk-4.0/settings.ini
 config/mimeapps.list: ~/.config/mimeapps.list
-config/paru/paru.conf: ~/.config/paru/paru.conf
+config/aur/paru.conf: ~/.config/paru/paru.conf
+config/aur/yay.json: ~/.config/yay/config.json
 config/rofi: ~/.config/rofi
 config/systemd/environment.d: ~/.config/environment.d
 config/systemd/user/alsa-restore.service: ~/.config/systemd/user/alsa-restore.service
