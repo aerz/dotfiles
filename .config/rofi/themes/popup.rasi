@@ -1,10 +1,10 @@
 /* -*- mode: css -*- */
 
 * {
-    bg: env(ROFI_BG, #E3E3E3);
+    bg: env(ROFI_BG, #e3e3e3);
     fg: env(ROFI_FG, #262626);
-    sel-bg: env(ROFI_SEL_BG, #C1C1C1);
-    prompt-bg: env(ROFI_PROMPT_BG, #EDEDED);
+    sel-bg: env(ROFI_SEL_BG, #c1c1c1);
+    prompt-bg: env(ROFI_PROMPT_BG, #ededed);
     prompt-fg: env(ROFI_PROMPT_FG, #262626);
     width: env(ROFI_WIDTH, 300px);
     spacing: 0;
@@ -21,7 +21,7 @@ window {
 }
 
 inputbar {
-    children: [ prompt, entry ];
+    children: [prompt, entry];
 }
 
 prompt {

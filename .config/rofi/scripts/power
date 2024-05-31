@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-readonly ROFI_THEME=~/.config/rofi/themes/popup.rasi
+readonly ROFI_THEME=~/.config/rofi/themes/power.rasi
 export ROFI_BG="#292B2B"
 export ROFI_FG="#C5C8C6"
 export ROFI_SEL_BG="#5C5E5E"
@@ -15,23 +15,27 @@ confirm() {
 }
 
 logout() {
-    swaymsg exit || i3-msg exit
+    swaymsg exit
     loginctl terminate-session "$(cat /proc/self/sessionid)"
 }
 
 select_action() {
-    uptime="Uptime $(uptime -p | sed -e 's/up //g;s/,.*//g'):"
     declare -ar actions=(
-        "   Shutdown"
-        "   Reboot"
-        "   Lock"
-        "   Suspend"
-        "   Hibernate"
-        "   Logout"
+        "󰤆  Shutdown"
+        "󰜉  Reboot"
+        "󰍁  Lock"
+        "󰒲  Suspend"
+        "󰁯  Hibernate"
+        "󰗽  Logout"
     )
+    uptime="$(uptime -p | \
+        sed 's/up //g;s/ days/d/g;s/ hours/h/g;s/ minutes/m/g;s/ seconds//g;
+             s/, //g')"
+    theme=$(mktemp)
+    sed "s/==uptime==/Uptime ${uptime}/g" $ROFI_THEME > "$theme"
 
     printf '%s\n' "${actions[@]}" | rofi \
-        -dmenu -i -l ${#actions[@]} -p "$uptime" -theme $ROFI_THEME
+        -dmenu -i -l ${#actions[@]} -p "Power:" -theme "$theme"
 }
 
 action="$(select_action)"
@@ -40,10 +44,10 @@ action="$(select_action)"
 [ -z "$action" ] && exit 0
 
 case $action in
-    *Shutdown) confirm && systemctl poweroff ;;
-    *Reboot) confirm && systemctl reboot ;;
-    *Lock) loginctl lock-session "$XDG_SESSION_ID" ;;
-    *Suspend) confirm && systemctl suspend ;;
+    *Shutdown) confirm && systemctl poweroff   ;;
+    *Reboot) confirm && systemctl reboot       ;;
+    *Lock) loginctl lock-session               ;;
+    *Suspend) confirm && systemctl suspend     ;;
     *Hibernate) confirm && systemctl hibernate ;;
-    *Logout) confirm && logout ;;
+    *Logout) confirm && logout                 ;;
 esac
