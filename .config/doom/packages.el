@@ -23,5 +23,9 @@
   :pin "13417d14abb3affc20a903daddd2f1525671b5bf"
   :recipe (:host sourcehut :repo "grtcdr/darkman.el"))
 
+(package! yadm
+  :pin "0b8148f0b90cdf7f36dc591a83b39b309d2c0e63"
+  :recipe (:host github :repo "seanfarley/yadm.el"))
+
 (package! polymode)
 (package! poly-ansible)

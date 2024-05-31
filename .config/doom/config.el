@@ -161,6 +161,14 @@
   (set-company-backend! 'sh-mode
                         '(company-shell :with company-yasnippet)))
 
+(use-package! yadm
+  :after (projectile magit)
+  :init
+  (advice-remove #'projectile-get-ext-command
+                 #'doom--only-use-generic-command-a)
+  (advice-add #'+vertico-file-search
+              :around #'yadm-doom-vertico-file-search))
+
 ;; -----------------------------------------------------------------------------
 ;; Themes
 ;; -----------------------------------------------------------------------------
