@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 readonly ROFI_THEME=~/.config/rofi/themes/power.rasi
+readonly ROFI_POPUP_THEME=~/.config/rofi/themes/popup.rasi
 export ROFI_BG="#292B2B"
 export ROFI_FG="#C5C8C6"
 export ROFI_SEL_BG="#5C5E5E"
@@ -11,7 +12,7 @@ confirm() {
     local no="No"
 
     [[ "$(echo -e "$no\n$yes" |
-        rofi -dmenu -i -l 2 -p "Confirm:" -theme $ROFI_THEME)" == "$yes" ]]
+        rofi -dmenu -i -l 2 -p "Confirm:" -theme $ROFI_POPUP_THEME)" == "$yes" ]]
 }
 
 logout() {
@@ -31,9 +32,9 @@ select_action() {
     uptime="$(uptime -p | \
         sed 's/up //g;s/ days/d/g;s/ hours/h/g;s/ minutes/m/g;s/ seconds//g;
              s/, //g')"
-    theme=$(mktemp)
-    sed "s/==uptime==/Uptime ${uptime}/g" $ROFI_THEME > "$theme"
+    theme="$(mktemp)"
 
+    sed "s/==uptime==/Uptime ${uptime}/g" $ROFI_THEME > "$theme"
     printf '%s\n' "${actions[@]}" | rofi \
         -dmenu -i -l ${#actions[@]} -p "Power:" -theme "$theme"
 }
