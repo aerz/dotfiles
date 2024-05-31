@@ -20,7 +20,7 @@
 ;;            :build (:not compile)))
 
 (package! darkman
-  :pin "13417d14abb3affc20a903daddd2f1525671b5bf"
+  :pin "fa80face9fb6e6c13dc2a0d84631d770fbef71fe"
   :recipe (:host sourcehut :repo "grtcdr/darkman.el"))
 
 (package! yadm
