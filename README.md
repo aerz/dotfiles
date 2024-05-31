@@ -33,16 +33,16 @@
 - [JetBrainsMono Nerd Font](https://www.nerdfonts.com)
 - [twemoji](https://github.com/twitter/twemoji). I like their flags.
 
-## Wallpaper
-
-My wallpaper is slightly edited, you can find it [here](img/wallpaper.jpg) and the [original](https://unsplash.com/photos/RRLb2zFzRK8) is by Timusic Photographso published on Unsplash.
-
 # Installation
 
-Make sure, you've installed [yadm](https://yadm.io/docs/install).
+> [!WARNING]
+> Be careful. The project is not intended to be widely used, use it as a reference for your own dotfiles.
+
+I use [yadm](https://yadm.io/docs/install) to manage them.
 
 ```shell
+cd ~
 yadm clone --bootstrap https://github.com/aerz/dotfiles.git
 ```
 
-After you complete the basic installation, there are more topics covered in [docs](./docs).
+When completed, there are manual configs or topics in the [docs](./.local/share/docs).
