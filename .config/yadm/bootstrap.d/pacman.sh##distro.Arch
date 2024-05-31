@@ -2,11 +2,11 @@
 
 set -eu
 
-sudo pacman -Syu
+sudo pacman -Sy
 
 # required
 sudo pacman -S \
-    bash waybar rofi sway swaybg sway-contrib swayidle swaylock terminfo \
+    bash autotiling-rs waybar rofi sway swaybg sway-contrib swayidle swaylock terminfo \
     wl-clipboard playerctl wtype inter-font ttf-jetbrains-mono-nerd
 
 # tools
@@ -19,3 +19,10 @@ sudo pacman -S zip unzip tar moreutils which bc zathura mpv
 
 # devtools
 sudo pacman -S shellcheck
+
+# paru
+sudo pacman -S --needed base-devel
+mkdir -p ~/.cache
+git clone https://aur.archlinux.org/paru.git ~/.cache/paru.git
+cd ~/.cache/paru.git
+makepkg -si
