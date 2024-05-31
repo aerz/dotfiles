@@ -15,7 +15,7 @@ sudo pacman -S \
     tree wget
 
 # utils
-sudo pacman -S zip unzip tar moreutils which bc zathura mpv
+sudo pacman -S zip unzip tar moreutils which bc typst typst-lsp zathura mpv
 
 # devtools
 sudo pacman -S shellcheck

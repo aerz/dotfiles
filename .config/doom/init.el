@@ -36,7 +36,7 @@
        vterm
 
        :checkers
-       syntax
+       (syntax +flymake)
 
        :tools
        ansible
@@ -45,7 +45,7 @@
        (eval +overlay)
        magit
        (lookup +docsets)
-       lsp
+       (lsp +eglot)
        pdf
        tree-sitter
 

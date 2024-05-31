@@ -152,25 +152,7 @@
           '("ShellCheck Wiki" "https://www.shellcheck.net/wiki/%s"))
 
 ;; -----------------------------------------------------------------------------
-;; Snippets
-;; -----------------------------------------------------------------------------
-(after! yasnippet
-  (add-to-list 'warning-suppress-types '(yasnippet backquote-change)))
-
-(after! sh-script
-  (set-company-backend! 'sh-mode
-                        '(company-shell :with company-yasnippet)))
-
-(use-package! yadm
-  :after (projectile magit)
-  :init
-  (advice-remove #'projectile-get-ext-command
-                 #'doom--only-use-generic-command-a)
-  (advice-add #'+vertico-file-search
-              :around #'yadm-doom-vertico-file-search))
-
-;; -----------------------------------------------------------------------------
-;; Themes
+;; Packages
 ;; -----------------------------------------------------------------------------
 (use-package! darkman
   :custom
@@ -185,3 +167,42 @@
     (advice-add 'darkman-mode :after
                 (lambda ()
                   (remove-hook 'server-after-make-frame-hook #'darkman-mode)))))
+
+(use-package! typst-ts-mode
+  :config
+  (add-hook! 'typst-ts-mode-hook #'lsp! 'append)
+  :custom
+  (typst-ts-watch-options "--open")
+  (typst-ts-mode-grammar-location (expand-file-name "tree-sitter/libtree-sitter-typst.so" user-emacs-directory))
+  (typst-ts-mode-enable-raw-blocks-highlight t)
+  (typst-ts-mode-highlight-raw-blocks-at-startup t))
+
+(after! typst-ts-mode
+  (add-to-list 'treesit-language-source-alist
+               '(typst "https://github.com/uben0/tree-sitter-typst"))
+  (treesit-install-language-grammar 'typst))
+
+(use-package! eglot
+  ;; FIXME related https://github.com/nvarner/typst-lsp/issues/434
+  ;; FIXME workaround https://github.com/joaotavora/eglot/issues/1363#issuecomment-1948922204
+  :custom (eglot-connect-hook nil)
+  :config (add-to-list 'eglot-server-programs '(typst-ts-mode . ("typst-lsp"))))
+
+(use-package! yadm
+  :after (projectile magit)
+  :init
+  (advice-remove #'projectile-get-ext-command
+                 #'doom--only-use-generic-command-a)
+  (advice-add #'+vertico-file-search
+              :around #'yadm-doom-vertico-file-search))
+
+;; -----------------------------------------------------------------------------
+;; Snippets
+;; -----------------------------------------------------------------------------
+(after! yasnippet
+  (add-to-list 'warning-suppress-types '(yasnippet backquote-change)))
+
+(after! sh-script
+  (set-company-backend! 'sh-mode
+                        '(company-shell :with company-yasnippet)))
+
