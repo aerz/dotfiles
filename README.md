@@ -1,7 +1,5 @@
 # dotfiles
 
-<img src="img/ufetch.png" align="right" alt="fetch image" width="400">
-
 - **OS**: [Arch Linux](https://archlinux.org)
 - **WM**: [sway](https://github.com/swaywm/sway)
 - **Bar**: [waybar](https://github.com/Alexays/Waybar)
@@ -17,7 +15,7 @@
 
 | Package                                                                       | Description                                         |
 | ----------------------------------------------------------------------------- | --------------------------------------------------- |
-| [rofi](https://github.com/davatorium/rofi)                                    | Dmenu replacement                                   |
+| [rofi](https://github.com/davatorium/rofi)                                    | `dmenu` replacement                                 |
 | [playerctl](https://github.com/altdesktop/playerctl)                          | Fetch metadata about what is being played           |
 | [ponymix](https://github.com/falconindy/ponymix)                              | Pulseaudio frontend to control output/input devices |
 | [yay](https://github.com/Jguer/yay)                                           | AUR helper                                          |
@@ -41,11 +39,10 @@ My wallpaper is slightly edited, you can find it [here](img/wallpaper.jpg) and t
 
 # Installation
 
+Make sure, you've installed [yadm](https://yadm.io/docs/install).
+
 ```shell
-git clone https://github.com/aerz/dotfiles ~/.config/dotfiles
-go get github.com/erizocosmico/dotman
-cd ~/.config/dotfiles
-dotman -config dotman.yaml
+yadm clone --bootstrap https://github.com/aerz/dotfiles.git
 ```
 
 After you complete the basic installation, there are more topics covered in [docs](./docs).

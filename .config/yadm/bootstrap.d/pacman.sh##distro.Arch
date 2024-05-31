@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+set -eu
+
+sudo pacman -Syu
+
+# required
+sudo pacman -S \
+    bash waybar rofi sway swaybg sway-contrib swayidle swaylock terminfo \
+    wl-clipboard playerctl wtype inter-font ttf-jetbrains-mono-nerd
+
+# tools
+sudo pacman -S \
+    bat eza ripgrep fd fzf zoxide mcfly tldr yt-dlp yq yazi man-db texinfo \
+    tree wget
+
+# utils
+sudo pacman -S zip unzip tar moreutils which bc zathura mpv
+
+# devtools
+sudo pacman -S shellcheck
