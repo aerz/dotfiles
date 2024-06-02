@@ -1,5 +1,5 @@
 /* -*- mode: css -*- */
 
-@import "popup.rasi" entry {
-    placeholder: "==uptime==";
+@import "popup.rasi" * {
+    font: "JetBrains Mono NF, Feather, 12";
 }
