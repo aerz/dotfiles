@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+#
+# Pick a colour by clicking on it. The hex value is copied to the clipboard
+# Requires: grim, slurp, wl-clipboard, imagemagick
+#
+# Source: https://git.sr.ht/~whynothugo/dotfiles/tree/28b646cd1c7df007a08395d10969b5f5f387fd89/item/home/.local/bin/color-picker
+
+grim -g "$(slurp -p)" -t ppm - |
+    magick - -format '%[pixel:p{0,0}]' txt:- |
+    tail -n 1 |
+    cut -d ' ' -f 4 |
+    wl-copy --trim-newline
