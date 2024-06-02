@@ -41,7 +41,7 @@
        :tools
        ansible
        biblio
-       (debugger +lsp)
+       debugger
        (eval +overlay)
        magit
        (lookup +docsets)
