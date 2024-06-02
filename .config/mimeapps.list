@@ -9,9 +9,13 @@ image/png=sxiv.desktop
 
 # URIs
 x-scheme-handler/discord=discord.desktop
-x-scheme-handler/https=brave-browser.desktop
+x-scheme-handler/https=librewolf.desktop
 
 # Mail
 x-scheme-handler/mid=thunderbird-beta-bin.desktop
 x-scheme-handler/mailto=thunderbird-beta-bin.desktop
 message/rfc822=thunderbird-beta-bin.desktop
+text/html=librewolf.desktop
+x-scheme-handler/http=librewolf.desktop
+x-scheme-handler/about=librewolf.desktop
+x-scheme-handler/unknown=librewolf.desktop
