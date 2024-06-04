@@ -2,7 +2,7 @@
 Name=WebCord
 Comment=A Discord and Fosscord client made with the Electron API
 GenericName=Internet Messenger
-Exec=webcord --enable-features=UseOzonePlatform --ozone-platform=wayland %U
+Exec=webcord --ozone-platform=wayland --use-gl=angle --use-angle=vulkan %U
 Icon=webcord
 Type=Application
 StartupNotify=true

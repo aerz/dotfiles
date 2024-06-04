@@ -1,0 +1,35 @@
+#
+# use this in case you want to disable flags set in brave://flags
+#
+#--no-experiments
+#
+# defaults: gpu crashes the entire window since `aur/brave-bin v1.65.114-1`
+# - https://issues.chromium.org/issues/329678163
+# - https://chromium-review.googlesource.com/c/chromium/src/+/5375669
+# - https://github.com/flathub/com.brave.Browser/issues/576
+# - https://github.com/brave/brave-browser/issues/37498
+#
+#--ozone-platform=wayland
+# or
+#--enable-features=UseOzonePlatform --ozone-platform=wayland
+#
+# workaround 1: really bad performance
+#
+#--ozone-platform=wayland --disable-gpu
+#
+# workaround 2: works, patch is wip https://issues.chromium.org/issues/334275637
+#               it was added in extra/chromium package `125.0.6422.141`
+# - https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/26165
+# - https://chromiumdash.appspot.com/commits?commit=9ca21ac45af570ce11a1b0b96fdb163985b59178&platform=Linux
+#
+--ignore-gpu-blocklist
+--enable-zero-copy--enable-gpu-rasterization
+--ozone-platform=wayland
+--enable-features=VaapiVideoDecoder
+--enable-features=VaapiVideoDecodeLinuxGL
+--enable-features=VaapiIgnoreDriverChecks
+--enable-accelerated-video-decode
+--disable-features=UseChromeOSDirectVideoDecoder
+--use-gl=angle
+--use-angle=vulkan
+--enable-features=Vulkan,VulkanFromANGLE,DefaultANGLEVulkan,VaapiIgnoreDriverChecks,VaapiVideoDecoder,UseMultiPlaneFormatForHardwareVideo
