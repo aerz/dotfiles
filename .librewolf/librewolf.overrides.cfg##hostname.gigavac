@@ -1,0 +1,14 @@
+defaultPref("privacy.resistFingerprinting", false);
+defaultPref("privacy.resistFingerprinting.autoDeclineNoUserInputCanvasPrompts", false);
+defaultPref("privacy.resistFingerprinting.letterboxing", false);
+
+defaultPref("gfx.webrender.all", true);
+defaultPref("media.ffmpeg.vaapi.enabled", true);
+defaultPref("widget.wayland-dmabuf-vaapi.enabled", true);
+
+defaultPref("browser.download.autohideButton", true);
+defaultPref("browser.download.useDownloadDir", false);
+defaultPref("general.autoScroll", true)
+defaultPref("identity.fxaccounts.enabled", true);
+defaultPref("middlemouse.paste", false);
+defaultPref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
