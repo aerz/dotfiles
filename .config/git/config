@@ -5,14 +5,17 @@
     autocrlf = input
     ignorecase = false
 [alias]
-    assume = update-index --assume-unchanged
-    unassume = update-index --no-assume-unchanged
-    undo = reset --soft HEAD~1
-    amend = commit -a --amend
-    st = status
     co = checkout
-    fob = "!f() { git fetch origin ${1}:${1}; }; f"
-    lo = log --oneline --graph
+    c = commit
+    ca = commit -a --amend
+    d = diff
+    lc = log --oneline --graph
+    ls = log --pretty=fuller --abbrev-commit --stat
+    lsc = log -p --pretty=fuller --abbrev-commit
+    st = status --short -uno
+    up = pull --rebase
+    ignore = update-index --assume-unchanged
+    track = update-index --no-assume-unchanged
 [filter "lfs"]
     clean = git-lfs clean -- %f
     smudge = git-lfs smudge -- %f
