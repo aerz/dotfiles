@@ -24,6 +24,7 @@ PS1='[\u@\h \W]\$ '
 alias p="sudo pacman"
 alias g="git"
 alias emacs="emacsclient -c -a 'emacs'"
+alias cu="checkupdates; paru -Qum"
 
 # Enable colors
 man() {
