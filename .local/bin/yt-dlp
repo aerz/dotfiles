@@ -1,19 +1,19 @@
 #!/usr/bin/env bash
 
 if [[ $* =~ -h|--help ]]; then
-    cat <<EOF
+    less <<EOF
 CUSTOM OPTIONS
 
 Usage: yt-dlp --custom-[flag] [OPTIONS] [URL] [URL...]
 
 Flags:
-  --custom-navidrome        Download audio from a video with metadata
-  --custom-live             Download live streaming
+  --custom-navidrome                Download audio from a video with metadata
+  --custom-live                     Download live streaming
 
 DEFAULT OPTIONS
 
+$(/usr/bin/yt-dlp --help)
 EOF
-    /usr/bin/yt-dlp --help
     exit 0
 fi
 
