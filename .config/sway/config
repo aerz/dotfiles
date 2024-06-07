@@ -310,7 +310,7 @@ bindsym $mod+space exec rofi -show drun -modi drun -drun-show-actions -show-icon
 bindsym $mod+$alt+space exec ~/.config/rofi/scripts/sway-window-menu
 bindsym $mod+Shift+space exec rofi -show run -modi run -matching fuzzy -theme ~/.config/rofi/themes/windows.rasi
 
-# bindsym $mod+Shift+c exec rofi -show calc -modi calc -n
+bindsym $mod+Shift+c exec alacritty -e qalc
 
 bindsym $mod+Shift+Ctrl+c exec ~/.local/bin/qrgen
 
