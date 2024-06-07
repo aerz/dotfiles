@@ -53,15 +53,16 @@
        tty
 
        :lang
-       emacs-lisp
        (go +lsp)
+       (javascript +lsp +tree-sitter)
        (json +lsp)
-       latex
-       markdown
        (org +roam2 +dragndrop +pandoc)
        (python +lsp)
-       (javascript +lsp +tree-sitter)
        (sh +lsp +tree-sitter)
+       emacs-lisp
+       latex
+       lua
+       markdown
        web
        yaml
 
