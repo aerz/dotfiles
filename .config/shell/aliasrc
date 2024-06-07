@@ -1,0 +1,39 @@
+#!/bin/sh
+
+# defaults
+alias \
+    emacs="emacsclient -c -a 'emacs'"
+
+# shorthands
+alias \
+    ..='cd ..' \
+    cu="checkupdates; paru -Qum" \
+    dw='sudo dmesg -L=always' \
+    g="git" \
+    jxe='journalctl -xe' \
+    p="sudo pacman" \
+    udm='sudo udevadm monitor'
+
+# colorize
+alias \
+    diff='diff --color=always' \
+    grep='grep --color=auto' \
+    l='ls -lgh' \
+    la='ls -lgah' \
+    ls='eza --icons' \
+    lt='eza --tree' \
+    tree='tree -C'
+
+# verbose
+alias \
+    cp='cp -iv' \
+    df='df -h'
+
+# helpers
+alias \
+    gpgak="keychain --quiet --nogui --attempts 2" \
+    gpgls='gpg --list-secret-keys --keyid-format LONG' \
+    keychain='keychain --quiet' \
+    ssh='TERM=xterm-256color ssh' \
+    sshak="keychain --quiet --inherit any --attempts 2" \
+    sshsum='ssh-keygen -l -f'

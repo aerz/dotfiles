@@ -5,17 +5,18 @@
     autocrlf = input
     ignorecase = false
 [alias]
-    co = checkout
     c = commit
     ca = commit -a --amend
+    co = checkout
     d = diff
+    ignore = update-index --assume-unchanged
     lc = log --oneline --graph
+    lf = log --graph --all --topo-order --decorate --oneline --boundary
     ls = log --pretty=fuller --abbrev-commit --stat
     lsc = log -p --pretty=fuller --abbrev-commit
     st = status --short -uno
-    up = pull --rebase
-    ignore = update-index --assume-unchanged
     track = update-index --no-assume-unchanged
+    up = pull --rebase
 [filter "lfs"]
     clean = git-lfs clean -- %f
     smudge = git-lfs smudge -- %f
