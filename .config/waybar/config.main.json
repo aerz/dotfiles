@@ -60,12 +60,9 @@
     "spacing": 10
   },
   "clock": {
-    "format": "󰅐 {:%H:%M  󰃶 %b %d}",
-    "format-alt": "󰅐 {:%H:%M  󰃶 %b %d, %Y}",
+    "format": "󰅐 {:%H:%M}",
+    "format-alt": "󰅐 {:%H:%M  󰃶 %A, %B %d, %Y}",
     "timezone": "Europe/Madrid"
-    // "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-    // "today-format": "<span color='#ff6699'><b><u>{}</u></b></span>",
-    // "format-calendar-weeks": "<span color='#99ffdd'><b>{}</b></span>",
   },
   "backlight": {
     "device": "ddcci4",
