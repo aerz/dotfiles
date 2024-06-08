@@ -16,7 +16,7 @@ confirm() {
 
 logout() {
     swaymsg exit
-    loginctl terminate-session "$(cat /proc/self/sessionid)"
+    loginctl terminate-user "$(whoami)"
 }
 
 select_action() {

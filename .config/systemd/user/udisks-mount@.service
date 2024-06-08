@@ -1,11 +1,11 @@
 [Unit]
 Description=Mount a block device using udisks
-Requires=gvfs-daemon.service
-After=gvfs-daemon.service
 
 [Service]
 Type=oneshot
+RemainAfterExit=yes
 ExecStart=/usr/bin/udisksctl mount --block-device=/dev/disk/by-label/%i --no-user-interaction
+ExecStop=/usr/bin/udisksctl unmount --block-device=/dev/disk/by-label/%i --no-user-interaction
 
 [Install]
 WantedBy=default.target
