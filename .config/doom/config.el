@@ -170,7 +170,8 @@
 
 (use-package! typst-ts-mode
   :config
-  (add-hook! 'typst-ts-mode-hook #'lsp! 'append)
+  ;;(add-hook! 'typst-ts-mode-hook #'lsp! 'append)
+  (add-hook! 'typst-ts-mode-hook #'auto-fill-mode)
   :custom
   (typst-ts-watch-options "--open")
   (typst-ts-mode-grammar-location (expand-file-name "tree-sitter/libtree-sitter-typst.so" user-emacs-directory))
