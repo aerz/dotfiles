@@ -6,6 +6,7 @@
 (package! dotenv-mode)
 (package! fennel-mode)
 (package! jinja2-mode)
+(package! just-mode)
 (package! nginx-mode)
 (package! olivetti)
 (package! org-modern)
