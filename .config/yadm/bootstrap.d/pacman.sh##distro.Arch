@@ -12,7 +12,7 @@ sudo pacman -S \
 # tools
 sudo pacman -S \
     bat eza ripgrep fd fzf zoxide mcfly tldr yt-dlp yq yazi man-db texinfo \
-    tree wget
+    just tree wget
 
 # utils
 sudo pacman -S zip unzip tar moreutils which bc typst typst-lsp zathura mpv
@@ -26,3 +26,7 @@ mkdir -p ~/.cache
 git clone https://aur.archlinux.org/paru.git ~/.cache/paru.git
 cd ~/.cache/paru.git
 makepkg -si
+
+# testing tools
+#sudo pacman -S git-delta diff-so-fancy bat-extras
+#paru -S git-extras
