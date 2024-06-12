@@ -3,7 +3,7 @@
 PKG_UPDATE_MIN=50
 
 is_pacman_running() {
-    pgrep "paru|yay|yay" >/dev/null 2>&1
+    pgrep "paru|yay" >/dev/null 2>&1
     test $? -eq 0
 }
 
