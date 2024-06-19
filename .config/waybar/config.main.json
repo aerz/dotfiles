@@ -124,8 +124,9 @@
     "on-click-right": "playerctl stop"
   },
   "custom/updates": {
-    "interval": 21600,
     "exec": "~/.config/waybar/scripts/updates.sh",
+    "format": "{}",
+    "restart-interval": 1,
     "signal": 8
   },
   "tray": {

@@ -59,7 +59,9 @@ case "$1" in
         ;;
     # Default
     *)
-        pkill -SIGRTMIN+8 waybar
+        # restart waybar custom/updates script module
+        # pkill -SIGRTMIN+8 waybar
+        systemctl --user kill --signal="SIGRTMIN+8" waybar-main
         /usr/bin/yay $@
         ;;
 esac
