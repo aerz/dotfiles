@@ -1,13 +1,30 @@
 #!/usr/bin/env bash
 
-sig_custom_updates() {
-    # pkill -SIGRTMIN+8 waybar
-    systemctl --user kill --signal="SIGRTMIN+8" waybar-main.service
-}
+if [[ $* =~ -h|--help ]]; then
+    less <<EOF
+CUSTOM OPERATIONS
+
+Usage: paru <operation> [...]
+
+Operations:
+    -Up                     Update all packages (paru -Syyu)
+
+DEFAULT OPERATIONS
+
+$(/usr/bin/paru --help)
+EOF
+    exit 0
+fi
+
+# restart custom/updates waybar module
+# pkill -SIGRTMIN+8 waybar
+systemctl --user kill --signal="SIGRTMIN+8" waybar-main.service
 
 case "$1" in
+    -Up)
+        paru -Syyu --noconfirm
+        ;;
     *)
-        sig_custom_updates
         /usr/bin/paru "$@"
         ;;
 esac

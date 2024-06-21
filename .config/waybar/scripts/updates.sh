@@ -23,6 +23,6 @@ while true; do
     aur=$(/usr/bin/paru -Qum 2>/dev/null | wc -l)
     updates=$(( pacman + aur ))
 
-    [ $updates -ge 0 ] && echo "󰏗 $updates" || echo ""
+    [ $updates -ge 50 ] && echo "󰏗 $updates" || echo ""
     sleep 21600 # 6h
 done
