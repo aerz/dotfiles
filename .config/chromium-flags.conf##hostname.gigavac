@@ -1,0 +1,10 @@
+# -*- mode: conf -*-
+# package: chromium
+# works because https://gitlab.archlinux.org/archlinux/packaging/packages/chromium/-/merge_requests/6
+# https://bbs.archlinux.org/viewtopic.php?id=244031
+--ozone-platform=wayland
+--use-angle=vulkan
+# webgpu?
+# chrome://flags -> #enable-unsafe-webgpu
+# ref: https://github.com/gpuweb/gpuweb/wiki/Implementation-Status
+--enable-features=Vulkan,VulkanFromANGLE,DefaultANGLEVulkan,VaapiIgnoreDriverChecks,VaapiVideoDecoder,UseMultiPlaneFormatForHardwareVideo,VaapiVideoEncoder

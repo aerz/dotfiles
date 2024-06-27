@@ -1,0 +1,6 @@
+#-*- mode: conf -*-
+# package (aur): google-chrome-wayland-vulkan
+# https://aur.archlinux.org/packages/google-chrome-wayland-vulkan
+--ozone-platform=wayland
+--use-angle=vulkan
+--enable-features=Vulkan,VulkanFromANGLE,DefaultANGLEVulkan,VaapiIgnoreDriverChecks,VaapiVideoDecoder,UseMultiPlaneFormatForHardwareVideo,VaapiVideoEncoder
