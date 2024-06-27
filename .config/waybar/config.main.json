@@ -65,11 +65,10 @@
     "timezone": "Europe/Madrid"
   },
   "backlight": {
-    "device": "ddcci4",
+    "device": "ddcci6",
     "format": "{percent}%  "
   },
   "network": {
-    "interface": "enp6s0",
     "format-wifi": "({signalStrength}%) ",
     "format-ethernet": "",
     "tooltip-format": "{ifname} via {gwaddr}",

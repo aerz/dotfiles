@@ -19,7 +19,7 @@
     "format": "{name}"
   },
   "backlight": {
-    "device": "ddcci1",
+    "device": "ddcci5",
     "format": "{percent}%  "
   },
   "cpu": {
