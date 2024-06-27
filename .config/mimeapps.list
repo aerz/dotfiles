@@ -1,21 +1,28 @@
 [Default Applications]
 text/plain=text.desktop
 application/pdf=org.pwmt.zathura-pdf-mupdf.desktop
-
-# Images
-image/svg+xml=brave-browser.desktop
-image/jpeg=sxiv.desktop
-image/png=sxiv.desktop
-
-# URIs
+image/svg+xml=librewolf.desktop
+image/jpeg=imv.desktop
+image/png=imv.desktop
 x-scheme-handler/discord=discord.desktop
 x-scheme-handler/https=librewolf.desktop
-
-# Mail
-x-scheme-handler/mid=thunderbird-beta-bin.desktop
-x-scheme-handler/mailto=thunderbird-beta-bin.desktop
-message/rfc822=thunderbird-beta-bin.desktop
+x-scheme-handler/mid=betterbird.desktop
+x-scheme-handler/mailto=betterbird.desktop
+message/rfc822=betterbird.desktop
 text/html=librewolf.desktop
 x-scheme-handler/http=librewolf.desktop
 x-scheme-handler/about=librewolf.desktop
 x-scheme-handler/unknown=librewolf.desktop
+application/x-partial-download=mpv.desktop
+application/vnd.openxmlformats-officedocument.wordprocessingml.document=libreoffice-writer.desktop
+inode/directory=thunar.desktop
+application/epub+zip=com.github.johnfactotum.Foliate.desktop
+
+[Added Associations]
+application/x-partial-download=mpv.desktop;
+text/x-lua=emacsclient.desktop;
+application/pdf=librewolf.desktop;org.pwmt.zathura-pdf-mupdf.desktop;
+image/jpeg=imv.desktop;
+application/vnd.openxmlformats-officedocument.wordprocessingml.document=libreoffice-writer.desktop;
+application/epub+zip=com.github.johnfactotum.Foliate.desktop;
+image/png=pinta.desktop;
