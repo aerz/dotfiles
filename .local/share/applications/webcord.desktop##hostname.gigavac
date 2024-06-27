@@ -1,8 +1,9 @@
+#-*- mode: conf -*-
 [Desktop Entry]
 Name=WebCord
 Comment=A Discord and Fosscord client made with the Electron API
 GenericName=Internet Messenger
-Exec=webcord --ozone-platform=wayland --use-gl=angle --use-angle=vulkan %U
+Exec=webcord --ozone-platform=wayland %U
 Icon=webcord
 Type=Application
 StartupNotify=true
