@@ -6,8 +6,9 @@ sudo pacman -Sy
 
 # required
 sudo pacman -S \
-    bash autotiling-rs waybar rofi sway swaybg sway-contrib swayidle swaylock terminfo \
-    wl-clipboard playerctl wtype inter-font ttf-jetbrains-mono-nerd
+    bash zsh starship git autotiling-rs waybar rofi sway swaybg sway-contrib swayidle \
+    swaylock terminfo wl-clipboard playerctl wtype inter-font \
+    ttf-jetbrains-mono-nerd
 
 # tools
 sudo pacman -S \
@@ -26,6 +27,9 @@ mkdir -p ~/.cache
 git clone https://aur.archlinux.org/paru.git ~/.cache/paru.git
 cd ~/.cache/paru.git
 makepkg -si
+
+# zsh
+paru -S oh-my-posh-bin
 
 # testing tools
 #sudo pacman -S git-delta diff-so-fancy bat-extras

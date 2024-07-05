@@ -3,7 +3,7 @@
 - **OS**: [Arch Linux](https://archlinux.org)
 - **WM**: [sway](https://github.com/swaywm/sway)
 - **Bar**: [waybar](https://github.com/Alexays/Waybar)
-- **Shell**: [Bash](https://www.gnu.org/software/bash/)
+- **Shell**: [Zsh](https://zsh.sourceforge.io)
 - **Terminal emulator**: [Alacritty](https://github.com/alacritty/alacritty)
 - **Editor**: [Emacs](https://www.gnu.org/software/emacs/)
 - **Icon theme**: [Papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme)
