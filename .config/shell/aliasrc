@@ -19,9 +19,9 @@ alias \
 alias \
     diff='diff --color=always' \
     grep='grep --color=auto' \
+    ls='eza --icons=always' \
     l='ls -lgh' \
     la='ls -lgah' \
-    ls='eza --icons' \
     lt='eza --tree' \
     tree='tree -C'
 
