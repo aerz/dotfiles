@@ -8,5 +8,5 @@ export \
     MCFLY_RESULTS=50 \
     MCFLY_INTERFACE_VIEW="bottom"
 eval "$(mcfly init bash)"
-eval "$(zoxide init bash)"
+eval "$(zoxide init --cmd cd bash)"
 eval "$(starship init bash)"
