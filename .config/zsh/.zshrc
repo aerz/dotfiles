@@ -19,6 +19,7 @@ zinit light Aloxaf/fzf-tab
 zinit snippet OMZP::archlinux
 zinit snippet OMZP::command-not-found
 zinit snippet OMZP::sudo
+zinit ice as"completion"; zinit snippet https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
 
 # cache support xdg base directory
 [ -d "${XDG_CACHE_HOME:-${HOME}/.cache}/zsh" ] || \
@@ -38,9 +39,9 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza --color=always $realpat
 
 # shell
 source "${XDG_CONFIG_HOME:-${HOME}/.config}/shell/aliasrc"
-source "${XDG_CONFIG_HOME:-${HOME}/.config}/zsh/bindkeys.sh"
-source "${XDG_CONFIG_HOME:-${HOME}/.config}/zsh/history.sh"
-source "${XDG_CONFIG_HOME:-${HOME}/.config}/zsh/funcs.sh"
+source "${XDG_CONFIG_HOME:-${HOME}/.config}/zsh/bindkeys.zsh"
+source "${XDG_CONFIG_HOME:-${HOME}/.config}/zsh/history.zsh"
+source "${XDG_CONFIG_HOME:-${HOME}/.config}/zsh/funcs.zsh"
 
 # init
 eval "$(oh-my-posh init --config "${XDG_CONFIG_HOME:-${HOME}/.config}/ohmyposh/zen.toml" zsh)"
