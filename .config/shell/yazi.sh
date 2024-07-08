@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 function ya() {
 	local tmp
@@ -6,7 +6,7 @@ function ya() {
 
 	yazi "$@" --cwd-file="$tmp"
 	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-		cd -- "$cwd" || return
+		cd "$cwd" || return
 	fi
-	rm -f -- "$tmp"
+	rm -f "$tmp"
 }

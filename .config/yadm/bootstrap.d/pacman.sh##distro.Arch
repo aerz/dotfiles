@@ -12,7 +12,7 @@ sudo pacman -S \
 
 # tools
 sudo pacman -S \
-    bat eza ripgrep fd fzf zoxide mcfly tldr yt-dlp yq yazi man-db texinfo \
+    bat eza ripgrep fd fzf zoxide tldr yt-dlp yq yazi man-db texinfo \
     just tree wget
 
 # utils
