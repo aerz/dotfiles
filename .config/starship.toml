@@ -1,6 +1,6 @@
 # format = "$username@$hostname: $directory$all"
 format = """
-$username@$hostname: $directory\
+$directory\
 $git_branch\
 $git_state\
 $git_status\
@@ -9,9 +9,10 @@ $line_break\
 $python\
 $character"""
 add_newline = false
+continuation_prompt = '❯❯ '
 
 [character]
-success_symbol = "[❯](green)"
+success_symbol = "[❯](purple)"
 error_symbol = "[❯](red)"
 vimcmd_symbol = "[❮](green)"
 
@@ -66,6 +67,8 @@ symbol = " "
 symbol = " "
 
 [directory]
+truncation_length = 0
+style = 'bold blue'
 read_only = " "
 
 [docker_context]
@@ -84,6 +87,8 @@ symbol = " "
 symbol = " "
 
 [git_branch]
+format = '[$symbol$branch(:$remote_branch)]($style) '
+style = 'bold #6c6c6c'
 symbol = " "
 
 [golang]

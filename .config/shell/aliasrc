@@ -28,7 +28,8 @@ alias \
 # verbose
 alias \
     cp='cp -iv' \
-    df='df -h'
+    df='df -h' \
+    free='free -h'
 
 # helpers
 alias \

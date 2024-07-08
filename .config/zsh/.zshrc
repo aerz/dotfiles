@@ -20,8 +20,19 @@ zinit wait lucid light-mode for \
 zinit wait lucid for \
     OMZ::plugins/archlinux \
     OMZ::plugins/command-not-found \
-    OMZ::plugins/sudo \
-    as'completion' https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
+    OMZ::plugins/sudo
+
+# completions
+zinit wait lucid as'completion' for \
+    https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker \
+    OMZ::plugins/fd/_fd
+
+# shell
+source "${XDG_CONFIG_HOME:-${HOME}/.config}/zsh/bindkeys.zsh"
+source "${XDG_CONFIG_HOME:-${HOME}/.config}/zsh/history.zsh"
+zinit wait lucid for \
+    is-snippet "${XDG_CONFIG_HOME:-${HOME}/.config}/shell/aliasrc" \
+    is-snippet "${XDG_CONFIG_HOME:-${HOME}/.config}/zsh/funcs.zsh"
 
 # cache support xdg base directory
 [ -d "${XDG_CACHE_HOME:-${HOME}/.cache}/zsh" ] || \
@@ -35,17 +46,13 @@ zinit cdreplay -q
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)EZA_COLORS}"
 zstyle ':completion:*' menu no
+zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path "${XDG_CACHE_HOME:-${HOME}/.cache}/zsh/zcompcache"
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza --color=always $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza --color=always $realpath'
 
-# shell
-source "${XDG_CONFIG_HOME:-${HOME}/.config}/shell/aliasrc"
-source "${XDG_CONFIG_HOME:-${HOME}/.config}/zsh/bindkeys.zsh"
-source "${XDG_CONFIG_HOME:-${HOME}/.config}/zsh/history.zsh"
-source "${XDG_CONFIG_HOME:-${HOME}/.config}/zsh/funcs.zsh"
-
 # init
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
+# eval "$(starship init zsh)"
 eval "$(oh-my-posh init --config "${XDG_CONFIG_HOME:-${HOME}/.config}/ohmyposh/zen.toml" zsh)"
