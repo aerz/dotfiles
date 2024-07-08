@@ -1,4 +1,5 @@
 # shellcheck disable=SC2296,SC2016,SC1091
+# zinit
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
 if [ ! -d "$ZINIT_HOME" ]; then
@@ -17,7 +18,6 @@ zinit light Aloxaf/fzf-tab
 # snippets
 zinit snippet OMZP::archlinux
 zinit snippet OMZP::command-not-found
-zinit snippet OMZP::git
 zinit snippet OMZP::sudo
 
 # cache support xdg base directory
@@ -28,29 +28,6 @@ autoload -Uz compinit
 compinit -d "${XDG_CACHE_HOME:-${HOME}.cache}/zsh/zcompdump-${ZSH_VERSION}"
 zinit cdreplay -q
 
-# keybindings
-bindkey -e
-bindkey '^p' history-search-backward
-bindkey '^n' history-search-forward
-# alt+arrow
-bindkey "^[[1;3D" backward-word
-bindkey "^[[1;3C" forward-word
-# delete
-bindkey '^[[3~' delete-char
-
-# history
-HISTSIZE=5000
-SAVEHIST=$HISTSIZE
-HISTFILE="${XDG_CACHE_HOME:-${HOME}/.cache}/zsh/history"
-HISTDUP=erase
-setopt appendhistory
-setopt sharehistory
-setopt hist_ignore_space
-setopt hist_ignore_all_dups
-setopt hist_save_no_dups
-setopt hist_ignore_dups
-setopt hist_find_no_dups
-
 # completion styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)EZA_COLORS}"
@@ -59,11 +36,11 @@ zstyle ':completion:*' cache-path "${XDG_CACHE_HOME:-${HOME}/.cache}/zsh/zcompca
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza --color=always $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza --color=always $realpath'
 
-# aliases
+# shell
 source "${XDG_CONFIG_HOME:-${HOME}/.config}/shell/aliasrc"
-
-# load functions
-source "${XDG_CONFIG_HOME:-${HOME}/.config}/shell/yazi.sh"
+source "${XDG_CONFIG_HOME:-${HOME}/.config}/zsh/bindkeys.sh"
+source "${XDG_CONFIG_HOME:-${HOME}/.config}/zsh/history.sh"
+source "${XDG_CONFIG_HOME:-${HOME}/.config}/zsh/funcs.sh"
 
 # init
 eval "$(oh-my-posh init --config "${XDG_CONFIG_HOME:-${HOME}/.config}/ohmyposh/zen.toml" zsh)"
