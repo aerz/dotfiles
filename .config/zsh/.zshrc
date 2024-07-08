@@ -10,16 +10,18 @@ fi
 source "${ZINIT_HOME}/zinit.zsh"
 
 # plugins
-zinit light zsh-users/zsh-syntax-highlighting
-zinit light zsh-users/zsh-completions
-zinit light zsh-users/zsh-autosuggestions
-zinit light Aloxaf/fzf-tab
+zinit wait lucid light-mode for \
+    atinit"zicompinit; zicdreplay" zsh-users/zsh-syntax-highlighting \
+    atload"_zsh_autosuggest_start" zsh-users/zsh-autosuggestions \
+    blockf atpull'zinit creinstall -q .' zsh-users/zsh-completions \
+    Aloxaf/fzf-tab
 
 # snippets
-zinit snippet OMZP::archlinux
-zinit snippet OMZP::command-not-found
-zinit snippet OMZP::sudo
-zinit ice as"completion"; zinit snippet https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
+zinit wait lucid for \
+    OMZ::plugins/archlinux \
+    OMZ::plugins/command-not-found \
+    OMZ::plugins/sudo \
+    as'completion' https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
 
 # cache support xdg base directory
 [ -d "${XDG_CACHE_HOME:-${HOME}/.cache}/zsh" ] || \
@@ -44,6 +46,6 @@ source "${XDG_CONFIG_HOME:-${HOME}/.config}/zsh/history.zsh"
 source "${XDG_CONFIG_HOME:-${HOME}/.config}/zsh/funcs.zsh"
 
 # init
-eval "$(oh-my-posh init --config "${XDG_CONFIG_HOME:-${HOME}/.config}/ohmyposh/zen.toml" zsh)"
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
+eval "$(oh-my-posh init --config "${XDG_CONFIG_HOME:-${HOME}/.config}/ohmyposh/zen.toml" zsh)"
