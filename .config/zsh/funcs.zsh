@@ -1,19 +1,19 @@
 # yazi moves you to last directory
 ya() {
-	local tmp
-	tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+  local tmp
+  tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
 
-	yazi "$@" --cwd-file="$tmp"
-	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-		cd "$cwd" || return
-	fi
-	rm -f "$tmp"
+  yazi "$@" --cwd-file="$tmp"
+  if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+    cd "$cwd" || return
+  fi
+  rm -f "$tmp"
 }
 
 # find directory from current location
 fzf_find_dir() {
   cd "$(find "${1:-$(pwd)}" -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf +m)" || \
-	  exit
+    exit
 }
 
 # docker
