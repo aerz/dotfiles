@@ -10,7 +10,8 @@ fi
 source "${ZINIT_HOME}/zinit.zsh"
 
 # plugins
-zinit wait lucid light-mode for \
+zinit atinit'eval "$(fzf --zsh)"' atload'eval "$(zoxide init --cmd cd zsh)"' \
+    wait lucid light-mode for \
     atinit"zicompinit; zicdreplay" zsh-users/zsh-syntax-highlighting \
     atload"_zsh_autosuggest_start" zsh-users/zsh-autosuggestions \
     blockf atpull'zinit creinstall -q .' zsh-users/zsh-completions \
@@ -51,8 +52,6 @@ zstyle ':completion:*' cache-path "${XDG_CACHE_HOME:-${HOME}/.cache}/zsh/zcompca
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza --color=always $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza --color=always $realpath'
 
-# init
-eval "$(fzf --zsh)"
-eval "$(zoxide init --cmd cd zsh)"
+# prompt
 # eval "$(starship init zsh)"
 eval "$(oh-my-posh init --config "${XDG_CONFIG_HOME:-${HOME}/.config}/ohmyposh/zen.toml" zsh)"
