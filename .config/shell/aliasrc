@@ -2,17 +2,18 @@
 
 # defaults
 alias \
-    emacs="emacsclient -c -a 'emacs'"
+    emacs="emacsclient -c -a 'emacs'" \
+    vim='nvim' vimdiff='nvim -d'
 
 # shorthands
 alias \
     ..='cd ..' \
     c='clear' \
-    cu="checkupdates; paru -Qum" \
+    cu='checkupdates; paru -Qum' \
     dw='sudo dmesg -L=always' \
-    g="git" \
+    g='git' \
     jxe='journalctl -xe' \
-    p="sudo pacman" \
+    p='sudo pacman' \
     udm='sudo udevadm monitor'
 
 # colorize
@@ -28,6 +29,11 @@ alias \
 # verbose
 alias \
     cp='cp -iv' \
+    mv='mv -iv' \
+    rm='rm -vI' \
+    bc='bc -ql' \
+    rsync='rsync -vrPlu' \
+    ffmpeg='ffmpeg -hide_banner' \
     df='df -h' \
     free='free -h'
 
