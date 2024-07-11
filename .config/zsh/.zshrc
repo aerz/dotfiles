@@ -17,7 +17,6 @@ source "${ZINIT_HOME}/zinit.zsh"
 zinit wait lucid light-mode for \
     atinit"zicompinit; zicdreplay" zsh-users/zsh-syntax-highlighting \
     atload"_zsh_autosuggest_start" zsh-users/zsh-autosuggestions \
-    blockf atpull'zinit creinstall -q .' zsh-users/zsh-completions \
     MichaelAquilina/zsh-you-should-use \
     MichaelAquilina/zsh-auto-notify
 
@@ -46,13 +45,6 @@ zinit wait lucid for \
     OMZ::plugins/sudo
 
 # ------------------------------------------------------------------------------
-# Completions
-# ------------------------------------------------------------------------------
-zinit wait lucid as'completion' for \
-    https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker \
-    OMZ::plugins/fd/_fd
-
-# ------------------------------------------------------------------------------
 # Shell
 # ------------------------------------------------------------------------------
 source "${XDG_CONFIG_HOME:-${HOME}/.config}/zsh/kb.zsh"
@@ -60,6 +52,13 @@ source "${XDG_CONFIG_HOME:-${HOME}/.config}/zsh/hist.zsh"
 source "${XDG_CONFIG_HOME:-${HOME}/.config}/shell/aliasrc"
 zinit wait lucid for \
     is-snippet "${XDG_CONFIG_HOME:-${HOME}/.config}/zsh/func.zsh"
+
+# ------------------------------------------------------------------------------
+# Completions
+# ------------------------------------------------------------------------------
+zinit wait lucid as'completion' for \
+    blockf atpull'zinit creinstall -q .' zsh-users/zsh-completions \
+    blockf /usr/share/zsh/site-functions
 
 # ------------------------------------------------------------------------------
 # Autoload
@@ -84,5 +83,9 @@ zstyle ':completion:*' cache-path "${XDG_CACHE_HOME:-${HOME}/.cache}/zsh/zcompca
 # ------------------------------------------------------------------------------
 # Prompt (PS1)
 # ------------------------------------------------------------------------------
+# zinit ice compile'(pure|async).zsh' pick'async.zsh' src'pure.zsh'
+# zinit light sindresorhus/pure
+#
 # eval "$(starship init zsh)"
-eval "$(oh-my-posh init --config "${XDG_CONFIG_HOME:-${HOME}/.config}/ohmyposh/zen.toml" zsh)"
+#
+eval "$(oh-my-posh init --config "${XDG_CONFIG_HOME:-${HOME}/.config}/ohmyposh.toml" zsh)"
