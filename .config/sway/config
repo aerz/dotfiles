@@ -289,7 +289,7 @@ bindsym $mod+Shift+$alt+s move to scratchpad
 # ------------------------------------------------------------------------------
 # Keybindings
 # ------------------------------------------------------------------------------
-bindsym $mod+Return         exec alacritty
+bindsym $mod+Return         exec wezterm
 bindsym $mod+Shift+period   exec emote
 
 bindsym $mod+Shift+n        exec dunstctl close-all
@@ -310,7 +310,7 @@ bindsym $mod+space exec rofi -show drun -modi drun -drun-show-actions -show-icon
 bindsym $mod+$alt+space exec ~/.config/rofi/scripts/sway-window-menu
 bindsym $mod+Shift+space exec rofi -show run -modi run -matching fuzzy -theme ~/.config/rofi/themes/windows.rasi
 
-bindsym $mod+Shift+c exec alacritty -e qalc
+bindsym $mod+Shift+c exec wezterm -e qalc
 
 bindsym $mod+Shift+Ctrl+c exec ~/.local/bin/qrgen
 

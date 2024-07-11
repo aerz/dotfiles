@@ -4,7 +4,7 @@
 - **WM**: [sway](https://github.com/swaywm/sway)
 - **Bar**: [waybar](https://github.com/Alexays/Waybar)
 - **Shell**: [Zsh](https://zsh.sourceforge.io)
-- **Terminal emulator**: [Alacritty](https://github.com/alacritty/alacritty)
+- **Terminal emulator**: [Wezterm](https://wezfurlong.org/wezterm/)
 - **Editor**: [Emacs](https://www.gnu.org/software/emacs/)
 - **Icon theme**: [Papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme)
 - **Color Scheme**: Based on [Min Tomorrow Theme](https://github.com/musm/min-tomorrow-theme)
