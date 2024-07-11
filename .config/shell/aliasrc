@@ -20,7 +20,7 @@ alias \
 alias \
     diff='diff --color=always' \
     grep='grep --color=auto' \
-    ls='eza --icons=always' \
+    ls='eza --icons=always --color=always --group-directories-first' \
     l='ls -lgh' \
     la='ls -lgah' \
     lt='eza --tree' \

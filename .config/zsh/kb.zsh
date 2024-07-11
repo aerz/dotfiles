@@ -1,3 +1,4 @@
+# use `cat -v` to see the symbols
 # emacs
 bindkey -e
 
