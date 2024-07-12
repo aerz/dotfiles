@@ -17,8 +17,13 @@ source "${ZINIT_HOME}/zinit.zsh"
 zinit wait lucid light-mode for \
     atinit"zicompinit; zicdreplay" zsh-users/zsh-syntax-highlighting \
     atload"_zsh_autosuggest_start" zsh-users/zsh-autosuggestions \
-    MichaelAquilina/zsh-you-should-use \
+    MichaelAquilina/zsh-you-should-use
+
+# zsh-auto-notify
+zinit wait lucid light-mode for \
     MichaelAquilina/zsh-auto-notify
+
+AUTO_NOTIFY_IGNORE+=("docker" "bat")
 
 # fzf-tab
 zinit wait lucid light-mode for \
@@ -58,7 +63,8 @@ zinit wait lucid for \
 # ------------------------------------------------------------------------------
 zinit wait lucid as'completion' for \
     blockf atpull'zinit creinstall -q .' zsh-users/zsh-completions \
-    blockf /usr/share/zsh/site-functions
+    blockf /usr/share/zsh/site-functions \
+    OMZ::plugins/docker/completions/_docker
 
 # ------------------------------------------------------------------------------
 # Autoload
@@ -83,9 +89,17 @@ zstyle ':completion:*' cache-path "${XDG_CACHE_HOME:-${HOME}/.cache}/zsh/zcompca
 # ------------------------------------------------------------------------------
 # Prompt (PS1)
 # ------------------------------------------------------------------------------
-# zinit ice compile'(pure|async).zsh' pick'async.zsh' src'pure.zsh'
-# zinit light sindresorhus/pure
-#
+# pure
+zinit ice compile'(pure|async).zsh' pick'async.zsh' src'pure.zsh'
+zinit light sindresorhus/pure
+
+# ohmyposh
+# eval "$(oh-my-posh init --config "${XDG_CONFIG_HOME:-${HOME}/.config}/ohmyposh.toml" zsh)"
+
+# starship
+# window_title() {
+#     echo -ne "\033]0;$PWD\007"
+# }
+
+# precmd_functions+=(window_title)
 # eval "$(starship init zsh)"
-#
-eval "$(oh-my-posh init --config "${XDG_CONFIG_HOME:-${HOME}/.config}/ohmyposh.toml" zsh)"
