@@ -1,4 +1,5 @@
 # use `cat -v` to see the symbols
+# `^ = ctrl`, `^[ = alt`, `\e or \E = esc`
 # emacs
 bindkey -e
 

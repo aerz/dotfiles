@@ -3,10 +3,8 @@
 version = 2
 final_space = true
 console_title_template = '{{.UserName}}@{{.HostName}} : {{.PWD}}'
-
-[[properties]]
-[[properties.disable_notice]]
-default = true
+auto_upgrade = false
+disable_notice = true
 
 [[blocks]]
 type = 'prompt'

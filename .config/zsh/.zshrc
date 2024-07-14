@@ -23,7 +23,7 @@ zinit wait lucid light-mode for \
 zinit wait lucid light-mode for \
     MichaelAquilina/zsh-auto-notify
 
-AUTO_NOTIFY_IGNORE+=("docker" "bat")
+AUTO_NOTIFY_IGNORE+=("docker" "bat" "nvim" "man")
 
 # fzf-tab
 zinit wait lucid light-mode for \
@@ -90,11 +90,14 @@ zstyle ':completion:*' cache-path "${XDG_CACHE_HOME:-${HOME}/.cache}/zsh/zcompca
 # Prompt (PS1)
 # ------------------------------------------------------------------------------
 # pure
-zinit ice compile'(pure|async).zsh' pick'async.zsh' src'pure.zsh'
-zinit light sindresorhus/pure
+# zinit ice compile'(pure|async).zsh' pick'async.zsh' src'pure.zsh'
+# zinit light sindresorhus/pure
+# newline before prompt issue (+fix)
+# https://github.com/sindresorhus/pure/issues/422#issuecomment-452004045
+# atload'ydotool key 29:1 38:1 38:0 29:0; swaymsg mode default' # ctrl+l
 
 # ohmyposh
-# eval "$(oh-my-posh init --config "${XDG_CONFIG_HOME:-${HOME}/.config}/ohmyposh.toml" zsh)"
+eval "$(oh-my-posh init --config "${XDG_CONFIG_HOME:-${HOME}/.config}/ohmyposh.toml" zsh)"
 
 # starship
 # window_title() {
