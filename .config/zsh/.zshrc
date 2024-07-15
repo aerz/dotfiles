@@ -38,7 +38,7 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza --color=always $realpat
 # src: https://github.com/zimfw/fzf/blob/50964d38e4bf0d14b2055aebcac419da0d95f47c/init.zsh#L22
 export FZF_DEFAULT_COMMAND="command fd -H --no-ignore-vcs -E .git -td -tf"
 export FZF_CTRL_T_COMMAND=${FZF_DEFAULT_COMMAND}
-export FZF_CTRL_T_OPTS="--bind ctrl-/:toggle-preview --preview 'command bat --color=always --line-range :500 {}'"
+export FZF_CTRL_T_OPTS="--bind ctrl-/:toggle-preview --preview 'command bat -n --color=always --line-range :500 {}'"
 export FZF_ALT_C_COMMAND="command fd -H --no-ignore-vcs -E .git -td"
 export FZF_ALT_C_OPTS="--bind ctrl-/:toggle-preview --preview 'command eza --group-directories-first --color=always -F {}'"
 
