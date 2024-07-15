@@ -28,6 +28,7 @@ AUTO_NOTIFY_IGNORE+=("docker" "bat" "nvim" "man")
 # fzf-tab
 zinit wait lucid light-mode for \
     atinit'eval "$(fzf --zsh)"' atload'eval "$(zoxide init --cmd cd zsh)"' \
+    junegunn/fzf-git.sh \
     Aloxaf/fzf-tab
 
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza --color=always $realpath'
