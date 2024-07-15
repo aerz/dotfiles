@@ -13,7 +13,7 @@ sudo pacman -S \
 # tools
 sudo pacman -S \
     bat eza ripgrep fd fzf zoxide tldr yt-dlp yq yazi man-db texinfo \
-    just tree wget
+    just tree wget git-delta
 
 # utils
 sudo pacman -S zip unzip tar moreutils which bc typst typst-lsp zathura mpv
@@ -32,5 +32,5 @@ makepkg -si
 paru -S oh-my-posh-bin
 
 # testing tools
-#sudo pacman -S git-delta diff-so-fancy bat-extras
+#sudo pacman -S diff-so-fancy bat-extras
 #paru -S git-extras
