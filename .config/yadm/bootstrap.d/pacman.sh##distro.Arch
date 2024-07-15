@@ -10,17 +10,6 @@ sudo pacman -S \
     swaylock terminfo wl-clipboard playerctl wtype inter-font \
     ttf-jetbrains-mono-nerd
 
-# tools
-sudo pacman -S \
-    bat eza ripgrep fd fzf zoxide tldr yt-dlp yq yazi man-db texinfo \
-    just tree wget git-delta
-
-# utils
-sudo pacman -S zip unzip tar moreutils which bc typst typst-lsp zathura mpv
-
-# devtools
-sudo pacman -S shellcheck
-
 # paru
 sudo pacman -S --needed base-devel
 mkdir -p ~/.cache
@@ -28,9 +17,24 @@ git clone https://aur.archlinux.org/paru.git ~/.cache/paru.git
 cd ~/.cache/paru.git
 makepkg -si
 
+# tools
+sudo pacman -S \
+    bat eza ripgrep fd fzf zoxide yt-dlp yq yazi man-db texinfo \
+    just tree wget git-delta
+
+paru -S tlrc-bin
+
+tldr --clean-cache && tldr --update
+
+# utils
+sudo pacman -S zip unzip tar moreutils which bc typst typst-lsp zathura mpv
+
+# devtools
+sudo pacman -S shellcheck
+
 # zsh
 paru -S oh-my-posh-bin
 
-# testing tools
+# under test tools
 #sudo pacman -S diff-so-fancy bat-extras
 #paru -S git-extras
