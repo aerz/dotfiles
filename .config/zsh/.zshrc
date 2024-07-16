@@ -36,10 +36,10 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza --tree --level=3 --colo
 
 # set fzf to use fd instead find
 # src: https://github.com/zimfw/fzf/blob/50964d38e4bf0d14b2055aebcac419da0d95f47c/init.zsh#L22
-export FZF_DEFAULT_COMMAND="command fd -H --no-ignore-vcs -E .git -td -tf"
+export FZF_DEFAULT_COMMAND="command fd --hidden --no-ignore-vcs --exclude .git --exclude node_modules -td -tf"
 export FZF_CTRL_T_COMMAND=${FZF_DEFAULT_COMMAND}
 export FZF_CTRL_T_OPTS="--bind ctrl-/:toggle-preview --preview 'command bat -n --color=always --line-range :500 {}'"
-export FZF_ALT_C_COMMAND="command fd -H --no-ignore-vcs -E .git -td"
+export FZF_ALT_C_COMMAND="command fd --hidden --no-ignore-vcs --exclude .git --exclude node_modules -td"
 export FZF_ALT_C_OPTS="--bind ctrl-/:toggle-preview --preview 'command eza --tree --level=3 --group-directories-first --color=always -F {}'"
 
 _fzf_compgen_path() {
