@@ -5,3 +5,8 @@ zinit delete --all
 
 # Display statistics on installed plugins load times :: zis
 zinit times -a
+
+% zsh, zoxide, cd, z
+
+# List all dirs in db with scores
+zoxide query -l -s
