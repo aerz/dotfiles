@@ -18,7 +18,7 @@
 | [rofi](https://github.com/davatorium/rofi)                                    | `dmenu` replacement                                 |
 | [playerctl](https://github.com/altdesktop/playerctl)                          | Fetch metadata about what is being played           |
 | [ponymix](https://github.com/falconindy/ponymix)                              | Pulseaudio frontend to control output/input devices |
-| [yay](https://github.com/Jguer/yay)                                           | AUR helper                                          |
+| [paru](https://github.com/Morganamilo/paru)                                   | AUR helper                                          |
 | [grimshot](https://github.com/OctopusET/sway-contrib)                         | Screenshot utility combines grim with slurp         |
 | [swaylock](https://github.com/mortie/swaylock-effects)                        | swaylock with effects                               |
 | [swayidle](https://github.com/swaywm/swayidle)                                | Idle manager doesn't care about media               |
