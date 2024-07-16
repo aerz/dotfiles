@@ -1,0 +1,9 @@
+% zsh, bindkey
+
+# Show all bindkeys set
+bindkey -M main
+
+% cd, zoxide
+
+# Find directory from current location :: find-dir
+cd "$(find "$(pwd)" -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf +m)"

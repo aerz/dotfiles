@@ -1,0 +1,15 @@
+% docker, fzf
+
+# Stop running containers :: docker-fzf-stop
+docker stop "$(docker ps | sed 1d | fzf -m -q "$1" | awk '{print $1}')"
+
+# Start and attach to a container :: docker-fzf-attach
+c="$(docker ps -a | sed 1d | fzf -1 -q "$1" | awk '{print $1}')"; docker start "$c" && docker attach "$c"
+
+# Remove containers :: docker-fzf-rm
+docker rm $(docker ps -a | sed 1d | fzf -m -q "$1" | awk '{print $1}')
+
+% docker
+
+# Explore container interactively
+docker run -it --rm <image> /bin/sh

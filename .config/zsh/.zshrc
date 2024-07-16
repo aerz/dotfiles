@@ -23,11 +23,12 @@ zinit wait lucid light-mode for \
 zinit wait lucid light-mode for \
     MichaelAquilina/zsh-auto-notify
 
-AUTO_NOTIFY_IGNORE+=("docker" "bat" "nvim" "man")
+AUTO_NOTIFY_IGNORE+=("docker" "bat" "nvim" "man" "navi")
 
-# fzf-tab
+# fzf-tab (+fzf +zoxide widgets)
 zinit wait lucid light-mode for \
-    atinit'eval "$(fzf --zsh)"' atload'eval "$(zoxide init --cmd cd zsh)"' \
+    atinit'eval "$(fzf --zsh)"' \
+    atload'eval "$(zoxide init --cmd cd zsh)"' \
     junegunn/fzf-git.sh \
     Aloxaf/fzf-tab
 
@@ -59,6 +60,12 @@ bindkey '^[[B' history-substring-search-down
 HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
 
 # ------------------------------------------------------------------------------
+# Widgets
+# ------------------------------------------------------------------------------
+zinit wait lucid for \
+    is-snippet "${XDG_CONFIG_HOME:-${HOME}/.config}/zsh/widgets/navi.zsh"
+
+# ------------------------------------------------------------------------------
 # Snippets
 # ------------------------------------------------------------------------------
 zinit wait lucid for \
@@ -67,7 +74,15 @@ zinit wait lucid for \
     OMZ::plugins/sudo
 
 # ------------------------------------------------------------------------------
-# Shell
+# Completions
+# ------------------------------------------------------------------------------
+zinit wait lucid as'completion' for \
+    blockf atpull'zinit creinstall -q .' zsh-users/zsh-completions \
+    blockf /usr/share/zsh/site-functions \
+    OMZ::plugins/docker/completions/_docker
+
+# ------------------------------------------------------------------------------
+# Defaults
 # ------------------------------------------------------------------------------
 source "${XDG_CONFIG_HOME:-${HOME}/.config}/zsh/kb.zsh"
 source "${XDG_CONFIG_HOME:-${HOME}/.config}/zsh/hist.zsh"
@@ -75,13 +90,12 @@ source "${XDG_CONFIG_HOME:-${HOME}/.config}/shell/aliasrc"
 zinit wait lucid for \
     is-snippet "${XDG_CONFIG_HOME:-${HOME}/.config}/zsh/func.zsh"
 
-# ------------------------------------------------------------------------------
-# Completions
-# ------------------------------------------------------------------------------
-zinit wait lucid as'completion' for \
-    blockf atpull'zinit creinstall -q .' zsh-users/zsh-completions \
-    blockf /usr/share/zsh/site-functions \
-    OMZ::plugins/docker/completions/_docker
+# completion styling
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' list-colors "${(s.:.)EZA_COLORS}"
+zstyle ':completion:*' menu no
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path "${XDG_CACHE_HOME:-${HOME}/.cache}/zsh/zcompcache"
 
 # ------------------------------------------------------------------------------
 # Autoload
@@ -95,31 +109,8 @@ compinit -d "${XDG_CACHE_HOME:-${HOME}.cache}/zsh/zcompdump-${ZSH_VERSION}"
 zinit cdreplay -q
 
 # ------------------------------------------------------------------------------
-# Completion styling (zutil)
-# ------------------------------------------------------------------------------
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-zstyle ':completion:*' list-colors "${(s.:.)EZA_COLORS}"
-zstyle ':completion:*' menu no
-zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path "${XDG_CACHE_HOME:-${HOME}/.cache}/zsh/zcompcache"
-
-# ------------------------------------------------------------------------------
 # Prompt (PS1)
 # ------------------------------------------------------------------------------
-# pure
-# zinit ice compile'(pure|async).zsh' pick'async.zsh' src'pure.zsh'
-# zinit light sindresorhus/pure
-# newline before prompt issue (+fix)
-# https://github.com/sindresorhus/pure/issues/422#issuecomment-452004045
-# atload'ydotool key 29:1 38:1 38:0 29:0; swaymsg mode default' # ctrl+l
-
-# ohmyposh
-eval "$(oh-my-posh init --config "${XDG_CONFIG_HOME:-${HOME}/.config}/ohmyposh.toml" zsh)"
-
-# starship
-# window_title() {
-#     echo -ne "\033]0;$PWD\007"
-# }
-
-# precmd_functions+=(window_title)
-# eval "$(starship init zsh)"
+# source "${XDG_CONFIG_HOME:-${HOME}/.config}/zsh/prompt/pure.zsh"
+# source "${XDG_CONFIG_HOME:-${HOME}/.config}/zsh/prompt/starship.zsh"
+source "${XDG_CONFIG_HOME:-${HOME}/.config}/zsh/prompt/ohmyposh.zsh"

@@ -1,0 +1,7 @@
+% zsh, zinit
+
+# Delete all plugins, snippets and completions :: zida
+zinit delete --all
+
+# Display statistics on installed plugins load times :: zis
+zinit times -a

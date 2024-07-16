@@ -20,7 +20,7 @@ makepkg -si
 # tools
 sudo pacman -S \
     bat eza ripgrep fd fzf zoxide yt-dlp yq yazi man-db texinfo \
-    just tree wget git-delta
+    just tree wget git-delta navi
 
 paru -S tlrc-bin
 
