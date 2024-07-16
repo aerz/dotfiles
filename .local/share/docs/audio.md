@@ -23,6 +23,6 @@ alsactl -f ~/.config/asound.state store
 systemctl --user enable --now alsa-restore.service
 ```
 
-**Related**
+## References
 
-- [Restore volumes with PipeWire/WirePlumber](https://unix.stackexchange.com/questions/741808/restore-volumes-with-pipewire-wireplumber)
+- https://unix.stackexchange.com/questions/741808/restore-volumes-with-pipewire-wireplumber

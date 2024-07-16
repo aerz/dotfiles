@@ -10,46 +10,42 @@ makes things like that easier.
 
 ## Usage
 
-This document is a note for my future self. Confirm that the purpose of this
-shell still makes sense in the functions it provides and its ux.
+> [!NOTE]
+> This document is a note for my future self. Confirm that the purpose of this
+> shell still makes sense in the functions it provides and its ux.
 
-### fzf
-
-https://github.com/junegunn/fzf/blob/master/shell/key-bindings.zsh
+### fzf[^1]
 
 - `ctrl+t`. Paste the selected file path(s) into the command line.
 - `alt+c`. `cd` into the selected directory.
 - `ctrl+r`. Paste the selected command from history into the command line.
 
-### zoxide
-
-https://github.com/ajeetdsouza/zoxide
+### zoxide[^2]
 
 - `cd`. Full replacement of shell cd builtin command.
 - `cdi`. Open interactive selection (fzf).
 - `cd foo<SPACE><TAB>`. Interactive completions (fzf).
 - `cd foo`. Interactive selection (fzf).
 
-### fzf-tab
-
-https://github.com/Aloxaf/fzf-tab
+### fzf-tab[^3]
 
 It will show zsh completions using `fzf` when pressing tab. It must be the last
-plugin to bin `^I` in order to keep the [compatibility](https://github.com/Aloxaf/fzf-tab/#compatibility-with-other-plugins) with others. You can use
-`bindkey -M main | grep 'fzf-tab-complete'` to check that it is properly seated.
+plugin to bin `^I` in order to keep the
+[compatibility](https://github.com/Aloxaf/fzf-tab/#compatibility-with-other-plugins)
+with others. You can use `bindkey -M main | grep 'fzf-tab-complete'` to check that it is properly seated.
 
 - `ctrl+space`. Multi-selection in `fzf`.
 
-### fzf-git
-
-https://github.com/junegunn/fzf-git.sh#usage
+### fzf-git[^4]
 
 Provides a lot of fzf function bindings for git repositories. 
 
-### navi
-
-https://github.com/denisidoro/navi/blob/master/docs/installation.md#installing-the-shell-widget
+### navi[^5]
 
 - `ctrl+g`. Find string in Navi cheat sheets. Replace with the snippet.
 
-
+[^1]: https://github.com/junegunn/fzf/blob/master/shell/key-bindings.zsh
+[^2]: https://github.com/ajeetdsouza/zoxide/blob/main/templates/zsh.txt
+[^3]: https://github.com/Aloxaf/fzf-tab
+[^4]: https://github.com/junegunn/fzf-git.sh#usage
+[^5]: https://github.com/denisidoro/navi/blob/master/docs/installation.md#installing-the-shell-widget
