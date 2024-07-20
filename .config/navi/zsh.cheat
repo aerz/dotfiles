@@ -6,6 +6,9 @@ zinit delete --all
 # Display statistics on installed plugins load times :: zis
 zinit times -a
 
+# Update zinit, plugins and snippets :: ziup
+zinit update; zinit self-update
+
 % zsh, zoxide, cd, z
 
 # List all dirs in db with scores
