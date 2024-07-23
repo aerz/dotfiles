@@ -12,5 +12,6 @@ Populates `dconf` database using `gsettings`.
 
 ## References
 
-- https://wiki.archlinux.org/title/Dark_mode_switching#gsettings
-- https://wiki.archlinux.org/title/GNOME#Configuration
+- [Dark mode switching#gsettings](https://wiki.archlinux.org/title/Dark_mode_switching#gsettings)
+- [GNOME#configuration](https://wiki.archlinux.org/title/GNOME#Configuration)
+- [XDG Desktop Portal](https://flatpak.github.io/xdg-desktop-portal/)
