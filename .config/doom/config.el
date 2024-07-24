@@ -159,10 +159,9 @@
 (use-package! yadm
   :after (projectile magit)
   :init
+  (add-to-list 'projectile-known-projects "~/")
   (advice-remove #'projectile-get-ext-command
-                 #'doom--only-use-generic-command-a)
-  (advice-add #'+vertico-file-search
-              :around #'yadm-doom-vertico-file-search))
+                 #'doom--only-use-generic-command-a))
 
 ;; -----------------------------------------------------------------------------
 ;; Snippets
