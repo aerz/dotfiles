@@ -80,11 +80,6 @@
   ;; hooks
   (add-hook! 'before-save-hook 'time-stamp))
 
-(use-package! org-modern
-  :hook (org-mode . global-org-modern-mode)
-  :config
-  (setq org-modern-label-border 0.3))
-
 (defun org-roam-node-insert-immediate (arg &rest args)
   "Inserts a new node without the need of pop-up the capture buffer."
   (interactive "P")

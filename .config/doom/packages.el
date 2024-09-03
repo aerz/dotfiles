@@ -9,7 +9,6 @@
 (package! just-mode)
 (package! nginx-mode)
 (package! olivetti)
-(package! org-modern)
 (unpin! org-roam)
 (package! org-roam-ui)
 (package! polymode)
