@@ -13,9 +13,11 @@
 (package! org-roam-ui)
 (package! polymode)
 (package! pkgbuild-mode)
-(package! poly-ansible)
 (package! scss-mode)
-(package! systemd)
+(package! systemd
+  :pin "8742607120fbc440821acbc351fda1e8e68a8806")
+(package! poly-ansible
+  :pin "6fcfbb7163f7a74db9da0d54a5ecaec2ac93b315")
 (package! typst-ts-mode
   :pin "430f0b8d647ca320a674cbccda2b6ccdbe145cde"
   :recipe (:host sourcehut :repo "meow_king/typst-ts-mode"

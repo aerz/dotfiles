@@ -158,6 +158,9 @@
   (advice-remove #'projectile-get-ext-command
                  #'doom--only-use-generic-command-a))
 
+(use-package! poly-ansible
+  :after systemd)
+
 ;; -----------------------------------------------------------------------------
 ;; Snippets
 ;; -----------------------------------------------------------------------------
