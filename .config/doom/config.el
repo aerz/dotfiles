@@ -54,11 +54,6 @@
       org-startup-folded t
       org-ellipsis " ›")
 
-(use-package! olivetti
-  :after org
-  :custom
-  (olivetti-style 'fancy))
-
 (defun aerz/default-org-mode ()
   "Set the defaults for org-mode personal usage."
   (interactive)
