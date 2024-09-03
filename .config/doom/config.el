@@ -17,11 +17,11 @@
 (after! persp-mode
   (setq persp-emacsclient-init-frame-behaviour-override "main"))
 
-(map! :map 'override :leader ":" nil
-      :leader
-      :prefix (":" . "execute")
-      :desc "M-x" ":" #'execute-extended-command
-      :desc "M-x for buffer" "." #'execute-extended-command-for-buffer)
+;; (map! :map 'override :leader ":" nil
+;;       :leader
+;;       :prefix ":"
+;;       :desc "M-x" ":" #'execute-extended-command
+;;       :desc "M-x for buffer" "." #'execute-extended-command-for-buffer)
 
 (map! :leader :desc "Search file" "\\" #'consult-find)
 
@@ -36,11 +36,11 @@
 (setq display-line-numbers-type 'relative)
 
 ;; ansible
-(setq lsp-yaml-custom-tags ["!vault"])
+(after! yaml-mode
+  (setq lsp-yaml-custom-tags ["!vault"]))
 
-;; ansible/jinja2
-(after! jinja2-mode (set-formatter!
-                      'prettier-jinja2 '("") :modes '(jinja2-mode)))
+(after! jinja2-mode
+  (set-formatter! 'prettier-jinja2 '("") :modes '(jinja2-mode)))
 
 ;; -----------------------------------------------------------------------------
 ;; org
@@ -54,26 +54,15 @@
       org-startup-folded t
       org-ellipsis " ›")
 
-(defun aerz/default-org-mode ()
-  "Set the defaults for org-mode personal usage."
-  (interactive)
-  (hl-line-mode -1)
-  (display-line-numbers-mode -1)
-  (vi-tilde-fringe-mode -1)
-  ;; (git-gutter-mode -1)
-  (auto-fill-mode +1)
-  (olivetti-mode +1))
-
-;; (add-hook! 'org-mode-hook #'aerz/default-org-mode)
-(add-hook! 'org-mode-hook #'auto-fill-mode)
-(add-hook! 'org-mode-hook #'+org-enable-auto-reformat-tables-h)
-
 (after! org
   ;; defaults
   (setq org-attach-dir-relative t
         time-stamp-format "%Y-%02m-%02d %02H:%02M")
   ;; hooks
-  (add-hook! 'before-save-hook 'time-stamp))
+  (add-hook! 'before-save-hook 'time-stamp)
+  (add-hook! 'org-mode-hook #'auto-fill-mode)
+  ;; (add-hook! 'org-mode-hook #'aerz/default-org-mode)
+  (add-hook! 'org-mode-hook #'+org-enable-auto-reformat-tables-h))
 
 (defun org-roam-node-insert-immediate (arg &rest args)
   "Inserts a new node without the need of pop-up the capture buffer."
@@ -109,30 +98,6 @@
                               "#+title: ${title}\n#+filetags:\n")
            :unnarrowed t)
           )))
-
-(use-package! websocket
-  :after org-roam)
-
-(use-package! org-roam-ui
-  :init
-  (map! :leader
-        :prefix "nr"
-        :desc "Open orui" "u" #'org-roam-ui-open
-        :desc "Sync theme with orui" "t" #'org-roam-ui-sync-theme)
-  :custom
-  (org-roam-ui-sync-theme t)
-  (org-roam-ui-follow t)
-  (org-roam-ui-update-on-save t)
-  (org-roam-ui-open-on-start nil))
-
-;; biblio
-(setq! citar-bibliography '("~/Documents/org/citations.bib"))
-
-;; reftex
-(setq reftex-default-bibliography "~/Documents/org/citations.bib")
-
-;; latex
-(setq +latex-viewers '(zathura))
 
 ;; -----------------------------------------------------------------------------
 ;; sh-mode
