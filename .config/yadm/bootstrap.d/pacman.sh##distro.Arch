@@ -20,9 +20,9 @@ makepkg -si
 # tools
 sudo pacman -S \
     bat eza ripgrep fd fzf zoxide yt-dlp yq yazi man-db texinfo \
-    just tree wget git-delta navi
+    just tree wget git-delta navi python-pipx
 
-paru -S tlrc-bin trashy
+paru -S tlrc-bin trashy poweralertd
 
 tldr --clean-cache && tldr --update
 
