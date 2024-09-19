@@ -291,6 +291,7 @@ bindsym $mod+Shift+$alt+s move to scratchpad
 # ------------------------------------------------------------------------------
 bindsym $mod+Return         exec wezterm
 bindsym $mod+Shift+period   exec emote
+bindsym $mod+Ctrl+v exec cliphist list | rofi -dmenu | cliphist decode | wl-copy
 
 bindsym $mod+Shift+n        exec dunstctl close-all
 bindsym $mod+n              exec dunstctl history-pop
@@ -348,5 +349,6 @@ bindsym XF86AudioPrev           exec playerctl previous
 exec systemd-run --user --unit=playerctld playerctld
 exec systemd-run --user --unit=emote emote
 exec systemd-run --user --unit=sway-autotiling autotiling-rs
+exec systemd-run --user --unit=cliphist wl-paste --watch cliphist store
 
 include `hostname`.conf

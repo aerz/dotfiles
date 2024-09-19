@@ -27,7 +27,8 @@ paru -S tlrc-bin trashy poweralertd
 tldr --clean-cache && tldr --update
 
 # utils
-sudo pacman -S zip unzip tar moreutils which bc typst typst-lsp zathura mpv
+sudo pacman -S \
+    zip unzip tar moreutils which bc typst typst-lsp zathura mpv cliphist
 
 # devtools
 sudo pacman -S shellcheck
