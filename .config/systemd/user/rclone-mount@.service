@@ -1,7 +1,8 @@
 [Unit]
 Description=Mounts %i storage using rclone
 Documentation=man:rclone(1)
-After=NetworkManager-wait-online.service
+After=network-online.target
+Wants=network-online.target
 
 [Service]
 Type=notify
