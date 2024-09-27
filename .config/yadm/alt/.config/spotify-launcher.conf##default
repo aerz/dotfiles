@@ -1,5 +1,3 @@
-# Reference
-# https://github.com/kpcyrd/spotify-launcher/blob/b73da20ce42f24416420d11c13a18a1855b1ba6b/contrib/spotify-launcher.conf
-#
+# -*- mode: conf -*-
 [spotify]
-extra_arguments = ["--ozone-platform=wayland"]
+extra_arguments = ["--ozone-platform=wayland", "--enable-features=UseOzonePlatform"]
