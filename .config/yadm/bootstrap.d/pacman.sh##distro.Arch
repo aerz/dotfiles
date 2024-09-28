@@ -38,4 +38,4 @@ paru -S oh-my-posh-bin
 
 # under test tools
 #sudo pacman -S diff-so-fancy bat-extras
-#paru -S git-extras
+#paru -S git-extras topgrade

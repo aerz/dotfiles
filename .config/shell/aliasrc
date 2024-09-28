@@ -9,12 +9,15 @@ alias \
 alias \
     ..='cd ..' \
     c='clear' \
-    cu='checkupdates; paru -Qum' \
     dw='sudo dmesg -L=always' \
     g='git' \
     jxe='journalctl -xe' \
-    p='sudo pacman' \
     udm='sudo udevadm monitor'
+
+alias \
+    p='sudo pacman' \
+    cu='checkupdates; paru -Qum' \
+    allup='topgrade --disable containers spicetify yadm'
 
 # colorize
 alias \
