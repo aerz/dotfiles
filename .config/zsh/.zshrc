@@ -105,7 +105,7 @@ zstyle ':completion:*' cache-path "${XDG_CACHE_HOME:-${HOME}/.cache}/zsh/zcompca
     mkdir -p "${XDG_CACHE_HOME:-${HOME}/.cache}/zsh"
 
 autoload -Uz compinit
-compinit -d "${XDG_CACHE_HOME:-${HOME}.cache}/zsh/zcompdump-${ZSH_VERSION}"
+compinit -d "${XDG_CACHE_HOME:-${HOME}/.cache}/zsh/zcompdump-${ZSH_VERSION}"
 zinit cdreplay -q
 
 # ------------------------------------------------------------------------------
