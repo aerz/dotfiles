@@ -84,11 +84,11 @@ zinit wait lucid as'completion' for \
 # ------------------------------------------------------------------------------
 # Defaults
 # ------------------------------------------------------------------------------
-source "${XDG_CONFIG_HOME:-${HOME}/.config}/zsh/kb.zsh"
-source "${XDG_CONFIG_HOME:-${HOME}/.config}/zsh/hist.zsh"
+source "${XDG_CONFIG_HOME:-${HOME}/.config}/zsh/bindkey.zsh"
+source "${XDG_CONFIG_HOME:-${HOME}/.config}/zsh/history.zsh"
 source "${XDG_CONFIG_HOME:-${HOME}/.config}/shell/aliasrc"
 zinit wait lucid for \
-    is-snippet "${XDG_CONFIG_HOME:-${HOME}/.config}/zsh/func.zsh"
+    is-snippet "${XDG_CONFIG_HOME:-${HOME}/.config}/zsh/functions.zsh"
 
 # completion styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
