@@ -1,33 +1,31 @@
 #!/bin/sh
 
+#alias sudo="sudo "
+
 # defaults
 alias \
     emacs="emacsclient -c -a 'emacs'" \
     vim='nvim' vimdiff='nvim -d'
 
-# shorthands
 alias \
     ..='cd ..' \
     c='clear' \
-    dw='sudo dmesg -L=always' \
     g='git' \
-    jxe='journalctl -xe' \
-    udm='sudo udevadm monitor'
-
-alias \
-    p='sudo pacman' \
-    cu='checkupdates; paru -Qum' \
-    allup='topgrade --disable containers spicetify yadm'
-
-# colorize
-alias \
     diff='diff --color=always' \
     grep='grep --color=auto' \
     ls='eza --icons=always --color=always --group-directories-first' \
     l='ls -lgh' \
+    ll='ls -l' \
     la='ls -lgah' \
-    lt='eza --tree' \
-    tree='tree -C'
+    lt='eza --tree'
+
+alias \
+    p='sudo pacman' \
+    cu='checkupdates; paru -Qum' \
+    allup='topgrade --disable containers spicetify yadm' \
+    jxe='journalctl -xe' \
+    udm='sudo udevadm monitor' \
+    dw='sudo dmesg -L=always'
 
 # verbose
 alias \
