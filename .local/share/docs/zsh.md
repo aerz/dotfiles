@@ -25,7 +25,7 @@ makes things like that easier.
 - `cd`. Full replacement of shell cd builtin command.
 - `cdi`. Open interactive selection (fzf).
 - `cd foo<SPACE><TAB>`. Interactive completions (fzf).
-- `cd foo`. Interactive selection (fzf).
+- `cd foo<TAB>`. Interactive selection (fzf) or auto-completion.
 
 ### fzf-tab[^3]
 
@@ -43,6 +43,38 @@ Provides a lot of fzf function bindings for git repositories.
 ### navi[^5]
 
 - `ctrl+g`. Find string in Navi cheat sheets. Replace with the snippet.
+
+## Commands
+
+### Debug shell load time
+
+```shell
+# .zshrc
+zmodload zsh/zprof # first line
+zprof              # end
+```
+
+```shell
+# how much time takes to load all configs?
+for i in {1..10}; do time zsh -i -c exit; done
+#zsh -i -c exit  0.04s user 0.02s system 99% cpu 0.054 total
+#...
+```
+
+## Resources
+
+### Plugins
+
+- [zsh-users](https://github.com/zsh-users)
+- [ohmyzsh/plugins](https://github.com/ohmyzsh/ohmyzsh/wiki/Plugins)
+- [awesome-zsh-plugins](https://github.com/unixorn/awesome-zsh-plugins)
+- [github/zsh-plugins](https://github.com/topics/zsh-plugins)
+
+### Completions
+
+- [apple/zsh-completions](https://github.com/apple-oss-distributions/zsh/tree/main/zsh/Completion)
+- [ohmyzsh/plguins/completions](https://github.com/ohmyzsh/ohmyzsh/wiki/Plugins). Plugins includes missing completions for known tools.
+- [zsh-more-completions](https://github.com/MenkeTechnologies/zsh-more-completions)
 
 [^1]: https://github.com/junegunn/fzf/blob/master/shell/key-bindings.zsh
 [^2]: https://github.com/ajeetdsouza/zoxide/blob/main/templates/zsh.txt
