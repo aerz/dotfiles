@@ -1,3 +1,6 @@
+#
+# https://zsh.sourceforge.io/Doc/Release/Zsh-Line-Editor.html
+
 # use `cat -v` to see the symbols
 # `^ = ctrl`, `^[ = alt`, `\e or \E = esc`
 
