@@ -25,7 +25,10 @@ zinit wait lucid light-mode for \
 
 AUTO_NOTIFY_IGNORE+=("docker" "bat" "nvim" "man" "navi")
 
-# fzf-tab (+fzf +zoxide widgets)
+# ------------------------------------------------------------------------------
+# Widgets
+# ------------------------------------------------------------------------------
+# fzf (+fzf-tab +zoxide +fzf-git)
 zinit wait lucid light-mode for \
     atinit'eval "$(fzf --zsh)"' \
     atload'eval "$(zoxide init --cmd cd zsh)"' \
@@ -59,9 +62,7 @@ bindkey '^[[B' history-substring-search-down
 
 HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
 
-# ------------------------------------------------------------------------------
-# Widgets
-# ------------------------------------------------------------------------------
+# navi
 zinit wait lucid for \
     is-snippet "${XDG_CONFIG_HOME:-${HOME}/.config}/zsh/widgets/navi.zsh"
 
@@ -78,8 +79,9 @@ zinit wait lucid for \
 # ------------------------------------------------------------------------------
 zinit wait lucid as'completion' for \
     blockf atpull'zinit creinstall -q .' zsh-users/zsh-completions \
-    blockf /usr/share/zsh/site-functions \
     OMZ::plugins/docker/completions/_docker
+
+zinit add-fpath "${XDG_CONFIG_HOME:-${HOME}/.config}/zsh/completions"
 
 # ------------------------------------------------------------------------------
 # Defaults

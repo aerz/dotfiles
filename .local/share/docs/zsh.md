@@ -72,6 +72,8 @@ for i in {1..10}; do time zsh -i -c exit; done
 
 ### Completions
 
+- [zsh-users/zsh-completions-howto](https://github.com/zsh-users/zsh-completions/blob/master/zsh-completions-howto.org)
+- [zsh docs/20.6 utility functions](https://zsh.sourceforge.io/Doc/Release/Completion-System.html#Completion-Functions)
 - [apple/zsh-completions](https://github.com/apple-oss-distributions/zsh/tree/main/zsh/Completion)
 - [ohmyzsh/plguins/completions](https://github.com/ohmyzsh/ohmyzsh/wiki/Plugins). Plugins includes missing completions for known tools.
 - [zsh-more-completions](https://github.com/MenkeTechnologies/zsh-more-completions)

@@ -1,0 +1,42 @@
+#compdef brillo
+
+_brillo() {
+    local curcontext="$curcontext" context state state_descr line
+    typeset -A opt_args
+
+    _arguments \
+        "1: :->operation" \
+        "*: :->args"
+
+    case "$state" in
+    operation)
+        _arguments \
+            "-G[Get brightness value (default)]" \
+            '-S+[Set brightness to value]:value' \
+            "-A+[Increment brightness by given value]:value" \
+            "-U+[Decrement brightness by given value]:value" \
+            "-O[Store the current brightness]" \
+            "-I[Restore cached brightness]" \
+            "-L[List available devices]" \
+            "-H[Show a short help output]" \
+            "-V[Report the version]"
+        ;;
+    *)
+        _arguments \
+            "-a[Automatic controller selection (default)]" \
+            "-e[Operate on every controller available]" \
+            "-s[Manual controller selection]:controller:($(brillo -L))" \
+            "-l[Act on display backlight (default)]" \
+            "-k[Act on keyboard backlight and LEDs]" \
+            "-b[Current brightness (default)]" \
+            "-m[Maximum brightness]" \
+            "-c[Minimum brightness]" \
+            "-p[Linear percentages (default)]" \
+            "-q[Exponential percentages]" \
+            "-r[Raw values]" \
+            "-u[time used to space the operation out]"
+        ;;
+    esac
+}
+
+_brillo "$@"
