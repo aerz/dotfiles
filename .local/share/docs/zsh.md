@@ -61,6 +61,12 @@ for i in {1..10}; do time zsh -i -c exit; done
 #...
 ```
 
+```shell
+# https://github.com/sharkdp/hyperfine
+hyperfine --warmup 1 'zsh -i -c exit'
+hyperfine --warmup 2 'fish -i -c exit' 'zsh -i -c exit'
+```
+
 ## Resources
 
 ### Plugins
