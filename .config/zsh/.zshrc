@@ -113,6 +113,4 @@ zinit cdreplay -q
 # ------------------------------------------------------------------------------
 # Prompt (PS1)
 # ------------------------------------------------------------------------------
-# source "${XDG_CONFIG_HOME:-${HOME}/.config}/zsh/prompt/pure.zsh"
-# source "${XDG_CONFIG_HOME:-${HOME}/.config}/zsh/prompt/starship.zsh"
 source "${XDG_CONFIG_HOME:-${HOME}/.config}/zsh/prompt/ohmyposh.zsh"

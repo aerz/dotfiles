@@ -69,6 +69,8 @@ hyperfine --warmup 2 'fish -i -c exit' 'zsh -i -c exit'
 
 ## Resources
 
+- [Zsh Reference Card](https://www.bash2zsh.com/zsh_refcard/refcard.pdf)
+
 ### Plugins
 
 - [zsh-users](https://github.com/zsh-users)
