@@ -1,79 +1,80 @@
-#:schema https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
-
-version = 2
-final_space = true
-console_title_template = '{{.UserName}}@{{.HostName}} : {{.PWD}}'
+console_title_template = '{{.UserName}}@{{.HostName}} in {{.PWD}}'
+version = 3
 auto_upgrade = false
-disable_notice = true
-
-[[blocks]]
-type = 'prompt'
-alignment = 'left'
-newline = true
-
-[[blocks.segments]]
-type = 'path'
-style = 'plain'
-background = 'transparent'
-foreground = 'blue'
-template = '<b>{{ .Path }}</b>'
-
-[blocks.segments.properties]
-style = 'full'
-
-[[blocks.segments]]
-type = 'git'
-style = 'plain'
-foreground = 'p:grey'
-background = 'transparent'
-template = ' {{ .HEAD }}{{if or (.Working.Changed) (.Staging.Changed) }}*{{end}} <cyan>{{if gt .Behind 0}}⇣{{end}}{{ if gt .Ahead 0 }}⇡{{ end }}</>'
-
-[blocks.segments.properties]
-branch_icon = ''
-commit_icon = '@'
-fetch_status = true
-
-[[blocks]]
-type = 'rprompt'
-overflow = 'hidden'
-
-[[blocks.segments]]
-type = 'executiontime'
-style = 'plain'
-foreground = 'yellow'
-background = 'transparent'
-template = '{{ .FormattedMs }}'
-
-[blocks.segments.properties]
-threshold = 5000
-
-[[blocks]]
-type = 'prompt'
-alignment = 'left'
-newline = true
-
-[[blocks.segments]]
-type = 'text'
-style = 'plain'
-foreground_templates = [
-  "{{if gt .Code 0}}red{{end}}",
-  "{{if eq .Code 0}}magenta{{end}}"
-]
-template = "❯"
-
-[transient_prompt]
-foreground_templates = [
-  "{{if gt .Code 0}}red{{end}}",
-  "{{if eq .Code 0}}magenta{{end}}"
-]
-foreground = 'magenta'
-background = 'transparent'
-template = "❯ "
-
-[secondary_prompt]
-foreground = 'magenta'
-background = 'transparent'
-template = "❯❯ "
+upgrade_notice = false
+final_space = true
+enable_cursor_positioning = true
 
 [palette]
-grey = "#6c6c6c"
+  grey = '#6c6c6c'
+
+[secondary_prompt]
+  template = '❯❯ '
+  foreground = 'magenta'
+  background = 'transparent'
+
+[transient_prompt]
+  template = '❯ '
+  foreground = 'magenta'
+  background = 'transparent'
+  foreground_templates = [
+    '{{if gt .Code 0}}red{{end}}',
+    '{{if eq .Code 0}}magenta{{end}}'
+  ]
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'left'
+  newline = true
+
+  [[blocks.segments]]
+    style = 'plain'
+    template = '<b>{{ .Path }}</b>'
+    foreground = 'blue'
+    background = 'transparent'
+    type = 'path'
+
+    [blocks.segments.properties]
+      style = 'full'
+
+  [[blocks.segments]]
+    style = 'plain'
+    template = ' {{ .HEAD }}{{if or (.Working.Changed) (.Staging.Changed) }}*{{end}} <cyan>{{if gt .Behind 0}}⇣{{end}}{{ if gt .Ahead 0 }}⇡{{ end }}</>'
+    foreground = 'p:grey'
+    background = 'transparent'
+    type = 'git'
+
+    [blocks.segments.properties]
+      branch_icon = ''
+      commit_icon = '@'
+      fetch_status = true
+
+[[blocks]]
+  type = 'rprompt'
+  overflow = 'hidden'
+
+  [[blocks.segments]]
+    style = 'plain'
+    template = '{{ .FormattedMs }}'
+    foreground = 'yellow'
+    background = 'transparent'
+    type = 'executiontime'
+
+    [blocks.segments.properties]
+      threshold = 5000
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'left'
+  newline = true
+
+  [[blocks.segments]]
+    style = 'plain'
+    template = '❯'
+    foreground = ''
+    background = ''
+    type = 'text'
+    foreground_templates = [
+      '{{if gt .Code 0}}red{{end}}',
+      '{{if eq .Code 0}}magenta{{end}}'
+    ]
