@@ -19,6 +19,7 @@ makes things like that easier.
 - `ctrl+t`. Paste the selected file path(s) into the command line.
 - `alt+c`. `cd` into the selected directory.
 - `ctrl+r`. Paste the selected command from history into the command line.
+- `kill -9 **<TAB>`. List all processes for select and kill.
 
 ### zoxide[^2]
 
