@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+if [[ $* =~ -h|--help ]]; then
+    cat <<EOF
+Show package reverse dependencies in a text tree.
+
+Usage: pkg-rd <package>
+
+Options:
+    -h --help    Show this screen
+EOF
+    exit 0
+fi
+
+PKG="$1"
+
+if [ -z "$1" ]; then
+    echo "error: you must provide a package name"
+    exit 1
+fi
+
+pactree -r "$PKG"

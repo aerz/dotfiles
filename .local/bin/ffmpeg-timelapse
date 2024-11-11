@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+if [[ $* =~ -h|--help ]]; then
+    cat <<EOF
+Create a timelapse video from images in a path.
+
+Usage: ffmpeg-timelapse <path> [filename]
+
+Options:
+    -h --help    Show this screen
+EOF
+    exit 0
+fi
+
+TL_PATH="$1"
+TL_FILENAME="$2"
+
+if [ ! -d "$TL_PATH" ]; then
+    echo "error: you must provide a valid path"
+    exit 1
+fi
+
+ffmpeg \
+    -framerate 30 -pattern_type glob -i "${TL_PATH}/*.JPG" \
+    -c:v libx264 \
+    -r 30 -pix_fmt yuv420p "${TL_FILENAME}.mp4"

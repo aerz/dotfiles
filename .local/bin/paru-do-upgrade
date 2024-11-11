@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+if [[ $* =~ -h|--help ]]; then
+    cat <<EOF
+Upgrade all packages installed.
+
+Usage: pkg-do-upgrade
+
+Options:
+    -h --help    Show this screen
+EOF
+    exit 0
+fi
+
+# restart custom/updates waybar module
+# pkill -SIGRTMIN+8 waybar
+systemctl --user kill --signal="SIGRTMIN+8" waybar-main.service
+
+paru -Syyu --noconfirm

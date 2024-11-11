@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+if [[ $* =~ -h|--help ]]; then
+    cat <<EOF
+Show packages with dependency cycles.
+
+Usage: pkg-cycles
+
+Options:
+    -h --help    Show this screen
+EOF
+    exit 0
+fi
+
+for pkg in $(pacman -Qq); do
+    if pactree -l "$pkg" | tail -n +2 | grep -Fqx "$pkg"; then
+        echo "  ${pkg}"
+    fi
+done

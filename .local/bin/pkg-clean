@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+if [[ $* =~ -h|--help ]]; then
+    cat <<EOF
+Clean pacman resources.
+
+Usage: pkg-clean [--orphans]
+
+Options:
+    -h --help    Show this screen
+EOF
+    exit 0
+fi
+
+du -sh /var/cache/pacman/pkg /var/lib/pacman "$HOME/.cache/yay" "$HOME/.cache/paru"
+echo && yay -Sc
+echo && paru -Sc
+
+if [ "$1" == "--orphans" ]; then
+    if [[ $(/usr/bin/yay -Qdtq) ]]; then
+        echo
+        yay -Qdtq | yay -Rns -
+    fi
+fi
